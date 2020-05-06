@@ -1,0 +1,13 @@
+{
+    "name": "Welcome",
+    "alias": "welcome",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Welcome\\Providers\\WelcomeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

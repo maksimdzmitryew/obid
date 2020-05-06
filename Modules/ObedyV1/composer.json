@@ -1,0 +1,25 @@
+{
+	"name": "maxd/obedyV1",
+	"description": "This module is intended only for 'themeing' support",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\ObedyV1\\Providers\\ObedyV1ServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\ObedyV1\\": ""
+		}
+	}
+}

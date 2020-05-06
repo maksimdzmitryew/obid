@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "axios": "^0.18",
+    "bootstrap": "^4.0.0",
+    "popper.js": "^1.12",
+    "cross-env": "^5.1",
+    "jquery": "^3.2",
+    "laravel-mix": "^2.0",
+    "lodash": "^4.17.4",
+    "vue": "^2.5.7"
+  },
+  "name": "culture-scapes.loc",
+  "description": "<p align=\"center\"><img src=\"https://laravel.com/assets/img/components/logo-laravel.svg\"></p>",
+  "version": "1.0.0",
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bxon-2017@bitbucket.org/activemediaUA/culturescapes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/activemediaUA/culturescapes#readme",
+  "dependencies": {
+    "bootstrap-3-typeahead": "^4.0.2",
+    "ckeditor": "^4.10.1",
+    "datatables.net": "^1.10.19",
+    "datatables.net-bs4": "^1.10.19",
+    "datatables.net-select": "^1.2.7",
+    "datatables.net-select-bs4": "^1.2.7",
+    "daterangepicker": "^2.1.25",
+    "html-beautify": "^1.0.4",
+    "ion-rangeslider": "^2.2.0",
+    "jgrowl": "^1.4.6",
+    "moment": "^2.22.2",
+    "noty": "^3.2.0-beta",
+    "query-string": "^6.1.0",
+    "select2": "^4.0.6-rc.1",
+    "sweetalert": "^2.1.0",
+    "sweetalert2": "^7.26.29",
+    "tinymce": "^4.8.3",
+    "typeahead": "^0.2.2"
+  }
+}

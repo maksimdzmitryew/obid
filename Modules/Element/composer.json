@@ -1,0 +1,25 @@
+{
+	"name": "maxd/element",
+	"description": "Elements that a Building is constructed of",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Element\\Providers\\ElementServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Element\\": ""
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"name": "maxd/mark",
+	"description": "Possible marks with designs",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Mark\\Providers\\MarkServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Mark\\": ""
+		}
+	}
+}

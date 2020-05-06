@@ -1,0 +1,25 @@
+{
+	"name": "maxd/opinion",
+	"description": "Possible opinions with designs",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Opinion\\Providers\\OpinionServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Opinion\\": ""
+		}
+	}
+}

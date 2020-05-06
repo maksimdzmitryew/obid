@@ -1,0 +1,13 @@
+{
+    "name": "Element",
+    "alias": "element",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Element\\Providers\\ElementServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

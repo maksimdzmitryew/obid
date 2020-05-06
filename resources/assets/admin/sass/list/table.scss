@@ -1,0 +1,25 @@
+.table-styled{
+  thead th{
+    background-color: #394357;
+    border-color: #5b6982;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.dataTables_paginate, .dataTables_info{
+  margin: 1.25rem;
+}
+
+.dataTables_paginate {
+  .paginate_button{
+    padding: .375rem .875rem;
+    line-height: 1.6667;
+  }
+
+  .paginate_button.current{
+    background-color: #394357;
+    &:focus, &:hover, &:focus{
+        background-color: #394357;
+    }
+  }
+}

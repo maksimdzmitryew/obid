@@ -1,0 +1,100 @@
+@import url(../icons/icomoon/styles.css);
+@import url(../icons/font-awesome-4.7.0/css/font-awesome.css);
+@import url(../css/bootstrap.css);
+@import url(../css/bootstrap_limitless.css);
+@import url(../css/layout.css);
+@import url(../css/components.css);
+@import url(../css/colors.css);
+.btn-styled {
+  border-radius: .3rem;
+  background-color: #009688;
+  color: #fff; }
+  .btn-styled:visited {
+    color: #fff;
+    background-color: #009688; }
+  .btn-styled:hover {
+    color: #fff;
+    background-color: #007d71; }
+  .btn-styled:focus {
+    box-shadow: 0px 0px 0px 0.17rem rgba(0, 150, 136, 0.5) !important; }
+  .btn-styled:active {
+    background-color: #007268; }
+
+.badge-styled {
+  background-color: #009688;
+  color: white;
+  cursor: pointer; }
+
+.page-title i {
+  font-size: 1.2rem; }
+
+.nav-sidebar .nav-item-submenu.nav-item-open .nav-group-sub {
+  display: block; }
+
+.tooltip-inner {
+  max-width: 20rem; }
+
+.form-control {
+  border-width: .1rem 0;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important; }
+
+.multiselect-native-select .dropdown-item.active {
+  background-color: #009688; }
+.multiselect-native-select .multiselect {
+  border-bottom-width: .1rem;
+  padding: .52rem 0;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important; }
+  .multiselect-native-select .multiselect .multiselect-item input[type=checkbox] ~ .form-check-control-indicator {
+    border-color: #394357; }
+
+.irs .irs-from, .irs .irs-to, .irs .irs-min, .irs .irs-max, .irs .irs-single {
+  padding: 0.4rem 0.6rem;
+  top: 0.1rem; }
+.irs .irs-from, .irs .irs-to, .irs .irs-single {
+  background-color: #394357; }
+.irs .irs-bar {
+  background-color: #009688; }
+.irs .irs-line {
+  background-color: #ddd; }
+.irs .irs-bar, .irs .irs-line {
+  height: .1rem;
+  top: 2.34rem; }
+.irs .irs-slider {
+  top: 1.85rem;
+  background-color: #009688; }
+  .irs .irs-slider:after {
+    background-color: #009688; }
+
+.tooltip.show {
+  opacity: 1; }
+.tooltip .tooltip-inner {
+  background-color: #394357;
+  padding: 0.3rem 0.6rem;
+  line-height: 1rem;
+  font-size: 0.8rem; }
+
+.daterangepicker .daterangepicker-inputs {
+  display: none; }
+.daterangepicker .table-condensed tr > td {
+  padding: 0.3rem; }
+.daterangepicker .table-condensed tr > th, .daterangepicker .table-condensed tr > td {
+  min-width: 2rem; }
+.daterangepicker td.active {
+  background-color: #009688; }
+  .daterangepicker td.active:hover, .daterangepicker td.active:focus {
+    background-color: #009688; }
+.daterangepicker .applyBtn {
+  background-color: #394357; }
+
+.noty_bar .noty_body {
+  font-size: .9rem; }
+
+.search-bar .tag {
+  background-color: gray; }
+.search-bar .search-bar-results tr td:hover {
+  background-color: #009688;
+  color: white; }
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,48 @@
+/*Cookie Consent Begin*/
+.js-cookie-consent.cookie-consent {
+    background-color: #855;
+    min-height: 260px;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 26px;
+    padding: 0px;
+    font-family: "Trebuchet MS",Helvetica,sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.js-cookie-consent.cookie-consent span, .js-cookie-consent.cookie-consent button {
+	margin-top: 5%;
+	display: block;
+    margin-left: 15%;
+}
+
+.js-cookie-consent.cookie-consent span.cookie-consent__message {
+    width: 60%;
+}
+
+.js-cookie-consent.cookie-consent button {
+    width: 20%;
+    border: solid grey 1px;
+    background-color: green;
+}
+
+.left {
+	float: left;
+}
+
+.js-cookie-consent.cookie-consent span.cookie-consent__later {
+    margin-left: 5%;
+    padding: 15px;
+    cursor: pointer;
+    border: 1px solid grey;
+}
+
+.js-cookie-consent.cookie-consent a {
+    color: #4B8EE7;
+    text-decoration: none;
+}
+/*Cookie Consent End*/

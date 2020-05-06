@@ -1,0 +1,16 @@
+.btn-styled {
+  border-radius: .3rem;
+  background-color: #009688;
+  color: #fff; }
+  .btn-styled:visited {
+    color: #fff;
+    background-color: #009688; }
+  .btn-styled:hover {
+    color: #fff;
+    background-color: #007d71; }
+  .btn-styled:focus {
+    box-shadow: 0px 0px 0px 0.17rem rgba(0, 150, 136, 0.5) !important; }
+  .btn-styled:active {
+    background-color: #007268; }
+
+/*# sourceMappingURL=buttons.css.map */

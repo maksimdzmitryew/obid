@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,aAAa;EACX,gBAAgB,EAHV,OAAO",
+"sources": ["badges.scss"],
+"names": [],
+"file": "badges.css"
+}

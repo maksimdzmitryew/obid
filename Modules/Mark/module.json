@@ -1,0 +1,13 @@
+{
+    "name": "Mark",
+    "alias": "mark",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Mark\\Providers\\MarkServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

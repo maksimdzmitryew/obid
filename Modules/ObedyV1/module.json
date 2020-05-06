@@ -1,0 +1,13 @@
+{
+    "name": "ObedyV1",
+    "alias": "obedyV1",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\ObedyV1\\Providers\\ObedyV1ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

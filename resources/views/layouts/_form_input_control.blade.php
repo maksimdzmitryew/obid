@@ -1,0 +1,1 @@
+		<input type="{!! $s_field_type !!}" name="{!! $s_fieldname !!}" class="form-control {!! $s_class_name !!}" placeholder=" {!! $s_hint !!} {!! $s_typein !!}" autocomplete="off" value="{{ $s_selected_title }}">

@@ -1,0 +1,21 @@
+$color: #009688;
+
+.btn-styled{
+  border-radius: .3rem;
+  background-color: $color;
+  color: #fff;
+  &:visited{
+    color: #fff;
+    background-color: $color;
+  }
+  &:hover{
+    color: #fff;
+    background-color: darken($color, 5%)
+  }
+  &:focus{
+    box-shadow: 0px 0px 0px .17rem rgba($color, .5) !important;
+  }
+  &:active{
+    background-color: darken($color, 7%)
+  }
+}

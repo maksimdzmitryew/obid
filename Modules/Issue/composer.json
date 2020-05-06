@@ -1,0 +1,25 @@
+{
+	"name": "maxd/issue",
+	"description": "Possible issues with designs",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Issue\\Providers\\IssueServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Issue\\": ""
+		}
+	}
+}

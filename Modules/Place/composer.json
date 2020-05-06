@@ -1,0 +1,25 @@
+{
+	"name": "maxd/place",
+	"description": "Places that exist on map",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Place\\Providers\\PlaceServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Place\\": ""
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"name": "maxd/style",
+	"description": "Possible types of buildings",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Style\\Providers\\StyleServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Style\\": ""
+		}
+	}
+}

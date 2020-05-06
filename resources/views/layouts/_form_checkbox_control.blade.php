@@ -1,0 +1,1 @@
+		<input name="{!! $name !!}" value="1" type="{!! $control !!}" class="switcher" data-on-text="{!! trans('user/crud.hint.enabled') !!}" data-off-text="{!! trans('user/crud.hint.disabled') !!}" data-on-color="success" data-off-color="default" {!! $s_selected_title !!}>

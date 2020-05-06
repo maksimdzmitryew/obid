@@ -1,0 +1,25 @@
+{
+	"name": "maxd/complaint",
+	"description": "Complaints that exist for places and responses received",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Complaint\\Providers\\ComplaintServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Complaint\\": ""
+		}
+	}
+}

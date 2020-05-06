@@ -1,0 +1,13 @@
+{
+    "name": "Style",
+    "alias": "style",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Style\\Providers\\StyleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

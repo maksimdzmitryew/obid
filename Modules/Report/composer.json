@@ -1,0 +1,25 @@
+{
+    "name": "maxd/report",
+    "description": "Reports on issues with designs submitted by users",
+    "authors": [
+        {
+            "name": "Maksim Dzmitryew̆",
+            "email": "maksimdzmitryew@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Report\\Providers\\ReportServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Report\\": ""
+        }
+    }
+}

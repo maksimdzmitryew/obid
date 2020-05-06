@@ -1,0 +1,20 @@
+.filters label {
+  margin: 0; }
+
+.table-styled thead th {
+  background-color: #394357;
+  border-color: #5b6982;
+  color: rgba(255, 255, 255, 0.9); }
+
+.dataTables_paginate, .dataTables_info {
+  margin: 1.25rem; }
+
+.dataTables_paginate .paginate_button {
+  padding: .375rem .875rem;
+  line-height: 1.6667; }
+.dataTables_paginate .paginate_button.current {
+  background-color: #394357; }
+  .dataTables_paginate .paginate_button.current:focus, .dataTables_paginate .paginate_button.current:hover, .dataTables_paginate .paginate_button.current:focus {
+    background-color: #394357; }
+
+/*# sourceMappingURL=list.css.map */

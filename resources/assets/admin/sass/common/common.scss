@@ -1,0 +1,145 @@
+@import "buttons";
+@import "badges";
+
+.page-title{
+  i{
+    font-size: 1.2rem;
+  }
+}
+
+.nav-sidebar {
+  .nav-item-submenu.nav-item-open {
+    .nav-group-sub {
+      display: block;
+    }
+  }
+}
+
+.tooltip-inner{
+  max-width: 20rem;
+}
+
+.form-control{
+  border-width: .1rem 0;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.multiselect-native-select{
+  .dropdown-item.active{
+    background-color: #009688;
+  }
+  .multiselect{
+    border-bottom-width: .1rem;
+    padding: .52rem 0;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    .multiselect-item{
+      input[type=checkbox] ~ .form-check-control-indicator{
+        border-color: #394357;
+      }
+    }
+  }
+}
+//
+//.select2-selection--single{
+//  box-shadow: none !important;
+//  -webkit-box-shadow: none !important;
+//  padding: 0.52rem 0;
+//  border-bottom-width: .1rem;
+//  border-bottom-color: #009688;
+//}
+//
+//.select2-container--open .select2-selection--multiple{
+//  border-bottom-color: #009688;
+//}
+//
+//.select2-selection--multiple{
+//  border-bottom: .1rem solid #ddd;
+//  .select2-selection__rendered{
+//    .select2-search__field{
+//      margin: 0;
+//      padding: 0.5rem 0 0.6rem 0;
+//    }
+//  }
+//}
+
+.irs{
+  .irs-from, .irs-to, .irs-min, .irs-max, .irs-single{
+    padding: 0.4rem 0.6rem;
+    top: 0.1rem;
+  }
+  .irs-from, .irs-to, .irs-single{
+    background-color: #394357;
+  }
+  .irs-bar{
+    background-color: #009688;
+  }
+  .irs-line{
+    background-color: #ddd;
+  }
+  .irs-bar, .irs-line{
+    height: .1rem;
+    top: 2.34rem;
+  }
+  .irs-slider{
+    top: 1.85rem;
+    background-color: #009688;
+    &:after{
+      background-color: #009688;
+    }
+  }
+}
+
+.tooltip{
+  &.show{
+    opacity: 1;
+  }
+  .tooltip-inner{
+    background-color: #394357;
+    padding: 0.3rem 0.6rem;
+    line-height: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+.daterangepicker{
+  .daterangepicker-inputs{
+    display: none;
+  }
+  .table-condensed{
+    tr > td{
+      padding: 0.3rem;
+    }
+    tr > th, tr > td{
+      min-width: 2rem;
+    }
+  }
+  td.active{
+    background-color: #009688;
+    &:hover, &:focus{
+      background-color: #009688;
+    }
+  }
+  .applyBtn{
+    background-color: #394357;
+  }
+}
+
+.noty_bar{
+  .noty_body{
+    font-size: .9rem;
+  }
+}
+
+.search-bar{
+  .tag{
+    background-color: gray;
+  }
+  .search-bar-results{
+    tr td:hover{
+      background-color: #009688;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,134 @@
+.uniform-uploader {
+  position: relative;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: stretch;
+      -webkit-box-align: stretch;
+          align-items: stretch; }
+  .uniform-uploader .filename {
+    color: #999;
+    padding: 0.5rem 0;
+    -ms-flex: 1;
+        -webkit-box-flex: 1;
+            flex: 1;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    word-break: break-word; }
+  .uniform-uploader .text-white ~ .filename {
+    color: #fff;
+    border-bottom-color: rgba(255, 255, 255, 0.5); }
+  .uniform-uploader .action {
+    margin-left: 1.25rem;
+    z-index: 1;
+    border-radius: 0.1875rem; }
+  .uniform-uploader input[type=file] {
+    width: 100%;
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    min-height: 2.37503rem;
+    border: 0;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; }
+  .uniform-uploader.disabled .filename {
+    border-bottom-style: dashed; }
+  .uniform-uploader.disabled .action {
+    opacity: 0.75; }
+  .uniform-uploader.disabled .filename,
+  .uniform-uploader.disabled input[type=file] {
+    cursor: default; }
+
+.form-control-styled-lg input[type=file] {
+  min-height: 2.62502rem; }
+
+.form-control-styled-lg .filename {
+  padding: 0.625rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4286; }
+
+.form-control-styled-sm input[type=file] {
+  min-height: 2.12502rem; }
+
+.form-control-styled-sm .filename {
+  padding: 0.375rem 0;
+  font-size: 0.75rem;
+  line-height: 1.6667; }
+
+.uniform-select {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.5385;
+  color: #333;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #ddd;
+  -webkit-transition: all ease-in-out 0.15s;
+  transition: all ease-in-out 0.15s; }
+  @media screen and (prefers-reduced-motion: reduce) {
+    .uniform-select {
+      -webkit-transition: none;
+      transition: none; } }
+  .uniform-select.focus {
+    border-bottom-color: #009688;
+    -webkit-box-shadow: 0 1px 0 #009688;
+            box-shadow: 0 1px 0 #009688; }
+  .uniform-select.text-white {
+    border-bottom-color: rgba(255, 255, 255, 0.5); }
+    .uniform-select.text-white.focus {
+      border-bottom-color: #fff;
+      -webkit-box-shadow: 0 1px 0 #fff;
+              box-shadow: 0 1px 0 #fff; }
+  .uniform-select span {
+    display: block;
+    position: relative;
+    text-align: left;
+    padding-right: 1.5rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+    .uniform-select span:after {
+      content: '\E9C5';
+      font-family: "icomoon";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 1rem;
+      margin-top: -0.12502rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale; }
+  .uniform-select select {
+    width: 100%;
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 2.37503rem;
+    border: 0;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; }
+  .uniform-select.disabled {
+    color: #999;
+    border-bottom-style: dashed; }
+    .uniform-select.disabled select {
+      cursor: default; }
+
+.form-control-styled-lg .uniform-select {
+  padding: 0.625rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4286; }
+
+.form-control-styled-sm .uniform-select {
+  padding: 0.375rem 0;
+  font-size: 0.75rem;
+  line-height: 1.6667; }

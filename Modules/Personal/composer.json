@@ -1,0 +1,25 @@
+{
+    "name": "maxd/personal",
+    "description": "shows inital page aka homepage",
+    "authors": [
+        {
+            "name": "Maksim Dzmitryew̆",
+            "email": "maksimdzmitryew@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Personal\\Providers\\PersonalServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Personal\\": ""
+        }
+    }
+}

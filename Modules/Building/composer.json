@@ -1,0 +1,25 @@
+{
+	"name": "maxd/building",
+	"description": "Types of Buildings",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Building\\Providers\\BuildingServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Building\\": ""
+		}
+	}
+}
