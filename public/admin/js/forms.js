@@ -14,6 +14,44 @@ $(document).ready(() => {
 		return true;
 	});
 
+	let a_params = {};
+	function setSwalParams(data){
+		a_params = {
+			reverseButtons:		true,
+			showCloseButton:	true,
+			icon:				'warning',
+			title:				data.title,
+			text:				data.message,
+		};
+
+		if (s_text_secondary != '')
+		{
+			a_params.cancelButtonText	= s_text_secondary;
+			a_params.showCancelButton	= true;
+			s_route_secondary = s_route_secondary.replace(':type', 'place').replace(':id', data.id);
+		}
+
+		if (s_text_extra != '')
+		{
+			if (typeof data.url !== 'undefined')
+				s_route_extra = data.url;
+			a_params.footer = '<a href="' + s_route_extra + '">' + s_text_extra + '</a>';
+		}
+		if (s_text_primary != '')
+		{
+			a_params.confirmButtonText = s_text_primary;
+			s_route_primary = s_route_primary.replace(':type', 'place').replace(':id', data.id);
+		}
+
+		a_params.onClose = () => {
+			if (s_route_primary != '' && s_route_secondary == '')
+				window.location.href = s_route_primary;
+			else
+				resetForm(form);
+		};
+
+	}
+
 	// TODO: refactoring
 	// loook at _profile.blade.php
 	$('form.item-form').on('submit', function(e){
@@ -28,33 +66,9 @@ $(document).ready(() => {
 			data: form.serialize()
 		}).done((data, status, xhr) => {
 
-			a_params = {
-				reverseButtons:		true,
-				showCloseButton:	true,
-				icon:				'info',
-				title:				s_res_submit,
-				text:				data.message,
-			};
-			a_routes = {};
-
-			if (s_text_secondary != '')
-			{
-				a_params.cancelButtonText	= s_text_secondary;
-				a_params.showCancelButton	= true;
-				s_route_secondary = s_route_secondary.replace(':type', 'place').replace(':id', data.id);
-			}
-
-			if (s_text_extra != '')
-			{
-				if (typeof data.url !== 'undefined')
-					s_route_extra = data.url;
-				a_params.footer = '<a href="' + s_route_extra + '">' + s_text_extra + '</a>';
-			}
-			if (s_text_primary != '')
-			{
-				a_params.confirmButtonText = s_text_primary;
-				s_route_primary = s_route_primary.replace(':type', 'place').replace(':id', data.id);
-			}
+			setSwalParams(data);
+			a_params.icon = 'info';
+			a_params.title = s_res_submit;
 
 			Swal.fire(
 				a_params
@@ -200,7 +214,31 @@ $(document).ready(() => {
 		}).fail((xhr) => {
 			let data = xhr.responseJSON;
 
-			notify(data.message, 'danger', 3000);
+			if (typeof data.title !== 'string')
+				notify(data.message, 'danger', 3000);
+			else
+			{
+				setSwalParams(data);
+				a_params.icon = 'warning';
+
+				Swal.fire(
+					a_params
+				).then((result) => {
+					if (result.value) {
+						if (s_route_primary != '')
+							window.location.href = s_route_primary;
+						else
+							resetForm(form);
+					} else if (result.dismiss === Swal.DismissReason.cancel) {
+						if (s_route_secondary != '')
+							window.location.href = s_route_secondary;
+						else
+							resetForm(form);
+					}
+				})
+				;
+
+			}
 		}).always((xhr, type, status) => {
 
 			let response = xhr.responseJSON || status.responseJSON,

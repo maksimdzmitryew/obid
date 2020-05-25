@@ -14,12 +14,12 @@ $s_cancel_route		= route($s_utype . '.personal.places');
 $s_list_route		= route($s_utype . '.personal.places');
 $s_opinion_route	= route($s_utype . '.opinion.form', [':type', ':id']);
 
-					$s_btn_primary		= '';
-					$s_route_primary	= '';
-					$s_btn_secondary	= trans('common/form.actions.evaluate');
-					$s_route_secondary	= $s_opinion_route;
-					$s_btn_extra		= '';
-					$s_route_extra		= '';
+$s_btn_primary		= '';
+$s_route_primary	= '';
+$s_btn_secondary	= trans('common/form.actions.evaluate');
+$s_route_secondary	= $s_opinion_route;
+$s_btn_extra		= '';
+$s_route_extra		= '';
 
 if (Request::getHost() == 'pr.max')
 	$b_dev					= TRUE;
@@ -60,6 +60,14 @@ if ($b_dev)
 	<script src="https://maps.googleapis.com/maps/api/js?key={!! config('services.google.map.key') !!}"></script>
 	<script src="/js/map.js?v={!! $version->js !!}"></script>
 @append
+
+
+{{-- https://loading.io/spinner/earth/-earth-globe-map-rotate --}}
+<div class="map_preloader_wrap">
+	<div class="map_preloader_spinner">
+		<img src="/images/spinner_earth.svg" width="120" height="120" />
+	</div>
+</div>
 
 <div id="main_map" data-zoom="{!! $i_map_zoom !!}" data-lat="{!! $f_map_center_lat !!}" data-lng="{!! $f_map_center_lng !!}"></div>
 

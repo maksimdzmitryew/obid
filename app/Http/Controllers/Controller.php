@@ -25,7 +25,7 @@ class Controller extends BaseController
 		$s_tmp						= get_called_class();
 		$a_tmp						= explode('\\', $s_tmp);
 		$this->_env->s_name			= str_replace($s_basename, '', $a_tmp[3]);
-
+#dd($this->_env->s_name, $a_tmp[0], $s_tmp);
 		if ($a_tmp[0] == 'Modules')
 		{
 			$this->_env->s_name		= $a_tmp[1];
@@ -33,6 +33,13 @@ class Controller extends BaseController
 			$this->_env->s_model	= '\Modules\\' . $this->_env->s_name . '\\' . 'Database' . '\\' . $this->_env->s_name ;
 
 			$this->_env->s_trans	= '\Modules\\' . $this->_env->s_name . '\\' . 'Database' . '\\' . $this->_env->s_name ;
+		}
+		elseif ($s_tmp == 'App\Http\\Controllers\\Guest\\PageController')
+		{
+			$this->_env->s_name		= 'Page';
+			$this->_env->s_model	= 'App\Http\\Controllers\\Guest\\PageController';
+			$this->_env->s_trans	= 'App\Http\\Controllers\\Guest\\PageController';
+			$a_tmp[2]				= 'Guest';
 		}
 		else
 		{
