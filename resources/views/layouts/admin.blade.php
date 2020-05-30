@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="version-app" content="{{ $version->app }}">
-
-    <title>@yield('title')</title>
+@include($theme . '::layouts._header')
 
     <!-- Global stylesheets -->
 	<link rel="stylesheet" href="{{ asset($theme . '/css/tabs.css?v=' . $version->css) }}">
@@ -291,7 +282,7 @@
 
             <div class="navbar-collapse collapse" id="navbar-footer">
                 <div class="navbar-text main">
-                    Produced with 3> by <a href="http://www.activemedia.ua/" target="_blank">Activemedia</a>
+                    Developed with 3> by <a href="https://www.linkedin.com/in/maximax/" target="_blank">maximax</a> of efte.in
                     <br />Version: {{ $version->app }}
                     <br />@php echo date("H:i:s m/d/Y") @endphp
                 </div>

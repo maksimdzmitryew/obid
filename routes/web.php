@@ -100,6 +100,11 @@ Route::group([
 	$s_method	= 'index';
 	Route::get('',									['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 
+	Route::get('info/{page_slug}', [
+		'as' => 'page',
+		'uses' => 'PageController@showStaticPage']
+	);
+
 	Route::group(['middleware' => 'auth'], function() {
 		$s_model	= 'Personal';
 		$s_path		= strtolower($s_model);
@@ -546,10 +551,10 @@ Route::group([
 	Route::post('contact-us', ['as' => 'contact-us', 'uses' => 'GeneralController@contactUs']);
 */
 	Route::group(['middleware' => 'auth'], function() {
+/*
 		Route::get('miy-pr', ['as' => 'cabinet', 'uses' => 'ProfileController@cabinet']);
 		Route::post('miy-pr', ['as' => 'profile.update', 'uses' => 'ProfileController@updateProfile']);
 		Route::post('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@updateProfile']);
-/*
 		Route::post('event/{event}/favorite', ['as' => 'event.favorite', 'uses' => 'ProgramController@favorite']);
 		Route::post('event/{event}/unfavorite', ['as' => 'event.unfavorite', 'uses' => 'ProgramController@unfavorite']);
 */
@@ -632,12 +637,12 @@ Route::group([
 
 
 
+*/
+/*
 	Route::get('info/{page_slug}', [
 		'as' => 'page',
 		'uses' => 'PageController@showStaticPage']
 	);
-*/
-/*
 	//Eugene Buchinsky
 	Route::get('', [
 		'as' => 'home',

@@ -21,7 +21,7 @@ $s_route_secondary	= $s_opinion_route;
 $s_btn_extra		= '';
 $s_route_extra		= '';
 
-if (Request::getHost() == 'pr.max')
+if (Request::getHost() == 'ob.max')
 	$b_dev					= TRUE;
 else
 	$b_dev					= FALSE;
@@ -40,7 +40,7 @@ if ($b_dev)
 @section('script')
 	<script type="text/javascript">
 	let google_map_key				= '{!! config('services.google.map.key') !!}'
-		,s_route_list				= '{!! route('api.'.$s_category.'.index') !!}'
+		,s_route_list				= '{!! route('signin_page') !!}'
 		,s_servererror_info			= '{!! trans('user/session.text.server_err_info') !!}'
 		,s_theme					= '{!! $theme !!}'
 
@@ -56,9 +56,11 @@ if ($b_dev)
 	</script>
 @append
 @section('js')
+	{{--
 	<script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key={!! config('services.google.map.key') !!}"></script>
 	<script src="/js/map.js?v={!! $version->js !!}"></script>
+	--}}
 @append
 
 
@@ -69,9 +71,9 @@ if ($b_dev)
 	</div>
 </div>
 
+{{--
 <div id="main_map" data-zoom="{!! $i_map_zoom !!}" data-lat="{!! $f_map_center_lat !!}" data-lng="{!! $f_map_center_lng !!}"></div>
 
-{{--
 <div class="map_info_block">
 	<div id="map_search" style="display:none;" >
 		<input type="text" placeholder="Поиск" name="s" />
