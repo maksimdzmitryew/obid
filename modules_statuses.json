@@ -1,12 +1,5 @@
 {
-	"Building":		true,
-	"Complaint":	true,
-	"Element":		true,
-	"Mark":			true,
-	"Opinion":		true,
 	"Personal":		true,
-	"Place":		true,
-	"ProvidnykV1":	true,
-	"Style":		true,
+	"ObedyV1":		true,
 	"Welcome":		true
 }
