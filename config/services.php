@@ -21,8 +21,9 @@ return [
 
     'mail' => [
         'from' 	=> env('MAIL_FROM_ADDRESS'),
-        'to' 	=> env('MAIL_TO_ADDRESS'),
         'name' 	=> env('MAIL_FROM_NAME'),
+        'to' 	=> env('MAIL_TO_ADDRESS'),
+        'me' 	=> env('MAIL_TO_NAME'),
     ],
 
     'ses' => [

@@ -12,5 +12,5 @@
 	@if(View::hasSection('title'))
 	@yield('title') &#60;
 	@endif
-	{!! mb_strtoupper(trans('app.name')) !!}
+	{!! mb_strtoupper($settings->title) !!}
 	</title>

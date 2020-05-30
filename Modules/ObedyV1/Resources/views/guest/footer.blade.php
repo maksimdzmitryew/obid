@@ -3,8 +3,8 @@
 		<div class="flexwrap">
 			<div class="copyright">
 				<p>
-					{!! trans('app.name') !!} &copy;
-					@if (config('app.est')!=date("Y")) {{ config('app.est') }} &mdash; @endif
+					{!! $settings->title !!} &copy;
+					@if ($settings->established != date("Y")) {!! $settings->established !!} &mdash; @endif
 					{!! @date("Y") !!}
 				</p>
 			</div>

@@ -65,6 +65,16 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'noreply@nospam.com'),
         'name' => env('MAIL_FROM_NAME', 'Noreply Nospam'),
     ],
+	/**
+	 *	this will override any "to" receipient defined by Mail
+	 *	only this adressee will receive emails
+	 */
+	/*
+	'to' => [
+		'address' => env('MAIL_TO_ADDRESS', 'noreply@nospam.com'),
+		'name' => env('MAIL_TO_NAME', 'Noreply Nospam'),
+	],
+	*/
 
     /*
     |--------------------------------------------------------------------------
