@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTextsTable extends Migration
+class CreateTextsBAKTable extends Migration
 {
     const TABLE_MIGRATION = 'texts';
     /**
@@ -26,7 +26,7 @@ class CreateTextsTable extends Migration
                 'created_at'    => '2019-03-02 21:21:21',
                 'updated_at'    => '2019-03-02 21:21:21',
             )
-        );        
+        );
         DB::table(self::TABLE_MIGRATION)->insert(
             array(
                 'id'            => 2,
@@ -34,7 +34,7 @@ class CreateTextsTable extends Migration
                 'created_at'    => '2019-03-03 17:17:17',
                 'updated_at'    => '2019-03-03 17:17:17',
             )
-        );        
+        );
     }
 
     /**

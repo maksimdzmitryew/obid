@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateFilesBAKTable extends Migration
 {
 	const DB_CONNECTION = 'usu';
     /**

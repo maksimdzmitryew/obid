@@ -1,4 +1,6 @@
 {
+	"Meal":			true,
+	"Place":		true,
 	"Personal":		true,
 	"ObedyV1":		true,
 	"Welcome":		true

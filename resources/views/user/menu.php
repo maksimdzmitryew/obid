@@ -9,12 +9,12 @@ $menu_color = '#f5ad42';
 $menu_icon = 'fa fa-sign-language';
 $menu_list = ['festivals' => 'icon-music', 'partners' => 'fa fa-handshake-o', 'events' => 'icon-calendar', 'presses' => 'icon-newspaper', 'news' => 'fa fa-globe'];
 {{--@ include('admin.common._card_group')--}}*/
-/*
 $menu_title[] = 'materials';
 $menu_color[] = '#5933d6';
 $menu_icon[] = 'fa fa-file-image-o';
-$menu_list[] = ['place', 'style', 'building', 'element', ];
+$menu_list[] = ['place', 'meal', ];
 
+/*
 $menu_title[] = 'improvements';
 $menu_color[] = '#f5ad42';
 $menu_icon[] = 'fa fa-envelope';

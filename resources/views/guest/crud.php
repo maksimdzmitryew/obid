@@ -19,7 +19,7 @@ $s_create_route		= route($s_utype.'.'.$s_form_route);
 #$s_delete_route		= route('api.' . $s_category . '.destroy');
 $s_list_route		= route($s_utype . '.personal.places');
 $s_cancel_route		= route($s_utype . '.personal.places');
-$s_opinion_route	= route($s_utype . '.opinion.form', [':type', ':id']);
+#$s_opinion_route	= route($s_utype . '.opinion.form', [':type', ':id']);
 $s_list_name		= trans('common/form.breadcrumbs.list') . ' ' . trans($s_category . '::crud.names.list');
 
 $s_title			= trans($s_category . '::crud.names.plr');
