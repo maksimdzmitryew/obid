@@ -1,8 +1,13 @@
 <?php
+$s_url			= env('APP_URL', 'http://localhost');
+$a_tmp			= parse_url($s_url);
+$s_name			= str_slug($a_tmp['host'], '_');
+if (empty($s_name))
+{
+	$s_name		= 'Laravel';
+}
 
 return [
-
-	'theme'		=> env('APP_THEME', ''),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -14,7 +19,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', $s_name),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +45,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', FALSE),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +58,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => $s_url,
 
     /*
     |--------------------------------------------------------------------------

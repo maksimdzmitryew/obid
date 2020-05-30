@@ -90,7 +90,7 @@ class Controller extends BaseController
 		{
 			$this->_env->s_utype	= 'guest';
 			$this->_env->fn_find	= '';
-			$this->_env->s_view		= (config('app.theme') . '::' ?: '') . $this->_env->s_utype . '.' ;
+			$this->_env->s_view		= ($settings->theme . '::' ?: '') . $this->_env->s_utype . '.' ;
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -103,7 +103,7 @@ class Controller extends BaseController
 		{
 			$this->_env->s_utype	= request()->segment(1) == 'admin' ? 'user' : 'guest';
 #			$this->_env->fn_find	= '';
-#			$this->_env->s_view		= (config('app.theme') . '::' ?: '') . $this->_env->s_utype . '.' ;
+#			$this->_env->s_view		= ($settings->theme . '::' ?: '') . $this->_env->s_utype . '.' ;
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 */
