@@ -1,43 +1,4 @@
-@php /*
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Module ObedyV1</title>
-
-		 { {-- Laravel Mix - CSS File --} }
-		 { {-- <link rel="stylesheet" href="{{ mix('css/obedyV1.css') }}"> --} }
-
-	</head>
-	<body>
-		@yield('content')
-
-		{ {-- Laravel Mix - JS File --} }
-		{ {-- <script src="{{ mix('js/obedyV1.js') }}"></script> --} }
-	</body>
-</html>
-*/@endphp
-
-
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-	<meta charset="UTF-8">
-	<title>
-	@if(View::hasSection('title'))
-	@yield('title') &#60;
-	@endif
-	{!! mb_strtoupper(trans('app.name')) !!}
-	</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width">
-
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<meta name="version-app" content="{{ $version->app }}">
-
-	@yield('meta')
+@include($theme . '::layouts._header')
 
 	<!-- Global stylesheets -->
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">

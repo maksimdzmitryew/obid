@@ -1,6 +1,4 @@
-@php
-# $version = include_once( __DIR__ . '/../../../version.php');
-@endphp<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
