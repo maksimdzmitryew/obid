@@ -16,23 +16,5 @@ return [
 		'saved'			=> 'точку',
 	],
 	'field' => [
-		'user_name' => [
-			'label'		=> 'Ім‘я Прізвище',
-		],
-		'lat' => [
-			'label'		=> 'Широта',
-			'filterby'	=> 'широтою',
-			'typein'	=> 'широту',
-		],
-		'lng' => [
-			'label'		=> 'Довгота',
-			'filterby'	=> 'довготою',
-			'typein'	=> 'довготу',
-		],
-		'address' => [
-			'label'		=> 'Адреса',
-			'filterby'	=> 'адресою',
-			'typein'	=> 'адресу',
-		],
 	],
 ];

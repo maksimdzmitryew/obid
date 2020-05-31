@@ -7,7 +7,6 @@ use App\Http\Requests\Request;
 class MealRequest extends Request
 {
 	protected $_rules = [
-		'building_id'		=> 'array',
 		'published'			=> 'boolean',
 		'title'				=> 'string',
 	];

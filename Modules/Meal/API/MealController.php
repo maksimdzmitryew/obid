@@ -47,8 +47,8 @@ class MealController extends Controller
 #	public function index(MealApiRequest $request, MealFilters $filters) : \Illuminate\Http\Response
 	public function index(MealRequest $request, MealFilters $filters) : \Illuminate\Http\Response
 	{
-		Meal::calculateRating();
-		return $this->indexAPI($request, $filters, ['user']);
+		$a_res = $this->indexAPI($request, $filters, ['user']);
+		return $a_res;
 	}
 
 	/**
@@ -59,9 +59,6 @@ class MealController extends Controller
 	 */
 	public function store(SaveRequest $request) : \Illuminate\Http\Response
 	{
-		$request->merge([
-			'user_id' => \Auth::user()->id,
-		]);
 		$a_res = $this->storeAPI($request);
 		return $a_res;
 	}

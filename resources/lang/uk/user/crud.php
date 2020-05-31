@@ -72,6 +72,9 @@ return [
 		'timezone' => [
 			'label'		=> 'Виберіть часовий пояс',
 		],
+		'user_name' => [
+			'label'		=> 'Ім‘я Прізвище',
+		],
 	],
 	'hint' => [
 		'disabled'		=> 'Вимкн.',
