@@ -1,0 +1,25 @@
+{
+	"name": "maxd/course",
+	"description": "Courses that exist on map",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Course\\Providers\\CourseServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Course\\": ""
+		}
+	}
+}

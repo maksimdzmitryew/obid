@@ -1,4 +1,5 @@
 {
+	"Course":		true,
 	"Meal":			true,
 	"Place":		true,
 	"Personal":		true,
