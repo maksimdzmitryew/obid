@@ -73,7 +73,7 @@ $s_route_extra = '';
 								: $s_create_route
 							);
 
-	$s_btn_secondary	= trans("common/form.breadcrumbs.list");
+	$s_btn_secondary	= trans('common/form.breadcrumbs.list');
 	$s_route_secondary	= $s_list_route;
 }
 

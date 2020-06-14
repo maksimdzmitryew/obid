@@ -48,6 +48,13 @@ include(base_path().'/resources/views/user/crud.php');
 			@include('admin.common.filters.js')
 
 			let dt = $('.table').DataTable({
+				'language': {
+					'lengthMenu':		'{!! trans('common/datatable.lengthMenu') !!}',
+					'zeroRecords':		'{!! trans('common/datatable.zeroRecords') !!}',
+					'info':				'{!! trans('common/datatable.info') !!}',
+					'infoEmpty':		'{!! trans('common/datatable.infoEmpty') !!}',
+					'infoFiltered':		'{!! trans('common/datatable.infoFiltered') !!}',
+				},
 				dom: 'tip',
 				autoWidth: false,
 				processing: true,
