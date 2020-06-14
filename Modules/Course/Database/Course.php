@@ -12,10 +12,16 @@ class Course extends Model
 {
 	protected $connection = 'psc';
 	protected $fillable = [
+		'provider_id',
 		'published',
 	];
 	public $translatedAttributes = [];
 	protected $a_form = [
+		'provider_id'		=> [
+			'tab'		=> 'data',
+			'field'		=> 'select',
+			'rules'		=> 'required|integer',
+		],
 		'published'		=> [
 			'tab'		=> 'data',
 			'field'		=> 'checkbox',

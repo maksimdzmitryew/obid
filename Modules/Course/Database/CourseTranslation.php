@@ -21,11 +21,6 @@ class CourseTranslation extends Model
 			'field'		=> 'input',
 			'rules'		=> 'required|string|max:255',
 		],
-		'address'	=> [
-			'tab'		=> 'data',
-			'field'		=> 'input',
-			'rules'		=> 'required|string|max:255',
-		],
 		'description'	=> [
 			'tab'		=> 'data',
 			'field'		=> 'input',
