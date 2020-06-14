@@ -3,6 +3,7 @@
 	"Meal":			true,
 	"Place":		true,
 	"Personal":		true,
+	"Provider":		true,
 	"ObedyV1":		true,
 	"Welcome":		true
 }

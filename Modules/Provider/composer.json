@@ -1,0 +1,25 @@
+{
+	"name": "maxd/provider",
+	"description": "Food Providers to order from",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Provider\\Providers\\ProviderServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Provider\\": ""
+		}
+	}
+}
