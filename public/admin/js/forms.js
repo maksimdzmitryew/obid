@@ -48,8 +48,6 @@ fnForm = function(e){
 							if (typeof tmp.btn_primary !== 'undefined')
 							{
 								s_text_primary = tmp.btn_primary;
-								s_text_secondary = '';
-								s_text_extra = '';
 								data.icon = 'info';
 								setSwalParams(data, form);
 							}
@@ -319,6 +317,19 @@ function setSwalParams(data, form){
 		title:				data.title,
 		text:				data.message,
 	};
+
+	if (typeof s_text_primary === 'undefined')
+	{
+		s_text_primary = '';
+	}
+	if (typeof s_text_secondary === 'undefined')
+	{
+		s_text_secondary = '';
+	}
+	if (typeof s_text_extra === 'undefined')
+	{
+		s_text_extra = '';
+	}
 
 	if (typeof data.icon !== 'undefined')
 	{

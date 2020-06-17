@@ -5,7 +5,7 @@
 @append
 @php
 $a_columns = [
-				'user_name' => 'text'
+				'user_name' => 'name'
 			];
 @endphp
 @extends('user.list')
