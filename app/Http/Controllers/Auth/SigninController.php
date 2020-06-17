@@ -61,9 +61,11 @@ class SigninController	extends Controller
 			Cookie::queue($my_cookie);
 
 			return back()->withCookie($my_cookie);
+/*
 			return response([
 				'action' => 'reload',
 			], 307);
+*/
 		}
 		return redirect(route('guest.personal.profile'));
 	}

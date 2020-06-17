@@ -10,9 +10,14 @@ class SigninRequest extends RequestUser
 	{
 		$this->a_rule = [
 			'email'					=> 'required|string|email|max:255',
-			'g-recaptcha-response'	=> 'required|recaptcha',
 			'password'				=> 'required|string|min:6',
 			'login_safety'			=> 'nullable|integer',
 		];
+		if (config('app.env') != 'local')
+		{
+			$this->a_rule = [
+				'g-recaptcha-response'	=> 'required|recaptcha',
+			];
+		}
 	}
 }

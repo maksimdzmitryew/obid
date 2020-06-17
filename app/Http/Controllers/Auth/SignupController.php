@@ -79,8 +79,10 @@ class SignupController	extends Controller
 		});
 
 		return response([
-			'message'	=> trans('user/form.text.token_sent'),
-			'url'		=> route('public.cabinet'),
+			'title'			=> trans('user/messages.text.success'),
+			'message'		=> trans('user/form.text.token_sent'),
+			'btn_primary'	=> trans('user/messages.button.ok'),
+			'url'			=> route('guest.personal.profile'),
 		], 200);
 
 	}

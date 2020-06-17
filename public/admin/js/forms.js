@@ -14,51 +14,16 @@ $(document).ready(() => {
 		return true;
 	});
 
-	let a_params = {};
-	function setSwalParams(data){
-		a_params = {
-			reverseButtons:		true,
-			showCloseButton:	true,
-			icon:				'warning',
-			title:				data.title,
-			text:				data.message,
-		};
+	$('form.item-form').on('submit', fnForm);
 
-		if (s_text_secondary != '')
-		{
-			a_params.cancelButtonText	= s_text_secondary;
-			a_params.showCancelButton	= true;
-			s_route_secondary = s_route_secondary.replace(':type', 'place').replace(':id', data.id);
-		}
+});
 
-		if (s_text_extra != '')
-		{
-			if (typeof data.url !== 'undefined')
-				s_route_extra = data.url;
-			a_params.footer = '<a href="' + s_route_extra + '">' + s_text_extra + '</a>';
-		}
-		if (s_text_primary != '')
-		{
-			a_params.confirmButtonText = s_text_primary;
-			s_route_primary = s_route_primary.replace(':type', 'place').replace(':id', data.id);
-		}
-
-		a_params.onClose = () => {
-			if (s_route_primary != '' && s_route_secondary == '')
-				window.location.href = s_route_primary;
-			else
-				resetForm(form);
-		};
-
-	}
-
-	// TODO: refactoring
-	// loook at _profile.blade.php
-	$('form.item-form').on('submit', function(e){
+fnForm = function(e){
 		e.preventDefault();
 
 		let data = {},
-			form = $(this);
+//			form = $(this);
+			form = $(e.currentTarget);
 
 		$.ajax({
 			url: form.attr('action'),
@@ -66,9 +31,66 @@ $(document).ready(() => {
 			data: form.serialize()
 		}).done((data, status, xhr) => {
 
-			setSwalParams(data);
-			a_params.icon = 'info';
-			a_params.title = s_res_submit;
+
+//console.log(xhr);
+
+
+
+					if (xhr.readyState == 4 && xhr.status == 200)
+						try {
+							// Do JSON handling here
+							tmp = JSON.parse(xhr.responseText);
+
+							if (typeof tmp.url === 'undefined')
+								s_route_primary = '';//window.location.href;//location.reload(true);
+							else
+								//window.location = data.url;
+								s_route_primary = data.url;
+
+							if (typeof tmp.btn_primary !== 'undefined')
+							{
+								s_text_primary = tmp.btn_primary;
+								s_text_secondary = '';
+								s_text_extra = '';
+								data.icon = 'info';
+								setSwalParams(data, form);
+							}
+
+/*
+							swal({
+								icon: "success",
+								title: '{!! trans('user/messages.text.success') !!}',
+								text: data.message,
+								button: '{!! trans('user/messages.button.ok') !!}',
+							}).then(function(){
+								if (typeof data.url === 'undefined')
+									location.reload(true);
+								else
+									window.location = data.url;
+							});
+*/
+						} catch(e) {
+							//JSON parse error, this is not json (or JSON isn't in the browser)
+//alert('catch e');
+//console.log(xhr, xhr.readyState, xhr.status);
+							// login back() reload with cookies set
+							location.reload(true);
+						}
+//					else
+//					{
+//alert('else');
+//						location.reload(true);
+//					}
+
+
+
+
+
+
+			data.icon = 'info';
+			setSwalParams(data, form);
+			if (typeof s_res_submit !== 'undefined' && s_res_submit != '')
+				a_params.title = s_res_submit;
 
 			Swal.fire(
 				a_params
@@ -218,8 +240,8 @@ $(document).ready(() => {
 				notify(data.message, 'danger', 3000);
 			else
 			{
-				setSwalParams(data);
-				a_params.icon = 'warning';
+				data.icon = 'warning';
+				setSwalParams(data, form);
 
 				Swal.fire(
 					a_params
@@ -261,6 +283,60 @@ $(document).ready(() => {
 
 			});
 		})
-	});
+	}
 
-});
+let a_params 	= {};
+function setSwalParams(data, form){
+	a_params = {
+		reverseButtons:		true,
+		showCloseButton:	true,
+		icon:				'warning',
+		title:				data.title,
+		text:				data.message,
+	};
+
+	if (typeof data.icon !== 'undefined')
+	{
+		a_params.icon		= data.icon;
+	};
+
+	if (s_text_secondary != '')
+	{
+		a_params.cancelButtonText	= s_text_secondary;
+		a_params.showCancelButton	= true;
+		s_route_secondary = s_route_secondary.replace(':type', 'place').replace(':id', data.id);
+	}
+	else
+	{
+		s_route_secondary = '';
+	}
+
+	if (s_text_extra != '')
+	{
+		if (typeof data.url !== 'undefined')
+			s_route_extra = data.url;
+		a_params.footer = '<a href="' + s_route_extra + '">' + s_text_extra + '</a>';
+	}
+	else
+	{
+		s_route_extra = '';
+	}
+
+	if (s_text_primary != '')
+	{
+		a_params.confirmButtonText = s_text_primary;
+		s_route_primary = s_route_primary.replace(':type', 'place').replace(':id', data.id);
+	}
+	else
+	{
+		s_route_primary = '';
+	}
+
+	a_params.onClose = () => {
+		if (s_route_primary != '' && s_route_secondary == '')
+			window.location.href = s_route_primary;
+		else
+			resetForm(form);
+	};
+
+}

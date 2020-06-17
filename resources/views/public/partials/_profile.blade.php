@@ -3,13 +3,16 @@
 @if (Cookie::get( config('cookie-consent.cookie_name') ) !== null)
 <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.google.recaptcha.key') }}"></script>
 @endif
+<script src="{{ asset('/admin/js/plugins/ui/moment/moment_locales.min.js') }}"></script>
+<script src="{!! asset('/admin/js/forms.js?v=' . $version->js) !!}"></script>
 @append
 
 @section('script')
 <script>
+	@if (config('app.env') != 'local')
 	let reCAPTCHA_site_key = '{{ config('services.google.recaptcha.key') }}';
+	@endif
 	$(document).ready(() => {
-
 
 //swal("Gotcha!", "Pikachu was caught!", "success");
 
@@ -38,6 +41,10 @@
 			@endif
 		}
 
+		// fn_form can be found in
+		// forms.js
+		$('{!! $s_id !!}').on('submit', fnForm);
+/*
 		// TODO: refactoring
 		// look at forms.js
 		$('{!! $s_id !!}').on('submit', (e) => {
@@ -55,6 +62,39 @@
 							// Do JSON handling here
 							tmp = JSON.parse(xhr.responseText);
 
+							if (typeof tmp.url === 'undefined')
+								s_route_primary = '';//window.location.href;//location.reload(true);
+							else
+								//window.location = data.url;
+								s_route_primary = data.url;
+
+
+		s_text_primary = '{!! trans('user/messages.button.ok') !!}';
+		s_text_secondary = '';
+		s_text_extra = '';
+
+			setSwalParams(data);
+
+			a_params.icon = 'info';
+
+
+			Swal.fire(
+				a_params
+			).then((result) => {
+				if (result.value) {
+					if (s_route_primary != '')
+						window.location.href = s_route_primary;
+					else
+						resetForm(form);
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					if (s_route_secondary != '')
+						window.location.href = s_route_secondary;
+					else
+						resetForm(form);
+				}
+			})
+			;
+/ * * /
 							swal({
 								icon: "success",
 								title: '{!! trans('user/messages.text.success') !!}',
@@ -66,14 +106,16 @@
 								else
 									window.location = data.url;
 							});
-
+/ * * /
 						} catch(e) {
 							//JSON parse error, this is not json (or JSON isn't in the browser)
-							location.reload(true);
+alert('catch e');
+//							location.reload(true);
 						}
 					else
 					{
-						location.reload(true);
+alert('else');
+//						location.reload(true);
 					}
 				},
 				'error': (xhr) => {
@@ -88,6 +130,9 @@
 				}
 			});
 		});
+*/
+
+
 	});
 </script>
 @append
