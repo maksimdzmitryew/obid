@@ -55,8 +55,8 @@ class SignupController	extends Controller
 
 	public function core(SignupRequest $request)
 	{
-/*
 		$data = $request->post();
+/*
 		$validator = Validator::make($data, []);
 
 		if($validator->fails()){

@@ -12,7 +12,7 @@ function resetForm(form)
 		form.find('.switcher').bootstrapSwitch('state', false);
 		form.find(".select2-dropdown").val(null).trigger('change');
 	}
-	form.find('fieldset').attr('disabled', true);
+	form.find('fieldset').attr('disabled', false);
 }
 
 function initLiveDropdowns(){

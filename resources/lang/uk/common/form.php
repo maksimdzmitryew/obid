@@ -13,7 +13,7 @@ return [
 		'list' => 'Список',
 	],
 	'text' => [
-		'create'		=> 'Створення',
+		'create'		=> 'Створити',
 		'create_more'	=> 'Створити ще один запис',
 		'evaluate'		=> 'Оцініти цій запис',
 		'edit'			=> 'Редагування',
@@ -28,9 +28,11 @@ return [
 		'continue'		=> 'Продовжити',
 	],
 	'fields' => [
+/*
 		'country_id' => [
 			'label' => 'Country',
 		],
+*/
 		'active' => [
 			'label' => 'Active',
 		],

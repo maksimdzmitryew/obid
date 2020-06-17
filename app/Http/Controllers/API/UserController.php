@@ -32,7 +32,7 @@ class UserController extends Controller
     {
 
         $user               = new User();
-        $user->country_id   = $request->country_id;
+#        $user->country_id   = $request->country_id;
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
         $user->email        = $request->email;
@@ -50,14 +50,15 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $item)
     {
-    	$data = $request->only('country_id', 'email', 'first_name', 'last_name', 'active');
+#    	$data = $request->only('country_id', 'email', 'first_name', 'last_name', 'active');
+    	$data = $request->only('email', 'first_name', 'last_name', 'active');
     	$data['active'] = $request->active ? 1 : 0 ?? 0;
 
         $item->update($data);
         $item->syncRoles($request->role);
 
         return response([
-            'message' => trans('messages.user_updated'),
+            'message' => trans('user/messages.text.updated'),
         ], 200);
     }
 

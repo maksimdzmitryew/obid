@@ -24,6 +24,9 @@
 @section('js')
     <script src="{{ asset('/admin/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
     <script src="{{ asset('/admin/js/plugins/forms/selects/select2.min.js') }}"></script>
+	<script src="{{ asset('/admin/js/plugins/ui/moment/moment_locales.min.js') }}"></script>
+	<script src="{!! asset('/admin/js/forms.js?v=' . $version->js) !!}"></script>
+	<script src="{!! asset('/js/liveDropDowns.js?v=' . $version->js) !!}"></script>
 @endsection
 
 @section('script')
@@ -41,7 +44,8 @@
                 e.preventDefault();
 
                 let data = {},
-                    form = $(this);
+                	form = $(e.currentTarget);
+//                    form = $(this);
 
                 $.each(form.serializeArray(), function() {
                     data[this.name] = this.value;
@@ -53,6 +57,7 @@
                     data: data
                 }).done((data, status, xhr) => {
 
+/*
                     swal({
                         title: data.message,
                         type: 'success',
@@ -68,6 +73,38 @@
                             form.find('fieldset').attr('disabled', false);
                         }
                     });
+*/
+
+s_text_secondary = '{!! trans('common/form.breadcrumbs.list') !!}';
+s_route_primary = '';
+s_route_secondary = '{!! route('admin.user.index') !!}';
+s_action_form		= '{!! ($user->id ? 'update' : 'create') !!}';
+
+			data.icon = 'info';
+			setSwalParams(data, form);
+			if (typeof s_res_submit !== 'undefined' && s_res_submit != '')
+				a_params.title = s_res_submit;
+
+			Swal.fire(
+				a_params
+			).then((result) => {
+				if (result.value) {
+					if (s_route_primary != '')
+						window.location.href = s_route_primary;
+					else
+						resetForm(form);
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					if (s_route_secondary != '')
+						window.location.href = s_route_secondary;
+					else
+						resetForm(form);
+				}
+			})
+			;
+
+
+
+
 
                     form.find('fieldset').attr('disabled', true);
                 }).fail((xhr) => {
@@ -157,7 +194,7 @@
                                     </div>
                                 @endif
 
-                                @if($countries)
+                                @if(0 && $countries)
                                     <div class="form-group row field" data-name="country_id">
                                         <div class="col-lg-3">
                                             <label class="d-block float-left py-2 m-0">{!! trans('common/form.fields.country_id.label') !!}</label>

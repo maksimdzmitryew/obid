@@ -57,6 +57,7 @@ function initMap( el )
 			else
 				notify(s_servererror_info, 'danger', 3000);
 			initClusterer(map);
+			$('.map_preloader_wrap').hide();
 		},
 		'error': (xhr) => {
 			notify(s_servererror_info, 'danger', 3000);

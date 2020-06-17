@@ -25,7 +25,7 @@ class User extends Authenticatable
 #        'role_id',
         'activation_token',
         'active',
-        'country_id',
+#        'country_id',
         'email',
         'first_name',
         'last_name',
