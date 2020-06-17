@@ -15,9 +15,7 @@ class SigninRequest extends RequestUser
 		];
 		if (config('app.env') != 'local')
 		{
-			$this->a_rule = [
-				'g-recaptcha-response'	=> 'required|recaptcha',
-			];
+			$this->a_rule['g-recaptcha-response'] = 'required|recaptcha';
 		}
 	}
 }
