@@ -32,8 +32,6 @@ fnForm = function(e){
 		}).done((data, status, xhr) => {
 
 
-//console.log(xhr);
-
 
 
 					if (xhr.readyState == 4 && xhr.status == 200)
@@ -234,51 +232,78 @@ fnForm = function(e){
 			resetForm(form);
 
 		}).fail((xhr) => {
-			let data = xhr.responseJSON;
-
-			if (typeof data.title !== 'string')
-				notify(data.message, 'danger', 3000);
-			else
+			// validator retuens "422 (Unprocessable Entity)"
+			if (xhr.readyState == 4 && xhr.status == 422)
 			{
-				data.icon = 'warning';
-				setSwalParams(data, form);
-
-				Swal.fire(
-					a_params
-				).then((result) => {
-					if (result.value) {
-						if (s_route_primary != '')
-							window.location.href = s_route_primary;
-						else
-							resetForm(form);
-					} else if (result.dismiss === Swal.DismissReason.cancel) {
-						if (s_route_secondary != '')
-							window.location.href = s_route_secondary;
-						else
-							resetForm(form);
+				try {
+					// Do JSON handling here
+					tmp = JSON.parse(xhr.responseText);
+					// no valid errors data for submitted form
+					if (typeof tmp.errors != 'object')
+					{
+						notify(xhr.status + ': ' + tmp.message, 'danger', 3000);
 					}
-				})
-				;
+				} catch(e) {
+					//JSON parse error, this is not json (or JSON isn't in the browser)
+					notify(xhr.status + ': ' + tmp.message, 'danger', 3000);
+				}
+			}
+			else
+			// return http error other that "422 (Unprocessable Entity)"
+			{
+				let data = xhr.responseJSON;
 
+				if (typeof data.title !== 'string')
+				{
+					notify(data.message, 'danger', 3000);
+				}
+				else
+				{
+					data.icon = 'warning';
+					setSwalParams(data, form);
+
+					Swal.fire(
+						a_params
+					).then((result) => {
+						if (result.value) {
+							if (s_route_primary != '')
+								window.location.href = s_route_primary;
+							else
+								resetForm(form);
+						} else if (result.dismiss === Swal.DismissReason.cancel) {
+							if (s_route_secondary != '')
+								window.location.href = s_route_secondary;
+							else
+								resetForm(form);
+						}
+					})
+					;
+				}
 			}
 		}).always((xhr, type, status) => {
 
 			let response = xhr.responseJSON || status.responseJSON,
 				errors = response.errors || [];
+			form.find('.item').each((i, el) => {
+				msg_text = $('<span class="err_text">');
+				let o_field = $(el),
+					field_value = o_field.find('.value'),
+					field_name = o_field.data('name'),
+					field_label = o_field.find('.label'),
+					prev_errors = o_field.find('.err_text');
+				prev_errors.remove();
+				field_label.removeClass('validation-invalid-label');
 
-			form.find('.field').each((i, el) => {
-				let field = $(el),
-					container = field.find(`.field-body`),
-					elem = $('<label class="message">');
-
-				container.find('label.message').remove();
-
-				if(errors[field.data('name')]){
-					errors[field.data('name')].forEach((msg) => {
-						elem.clone().addClass('validation-invalid-label').html(msg).appendTo(container);
+				if(errors[o_field.data('name')])
+				{
+					errors[field_name].forEach((msg) => {
+						field_label.addClass('validation-invalid-label');
+						msg_text.clone().addClass('validation-invalid-text').html(msg).appendTo(field_value);
 					});
-				}else{
-					//elem.clone().addClass('validation-valid-label').html('Success').appendTo(container);
+				}
+				else
+				{
+					field_label.addClass('validation-valid-label');
 				}
 
 			});

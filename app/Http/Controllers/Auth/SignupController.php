@@ -55,16 +55,17 @@ class SignupController	extends Controller
 
 	public function core(SignupRequest $request)
 	{
+/*
 		$data = $request->post();
 		$validator = Validator::make($data, []);
 
 		if($validator->fails()){
 			return response([
-				'message' => 'Validation fails',
+				'message' => trans('validation/status.422'),
 				'errors' => $validator->errors()
 			], 422);
 		}
-
+*/
 		$token = sha1(Str::random(60));
 
 		$user = User::create([

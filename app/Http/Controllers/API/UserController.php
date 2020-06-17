@@ -88,7 +88,7 @@ class UserController extends Controller
 
         if ($validator->fails()) {
             return response([
-                'message' => 'The given data was invalid.',
+                'message' => trans('validation/status.422'),
                 'errors' => $validator->errors(),
             ], 422);
         }

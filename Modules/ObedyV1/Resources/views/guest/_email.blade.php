@@ -1,4 +1,4 @@
-								<div class="item">
+								<div class="item" data-name="email">
 									<span class="label">
 										{!! trans('user/form.field.email') !!}
 									</span>

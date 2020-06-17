@@ -8,7 +8,7 @@
 @append
 
 @section('script')
-<script>
+<script type="text/javascript">
 	@if (config('app.env') != 'local')
 	let reCAPTCHA_site_key = '{{ config('services.google.recaptcha.key') }}';
 	@endif

@@ -12927,28 +12927,35 @@ input[type=text].noui-height-helper:not(.noUi-target)[data-fouc] {
 *
 * ---------------------------------------------------------------------------- */
 .validation-invalid-label,
-.validation-valid-label {
+.validation-valid-label,
+.validation-invalid-text {
+/*
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+*/
   display: block;
-  color: #F44336;
+  color: #F44336 !important;
   position: relative;
-  padding-left: 1.625rem; }
+  padding-left: 1.625rem;
+}
 
-.validation-valid-label {
-  color: #4CAF50; }
+.validation-valid-label,
+.validation-valid-text {
+  color: #4CAF50 !important;
+}
 
 .validation-invalid-label:before,
 .validation-valid-label:before {
   font-family: "icomoon";
   font-size: 1rem;
   position: absolute;
-  top: 0.12502rem;
-  left: 0;
+  top: 1.05rem;
+  left: 0.2rem;
   display: inline-block;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .validation-invalid-label:empty,
 .validation-valid-label:empty {

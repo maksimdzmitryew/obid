@@ -23,17 +23,17 @@ class SigninController	extends Controller
 
 	public function core(SigninRequest $request)
 	{
-
+/*
 		$data = $request->post();
 		$validator = Validator::make($data, []);
 
 		if($validator->fails()){
 			return response([
-				'message' => 'Validation failed',
+				'message' => trans('validation/status.422'),
 				'errors' => $validator->errors()
 			], 422);
 		}
-
+*/
 		if (in_array($request->login_safety, [0,1,2]))
 			$i_safety = $request->login_safety;
 		else
