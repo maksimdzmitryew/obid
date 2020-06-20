@@ -18,6 +18,7 @@ $(document).ready(() => {
 
 });
 
+let b_error 	= false;
 fnForm = function(e){
 		e.preventDefault();
 
@@ -26,30 +27,43 @@ fnForm = function(e){
 			form = $(e.currentTarget);
 
 		$.ajax({
-			url: form.attr('action'),
-			type: form.attr('method'),
-			data: form.serialize()
+			url:	form.attr('action'),
+			type:	form.attr('method'),
+			data:	form.serialize()
 		}).done((data, status, xhr) => {
-
+			b_error		= false;
+			if (typeof data.icon === 'undefined')
+			{
+				data.icon	= 'info';
+			}
+			if (typeof data.url === 'undefined')
+			{
+				data.url	= s_route_primary;
+			}
 
 
 
 					if (xhr.readyState == 4 && xhr.status == 200)
+					{
 						try {
 							// Do JSON handling here
 							tmp = JSON.parse(xhr.responseText);
 
-							if (typeof tmp.url === 'undefined')
-								s_route_primary = '';//window.location.href;//location.reload(true);
-							else
+//							if (typeof tmp.url !== 'undefined')
 								//window.location = data.url;
-								s_route_primary = data.url;
+//								s_route_primary = tmp.url;
+//							else
+//								s_route_primary = '';//window.location.href;//location.reload(true);
+
+							if (typeof tmp.icon === 'undefined')
+							{
+								tmp.icon	= 'info';
+							}
 
 							if (typeof tmp.btn_primary !== 'undefined')
 							{
 								s_text_primary = tmp.btn_primary;
-								data.icon = 'info';
-								setSwalParams(data, form);
+								setSwalParams(tmp, form, b_error);
 							}
 
 /*
@@ -67,14 +81,12 @@ fnForm = function(e){
 */
 						} catch(e) {
 							//JSON parse error, this is not json (or JSON isn't in the browser)
-//alert('catch e');
-//console.log(xhr, xhr.readyState, xhr.status);
 							// login back() reload with cookies set
 							location.reload(true);
 						}
+					}
 //					else
 //					{
-//alert('else');
 //						location.reload(true);
 //					}
 
@@ -83,8 +95,7 @@ fnForm = function(e){
 
 
 
-			data.icon = 'info';
-			setSwalParams(data, form);
+			setSwalParams(data, form, b_error);
 			if (typeof s_res_submit !== 'undefined' && s_res_submit != '')
 				a_params.title = s_res_submit;
 
@@ -92,8 +103,8 @@ fnForm = function(e){
 				a_params
 			).then((result) => {
 				if (result.value) {
-					if (s_route_primary != '')
-						window.location.href = s_route_primary;
+					if (data.url != '')
+						window.location.href = data.url;
 					else
 						resetForm(form);
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -230,7 +241,18 @@ fnForm = function(e){
 			resetForm(form);
 
 		}).fail((xhr) => {
-			// validator retuens "422 (Unprocessable Entity)"
+			b_error	= true;
+
+			if (typeof data.icon !== 'undefined')
+			{
+				data.icon	= 'warning';
+			}
+			if (typeof data.url === 'undefined')
+			{
+				data.url	= s_route_primary;
+			}
+
+			// validator returns "422 (Unprocessable Entity)"
 			if (xhr.readyState == 4 && xhr.status == 422)
 			{
 				try {
@@ -247,7 +269,7 @@ fnForm = function(e){
 				}
 			}
 			else
-			// return http error other that "422 (Unprocessable Entity)"
+			// return http errors other that "422 (Unprocessable Entity)"
 			{
 				let data = xhr.responseJSON;
 
@@ -257,22 +279,21 @@ fnForm = function(e){
 				}
 				else
 				{
-					data.icon = 'warning';
-					setSwalParams(data, form);
+					setSwalParams(data, form, b_error);
 
 					Swal.fire(
 						a_params
 					).then((result) => {
 						if (result.value) {
-							if (s_route_primary != '')
-								window.location.href = s_route_primary;
-							else
-								resetForm(form);
+							if (data.url != '')
+								window.location.href = data.url;
+//							else
+//								resetForm(form);
 						} else if (result.dismiss === Swal.DismissReason.cancel) {
 							if (s_route_secondary != '')
 								window.location.href = s_route_secondary;
-							else
-								resetForm(form);
+//							else
+//								resetForm(form);
 						}
 					})
 					;
@@ -280,8 +301,12 @@ fnForm = function(e){
 			}
 		}).always((xhr, type, status) => {
 
-			let response = xhr.responseJSON || status.responseJSON,
-				errors = response.errors || [];
+			let response	= xhr.responseJSON || status.responseJSON,
+				errors		= [];
+			if (typeof (response) !== 'undefined')
+			{
+				errors = response.errors;
+			}
 			form.find('.item').each((i, el) => {
 				msg_text = $('<span class="err_text">');
 				let o_field = $(el),
@@ -309,7 +334,7 @@ fnForm = function(e){
 	}
 
 let a_params 	= {};
-function setSwalParams(data, form){
+function setSwalParams(data, form, b_error){
 	a_params = {
 		reverseButtons:		true,
 		showCloseButton:	true,
@@ -334,7 +359,17 @@ function setSwalParams(data, form){
 	if (typeof data.icon !== 'undefined')
 	{
 		a_params.icon		= data.icon;
-	};
+	}
+
+	if (typeof data.url === 'undefined')
+	{
+		data.url		= s_route_primary;
+	}
+
+	if (typeof data.btn !== 'undefined')
+	{
+		s_text_primary		= data.btn;
+	}
 
 	if (s_text_secondary != '')
 	{
@@ -361,17 +396,17 @@ function setSwalParams(data, form){
 	if (s_text_primary != '')
 	{
 		a_params.confirmButtonText = s_text_primary;
-		s_route_primary = s_route_primary.replace(':type', 'place').replace(':id', data.id);
+		data.url = data.url.replace(':type', 'place').replace(':id', data.id);
 	}
 	else
 	{
-		s_route_primary = '';
+		data.url = '';
 	}
 
 	a_params.onClose = () => {
-		if (s_route_primary != '' && s_route_secondary == '')
-			window.location.href = s_route_primary;
-		else
+		if (data.url != '' && s_route_secondary == '')
+			window.location.href = data.url;
+		else if (!b_error)
 			resetForm(form);
 	};
 

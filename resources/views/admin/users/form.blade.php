@@ -52,10 +52,12 @@
                 });
 
                 $.ajax({
-                    url: form.attr('action'),
-                    type: form.attr('method'),
-                    data: data
+                    url:	form.attr('action'),
+                    type:	form.attr('method'),
+                    data:	data
                 }).done((data, status, xhr) => {
+					data.icon	= 'info';
+					b_error		= false;
 
 /*
                     swal({
@@ -80,8 +82,7 @@ s_route_primary = '';
 s_route_secondary = '{!! route('admin.user.index') !!}';
 s_action_form		= '{!! ($user->id ? 'update' : 'create') !!}';
 
-			data.icon = 'info';
-			setSwalParams(data, form);
+			setSwalParams(data, form, b_error);
 			if (typeof s_res_submit !== 'undefined' && s_res_submit != '')
 				a_params.title = s_res_submit;
 
@@ -108,6 +109,7 @@ s_action_form		= '{!! ($user->id ? 'update' : 'create') !!}';
 
                     form.find('fieldset').attr('disabled', true);
                 }).fail((xhr) => {
+					b_error	= true;
                     let data = xhr.responseJSON;
 
                     notify(data.message, 'danger', 3000);

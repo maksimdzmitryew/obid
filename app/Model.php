@@ -6,6 +6,7 @@ use                               App\Traits\GeneralTrait;
 use             Illuminate\Database\Eloquent\Model          as BaseModel;
 use        Astrotomic\Translatable\Contracts\Translatable   as TranslatableContract;
 use                  Astrotomic\Translatable\Translatable;
+use                          Illuminate\Http\Response;
 use                          Illuminate\Http\Request;
 
 class Model extends BaseModel
@@ -187,6 +188,19 @@ class Model extends BaseModel
 		}
 #dd($a_res);
 		return $a_res;
+	}
+
+
+	/**
+	 * make data into response'ble
+	 *
+	 * @param Array		$a_response		Model specific
+	 *
+	 * @return Response					response ready
+	 */
+	public static function makeResponse($a_response) : Response
+	{
+		return response($a_response, $a_response['code']);
 	}
 
 }
