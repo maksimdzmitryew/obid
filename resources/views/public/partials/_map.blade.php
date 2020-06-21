@@ -16,8 +16,8 @@ $s_list_route		= route($s_utype . '.personal.places');
 
 $s_btn_primary		= '';
 $s_route_primary	= '';
-$s_btn_secondary	= trans('common/form.actions.evaluate');
-$s_route_secondary	= $s_opinion_route;
+$s_btn_secondary	= '';#trans('common/form.actions.evaluate');
+$s_route_secondary	= '';#$s_opinion_route;
 $s_btn_extra		= '';
 $s_route_extra		= '';
 

@@ -1,3 +1,4 @@
+0.00.0+a173:1 user ADD clear redundant route
 0.00.0+a172:1 user ADD link courses and providers
 0.00.0+a169:5 user ADD link courses and providers
 0.00.0+a169:4 user ADD link courses and providers
@@ -44,6 +45,13 @@ Ensures visitor browsing-security by preventing cross-site request forgery. This
 за посиланням у кінці повідомлення.
 
 If you choose to send us your system information, you encourage better support for your system configuration in our future releases. This is entirely voluntary and anonymous. We promise never to use your information for nefarious purposes. Please click Open Preferences to learn more.
+
+Team Win strives to provide a quality product.  However, it is your decision to install our software on your device.  Team Win takes no responsibility for any damage that may occur from installing or using TWRP.
+
+Status:
+Support Status: Current
+
+Maintainer: Bruno Martins (bgcngm), Louis Popi (h2o64)
 
 https://nwidart.com/laravel-modules/v6/advanced-tools/artisan-commands
 php artisan module:use Issue
