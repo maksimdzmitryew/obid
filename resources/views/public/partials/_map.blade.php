@@ -65,12 +65,13 @@ if ($b_dev)
 
 
 {{-- https://loading.io/spinner/earth/-earth-globe-map-rotate --}}
+{{--
 <div class="map_preloader_wrap">
 	<div class="map_preloader_spinner">
 		<img src="/images/spinner_earth.svg" width="120" height="120" />
 	</div>
 </div>
-
+--}}
 {{--
 <div id="main_map" data-zoom="{!! $i_map_zoom !!}" data-lat="{!! $f_map_center_lat !!}" data-lng="{!! $f_map_center_lng !!}"></div>
 

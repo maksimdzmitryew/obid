@@ -1,7 +1,9 @@
 @media screen and (max-width:1180px) {
+/*
 	footer .flexwrap {
 		display: none;
 	}
+*/
 	header nav {
 		display: none;
 		position: absolute;

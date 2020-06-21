@@ -55,7 +55,7 @@ button {cursor:pointer;}
 
 img {max-width: 100%;}
 .container {display: block;width:1030px;margin:0 auto;position:relative;padding:0 15px;}
-.container.fullwidth {width:100%;padding:0 40px;}
+.container.fullwidth {width:100%;max-width:100%;padding:0 40px;}
 .container::before {display: table;width:100%;clear: both;content: '';}
 .container::after {display: table;width:100%;clear: both;content: '';}
 .divider {clear:both;}
@@ -146,12 +146,12 @@ footer {
 	left: 0;
 	z-index: 99;
 	width: 100%;
-	height: 48px;
+	height: 80px;
 	box-shadow: 0 0 40px 0 rgba(82, 85, 114, 0.2);
 	background-color: #ffffff;
 	padding: 14px 0;
 }
-footer .copyright {
+footer p {
 	font-size: 16px;
 	font-weight: 300;
 	letter-spacing: -0.3px;
@@ -183,6 +183,16 @@ footer .language li a.active {
 footer .language li a:hover {
 	text-decoration: underline;
 }
+footer .socials a.ico {
+	display: inline;
+	float: left;
+	padding-left: 20px;
+}
+footer .socials a img {
+	width: 20px;
+	height: 20px;
+}
+/*
 footer .socials {
 	padding: 0 0;
 	margin: 0 0;
@@ -193,6 +203,7 @@ footer .socials li {
 	vertical-align: top;
 	padding:0 0 0 20px;
 }
+*/
 footer .open_filter_btn {
 	display:none;
 }
@@ -1249,3 +1260,76 @@ i.icon-switch2 {
 header nav ul li button.green {
 	padding: 0.7rem 1.25rem;
 }
+
+footer div {
+	padding-left: 20px;
+}
+footer div, img, p {
+	display: block;
+	float: left;
+}
+footer .copyright {
+	width: 250px;
+}
+footer .eu_visibility img {
+	margin-right: 20px;
+}
+
+footer .eu_visibility a {
+	color: #848a91;
+}
+footer .socials {
+	width: 650px;
+}
+
+.div_reset_password {
+	margin: 0 auto 0 40%;
+}
+
+@media screen and (max-width:1180px) {
+	header nav ul li button.green {
+		margin: 0 auto 0 42%;
+	}
+	footer div {
+		padding-left: 7px;
+	}
+	footer .copyright {
+		padding-top: 10px;
+		width: 100%;
+	}
+	footer .eu_visibility img {
+		margin-right: 7px;
+	}
+}
+@media screen and (max-width:700px) {
+	header nav ul li button.green {
+		margin: 0 auto 0 37%;
+	}
+	.div_reset_password {
+		margin: 0 auto 0 30%;
+	}
+}
+@media screen and (max-width:480px) {
+}
+
+.map_preloader_wrap {
+  position: fixed;
+  background: #fff;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+}
+
+.map_preloader_spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+

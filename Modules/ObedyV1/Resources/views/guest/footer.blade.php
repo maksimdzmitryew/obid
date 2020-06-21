@@ -4,6 +4,8 @@
 			<div class="copyright">
 				<p>
 					{!! $settings->title !!} &copy;
+				</p>
+				<p>
 					@if ($settings->established != date("Y")) {!! $settings->established !!} &mdash; @endif
 					{!! @date("Y") !!}
 				</p>
