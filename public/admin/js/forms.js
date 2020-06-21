@@ -18,7 +18,11 @@ $(document).ready(() => {
 
 });
 
-let b_error 	= false;
+let b_error 		= false,
+	s_url_ok		= '',
+	s_url_dissmiss	= '',
+	s_url_close		= '',
+	s_btn_ok		= '';
 fnForm = function(e){
 		e.preventDefault();
 
@@ -32,225 +36,26 @@ fnForm = function(e){
 			data:	form.serialize()
 		}).done((data, status, xhr) => {
 			b_error		= false;
-			if (typeof data.icon === 'undefined')
+			if (xhr.readyState == 4 && xhr.status == 200)
 			{
-				data.icon	= 'info';
+				try {
+					// Do JSON handling here
+					tmp = JSON.parse(xhr.responseText);
+					setSwalParams(tmp, form, b_error);
+				} catch(e) {
+					//JSON parse error, this is not json (or JSON isn't in the browser)
+					// login back() reload with cookies set
+					location.reload(true);
+				}
 			}
-			if (typeof data.url === 'undefined')
+			else
 			{
-				data.url	= s_route_primary;
-			}
-
-
-
-					if (xhr.readyState == 4 && xhr.status == 200)
-					{
-						try {
-							// Do JSON handling here
-							tmp = JSON.parse(xhr.responseText);
-
-//							if (typeof tmp.url !== 'undefined')
-								//window.location = data.url;
-//								s_route_primary = tmp.url;
-//							else
-//								s_route_primary = '';//window.location.href;//location.reload(true);
-
-							if (typeof tmp.icon === 'undefined')
-							{
-								tmp.icon	= 'info';
-							}
-
-							if (typeof tmp.btn_primary !== 'undefined')
-							{
-								s_text_primary = tmp.btn_primary;
-								setSwalParams(tmp, form, b_error);
-							}
-
-/*
-							swal({
-								icon: "success",
-								title: '{!! trans('user/messages.text.success') !!}',
-								text: data.message,
-								button: '{!! trans('user/messages.button.ok') !!}',
-							}).then(function(){
-								if (typeof data.url === 'undefined')
-									location.reload(true);
-								else
-									window.location = data.url;
-							});
-*/
-						} catch(e) {
-							//JSON parse error, this is not json (or JSON isn't in the browser)
-							// login back() reload with cookies set
-							location.reload(true);
-						}
-					}
-//					else
-//					{
 //						location.reload(true);
-//					}
-
-
-
-
-
-
-			setSwalParams(data, form, b_error);
-			if (typeof s_res_submit !== 'undefined' && s_res_submit != '')
-				a_params.title = s_res_submit;
-
-			Swal.fire(
-				a_params
-			).then((result) => {
-				if (result.value) {
-					if (data.url != '')
-						window.location.href = data.url;
-					else
-						resetForm(form);
-				} else if (result.dismiss === Swal.DismissReason.cancel) {
-					if (s_route_secondary != '')
-						window.location.href = s_route_secondary;
-					else
-						resetForm(form);
-				}
-			})
-			;
-
-/*
-
-//swal("Gotcha!", "Pikachu was caught!", "success");
-
-			var a_buttons = {};
-
-			if (s_text_secondary != '')
-			{
-				a_buttons['secondary'] = {
-					text: s_text_secondary,
-					className: "btn-light",
-				};
+				setSwalParams(data, form, b_error);
 			}
-
-			if (s_text_extra != '')
-				a_buttons['extra'] = {
-					text: s_text_extra,
-					className: "btn-light",
-				};
-
-			if (s_text_primary != '')
-			{
-				a_buttons['primary'] = {
-					text: s_text_primary,
-					className: "btn-primary",
-				};
-				s_route_primary = s_route_primary.replace(':type', 'place').replace(':id', data.id);
-			}
-
-			swal({
-				icon: "success",
-				title: s_res_submit,
-				text: data.message,
-				buttons: a_buttons,
-			}).then((reaction) => {
-
-				switch (reaction) {
-
-					case 'extra':
-						if (s_route_extra != '')
-							window.location.href = s_route_extra;
-						else
-							resetForm(form);
-					break;
-					case 'secondary':
-						if (typeof data.url === 'undefined')
-							window.location.href = s_route_secondary;
-						else
-							window.location = data.url;
-					break;
-					case 'primary':
-						if (s_route_primary != '')
-							window.location.href = s_route_primary;
-						else
-							resetForm(form);
-					break;
-
-					default:
-						if (s_close_route != '')
-							window.location.href = s_route_list;
-						else
-							resetForm(form);
-				}
-
-			});
-*/
-/*
-			swal({
-				icon: "success",
-				title: s_res_submit,
-				text: data.message,
-				buttons: {
-					list: {
-						text: s_text_list,
-						className: "btn-light",
-					},
-					primary: {
-						text: s_text_continue,
-						className: "btn-primary",
-					},
-				},
-			}).then((reaction) => {
-
-				switch (reaction) {
-
-					case 'list':
-						if (typeof data.url === 'undefined')
-							window.location.href = s_route_list;
-						else
-							window.location = data.url;
-					  break;
-					case 'primary':
-						resetForm(form);
-					  break;
-
-					default:
-						if (s_close_route != '')
-							window.location.href = s_route_list;
-						else
-							resetForm(form);
-//						window.location.href = s_route_list;
-				}
-
-			});
-*/
-/*
-			swal({
-				title: s_res_submit,
-				type: 'success',
-				showCancelButton: true,
-				confirmButtonText: s_text_list,
-				confirmButtonClass: 'btn btn-primary',
-				cancelButtonText: s_text_continue,
-				cancelButtonClass: 'btn btn-light',
-			}).then((confirm) => {
-				if(confirm.value){
-					window.location.href = s_route_list;
-				}else{
-					form.find('fieldset').attr('disabled', false);
-				}
-			});
-*/
-			resetForm(form);
-
+			runSwal(b_error);
 		}).fail((xhr) => {
 			b_error	= true;
-
-			if (typeof data.icon !== 'undefined')
-			{
-				data.icon	= 'warning';
-			}
-			if (typeof data.url === 'undefined')
-			{
-				data.url	= s_route_primary;
-			}
 
 			// validator returns "422 (Unprocessable Entity)"
 			if (xhr.readyState == 4 && xhr.status == 422)
@@ -280,23 +85,7 @@ fnForm = function(e){
 				else
 				{
 					setSwalParams(data, form, b_error);
-
-					Swal.fire(
-						a_params
-					).then((result) => {
-						if (result.value) {
-							if (data.url != '')
-								window.location.href = data.url;
-//							else
-//								resetForm(form);
-						} else if (result.dismiss === Swal.DismissReason.cancel) {
-							if (s_route_secondary != '')
-								window.location.href = s_route_secondary;
-//							else
-//								resetForm(form);
-						}
-					})
-					;
+					runSwal(b_error);
 				}
 			}
 		}).always((xhr, type, status) => {
@@ -338,10 +127,29 @@ function setSwalParams(data, form, b_error){
 	a_params = {
 		reverseButtons:		true,
 		showCloseButton:	true,
-		icon:				'warning',
-		title:				data.title,
-		text:				data.message,
 	};
+
+	s_url_ok		= '',
+	s_url_dissmiss	= '',
+	s_url_close		= '',
+	s_btn_ok		= '';
+
+	if (typeof data.message !== 'undefined')
+	{
+		a_params.text			= data.message;
+	}
+
+	if (typeof data.title !== 'undefined')
+	{
+		a_params.title		= data.title;
+	}
+	else
+	{
+		if (typeof s_res_submit !== 'undefined' && s_res_submit != '')
+		{
+			a_params.title = s_res_submit;
+		}
+	}
 
 	if (typeof s_text_primary === 'undefined')
 	{
@@ -360,26 +168,45 @@ function setSwalParams(data, form, b_error){
 	{
 		a_params.icon		= data.icon;
 	}
+	else
+	{
+		if (b_error)
+			a_params.icon	= 'warning';
+		else
+			a_params.icon	= 'info';
+	}
 
-	if (typeof data.url === 'undefined')
+	if (typeof data.url === 'undefined' && typeof s_route_primary !== 'undefined')
 	{
 		data.url		= s_route_primary;
+	}
+	else
+	{
+		data.url		= '';
 	}
 
 	if (typeof data.btn !== 'undefined')
 	{
-		s_text_primary		= data.btn;
+		s_btn_ok		= data.btn;
+	}
+	else if (s_text_primary != '')
+	{
+		s_btn_ok		= s_text_primary;
+	}
+	else
+	{
+		s_btn_ok		= '';
 	}
 
 	if (s_text_secondary != '')
 	{
 		a_params.cancelButtonText	= s_text_secondary;
 		a_params.showCancelButton	= true;
-		s_route_secondary = s_route_secondary.replace(':type', 'place').replace(':id', data.id);
+		s_url_dissmiss = s_route_secondary.replace(':type', 'place').replace(':id', data.id);
 	}
 	else
 	{
-		s_route_secondary = '';
+		s_url_dissmiss = '';
 	}
 
 	if (s_text_extra != '')
@@ -393,10 +220,10 @@ function setSwalParams(data, form, b_error){
 		s_route_extra = '';
 	}
 
-	if (s_text_primary != '')
+	if (s_btn_ok != '')
 	{
-		a_params.confirmButtonText = s_text_primary;
-		data.url = data.url.replace(':type', 'place').replace(':id', data.id);
+		a_params.confirmButtonText = s_btn_ok;
+		s_url_ok = data.url.replace(':type', 'place').replace(':id', data.id);
 	}
 	else
 	{
@@ -404,10 +231,33 @@ function setSwalParams(data, form, b_error){
 	}
 
 	a_params.onClose = () => {
-		if (data.url != '' && s_route_secondary == '')
-			window.location.href = data.url;
+		if (s_url_ok != '' && s_url_dissmiss == '')
+			window.location.href = s_url_ok;
 		else if (!b_error)
 			resetForm(form);
 	};
+}
 
+function runSwal(b_keep_form)
+{
+	// check that setSwalParams() was called
+	if ("title" in a_params)
+	{
+		Swal.fire(
+			a_params
+		).then((result) => {
+			if (result.value) {
+				if (s_url_ok != '')
+					window.location.href = s_url_ok;
+				else if (!b_keep_form)
+					resetForm(form);
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				if (s_url_dissmiss != '')
+					window.location.href = s_url_dissmiss;
+				else if (!b_keep_form)
+					resetForm(form);
+			}
+		})
+		;
+	}
 }
