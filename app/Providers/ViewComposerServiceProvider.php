@@ -20,6 +20,8 @@ class ViewComposerServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		$this->_L10N2config();
+		// TODO refactroring
+		// app/Http/Controllers/Controller.php
 		$o_settings	= app('App\Settings');
 		$s_theme	= $o_settings->theme;
 

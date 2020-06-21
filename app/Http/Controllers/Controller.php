@@ -26,6 +26,12 @@ class Controller extends BaseController
 		$a_tmp						= explode('\\', $s_tmp);
 		$this->_env->s_name			= str_replace($s_basename, '', $a_tmp[3]);
 #dd($this->_env->s_name, $a_tmp[0], $s_tmp);
+
+		// TODO refactroring
+		// app/Providers/ViewComposerServiceProvider.php
+		$o_settings	= app('App\Settings');
+		$s_theme	= $o_settings->theme;
+
 		if ($a_tmp[0] == 'Modules')
 		{
 			$this->_env->s_name		= $a_tmp[1];
@@ -90,7 +96,7 @@ class Controller extends BaseController
 		{
 			$this->_env->s_utype	= 'guest';
 			$this->_env->fn_find	= '';
-			$this->_env->s_view		= ($settings->theme . '::' ?: '') . $this->_env->s_utype . '.' ;
+			$this->_env->s_view		= ($s_theme . '::' ?: '') . $this->_env->s_utype . '.' ;
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
