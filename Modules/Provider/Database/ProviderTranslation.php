@@ -11,8 +11,6 @@ class ProviderTranslation extends Model
 
 	protected $fillable = [
 		'title',
-		'address',
-		'description',
 	];
 
 	public $a_form = [
@@ -20,16 +18,6 @@ class ProviderTranslation extends Model
 			'tab'		=> 'data',
 			'field'		=> 'input',
 			'rules'		=> 'required|string|max:255',
-		],
-		'address'	=> [
-			'tab'		=> 'data',
-			'field'		=> 'input',
-			'rules'		=> 'required|string|max:255',
-		],
-		'description'	=> [
-			'tab'		=> 'data',
-			'field'		=> 'input',
-			'rules'		=> 'string|max:255',
 		],
 	];
 }

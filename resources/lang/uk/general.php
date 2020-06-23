@@ -1,7 +1,7 @@
 <?php
 
 return array (
-	'admin-panel'			=> 'Адмін',
+	'admin-panel'			=> 'Керування',
 	'bookmarks'				=> 'Обране',
 	'my-city'				=> 'Моє місто',
 #	'date'					=> ':day :month :year',
