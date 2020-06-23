@@ -45,7 +45,7 @@ textarea{overflow:auto;resize:none}
 
 .wow { visibility: hidden; }
 
-html, body {background-color:#fff;width:100%;overflow-x:hidden;font-family: 'Roboto', sans-serif;font-weight: 400;font-size:16px;color:#383838;background-color: #f7f8f9;}
+html, body {background-color:#fff;width:100%;overflow-x:hidden;font-weight: 400;color:#383838;background-color: #f7f8f9;}
 html.modal_opened,
 body.modal_opened {overflow: hidden !important;}
 p {font-size: 18px;line-height:1.33;margin-bottom:1em;overflow:visible;color: #383838;}
