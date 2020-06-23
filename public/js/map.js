@@ -36,7 +36,7 @@ function initMap( el )
 		'type': 'get',
 		'url': s_route_list,
 		data: {
-			length: 10000,
+			length: i_places_qty,
 			filters: { published: 1 },
 		},
 		success: (data, status, xhr) => {
@@ -272,7 +272,7 @@ function findMe( map )
 			alert('Error: The Geolocation service failed.');
 		});
 	} else {
-		alert('Error: Your browser doesn\'t support geolocation.');
+		alert('Error: Your browser doesn’t support geolocation.');
 	}
 }
 
