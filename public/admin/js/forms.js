@@ -21,8 +21,7 @@ $(document).ready(() => {
 let b_error 		= false,
 	s_url_ok		= '',
 	s_url_dissmiss	= '',
-	s_url_close		= '',
-	s_btn_ok		= '';
+	s_url_close		= '';
 fnForm = function(e){
 		e.preventDefault();
 
@@ -260,4 +259,16 @@ function runSwal(b_keep_form)
 		})
 		;
 	}
+}
+
+function resetForm(form)
+{
+	if (s_action_form == 'create')
+	{
+		// clean all fields once the form's been saved
+		form.find('input[type=text]').val('');
+		form.find('.switcher').bootstrapSwitch('state', false);
+		form.find(".select2-dropdown").val(null).trigger('change');
+	}
+	form.find('fieldset').attr('disabled', false);
 }

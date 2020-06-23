@@ -282,7 +282,7 @@
 
             <div class="navbar-collapse collapse" id="navbar-footer">
                 <div class="navbar-text main">
-                    <a href="https://www.linkedin.com/in/maximax/" target="_blank">maximax</a> of efte.in
+                    <a href="https://www.linkedin.com/in/maximax/" target="_blank">maximax</a> at efte.in
                     <br />Version: {{ $version->app }}
                     <br />@php echo date("H:i:s m/d/Y") @endphp
                 </div>

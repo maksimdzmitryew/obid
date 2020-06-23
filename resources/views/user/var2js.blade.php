@@ -1,5 +1,5 @@
 let
-	s_route_session			= '{!! route('admin.session') !!}'
+	s_route_session				= '{!! route('admin.session') !!}'
 	,s_route_file				= '{!! route('api.upload.file') !!}'
 	,s_route_image				= '{!! route('api.upload.image') !!}'
 	,s_btn_ok					= '{!! trans('user/messages.button.ok') !!}'

@@ -3,18 +3,6 @@ $(document).ready(function ()
 	initLiveDropdowns();
 });
 
-function resetForm(form)
-{
-	if (s_action_form == 'create')
-	{
-		// clean all fields once the form's been saved
-		form.find('input[type=text]').val('');
-		form.find('.switcher').bootstrapSwitch('state', false);
-		form.find(".select2-dropdown").val(null).trigger('change');
-	}
-	form.find('fieldset').attr('disabled', false);
-}
-
 function initLiveDropdowns(){
 	var selects = $(".select2");
 	selects.each(function (i, item) {
