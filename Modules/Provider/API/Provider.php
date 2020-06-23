@@ -7,6 +7,8 @@ use                   Modules\Provider\Database\Provider as Model;
 
 class Provider extends Model
 {
+	use FileTrait;
+
 	public $translationModel = '\Modules\Provider\Database\ProviderTranslation';
 
 	/**
@@ -17,13 +19,13 @@ class Provider extends Model
 	 */
 	public static function parse()
 	{
+		$s_url_read	= 'http://obed.in.ua/menu/ponedelnik/index.php';
+		$i_id		= 0;
 		$a_res		= self::downloadFile(
 								$s_url_read,
-								'source_',# . $o_doc->source_id,
-								$o_doc->id
+								'provider_',
+								$i_id
 							);
-
-#						self::writeLog('info', $s_log, 'loop');
 
 #self::writeLog('info', 'http_size='.(int)$a_res['i_source_size'].',tmp_size='.(int)$a_res['i_temp_size']);
 #self::writeLog('info', 'http_code='.(int)$a_res['i_http_code'].',curl_code='.(int)$a_res['i_curl_code']);
@@ -35,11 +37,12 @@ class Provider extends Model
 			&& file_exists($a_res['s_temp_name'])
 			)
 		{
-			$s_file_path = $a_res['s_temp_name'];
-			$s_content	= file_get_contents($s_file_path);
-			$o_doc->{'s_' . $o_item_params->s_type_source . '_meta'} = mime_content_type($s_file_path);
+			$s_file_path	= $a_res['s_temp_name'];
+			$s_content		= file_get_contents($s_file_path);
+			$s_meta			= mime_content_type($s_file_path);
 			unlink($s_file_path);
-
+		}
+dd($s_content, $s_content);
 		die('ok');
 	}
 

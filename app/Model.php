@@ -363,12 +363,6 @@ class Model extends BaseModel
 		}
 	}
 
-	public static function formatNumber($i_qty)
-	{
-		$s_tmp = number_format((float)$i_qty, 0, ',', '"');
-		return $s_tmp;
-	}
-
 	public static function _replaceSeparatorK($s_msg)
 	{
 		# replace thousand separator which is treated as 2 chars per each symbol by vsprintf otherwise
