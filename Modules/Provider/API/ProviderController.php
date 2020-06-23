@@ -5,7 +5,9 @@
 namespace Modules\Provider\API;
 
 #use App\Provider;
-use               Modules\Complaint\Database\Complaint;
+use                        App\Http\Controllers\ControllerAPI as Controller;
+use                           App\Http\Requests\DeleteRequest;
+#use                 Modules\Complaint\Database\Complaint;
 use                        Modules\Provider\API\Provider;
 use                   Modules\Provider\Database\Provider as DBProvider;
 
@@ -15,9 +17,7 @@ use                    Modules\Provider\Filters\ProviderFilters;
 #use App\Http\Requests\ProviderRequest;
 #use Modules\Provider\Requests\ProviderRequest;
 
-use                        App\Http\Requests\DeleteRequest;
 
-use                     App\Http\Controllers\ControllerAPI as Controller;
 #use App\Http\Requests\ProviderApiRequest;
 use                       Modules\Provider\Http\ProviderRequest;
 use                        Modules\Provider\API\SaveRequest;
@@ -60,7 +60,7 @@ class ProviderController extends Controller
 	 */
 	public function parse()
 	{
-		die('ok');
+		Provider::parse();
 	}
 
 	/**

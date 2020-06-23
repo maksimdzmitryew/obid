@@ -1,4 +1,4 @@
-COPY improvements from core
+0.00.2+a176:1 user ADD enhance common Model
 0.00.2+a175:3 user ADD better provider form and translation
 0.00.2+a175:2 user ADD better font styling
 0.00.2+a175:1 user ADD route to parsing provider’s web-page
