@@ -1,4 +1,5 @@
-0.00.2+a175:1 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch
+0.00.2+a175:1 user ADD route to parsing provider’s web-page
+0.00.2+a175:1 user COPY improvements from core
 0.00.2+a173:5 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch
 0.00.2+a173:4 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch
 0.00.2+a173:3 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch

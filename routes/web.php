@@ -21,6 +21,9 @@ use Spatie\Permission\Models\Role;
 $a_list = config('fragment.list');
 $a_modules = config('fragment.modules');
 
+Route::get('parse/{id?}',			['as' => 'parse_provider',			'uses' => '\Modules\Provider\API\ProviderController@parse']);
+
+
 Route::group([
 	'middleware' => []#'language']
 ], function() {
@@ -133,7 +136,7 @@ Route::group([
 		Route::post($s_path . '/done',				['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 		$s_method	= 'view';
 		Route::get($s_path . '/look/{id}',			['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-
+/*
 		$s_model	= 'Opinion';
 		$s_path		= strtolower($s_model);
 		$s_ctrl		= '\Modules\\' . $s_model . '\Guest\\' . $s_model ;
@@ -150,6 +153,7 @@ Route::group([
 		Route::get($s_path . '/all/{type?}/{tid?}',	['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 		$s_method	= 'view';
 		Route::get($s_path . '/look/{id}',			['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
+*/
 	});
 
 });
@@ -161,7 +165,7 @@ Route::group([
 	'namespace' => 'API',
 	'middleware' => [],
 ], function() use ($a_list, $a_modules) {
-
+/*
 	$s_model	= 'Opinion';
 	$s_path		= strtolower($s_model);
 	$s_ctrl		= '\Modules\\' . $s_model . '\API\\' . $s_model ;
@@ -170,7 +174,7 @@ Route::group([
 	Route::get($s_path.'/'.$s_method.'/{pid}',		['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 	$s_method	= 'unvoted';
 	Route::get($s_path.'/{id}/'.$s_method,			['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-
+*/
 
 /*
 	$s_model	= 'Point';
@@ -407,7 +411,7 @@ Route::group([
 			Route::get($s_path . '/form/{id?}',	['as' => $s_path . '.form',		'uses' => $s_ctrl . '@form']);
 		}
 	}
-
+/*
 	$s_model	= 'Opinion';
 	$s_path		= strtolower($s_model);
 	$s_ctrl		= '\Modules\\' . $s_model . '\User\\' . $s_model ;
@@ -415,7 +419,7 @@ Route::group([
 
 	$s_method	= 'place';
 	Route::get($s_path . '/place/{id?}',		['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-
+*/
 });
 
 //Admin Routes

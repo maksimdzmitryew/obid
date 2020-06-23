@@ -47,8 +47,20 @@ class ProviderController extends Controller
 #	public function index(ProviderApiRequest $request, ProviderFilters $filters) : \Illuminate\Http\Response
 	public function index(ProviderRequest $request, ProviderFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters, ['user']);
+		$a_res = $this->indexAPI($request, $filters);
 		return $a_res;
+	}
+
+
+	/**
+	 * Parse provider’s web-page for updates in menu
+	 * @param Request	$request		Data from request
+	 *
+	 * @return Response	json instance of
+	 */
+	public function parse()
+	{
+		die('ok');
 	}
 
 	/**
