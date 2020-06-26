@@ -65,5 +65,13 @@ class Provider extends Model
 			'default'	=>	'',
 		],
 	];
+	public function course()
+	{
+		return $this->hasOne('Modules\Course\Database\Course');
+	}
 
+	public function meal()
+	{
+		return $this->hasOne('Modules\Meal\Database\Meal');
+	}
 }

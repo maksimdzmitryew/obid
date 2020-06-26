@@ -13,6 +13,7 @@ use                   Modules\Provider\Database\Provider as DBProvider;
 
 #use App\Filters\ProviderFilters;
 use                    Modules\Provider\Filters\ProviderFilters;
+use                             Illuminate\Http\Request;
 
 #use App\Http\Requests\ProviderRequest;
 #use Modules\Provider\Requests\ProviderRequest;
@@ -47,7 +48,7 @@ class ProviderController extends Controller
 #	public function index(ProviderApiRequest $request, ProviderFilters $filters) : \Illuminate\Http\Response
 	public function index(ProviderRequest $request, ProviderFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters);
+		$a_res = $this->indexAPI($request, $filters, ['course']);
 		return $a_res;
 	}
 
@@ -58,9 +59,9 @@ class ProviderController extends Controller
 	 *
 	 * @return Response	json instance of
 	 */
-	public function parse()
+	public function parse(Request $request)
 	{
-		Provider::parse();
+		Provider::parse($request);
 	}
 
 	/**

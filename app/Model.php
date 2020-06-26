@@ -2,12 +2,12 @@
 
 namespace App;
 
-use                               App\Traits\GeneralTrait;
-use             Illuminate\Database\Eloquent\Model          as BaseModel;
-use        Astrotomic\Translatable\Contracts\Translatable   as TranslatableContract;
-use                  Astrotomic\Translatable\Translatable;
-use                          Illuminate\Http\Response;
-use                          Illuminate\Http\Request;
+use                                  App\Traits\GeneralTrait;
+use                Illuminate\Database\Eloquent\Model          as BaseModel;
+use           Astrotomic\Translatable\Contracts\Translatable   as TranslatableContract;
+use                     Astrotomic\Translatable\Translatable;
+use                             Illuminate\Http\Response;
+use                             Illuminate\Http\Request;
 
 class Model extends BaseModel
 {
@@ -105,14 +105,14 @@ class Model extends BaseModel
 	 * @param Bool		$b_published	NULL (default) = all, TRUE/FALSE
 	 * @param Array		$a_include_ids	if only specific ids are needed
 	 * @param Array		$a_exclude_ids	if some ids are not needed
-	 * @param Bool		$b_byid			id will be the key and title will be the value
 	 * @param Bool		$b_sort_bytitle	default sorting is by the key
+	 * @param Bool		$b_byid			id will be the key and title will be the value
 */
 #	 * @param Bool		$b_json			Data from request
 /*	 *
 	 * @return Array	set of results
 	 */
-	public static function getIdTitle(Request $request, $filters, String $s_model, $b_published, Array $a_include_ids, Array $a_exclude_ids, Bool $b_sort_bytitle, Bool $b_byid
+	public static function getIdTitle(Request $request, $filters, String $s_model, Bool $b_published, Array $a_include_ids, Array $a_exclude_ids, Bool $b_sort_bytitle, Bool $b_byid
 #		, Bool $b_json
 	) : Array
 	{
@@ -203,6 +203,13 @@ class Model extends BaseModel
 		return response($a_response, $a_response['code']);
 	}
 
+
+	public static function _getServerName()
+	{
+		$a_tmp = explode('.', request()->getHost());
+		$a_tmp[0] = strtoupper($a_tmp[0]);
+		return $a_tmp[0];
+	}
 
 	/**
 	 * write debug info to server's log file

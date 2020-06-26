@@ -30,4 +30,8 @@ class Course extends Model
 		],
 	];
 
+	public function provider()
+	{
+		return $this->belongsTo('Modules\Provider\Database\Provider');
+	}
 }

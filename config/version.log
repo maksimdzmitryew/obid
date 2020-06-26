@@ -1,3 +1,4 @@
+0.00.2+a178:1 user ADD parse webpage and insert missing data for course and meal
 0.00.2+a177:1 user ADD parse list of items at menu page
 0.00.2+a176:3 user ADD download provider web-page with file trait
 0.00.2+a176:2 user ADD file trait

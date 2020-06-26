@@ -12,6 +12,8 @@ class Meal extends Model
 {
 	protected $connection = 'psc';
 	protected $fillable = [
+		'course_id',
+		'provider_id',
 		'published',
 	];
 	public $translatedAttributes = [];
@@ -23,5 +25,15 @@ class Meal extends Model
 			'default'	=>	TRUE,
 		],
 	];
+
+	public function course()
+	{
+		return $this->belongsTo('Modules\Course\Database\Course');
+	}
+
+	public function provider()
+	{
+		return $this->belongsTo('Modules\Provider\Database\Provider');
+	}
 
 }
