@@ -2,5 +2,5 @@
 
 return [
 	'name'			=> 'Course',
-	'ico'			=> 'icon-folder2',
+	'ico'			=> 'icon-color-sampler',
 ];

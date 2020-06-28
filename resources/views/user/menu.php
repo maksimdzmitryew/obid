@@ -11,8 +11,8 @@ $menu_list = ['festivals' => 'icon-music', 'partners' => 'fa fa-handshake-o', 'e
 {{--@ include('admin.common._card_group')--}}*/
 $menu_title[] = 'materials';
 $menu_color[] = '#5933d6';
-$menu_icon[] = 'fa fa-file-image-o';
-$menu_list[] = ['place', 'provider', 'course', 'meal', ];
+$menu_icon[] = 'fas	fa-hat-chef';
+$menu_list[] = ['place', 'provider', 'course', 'meal', 'plate', ];
 
 /*
 $menu_title[] = 'improvements';

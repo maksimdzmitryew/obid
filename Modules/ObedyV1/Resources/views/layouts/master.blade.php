@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="{{ asset('css/sweet_alert.css?v=' . $version->css) }}">
 --}}
 	<link rel="stylesheet" href="{{ asset('icons/icomoon/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset('icons/fontawesome/css/all.min.css?v=5.13.0') }}">
 	<!-- /global stylesheets -->
 
 	<link rel="stylesheet" href="{{ asset($theme . '/css/' . $_env->s_utype . '_app.css?v=' . $version->css) }}">

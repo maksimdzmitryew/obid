@@ -1,6 +1,6 @@
-@php
-# $version = include_once( __DIR__ . '/../../../version.php');
-@endphp<!DOCTYPE html>
+auth.blade
+{{--
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,6 @@
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-    <link href="/admin/css/app.css?v={{ config('version.css')) }}" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
 </head>
@@ -34,3 +33,4 @@
 <script src="/admin/js/app.js"></script>
 </body>
 </html>
+ --}}

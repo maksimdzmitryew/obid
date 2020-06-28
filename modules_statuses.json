@@ -2,6 +2,7 @@
 	"Course":		true,
 	"Meal":			true,
 	"Place":		true,
+	"Plate":		true,
 	"Personal":		true,
 	"Provider":		true,
 	"ObedyV1":		true,

@@ -2,5 +2,5 @@
 
 return [
 	'name'			=> 'Meal',
-	'ico'			=> 'icon-stack-text',
+	'ico'			=> 'far fa-oven',
 ];
