@@ -1,0 +1,13 @@
+{
+    "name": "Plate",
+    "alias": "plate",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Plate\\Providers\\PlateServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
