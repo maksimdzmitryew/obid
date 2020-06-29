@@ -74,4 +74,9 @@ class Provider extends Model
 	{
 		return $this->hasOne('Modules\Meal\Database\Meal');
 	}
+
+    public function plate()
+    {
+        return $this->hasManyThrough('Modules\Plate\Database\Plate', 'Modules\Meal\Database\Meal');
+    }
 }

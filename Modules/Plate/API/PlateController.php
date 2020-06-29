@@ -47,7 +47,7 @@ class PlateController extends Controller
 #	public function index(PlateApiRequest $request, PlateFilters $filters) : \Illuminate\Http\Response
 	public function index(PlateRequest $request, PlateFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters, ['meal',]);
+		$a_res = $this->indexAPI($request, $filters, ['meal', 'mealCourse', 'mealProvider', ]);
 		return $a_res;
 	}
 

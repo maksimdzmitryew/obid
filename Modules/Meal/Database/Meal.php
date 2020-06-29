@@ -31,6 +31,11 @@ class Meal extends Model
 		return $this->belongsTo('Modules\Course\Database\Course');
 	}
 
+	public function plate()
+	{
+		return $this->hasMany('Modules\Plate\Database\Plate');
+	}
+
 	public function provider()
 	{
 		return $this->belongsTo('Modules\Provider\Database\Provider');

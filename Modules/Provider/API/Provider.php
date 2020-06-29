@@ -6,6 +6,7 @@ use                                      Carbon\Carbon;
 use                     Modules\Course\Database\Course as Course;
 use                                  App\Traits\FileTrait;
 use                       Modules\Meal\Database\Meal;
+use                      Modules\Plate\Database\Plate;
 use                   Modules\Provider\Database\Provider as Model;
 use                             Illuminate\Http\Request;
 
@@ -23,8 +24,20 @@ class Provider extends Model
 	 */
 	public static function parse(Request $request) : void
 	{
-		$a_items	= self::select('id')->wherePublished(1)->limit(25)->get();
-		self::_parseDay($a_items[0]->id);
+		$a_columns	= ['id'];
+		for ($d = 1; $d < 6; $d++)
+		{
+			$a_columns[]	= 'day_' . $d;
+		}
+		$a_items	= self::select($a_columns)->wherePublished(1)->limit(25)->get()->toArray();
+		for ($i = 0; $i < count($a_items); $i++)
+		{
+			for ($d = 1; $d < 6; $d++)
+			{
+				dump($a_items[$i]['day_' . $d]);
+				self::_parseDay($a_items[$i]['id'], $a_items[$i]['day_' . $d]);
+			}
+		}
 	}
 
 	/**
@@ -49,9 +62,9 @@ class Provider extends Model
 	 * Find recognisable date stamp within webpage content
 	 * @param String	$s_content			webpage all content
 	 *
-	 * @return String						date formatted as 'Y-m-d'
+	 * @return Object						carbon ready
 	 */
-	private static function _getDate(String $s_content) : String
+	private static function _getDate(String $s_content) : Object
 	{
 		$s_date		= '';
 		$s_regexps	=
@@ -70,11 +83,14 @@ class Provider extends Model
 		preg_match_all('~' . $s_regexps . '~iu', $s_content, $a_matches);
 
 		if (isset($a_matches[1][0]))
-			$s_date = $a_matches[1][0];
+			$s_date = ltrim(trim(str_replace('.', '/', $a_matches[1][0]), ' /'), '0');
 
-		$s_date		= Carbon::parse($s_date)->format('Y-m-d');
-
-		return $s_date;
+		$o_date		= Carbon::createFromFormat('j/m/Y', $s_date);
+		if ($o_date->format("Y") < date("Y"))
+		{
+			$o_date	= Carbon::createFromFormat('j/m/y', $s_date);
+		}
+		return $o_date;
 	}
 
 	/**
@@ -93,15 +109,8 @@ class Provider extends Model
 						. '<td class="ttdd5s".+?value="(\d+?)".+?/td>'
 						. '.*?</tr>'
 						;
-
-		#		$s_regexps	= '((\b\w{1,}|\b\w{1,}\s{1,}\w{1,}|\b\w{1,}\s{1,}\w{1,}\s{1,}\w{1,})\sУкраїни|цього Кодексу)';
 		preg_match_all('~' . $s_regexps . '~iu', $s_text, $a_matches);
-
-
-		#<tr><td class="ttdd1s">1</td><td class="ttdd2s">Салаты</td><td class="ttdd3s">Салат из свежих овощей с маслом растительным (огурец, помидор, масло раст.)  [591]</td><td class="ttdd4s" align="center"><input class="input1" readonly type="text" value="150"></td><td class="ttdd5s" align="center"><input readonly class="input1" type="text" id="c11" value="22" align="center" onkeyup="document.getElementById('result1').innerHTML = (parseFloat(this.value)||0) * (parseFloat(document.getElementById('x11').value)||0); "></td><td class="ttdd6s" align="center"><input style="text-align:center; background: #CCCCCC;" class="mokrec" type="text" size="2" name="1" id="x11" onkeyup="document.getElementById('result1').innerHTML = (parseFloat(this.value)||0) * (parseFloat(document.getElementById('c11').value)||0)"></td><td class="ttdd7s" align="center" style="font-weight:bold;" name="result1" id="result1"></td></tr>
-		echo '<pre>';
-		var_dump($a_matches);
-		echo '</pre>';
+#		echo '<pre>';var_dump($a_matches);echo '</pre>';
 		$a_courses	= [];
 		return $a_matches;
 	}
@@ -133,7 +142,7 @@ class Provider extends Model
 						'provider_id'	=> $provider_id,
 						'published'		=> TRUE,
 						'title'			=> $a_matches[3][$i_pointer],
-						'id'			=> (int)$a_matches[4][$i_pointer],
+						'number'		=> (int)$a_matches[4][$i_pointer],
 						'weight'		=> (int)$a_matches[5][$i_pointer],
 						'price'			=> (int)$a_matches[6][$i_pointer],
 					];
@@ -199,18 +208,8 @@ class Provider extends Model
 		$fn_select		= $s_model . '::select';
 		$o_items		= $fn_select()->whereProviderId($provider_id)->get()->pluck('title');
 
-#dd($s_type, $a_res, $a_titles, $a_items[$s_type]);
+		$a_new			= array_values(array_diff($a_titles, $o_items->toArray()));
 
-
-		#$a_res	=	self::getIdTitle($request, NULL, 'Course', TRUE, [], [], TRUE, FALSE);
-
-		#$a_res	=	Course::select('id')->whereIn('title', $a_courses)->pluck('title', 'id');
-#		$o_items		=	Course::select()->whereProviderId($provider_id)->get()->pluck('title');
-		#dd($o_courses);
-		#$o_course	=	Course::select()->whereProvider()->pluck('title', 'id');
-
-		$a_new			= array_diff($a_titles, $o_items->toArray());
-#dump($a_new);
 		for ($i = 0; $i < count($a_new); $i++)
 		{
 			$s_title	= $a_new[$i];
@@ -219,36 +218,93 @@ class Provider extends Model
 			$o_tmp		= new $s_model;
 			$o_tmp->fill($a_data);
 			$o_tmp->save();
-
-#dd($s_title, $a_data);
-/*
-			$a_tmp	= [
-							'provider_id'	=> $provider_id,
-							'published'		=> TRUE,
-							'title'			=> $a_new[$i],
-						];
-*/
-		#	$a_insert[]	= $o_tmp;
-		#	$a_insert[]	= $a_tmp;
 		}
-		#Course::insert($a_insert);
-		#Course::createMany($a_insert);
-		#dd($a_insert);
-		#Course::create($a_insert);
-		#$a_insert[0]->save();
+	}
 
+	/**
+	 * assign course_id foreign key value to each meal
+	 * @param String	$s_target		items to add other items ids
+	 * @param String	$s_source		items to get ids from
+	 * @param Array		$a_items		items from webpage
+	 * @param Array		$a_db			items from DB
+	 *
+	 * @return Array					updated $a_items with course foreign key
+	 */
+	private static function _linkItemsWithIdsFromDB(String $s_target, String $s_source, Array $a_items, Array $a_db) : Array
+	{
+		foreach ($a_items[$s_target] AS $s_title => $a_data)
+		{
+			$s_tmp	= ($s_target != $s_source ? $s_source . '_' : '');
+			$i_cid	= array_search($a_data[$s_tmp . 'title'], $a_db);
+			if ($i_cid !== FALSE)
+			{
+				$a_items[$s_target][$s_title][$s_source . '_' . 'id']	= $i_cid;
+			}
+		}
+		return $a_items;
+	}
+
+	/**
+	 * assign course_id foreign key value to each meal
+	 * @param Array		$a_items		items from webpage
+	 * @param Array		$a_courses		courses from DB
+	 *
+	 * @return Array					updated $a_items with course foreign key
+	 */
+	private static function _linkCoursesAndMeals(Array $a_items, Array $a_courses) : Array
+	{
+		$a_items	= self::_linkItemsWithIdsFromDB('meal', 'course', $a_items, $a_courses);
+		return $a_items;
+	}
+
+	/**
+	 * assign meal’s foreign key as id value to each meal
+	 * @param Array		$a_items		items from webpage
+	 * @param Array		$a_meals		meals from DB
+	 *
+	 * @return Array					updated $a_items with meal id
+	 */
+	private static function _linkMealsAndMeals(Array $a_items, Array $a_meals) : Array
+	{
+		$a_items	= self::_linkItemsWithIdsFromDB('meal', 'meal', $a_items, $a_meals);
+		return $a_items;
+	}
+
+	/**
+	 * assign course_id foreign key value to each meal
+	 * @param Array		$a_items			items from webpage
+	 * @param Integer	$provider_id		provider
+	 * @param Object	$o_date				date whem meal is available for ordering
+	 *
+	 * @return void
+	 */
+	private static function _fillDailyMenu(Array $a_items, Int $provider_id, Object $o_date) : void
+	{
+		$o_items		= Plate::getItems($provider_id, $o_date);
+
+		$a_titles		= array_keys($a_items);
+		$a_new			= array_values(array_diff($a_titles, $o_items->pluck('title')->toArray()));
+
+		for ($i = 0; $i < count($a_new); $i++)
+		{
+			$s_title			= $a_new[$i];
+			$a_data				= $a_items[$s_title];
+			$a_data['date']		= $o_date;
+			$o_tmp		= new Plate;
+			$o_tmp->fill($a_data);
+			$o_tmp->save();
+		}
 	}
 
 	/**
 	 * Parse provider’s web-page for updates in menu
 	 * @param Integer	$provider_id		provider’s identifier
+	 * @param String	$s_url_read			webpage URL
 	 *
-	 * @return void
+	 * @return Boolean						success/failure
 	 */
-	private static function _parseDay(Int $provider_id = 4) : void
+	private static function _parseDay(Int $provider_id, String $s_url_read) : Bool
 	{
-#		$s_url_read	= 'http://obed.in.ua/menu/ponedelnik/index.php';
-		$s_url_read			= 'http://obed.in.ua/menu/vtornik/index.php';
 		$s_content			= self::getFileContent($s_url_read);
 
 		$s_text				= self::_getText($s_content);
@@ -258,60 +314,37 @@ class Provider extends Model
 			/**
 			 *	inform and stop
 			 */
-			self::writeLog('critical', 'Not found: webpage is empty. provider=' . $provider_id);
+			self::writeLog('warning', 'Not found: webpage is empty. provider=' . $provider_id);
+			return FALSE;
 		}
-#dd($s_text);
 
 		$a_matches			= self::_getMatches($s_text);
 		if (count($a_matches[0]) < 1)
 		{
-			self::writeLog('critical', 'No meals for the day. provider=' . $provider_id . ' url=' . $s_url_read );
+			self::writeLog('warning', 'No meals for the day. provider=' . $provider_id . ' url=' . $s_url_read );
+			return FALSE;
 		}
 
-		$s_date				= self::_getDate($s_content);
+		$o_date				= self::_getDate($s_content);
 
-		if (empty($s_date))
+		if (empty($o_date))
 		{
-			self::writeLog('critical', 'Empty date. provider=' . $provider_id . ' url=' . $s_url_read );
+			self::writeLog('warning', 'Empty date. provider=' . $provider_id . ' url=' . $s_url_read );
+			return FALSE;
 		}
 
 		$a_items			= self::_getCoursesMeals($a_matches, $provider_id);
 
 		self::_checkAndCreateItems('course', $a_items, $provider_id);
-		$o_courses			=	Course::select()->get()->pluck('title', 'id');
+		$a_courses			= Course::select()->whereProviderId($provider_id)->get()->pluck('title', 'id')->toArray();
+		$a_items			= self::_linkCoursesAndMeals($a_items, $a_courses);
 
-		/**
-		 *	assign course_id foreign key value to each meal
-		 */
-		foreach ($a_items['meal'] AS $s_title => $a_data)
-		{
-			$i_cid = array_search($a_data['course_title'], $o_courses->toArray());
-			if ($i_cid !== FALSE)
-			{
-				$a_items['meal'][$s_title]['course_id']	= $i_cid;
-			}
-		}
 		self::_checkAndCreateItems('meal', $a_items, $provider_id);
+		$a_meals			= Meal::select()->whereProviderId($provider_id)->get()->pluck('title', 'id')->toArray();
+		$a_items			= self::_linkMealsAndMeals($a_items, $a_meals);
 
-#		$a_courses			= array_keys($a_items['courses']);
-#		$a_meals			= array_keys($a_items['meals']);
+		self::_fillDailyMenu($a_items['meal'], $provider_id, $o_date);
 
-#		self::_checkExistingCoursesTitles($a_matches, $provider_id);
-		$o_meals			=	Meal::select()->get()->pluck('title', 'id');
-
-dd($s_date, $s_text, $a_items, $o_courses, $o_meals);#, $a_courses, $a_meals);
-
-
-
-
-#dd($events->toSql(), $events->getBindings());
-dd($a_courses, $a_res, $a_tmp, $a_insert);
-die();
-
-
-
-
-dd($s_text, $s_content);
-		die('ok');
+		return TRUE;
 	}
 }
