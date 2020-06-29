@@ -35,10 +35,4 @@ class Meal extends Model
 	{
 		return $this->hasMany('Modules\Plate\Database\Plate');
 	}
-
-	public function provider()
-	{
-		return $this->belongsTo('Modules\Provider\Database\Provider');
-	}
-
 }

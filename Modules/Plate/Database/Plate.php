@@ -76,27 +76,9 @@ class Plate extends Model
 		return $o_query->get();
 	}
 
-    public function mealCourse()
-    {
-        return $this->hasOneThrough('Modules\Course\Database\Course', 'Modules\Meal\Database\Meal');
-    }
-
 	public function meal()
 	{
 		return $this->belongsTo('Modules\Meal\Database\Meal');
 	}
-
-    public function provider()
-    {
-
-        return $this
-                ->join('meals', 'plates.meal_id', '=', 'meals.id')
-                ;
-    	dd($this);
-
-    	dump($res);
-    	return $res;
-        return $this->hasOneThrough('Modules\Provider\Database\Provider', 'Modules\Meal\Database\Meal');
-    }
 
 }

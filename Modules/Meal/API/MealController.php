@@ -47,7 +47,7 @@ class MealController extends Controller
 #	public function index(MealApiRequest $request, MealFilters $filters) : \Illuminate\Http\Response
 	public function index(MealRequest $request, MealFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters, ['course', 'provider']);
+		$a_res = $this->indexAPI($request, $filters, ['course', 'course.provider', 'plate', ]);
 		return $a_res;
 	}
 

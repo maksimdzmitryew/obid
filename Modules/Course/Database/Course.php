@@ -30,6 +30,16 @@ class Course extends Model
 		],
 	];
 
+	public function meal()
+	{
+		return $this->hasMany('Modules\Meal\Database\Meal');
+	}
+
+	public function plate()
+	{
+		return $this->hasManyThrough('Modules\Plate\Database\Plate', 'Modules\Meal\Database\Meal');
+	}
+
 	public function provider()
 	{
 		return $this->belongsTo('Modules\Provider\Database\Provider');

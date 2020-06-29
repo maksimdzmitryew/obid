@@ -47,7 +47,7 @@ class CourseController extends Controller
 #	public function index(CourseApiRequest $request, CourseFilters $filters) : \Illuminate\Http\Response
 	public function index(CourseRequest $request, CourseFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters, ['provider']);
+		$a_res = $this->indexAPI($request, $filters, ['meal', 'plate', 'provider', ]);
 		return $a_res;
 	}
 

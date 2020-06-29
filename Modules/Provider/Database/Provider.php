@@ -65,18 +65,13 @@ class Provider extends Model
 			'default'	=>	'',
 		],
 	];
+
 	public function course()
 	{
-		return $this->hasOne('Modules\Course\Database\Course');
+		return $this->hasMany('Modules\Course\Database\Course');
 	}
-
 	public function meal()
 	{
-		return $this->hasOne('Modules\Meal\Database\Meal');
+		return $this->hasManyThrough('Modules\Meal\Database\Meal', 'Modules\Course\Database\Course');
 	}
-
-    public function plate()
-    {
-        return $this->hasManyThrough('Modules\Plate\Database\Plate', 'Modules\Meal\Database\Meal');
-    }
 }

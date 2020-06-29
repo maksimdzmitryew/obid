@@ -48,7 +48,7 @@ class ProviderController extends Controller
 #	public function index(ProviderApiRequest $request, ProviderFilters $filters) : \Illuminate\Http\Response
 	public function index(ProviderRequest $request, ProviderFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters, ['course']);
+		$a_res = $this->indexAPI($request, $filters, ['course', 'meal', 'course.meal.plate', ]);
 		return $a_res;
 	}
 
