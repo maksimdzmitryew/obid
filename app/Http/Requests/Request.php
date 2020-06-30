@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use               Illuminate\Foundation\Http\FormRequest as BaseRequest;
-use                                          ReflectionClass;
-use                                          ReflectionMethod;
+use                  Illuminate\Foundation\Http\FormRequest as BaseRequest;
+use                                             ReflectionClass;
+use                                             ReflectionMethod;
 
 class Request extends BaseRequest
 {

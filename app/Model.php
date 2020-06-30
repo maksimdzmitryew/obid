@@ -97,20 +97,49 @@ class Model extends BaseModel
 		]);
 	}
 
+	public static function getModelNameWithNamespace($s_name)
+	{
+		$s_model		= ucfirst($s_name);
+		$s_model		= '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model;
+		return $s_model;
+	}
+
+	/**
+	 * Find items that only belong to specified parent’s ids
+	 *
+	 * @param String	$s_model			the child’s table
+	 * @param Bool		$b_published		NULL (default) = all, TRUE/FALSE
+	 * @param String	$s_parent			parent name
+	 * @param Array		$a_parent			parent identifier(s) that child records will belong to
+	 *
+	 * @return Array
+	 */
+	public static function getIdTitleForParent(String $s_model, Bool $b_published = NULL, String $s_parent, Array $a_parent) : Array
+	{
+		$s_model		= self::getModelNameWithNamespace($s_model);
+		$fn_select		= $s_model . '::select';
+		$o_items		= $fn_select()->whereIn($s_parent . '_id', $a_parent)->get('title', 'id')->pluck('title', 'id');
+		if (!is_null($b_published))
+		{
+			$o_items	= $o_items->wherePublished($b_published);
+		}
+		return $o_items->toArray();
+	}
+
 	/**
 	 * Get 2 columns from DB and organise them for a specific need
-	 * @param Request	$request		Data from request
-	 * @param Filters	$filters		Whatever filters applied
-	 * @param String	$s_model		Model name to retrieve data from
-	 * @param Bool		$b_published	NULL (default) = all, TRUE/FALSE
-	 * @param Array		$a_include_ids	if only specific ids are needed
-	 * @param Array		$a_exclude_ids	if some ids are not needed
-	 * @param Bool		$b_sort_bytitle	default sorting is by the key
-	 * @param Bool		$b_byid			id will be the key and title will be the value
+	 * @param Request	$request			Data from request
+	 * @param Filters	$filters			Whatever filters applied
+	 * @param String	$s_model			Model name to retrieve data from
+	 * @param Bool		$b_published		NULL (default) = all, TRUE/FALSE
+	 * @param Array		$a_include_ids		if only specific ids are needed
+	 * @param Array		$a_exclude_ids		if some ids are not needed
+	 * @param Bool		$b_sort_bytitle		default sorting is by the key
+	 * @param Bool		$b_byid				id will be the key and title will be the value
 */
-#	 * @param Bool		$b_json			Data from request
+#	 * @param Bool		$b_json				Data from request
 /*	 *
-	 * @return Array	set of results
+	 * @return Array						set of results
 	 */
 	public static function getIdTitle(Request $request, $filters, String $s_model, Bool $b_published, Array $a_include_ids, Array $a_exclude_ids, Bool $b_sort_bytitle, Bool $b_byid
 #		, Bool $b_json
@@ -131,8 +160,9 @@ class Model extends BaseModel
 #		if ($b_json)
 #			$s_title = 'text';
 
-		$fn_select				= '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model . '::select';
-		$fn_filter				= '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model . '::filter';
+		$s_model				= self::getModelNameWithNamespace($s_model);
+		$fn_select				= $s_model . '::select';
+		$fn_filter				= $s_model . '::filter';
 
 
 		if (is_null($filters))

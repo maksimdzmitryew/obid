@@ -139,7 +139,6 @@ class Provider extends Model
 						'position'		=> (int)$a_matches[1][$i_pointer],
 						'course_id'		=> NULL,
 						'course_title'	=> $a_tmp['course']['title'],
-						'provider_id'	=> $provider_id,
 						'published'		=> TRUE,
 						'title'			=> $a_matches[3][$i_pointer],
 						'number'		=> (int)$a_matches[4][$i_pointer],
@@ -195,25 +194,24 @@ class Provider extends Model
 	 * Save courses that are not already in DB
 	 *
 	 * @param String	$s_type				type that matches the table name
-	 * @param Array		$a_matches			raw matched records from webpage
-	 * @param Integer	$provider_id		provider
+	 * @param Array		$a_items_new		items found at webpage
+	 * @param String	$s_parent			parent name
+	 * @param Array		$a_parent			parent identifier(s)
 	 *
 	 * @return void
 	 */
-	private static function _checkAndCreateItems(String $s_type, Array $a_items, Int $provider_id) : void
+	private static function _checkAndCreateItems(String $s_type, Array $a_items_new, String $s_parent, Array $a_parent) : void
 	{
-		$a_titles		= array_keys($a_items[$s_type]);
-		$s_model		= ucfirst($s_type);
-		$s_model		= '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model;
-		$fn_select		= $s_model . '::select';
-		$o_items		= $fn_select()->whereProviderId($provider_id)->get()->pluck('title');
+		$a_items		= self::getIdTitleForParent($s_type, NULL, $s_parent, $a_parent);
+		$a_titles		= array_keys($a_items_new[$s_type]);
+		$a_new			= array_values(array_diff($a_titles, $a_items));
 
-		$a_new			= array_values(array_diff($a_titles, $o_items->toArray()));
+		$s_model		= self::getModelNameWithNamespace($s_type);
 
 		for ($i = 0; $i < count($a_new); $i++)
 		{
 			$s_title	= $a_new[$i];
-			$a_data		= $a_items[$s_type][$s_title];
+			$a_data		= $a_items_new[$s_type][$s_title];
 
 			$o_tmp		= new $s_model;
 			$o_tmp->fill($a_data);
@@ -335,12 +333,16 @@ class Provider extends Model
 
 		$a_items			= self::_getCoursesMeals($a_matches, $provider_id);
 
-		self::_checkAndCreateItems('course', $a_items, $provider_id);
-		$a_courses			= Course::select()->whereProviderId($provider_id)->get()->pluck('title', 'id')->toArray();
+		$s_parent_key		= 'provider';
+		$a_parent_ids		= array($provider_id);
+		self::_checkAndCreateItems('course', $a_items, $s_parent_key, $a_parent_ids);
+		$a_courses			= self::getIdTitleForParent('course', NULL, $s_parent_key, $a_parent_ids);
 		$a_items			= self::_linkCoursesAndMeals($a_items, $a_courses);
 
-		self::_checkAndCreateItems('meal', $a_items, $provider_id);
-		$a_meals			= Meal::select()->whereProviderId($provider_id)->get()->pluck('title', 'id')->toArray();
+		$s_parent_key		= 'course';
+		$a_parent_ids		= array_keys($a_courses);
+		self::_checkAndCreateItems('meal', $a_items, $s_parent_key, $a_parent_ids);
+		$a_meals			= self::getIdTitleForParent('meal', NULL, $s_parent_key, $a_parent_ids);
 		$a_items			= self::_linkMealsAndMeals($a_items, $a_meals);
 
 		self::_fillDailyMenu($a_items['meal'], $provider_id, $o_date);

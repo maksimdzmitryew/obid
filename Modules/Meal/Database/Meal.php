@@ -13,7 +13,6 @@ class Meal extends Model
 	protected $connection = 'psc';
 	protected $fillable = [
 		'course_id',
-		'provider_id',
 		'published',
 	];
 	public $translatedAttributes = [];
