@@ -1,0 +1,25 @@
+{
+	"name": "maxd/demand",
+	"description": "Selection of plate for specific date",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Demand\\Providers\\DemandServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Demand\\": ""
+		}
+	}
+}

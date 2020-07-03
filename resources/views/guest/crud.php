@@ -17,9 +17,9 @@ $s_cat_plr_u1		= ucfirst($s_cat_plr_low);
 
 $s_create_route		= route($s_utype.'.'.$s_form_route);
 #$s_delete_route		= route('api.' . $s_category . '.destroy');
-$s_list_route		= route($s_utype . '.personal.places');
-$s_cancel_route		= route($s_utype . '.personal.places');
-#$s_opinion_route	= route($s_utype . '.opinion.form', [':type', ':id']);
+$s_list_route		= route($s_utype . '.personal.activity');
+$s_cancel_route		= route($s_utype . '.personal.activity');
+$s_personal_route	= route($s_utype . '.demand.form', [':type', ':id']);
 $s_list_name		= trans('common/form.breadcrumbs.list') . ' ' . trans($s_category . '::crud.names.list');
 
 $s_title			= trans($s_category . '::crud.names.plr');
@@ -53,17 +53,9 @@ if (isset($$s_category))
 
 	switch ($s_category)
 	{
-		case 'opinion':
-		$s_btn_primary		= trans('common/form.actions.view') . ' ' . trans("common/form.breadcrumbs.list");
-		$s_route_primary	= $s_list_route;
-		$s_btn_secondary	= '';
-		$s_route_secondary	= '';
-		$s_btn_extra		= '';
-		$s_route_extra		= '';
-		break;
-		case 'place':
+		case 'demand':
 		$s_btn_primary		= trans('common/form.actions.evaluate');
-		$s_route_primary	= $s_opinion_route;
+		$s_route_primary	= $s_personal_route;
 		$s_btn_secondary	= trans('common/form.actions.create_more');
 		$s_route_secondary	= $s_create_route;
 		$s_btn_extra		= trans('common/form.actions.view') . ' ' . trans("common/form.breadcrumbs.list");

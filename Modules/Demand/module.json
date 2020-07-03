@@ -1,0 +1,13 @@
+{
+    "name": "Demand",
+    "alias": "demand",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Demand\\Providers\\DemandServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
