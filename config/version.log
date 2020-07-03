@@ -1,3 +1,4 @@
+0.00.2+a185:4 user ADD simplify and make laravel-style comparison of daily menu against existing items in DB
 0.00.2+a185:3 user ADD better translation key for parent translation
 0.00.2+a185:2 user ADD translation from parent model
 0.00.2+a185:1 user ADD clean translation for plate

@@ -37,6 +37,27 @@ class Plate extends Model
 	 *
 	 * @return Object						collection of meals with courses
 	 */
+/*
+
+$o_items		= Plate::select(['id', 'meal_id'])->whereDate('date', '=', $o_date)->get();
+
+for ($i = 0; $i < $o_items->count(); $i++)
+{
+	$o_data		= $o_items->offsetGet($i);
+	$a_items[]	= [
+					'id'			=> $o_data->id,
+					'title'			=> $o_data->meal->title,
+					'meal_id'		=> $o_data->meal->id,
+					'course_id'		=> $o_data->meal->course->id,
+					'provider_id'	=> $o_data->meal->course->provider->id,
+					];
+}
+
+----------------------- the below can be substituted with the above -----------------------
+
+#		$o_items		= Plate::getItems($provider_id, $o_date);
+#		$a_new			= array_values(array_diff($a_titles, $o_items->pluck('title')->toArray()));
+
 	public static function getItems(Int $provider_id, Object $o_date) : Object
 	{
 		$s_type			= 'plate';
@@ -44,40 +65,34 @@ class Plate extends Model
 		$s_model		= '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model;
 		$fn_select		= $s_model . '::select';
 
-#        $o_query = $fn_select
         $o_query = self::select
         			(
 						'plates.id'
 #						, 'plate_translations.title as title'
 						, 'meals.id AS meal_id'
+						, 'meal_translations.title AS title'
 						, 'courses.id AS course_id'
 						, 'providers.id AS provider_id'
         			)
-/*
+/ *
             ->leftJoin('plate_translations', function($join) {
                 $join->on('plate_translations.plate_id', '=', 'plates.id')
                     ->where('locale', '=', app()->getLocale());
             })
-*/
+* /
             ->join('meals', 'plates.meal_id', '=', 'meals.id')
+            ->join('meal_translations', 'plates.meal_id', '=', 'meal_translations.meal_id')
             ->join('courses', 'courses.id', '=', 'meals.course_id')
             ->leftJoin('providers', function($join) {
                 $join->on('courses.provider_id', '=', 'providers.id');
             })
             ->whereDate('date', '=', $o_date)
-#            ->whereDate('date', '=', Carbon::parse('2020-05-05'))
-            #->get()
             ;
-        /*
-		$o_items		= $fn_select()->with('meal')
-#		->whereProviderId($provider_id)
-		->get()
-		;#->pluck('title');
-		*/
-#dd($o_query);
+#dd($o_query->get()[0]->original);
+
 		return $o_query->get();
 	}
-
+*/
 	public function meal()
 	{
 		return $this->belongsTo('Modules\Meal\Database\Meal');

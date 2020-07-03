@@ -110,7 +110,7 @@ class Provider extends Model
 						. '.*?</tr>'
 						;
 		preg_match_all('~' . $s_regexps . '~iu', $s_text, $a_matches);
-#		echo '<pre>';var_dump($a_matches);echo '</pre>';
+#echo '<pre>';var_dump($a_matches);echo '</pre>';
 		$a_courses	= [];
 		return $a_matches;
 	}
@@ -278,10 +278,21 @@ class Provider extends Model
 	 */
 	private static function _fillDailyMenu(Array $a_items, Int $provider_id, Object $o_date) : void
 	{
-		$o_items		= Plate::getItems($provider_id, $o_date);
+		$a_exist		= [];
+		$o_items		= Plate::select(['id', 'meal_id'])->whereDate('date', '=', $o_date)->get();
+
+		for ($i = 0; $i < $o_items->count(); $i++)
+		{
+			$o_data		= $o_items->offsetGet($i);
+			$a_exist[]	= $o_data->meal->title;
+		}
 
 		$a_titles		= array_keys($a_items);
-		$a_new			= array_values(array_diff($a_titles, $o_items->pluck('title')->toArray()));
+		/**
+		 *	without array_values the key will be the id from DB
+		 *	this will make iteration for() less convenient
+		 */
+		$a_new			= array_values(array_diff($a_titles, $a_exist));
 
 		for ($i = 0; $i < count($a_new); $i++)
 		{
