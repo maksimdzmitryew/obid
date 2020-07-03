@@ -20,7 +20,7 @@ class Plate extends Model
 		'price',
 		'number',
 	];
-	public $translatedAttributes = [];
+	public $translatedModel = 'meal';
 	protected $a_form = [
 		'published'		=> [
 			'tab'		=> 'data',
@@ -48,15 +48,17 @@ class Plate extends Model
         $o_query = self::select
         			(
 						'plates.id'
-						, 'plate_translations.title as title'
+#						, 'plate_translations.title as title'
 						, 'meals.id AS meal_id'
 						, 'courses.id AS course_id'
 						, 'providers.id AS provider_id'
         			)
+/*
             ->leftJoin('plate_translations', function($join) {
                 $join->on('plate_translations.plate_id', '=', 'plates.id')
                     ->where('locale', '=', app()->getLocale());
             })
+*/
             ->join('meals', 'plates.meal_id', '=', 'meals.id')
             ->join('courses', 'courses.id', '=', 'meals.course_id')
             ->leftJoin('providers', function($join) {

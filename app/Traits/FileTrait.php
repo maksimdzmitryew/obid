@@ -93,7 +93,8 @@ trait FileTrait
 		$s_content			= str_replace('> <', '><', $s_content);
 
 		if (preg_match('/<meta charset="(.+?)">/', $s_content, $a_matches))
-			$s_content		= iconv($a_matches[1], 'UTF-8//IGNORE', $s_content);
+			#$s_content		= iconv($a_matches[1], 'UTF-8//IGNORE', $s_content);
+			$s_content		= mb_convert_encoding($s_content, 'UTF-8', $a_matches[1]);
 
 		return $s_content;
 	}
