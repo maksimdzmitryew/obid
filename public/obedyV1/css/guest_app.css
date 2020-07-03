@@ -1271,15 +1271,12 @@ footer div, img, p {
 footer .copyright {
 	width: 250px;
 }
-footer .eu_visibility img {
-	margin-right: 20px;
-}
-
-footer .eu_visibility a {
-	color: #848a91;
-}
 footer .socials {
 	width: 650px;
+}
+
+footer .contact_us {
+	width: 200px;
 }
 
 .div_reset_password {
@@ -1296,9 +1293,6 @@ footer .socials {
 	footer .copyright {
 		padding-top: 10px;
 		width: 100%;
-	}
-	footer .eu_visibility img {
-		margin-right: 7px;
 	}
 }
 @media screen and (max-width:700px) {

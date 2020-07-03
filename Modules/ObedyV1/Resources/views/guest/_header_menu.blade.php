@@ -1,3 +1,4 @@
+@include($theme . '::layouts._social_networks')
 			<nav>
 				<ul>
 {{--
@@ -21,7 +22,6 @@
 					<li><a class="green" href="{!! route('signin_page') !!}">{{ trans('general.signin') }}</a></li>
 					@endif
 				</ul>
-@include($theme . '::layouts._social_networks')
 @include($theme . '::layouts._lang')
 			</nav>
 			<button class="open_menu"><span></span><span></span><span></span></button>
