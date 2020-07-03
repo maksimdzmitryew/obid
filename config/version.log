@@ -1,3 +1,5 @@
+0.00.2+a185:6 user ADD activity tab and menu item
+ADD demand module
 0.00.2+a185:5 user ADD adjust contacts info and layout
 0.00.2+a185:4 user ADD simplify and make laravel-style comparison of daily menu against existing items in DB
 0.00.2+a185:3 user ADD better translation key for parent translation

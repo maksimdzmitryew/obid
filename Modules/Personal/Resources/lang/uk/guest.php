@@ -3,13 +3,12 @@
 return [
 	'text' => [
 		'profile'					=> 'Профіль',
-		'places'					=> 'Мої замовлення',
+		'activity'					=> 'Мої замовлення',
 	],
 	'field' => [
 	],
 	'button' => [
 		'change'					=> 'Зберегти',
-		'add_new_place'				=> 'Зробити замовлення',
-		'add_new_opinion'			=> 'Додати оцінку',
+		'add_new_demand'			=> 'Зробити замовлення',
 	],
 ];

@@ -3,11 +3,11 @@
 return array (
 	'admin-panel'			=> 'Керування',
 	'bookmarks'				=> 'Обране',
-	'my-city'				=> 'Моє місто',
 #	'date'					=> ':day :month :year',
 	'signin'				=> 'Вхід',
 	'signup'				=> 'Приєднатися',
-	'my-area'				=> 'Мої Обіди',
+	'my-area'				=> 'Мій профіль',
+	'my-activity'			=> 'Мої Обіди',
 	'my'					=> 'Особістий',
 	'save-changes'			=> 'Зберегти зміни',
 	'search-results'		=> 'Результати пошуку',

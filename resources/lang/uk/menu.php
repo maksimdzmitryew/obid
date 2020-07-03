@@ -1,8 +1,8 @@
 <?php
 
 return [
-	'improvements'	=> 'Поліпшення',
-	'materials'		=> 'Матеріали',
-	'menu'			=> 'Меню',
-	'people'		=> 'Люди',
+	'needs'			=> 'Попит',
+	'foods'			=> 'Їжа',
+	'menu'			=> 'Мєню',
+	'people'		=> 'Людини',
 ];

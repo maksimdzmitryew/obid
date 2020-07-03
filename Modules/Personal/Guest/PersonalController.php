@@ -83,7 +83,7 @@ class PersonalController extends Controller
 		return back();
 	}
 
-	public function places(Request $request)
+	public function activity(Request $request)
 	{
 		$this->setEnv();
 

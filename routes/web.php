@@ -118,10 +118,10 @@ Route::group([
 		Route::get('my/profile',					['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 		$s_method	= 'update';
 		Route::post('my/profile',					['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-		$s_method	= 'places';
-		Route::get('my/places',						['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
+		$s_method	= 'activity';
+		Route::get('my/activity',					['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 
-		$s_model	= 'Place';
+		$s_model	= 'Demand';
 		$s_path		= strtolower($s_model);
 		$s_ctrl		= '\Modules\\' . $s_model . '\Guest\\' . $s_model ;
 		$s_ctrl		.='Controller';

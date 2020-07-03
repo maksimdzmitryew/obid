@@ -1,7 +1,7 @@
 {
 	"Course":		true,
+	"Demand":		true,
 	"Meal":			true,
-	"Place":		true,
 	"Plate":		true,
 	"Personal":		true,
 	"Provider":		true,
