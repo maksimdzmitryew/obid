@@ -44,7 +44,7 @@ class FiltersAPI extends Filters
 		{
 			$this->_env->s_name		= str_replace($s_basename, '', $a_tmp[4]);
 			$this->_env->s_model	= '\App\\'.$this->_env->s_name;
-			$this->_env->s_trans	= $this->_env->s_model ;
+			$this->_env->s_trans	= $this->_env->s_model;
 		}
 
 		$o_query					= $this->builder;
@@ -65,6 +65,11 @@ class FiltersAPI extends Filters
 		{
 			$s_tmp					= ucfirst($s_parent_trans);
 			$this->_env->s_trans	= '\Modules\\' . $s_tmp . '\\' . 'Database' . '\\' . $s_tmp . 'Translation' ;
+			$s_name_sgl				= $s_parent_trans;
+		}
+		else
+		{
+			$s_name_sgl				= Str::singular($s_table_main);
 		}
 
 		$s_tmp						= $this->_env->s_trans;
@@ -76,21 +81,14 @@ class FiltersAPI extends Filters
 			$s_table_trans			= $t->getTable();
 			$a_select[]				= $s_table_trans.'.title AS title';
 
+			$s_key_on				= '';
 			if (!is_null($s_parent_trans))
 			{
-				$s_key_at			= $s_table_main;
-				$s_key_on			= $s_table_trans;
-				$s_name_sgl			= Str::singular($s_parent_trans);
-			}
-			else
-			{
-				$s_key_at			= $s_table_trans;
-				$s_key_on			= $s_table_main;
-				$s_name_sgl			= Str::singular($s_key_on);
+				$s_key_on			= $s_name_sgl.'_';
 			}
 
-			$s_key_at				= $s_key_at.'.'.$s_name_sgl.'_id';
-			$s_key_on				= $s_key_on.'.id';
+			$s_key_at				= $s_table_trans . '.' . $s_name_sgl . '_id';
+			$s_key_on				= $s_table_main . '.' . $s_key_on . 'id';
 
 			$o_query
 				->leftJoin($s_table_trans, function($query) use ($s_key_at, $s_key_on) {
