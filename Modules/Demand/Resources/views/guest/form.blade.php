@@ -42,6 +42,7 @@ include(base_path().'/resources/views/guest/crud.php');
 							</div>
 
 							@foreach ($o_courses AS $o_course)
+							@php $i_course_id = $o_course->id; @endphp
 							<div class="div_row" style="width:100%">
 								<div style="width:100%">
 									<p>{{ $o_course->title }}</p>
@@ -61,7 +62,7 @@ include(base_path().'/resources/views/guest/crud.php');
 
 							</div>
 
-								@php $a_pos = array_keys($a_items[$o_course->id]); @endphp
+								@php $a_pos = array_keys($a_items[$i_course_id]); @endphp
 
 								@for ($p = 0; $p < count($a_pos); $p++)
 								@php $i_curr_pos = $a_pos[$p]; @endphp
@@ -72,9 +73,15 @@ include(base_path().'/resources/views/guest/crud.php');
 
 									@for ($d=0; $d < count($a_dates); $d++)
 									@php $s_date = $a_dates[$d]; @endphp
+									@php $i_meal_id = $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->id; @endphp
 
 								<div class="div_cell">
-									<p class="div_meal_item">{{ $a_items[$o_course->id][$i_curr_pos][$s_date]->meal->title }} [id={{ $a_items[$o_course->id][$i_curr_pos][$s_date]->meal->id }}]</p>
+									<p class="div_meal_item"
+										data-meal_id="{{ $i_meal_id }}"
+										data-date="{{ $s_date }}"
+										data-price="{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->price }}"
+										data-weight="{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->weight }}"
+									>{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->title }}</p>
 								</div>
 
 									@endfor
@@ -208,22 +215,27 @@ include(base_path().'/resources/views/guest/crud.php');
 	@yield('script-input')
 	@yield('script-select')
 
-  <script type="text/javascript">
+ 	<script type="text/javascript">
 
-$(document).ready(() => {
+	$(document).ready(() => {
 
-	$('form.item-form').on('submit', fnForm);
+		$('form.item-form').on('submit', fnForm);
 
-	$(document).on('click', '.div_meal_item', function (e) {
-		fnSelect(e);
-    });
+		$('.div_meal_item').click(function (e) {
+			fnSelect(e);
+	    });
+	});
 
-});
+	fnSelect = function(e)
+	{
+		let target = $(e.currentTarget);
+		console.log(
+			'meal_id=' + target.data('meal_id')
+			+ ' date=' + target.data('date')
+			+ ' price=' + target.data('price')
+			+ ' weight=' + target.data('weight')
+			);
+	}
 
-fnSelect = function(e)
-{
-	alert('ok');
-}
-
-  </script>
+ 	</script>
 @append
