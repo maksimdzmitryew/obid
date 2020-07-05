@@ -10,5 +10,5 @@
 	}
 	else
 	{
-		$s_selected_title = ($_env->a_default[$s_field_name] ? 'checked="checked"' : '');
+		$s_selected_title = ($_env->a_default[$s_fieldname] ? 'checked="checked"' : '');
 	}

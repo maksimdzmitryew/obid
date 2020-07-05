@@ -2,12 +2,13 @@
 
 namespace Modules\Demand\Guest;
 
-use                                          Auth;
-use                Modules\Building\Database\Building;
-use                     App\Http\Controllers\ControllerGuest as Controller;
-#                                 use Hash;
+use                                           Auth;
+use                        Illuminate\Support\Carbon;
+use                      App\Http\Controllers\ControllerGuest as Controller;
 use                   Modules\Demand\Database\Demand;
-use                          Illuminate\Http\Request;
+use                      Modules\Demand\Guest\Demand as GuestDemand;
+use                    Modules\Plate\Database\Plate;
+use                           Illuminate\Http\Request;
 #                             use App\Subscriber;
 #                             use App\User;
 #                                 use Validator;
@@ -28,11 +29,15 @@ class DemandController extends Controller
 
 		$user = Auth::user();
 
+		$o_query = Plate::where('date', '>', Carbon::now())->distinct()->limit(1000);
+
 		return view($this->_env->s_view . 'form',
 					[
 						'b_admin'		=> $user->checkAdmin(),
-#						'building'		=> Building::all()->sortBy('title'),
-						'demand'		=> Demand::findOrNew($request->id),
+						'demand'		=> GuestDemand::findOrNew($request->id),
+						'a_dates'		=> GuestDemand::getUpcomingDates($o_query),
+						'o_courses'		=> GuestDemand::getCourses($o_query),
+						'a_items'		=> GuestDemand::getItems($o_query),
 						'user'			=> $user,
 					]);
 	}

@@ -1327,3 +1327,40 @@ footer .contact_us {
   transform: translate(-50%, -50%);
 }
 
+
+
+
+
+.div_table
+{
+    display: table;
+}
+.div_title
+{
+    display: table-caption;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+.div_heading
+{
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+}
+.div_row
+{
+    display: table-row;
+}
+.div_cell
+{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.div_cell p
+{
+	float: none;
+}
