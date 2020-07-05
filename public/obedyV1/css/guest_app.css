@@ -36,12 +36,6 @@ textarea{overflow:auto;resize:none}
 :disabled{pointer-events:none}
 ::-moz-focus-outer,::-moz-focus-inner{border:0;padding:0}
 ::placeholder,::-moz-placeholder{opacity:1;color:#7f7f7f}
-::-webkit-scrollbar-button{background-image:url();background-repeat:no-repeat;width:10px;height:0}
-::-webkit-scrollbar-track{background-color:transparent}
-::-webkit-scrollbar-thumb{-webkit-border-radius:0;border-radius:5px;background-color:#dadee2;}
-::-webkit-scrollbar-thumb:hover{background-color:#222}
-::-webkit-resizer{background-image:url();background-repeat:no-repeat;width:0;height:0}
-::-webkit-scrollbar{width:10px;}
 
 .wow { visibility: hidden; }
 

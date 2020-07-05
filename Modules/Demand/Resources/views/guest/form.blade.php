@@ -20,14 +20,6 @@ include(base_path().'/resources/views/guest/crud.php');
 
 @section('content')
 
-		<div id="main_map" style="display:none;" data-zoom="16">
-			<div class="marker" data-lat="50.405388" data-lng="30.3341461" data-icon="/{!! $theme !!}/img/map_markers/map_marker_bank.png"></div>
-			<div class="marker" data-lat="50.4066782" data-lng="30.3410947" data-icon="/{!! $theme !!}/img/map_markers/map_marker_bank.png"></div>
-			<div class="marker" data-lat="50.4063072" data-lng="30.3283194" data-icon="/{!! $theme !!}/img/map_markers/map_marker_wc.png"></div>
-			<div class="marker" data-lat="50.4040143" data-lng="30.3339627" data-icon="/{!! $theme !!}/img/map_markers/map_marker_atm.png"></div>
-		</div>
-
-
 		<div class="map_info_block">
 			<div id="map_search" style="display:none;">
 				<input type="text" demandholder="Поиск" name="s" />
@@ -82,7 +74,7 @@ include(base_path().'/resources/views/guest/crud.php');
 									@php $s_date = $a_dates[$d]; @endphp
 
 								<div class="div_cell">
-									<p>{{ $a_items[$o_course->id][$i_curr_pos][$s_date]->meal->title }}</p>
+									<p class="div_meal_item">{{ $a_items[$o_course->id][$i_curr_pos][$s_date]->meal->title }} [id={{ $a_items[$o_course->id][$i_curr_pos][$s_date]->meal->id }}]</p>
 								</div>
 
 									@endfor
@@ -200,7 +192,6 @@ include(base_path().'/resources/views/guest/crud.php');
 @section('js')
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQueryFormStyler/2.0.2/jquery.formstyler.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpiBWpweBNNC0OULC4g-aAvVdS38Ccdu8"></script>
 @append
 
 @section('js')
@@ -208,9 +199,7 @@ include(base_path().'/resources/views/guest/crud.php');
 	@yield('js-image')
 	@yield('js-input')
 	@yield('js-select')
-	<script src="{{ asset('/admin/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
-	<script src="{{ asset('/admin/js/plugins/ui/moment/moment_locales.min.js') }}"></script>
-	<script src="{!! asset('/admin/js/forms.js?v=' . $version->js) !!}"></script>
+	<script src="{!! asset('/admin/js/plugins/forms/selects/bootstrap_multiselect.js') !!}"></script>
 @append
 
 @section('script')
@@ -220,117 +209,21 @@ include(base_path().'/resources/views/guest/crud.php');
 	@yield('script-select')
 
   <script type="text/javascript">
-		  function initMap( $el ) {
-			  var $markers = $el.find('.marker');
-			  var mapArgs = {
-				  zoom        : $el.data('zoom') || 16,
-				  mapTypeId   : google.maps.MapTypeId.ROADMAP
-			  };
-			  var map = new google.maps.Map( $el[0], mapArgs );
-			  map.markers = [];
-			  $markers.each(function(){
-				  initMarker( $(this), map );
-			  });
-			  centerMap( map );
-			  $('#findme_btn').bind('click', function() {
-				  findMe(map);
-			  });
-			  var styles = [
-				  {
-					  "featureType": "administrative",
-					  "elementType": "geometry",
-					  "stylers": [
-						  {
-							  "visibility": "off"
-						  }
-					  ]
-				  },
-				  {
-					  "featureType": "poi",
-					  "stylers": [
-						  {
-							  "visibility": "off"
-						  }
-					  ]
-				  },
-				  {
-					  "featureType": "road",
-					  "elementType": "labels.icon",
-					  "stylers": [
-						  {
-							  "visibility": "off"
-						  }
-					  ]
-				  },
-				  {
-					  "featureType": "transit",
-					  "stylers": [
-						  {
-							  "visibility": "off"
-						  }
-					  ]
-				  }
-			  ];
-			  map.setOptions({styles: styles});
-			  return map;
-		  }
 
-		  function initMarker( $marker, map ) {
-			  var lat = $marker.data('lat');
-			  var lng = $marker.data('lng');
-			  var latLng = {
-				  lat: parseFloat( lat ),
-				  lng: parseFloat( lng )
-			  };
-			  var marker = new google.maps.Marker({
-				  position : latLng,
-				  map: map,
-				  icon: $marker.data('icon')
-			  });
-			  map.markers.push( marker );
-			  google.maps.event.addListener(marker, 'click', function() {
-				  alert("Вы кликнули на маркер "+lat+" "+lng+" В консоли вывел параметры маркера. Цепляйте на него нужные события)");
-				  console.log(marker);
-			  });
-		  }
+$(document).ready(() => {
 
-		  function centerMap( map ) {
-			  var bounds = new google.maps.LatLngBounds();
-			  map.markers.forEach(function( marker ){
-				  bounds.extend({
-					  lat: marker.position.lat(),
-					  lng: marker.position.lng()
-				  });
-			  });
-			  if( map.markers.length == 1 ){
-				  map.setCenter( bounds.getCenter() );
-			  } else{
-				  map.fitBounds( bounds );
-			  }
-		  }
+	$('form.item-form').on('submit', fnForm);
 
-		  function findMe( map ) {
-			  findMeMarker = new google.maps.InfoWindow;
-			  if (navigator.geolocation) {
-				  navigator.geolocation.getCurrentPosition(function(position) {
-					  var pos = {
-						  lat: position.coords.latitude,
-						  lng: position.coords.longitude
-					  };
-					  findMeMarker.setPosition(pos);
-					  findMeMarker.setContent('<div class="mydemandmarker"><span class="ov1"></span><span class="ov2"></span><span class="ov3"></span><span class="ov4"></span></div>');
-					  findMeMarker.open(map);
-					  map.setCenter(pos);
-				  }, function() {
-					  alert('Error: The Geolocation service failed.');
-				  });
-			  } else {
-				  alert('Error: Your browser doesn\'t support geolocation.');
-			  }
-		  }
+	$(document).on('click', '.div_meal_item', function (e) {
+		fnSelect(e);
+    });
 
-		  $(document).ready(function(){
-			   var map = initMap( $('#main_map') );
-		  });
+});
+
+fnSelect = function(e)
+{
+	alert('ok');
+}
+
   </script>
 @append
