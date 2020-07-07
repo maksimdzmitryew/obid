@@ -1370,21 +1370,32 @@ footer .contact_us {
 	cursor: copy;
 }
 
-.div_cell.div_meal_item:hover p
+.div_cell.div_meal_item:hover
 {
-	color: #1958fb;
+	background-color: #1958fb;
+}
+.div_cell.div_meal_item:hover p,
+.div_meal_item.selected:hover,
+.div_meal_item.selected:hover p
+{
+	color: white;
+}
+
+.div_cell.div_meal_item.selected
+{
+	background-color: green;
 }
 
 .div_cell.div_meal_item.selected p
 {
-	color: green;
+	color: white;
 }
 
 .div_meal_item.selected:hover,
 .div_meal_item.selected:hover p
 {
 	cursor: no-drop;
-	color: red;
+	background-color: red;
 }
 
 .div_cell .smaller p
@@ -1403,7 +1414,7 @@ div.sticky
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: yellow;
+  background-color: white;
   padding: 0;
 }
 

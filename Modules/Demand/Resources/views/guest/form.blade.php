@@ -232,31 +232,43 @@ include(base_path().'/resources/views/guest/crud.php');
 		$('form.item-form').on('submit', fnForm);
 
 		$('.div_meal_item').click(function (e) {
-			fnSelect(e);
+			fnClick(e);
 	    });
 	});
 
-	fnSelect = function(e)
+	fnClick = function(e)
 	{
-		let target		= $(e.currentTarget),
-			container	= $('#demand_' + target.data('date') + '_list'),
-			meal_id		= target.data('meal_id'),
-			plate_id	= target.data('plate_id'),
-			course_id	= target.data('course_id'),
-			position	= target.data('position'),
-			date		= target.data('date'),
-			price		= target.data('price'),
-			weight		= target.data('weight')
-			element_id	= '.meal_id_' + target.data('meal_id')
-			;
-		let
-			s_demand_id	= 'list_' + course_id+'_'+date+'_'+meal_id,
-			s_plate_id	= 'plate_' + course_id+'_'+date+'_'+meal_id,
-			s_total_id	= 'demand_'+date+'_total',
-			s_total_num	= 'demand_'+date+'_nums',
-			title_id	= element_id+'_title'
-			;
+		target		= $(e.currentTarget),
+		container	= $('#demand_' + target.data('date') + '_list'),
+		meal_id		= target.data('meal_id'),
+		plate_id	= target.data('plate_id'),
+		course_id	= target.data('course_id'),
+		position	= target.data('position'),
+		date		= target.data('date'),
+		price		= target.data('price'),
+		weight		= target.data('weight')
+		element_id	= '.meal_id_' + target.data('meal_id')
+		;
+		s_demand_id	= 'list_' + course_id+'_'+date+'_'+meal_id,
+		s_plate_id	= 'plate_' + course_id+'_'+date+'_'+meal_id,
+		s_total_id	= 'demand_'+date+'_total',
+		s_total_num	= 'demand_'+date+'_nums',
+		title_id	= element_id+'_title'
+		;
 
+		if ($('#' + s_plate_id).hasClass('selected'))
+		{
+			//$('#' + s_plate_id).removeClass('selected');
+			fnRemove();
+		}
+		else
+		{
+			fnSelect();
+		}
+	}
+
+	fnSelect = function()
+	{
 		$('#' + s_plate_id).addClass('selected');
 
 		a_sub_space = $(title_id).html().split(' ');
@@ -286,13 +298,15 @@ include(base_path().'/resources/views/guest/crud.php');
 
 		node = $('<p>', {
 				'class': 'div_meal_item selected',
-				'data-course_id': course_id,
-				'data-date': date,
-				'data-meal_id': meal_id,
-				'data-price': price,
-				'data-position': position,
-				'id': s_demand_id,
-				'title': $(title_id).html()
+				'data-meal_id':		meal_id,
+				'data-plate_id':	plate_id,
+				'data-course_id':	course_id,
+				'data-position':	position,
+				'data-date':		date,
+				'data-price':		price,
+				'data-weight':		weight,
+				'id':				s_demand_id,
+				'title':			$(title_id).html()
 			} )
 			.html( (parseInt(price)) + '₴ ' + s_title )
 			.appendTo( container );
@@ -314,12 +328,13 @@ include(base_path().'/resources/views/guest/crud.php');
 		$('#' + s_total_id).prop('total', total);
 
 		$('#' + s_demand_id).click(function (e) {
-			fnRemove(e);
+			fnClick(e);
 	    });
 	}
 
-	fnRemove = function(e)
+	fnRemove = function()
 	{
+/*
 		let target		= $(e.currentTarget),
 			container	= $('#demand_' + target.data('date') + '_list'),
 			meal_id		= target.data('meal_id'),
@@ -338,7 +353,7 @@ include(base_path().'/resources/views/guest/crud.php');
 			s_total_num	= 'demand_'+date+'_nums',
 			title_id	= element_id+'_title'
 			;
-
+*/
 		$('#' + s_demand_id).remove();
 		$('#' + s_plate_id).removeClass('selected');
 
