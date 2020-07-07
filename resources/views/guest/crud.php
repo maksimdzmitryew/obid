@@ -15,7 +15,7 @@ $s_cat_plr_low		= mb_strtolower(trans($s_category . '::crud.names.plr'));
 $s_cat_plr_up		= mb_strtoupper($s_cat_plr_low);
 $s_cat_plr_u1		= ucfirst($s_cat_plr_low);
 
-$s_create_route		= route($s_utype.'.'.$s_form_route);
+$s_create_route		= #route($s_utype.'.'.$s_form_route);
 #$s_delete_route		= route('api.' . $s_category . '.destroy');
 $s_list_route		= route($s_utype . '.personal.activity');
 $s_cancel_route		= route($s_utype . '.personal.activity');
@@ -54,12 +54,12 @@ if (isset($$s_category))
 	switch ($s_category)
 	{
 		case 'demand':
-		$s_btn_primary		= trans('common/form.actions.evaluate');
-		$s_route_primary	= $s_personal_route;
-		$s_btn_secondary	= trans('common/form.actions.create_more');
-		$s_route_secondary	= $s_create_route;
-		$s_btn_extra		= trans('common/form.actions.view') . ' ' . trans("common/form.breadcrumbs.list");
-		$s_route_extra		= $s_list_route;
+		$s_btn_primary		= trans('common/form.actions.view') . ' ' . trans("common/form.breadcrumbs.list");
+		$s_route_primary	= $s_list_route;
+		$s_btn_secondary	= '';#trans('common/form.actions.create_more');
+		$s_route_secondary	= '';#$s_create_route;
+		$s_btn_extra		= '';
+		$s_route_extra		= '';
 		break;
 		default:
 		$s_btn_primary		= ($o_item->id

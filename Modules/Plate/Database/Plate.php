@@ -12,6 +12,7 @@ class Plate extends Model
 {
 	protected $connection = 'psc';
 	protected $fillable = [
+		'demand_id',
 		'meal_id',
 		'published',
 		'date',
@@ -27,6 +28,11 @@ class Plate extends Model
 			'field'		=> 'checkbox',
 			'rules'		=> 'boolean',
 			'default'	=>	TRUE,
+		],
+		'demand_ids'		=> [
+			'tab'		=> 'data',
+			'field'		=> 'select',
+			'rules'		=> '',
 		],
 	];
 
@@ -93,6 +99,11 @@ for ($i = 0; $i < $o_items->count(); $i++)
 		return $o_query->get();
 	}
 */
+	public function demand()
+	{
+		return $this->belongsToMany('Modules\Demand\Database\Demand');
+	}
+
 	public function meal()
 	{
 		return $this->belongsTo('Modules\Meal\Database\Meal');

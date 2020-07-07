@@ -1041,7 +1041,9 @@ footer .open_filter_btn {
 #profile_wrap .profile .user_fields .item:last-child {
 	border-bottom: none;
 }
-#profile_wrap .profile .confirm {
+#profile_wrap .profile .confirm,
+form .buttons .confirm
+{
 	width: 330px;
 	height: 52px;
 	border-radius: 25px;

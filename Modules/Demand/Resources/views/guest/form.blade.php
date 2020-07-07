@@ -19,8 +19,15 @@ include(base_path().'/resources/views/guest/crud.php');
 @append
 
 @section('content')
+	<form action="{!! route('api.'.$s_category.'.store') !!}" method="POST" class="form-page item-form" id="create-{!! $s_category !!}-form">
+		@csrf
 
 	<div class="sticky">
+		<div class="buttons">
+			<button type="submit" class="confirm">
+			{!! trans('personal::guest.button.add_new_' . $s_category) !!}
+			</button>
+		</div>
 		<div class="div_table">
 			<div class="div_row">
 				<div class="div_cell" style="width:5%">
@@ -44,9 +51,9 @@ include(base_path().'/resources/views/guest/crud.php');
 				</div>
 
 				@endfor
-
 			</div>
 		</div>
+
 	</div>
 
 											{{-- <div class="map_info_block">
@@ -62,8 +69,6 @@ include(base_path().'/resources/views/guest/crud.php');
 		$code				= NULL;
 	@endphp
 
-	<form action="{!! route('api.'.$s_category.'.store') !!}" method="POST" class="form-page item-form" id="create-{!! $s_category !!}-form">
-		@csrf
 
 		<div class="div_table">
 			<div class="div_title">
@@ -118,6 +123,7 @@ include(base_path().'/resources/views/guest/crud.php');
 					>
 					<p class="meal_id_{{ $i_meal_id }}_title"
 					>{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->title }}</p>
+					<input type="hidden" class="form-control" id="{{ $i_plate_id }}" name="plate_ids[]" value="">
 				</div>
 
 					@endfor
@@ -160,11 +166,9 @@ include(base_path().'/resources/views/guest/crud.php');
 
 @include($theme . '::' . $_env->s_utype . '._recaptcha', ['id' => 'create-' . $s_category])
 
-			<div class="buttons">
 				<button type="submit" class="confirm">
 					{!! trans('personal::guest.button.add_new_' . $s_category) !!}
 				</button>
-			</div>
 
 			<div class="divider"></div>
 		</div>
@@ -229,7 +233,7 @@ include(base_path().'/resources/views/guest/crud.php');
 
 	$(document).ready(() => {
 
-		$('form.item-form').on('submit', fnForm);
+//		$('form.item-form').on('submit', fnForm);
 
 		$('.div_meal_item').click(function (e) {
 			fnClick(e);
@@ -253,7 +257,8 @@ include(base_path().'/resources/views/guest/crud.php');
 		s_plate_id	= 'plate_' + course_id+'_'+date+'_'+meal_id,
 		s_total_id	= 'demand_'+date+'_total',
 		s_total_num	= 'demand_'+date+'_nums',
-		title_id	= element_id+'_title'
+		title_id	= element_id+'_title',
+		input_id	= '#' + plate_id
 		;
 
 		if ($('#' + s_plate_id).hasClass('selected'))
@@ -326,7 +331,7 @@ include(base_path().'/resources/views/guest/crud.php');
 		$('.' + s_total_id).text(total+ '₴');
 		// store total value
 		$('#' + s_total_id).prop('total', total);
-
+		$(input_id).val(plate_id);
 		$('#' + s_demand_id).click(function (e) {
 			fnClick(e);
 	    });
@@ -334,32 +339,13 @@ include(base_path().'/resources/views/guest/crud.php');
 
 	fnRemove = function()
 	{
-/*
-		let target		= $(e.currentTarget),
-			container	= $('#demand_' + target.data('date') + '_list'),
-			meal_id		= target.data('meal_id'),
-			plate_id	= target.data('plate_id'),
-			course_id	= target.data('course_id'),
-			position	= target.data('position'),
-			date		= target.data('date'),
-			price		= target.data('price'),
-			weight		= target.data('weight')
-			element_id	= '.meal_id_' + target.data('meal_id')
-			;
-		let
-			s_demand_id	= 'list_' + course_id+'_'+date+'_'+meal_id,
-			s_plate_id	= 'plate_' + course_id+'_'+date+'_'+meal_id,
-			s_total_id	= 'demand_'+date+'_total',
-			s_total_num	= 'demand_'+date+'_nums',
-			title_id	= element_id+'_title'
-			;
-*/
 		$('#' + s_demand_id).remove();
 		$('#' + s_plate_id).removeClass('selected');
 
 		total = ( parseFloat($('#' + s_total_id).prop('total')) - parseFloat(price));
 		$('.' + s_total_id).text(total+ '₴');
 		$('#' + s_total_id).prop('total', total);
+		$(input_id).val('');
 		s_nums = $('#' + s_total_num).text() + ',';
 		s_nums = s_nums.replace(position + ',', '').slice(0,-1);
 		$('.' + s_total_num).text( s_nums );

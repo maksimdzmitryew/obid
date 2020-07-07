@@ -8,7 +8,6 @@ class DemandRequest extends Request
 {
 	protected $_rules = [
 		'published'			=> 'boolean',
-		'title'				=> 'string',
 	];
 
 	/**
