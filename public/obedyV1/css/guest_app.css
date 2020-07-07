@@ -1346,10 +1346,9 @@ footer .contact_us {
 .div_cell
 {
 	display: table-cell;
-	border: solid;
+	border: solid lightslategray;
 	border-width: thin;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding: 3px 1px 7px 4px;
 }
 .div_heading .div_cell
 {
@@ -1359,10 +1358,10 @@ footer .contact_us {
 .div_cell p
 {
 	float: none;
-	width: 100%;
-	height: 100%;
 	text-align: left;
 	font-size: 0.95rem;
+	margin: 0;
+	color: black;
 }
 
 .div_cell.div_meal_item:hover
@@ -1400,13 +1399,20 @@ footer .contact_us {
 
 .div_cell .smaller p
 {
+	padding-top: 3px;
+	padding-bottom: 3px;
 	font-size: 0.7rem;
 }
-
 
 .div_row.div_course_title
 {
 	background-color: white;
+}
+
+.div_cell p.p_totals
+{
+	padding-top: 2px;
+	padding-bottom: 5px;
 }
 
 div.sticky

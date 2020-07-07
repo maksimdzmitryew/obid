@@ -6,7 +6,7 @@ $a_production = [
     'version_patch'         => '2',
     'version_maturity'      => 'a', # a=alfa,b=beta,rc=candidate,r=release,sr=service release
     'version_day'           => '189',
-    'version_seq'           => '2',
+    'version_seq'           => '3',
 ];
 
 return (object) [
@@ -23,6 +23,6 @@ return (object) [
     'user'                  => '0.00.2',
     'test'                  => '0.00.0',
     'api'                   => '0.00.0',
-    'css'                   => '0.15.0',
+    'css'                   => '0.16.0',
     'js'                    => '0.09.0',
 ];

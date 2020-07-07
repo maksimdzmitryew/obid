@@ -35,7 +35,7 @@ include(base_path().'/resources/views/guest/crud.php');
 				<div class="div_cell" style="width:19%">
 					<div>
 						<p>{{ \Carbon\Carbon::parse($a_dates[$d])->format('D j M') }}</p>
-						<p>
+						<p class="p_totals">
 							<span id="demand_{{ $s_date }}_total" class="demand_{{ $s_date }}_total" style="font-weight: bold;">0₴</span>
 							<span id="demand_{{ $s_date }}_nums" class="demand_{{ $s_date }}_nums" style="font-weight: normal;"></span>
 						</p>
