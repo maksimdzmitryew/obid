@@ -4,7 +4,7 @@ namespace Modules\Personal\Guest;
 
 use                                              Auth;
 use                         App\Http\Controllers\ControllerGuest as Controller;
-use                      Modules\Demand\Database\Demand;
+use                         Modules\Demand\Guest\Demand as GuestDemand;
 use                                              Hash;
 use                       Modules\Place\Database\Place;
 use                              Illuminate\Http\Request;
@@ -95,7 +95,7 @@ class PersonalController extends Controller
 						'tab'			=> request()->segment(2),
 						'user'			=> $o_user,
 						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
-						'activity'		=> Demand::getUserActivity($o_user),
+						'activity'		=> GuestDemand::getUserActivity($o_user),
 					]);
 	}
 

@@ -19,7 +19,7 @@ $s_create_route		= #route($s_utype.'.'.$s_form_route);
 #$s_delete_route		= route('api.' . $s_category . '.destroy');
 $s_list_route		= route($s_utype . '.personal.activity');
 $s_cancel_route		= route($s_utype . '.personal.activity');
-$s_personal_route	= route($s_utype . '.demand.form', [':type', ':id']);
+$s_personal_route	= route($s_utype . '.demand.week', [':type', ':id']);
 $s_list_name		= trans('common/form.breadcrumbs.list') . ' ' . trans($s_category . '::crud.names.list');
 
 $s_title			= trans($s_category . '::crud.names.plr');

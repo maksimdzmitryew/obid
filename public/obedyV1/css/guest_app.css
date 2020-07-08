@@ -1406,11 +1406,12 @@ footer .contact_us {
 	font-size: 0.7rem;
 }
 
-p.smaller
+p.smaller, span.smaller
 {
 	padding-top: 3px;
 	padding-bottom: 3px;
 	font-size: 0.85rem;
+	font-weight: normal;
 }
 
 .div_row.div_course_title

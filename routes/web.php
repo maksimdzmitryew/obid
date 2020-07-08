@@ -126,16 +126,18 @@ Route::group([
 		$s_ctrl		= '\Modules\\' . $s_model . '\Guest\\' . $s_model ;
 		$s_ctrl		.='Controller';
 
+		$s_method	= 'week';
+		Route::get($s_path . '/week',				['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 #		$s_method	= 'edit';
 #		Route::get($s_path . '/modify/{id?}',		['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-		$s_method	= 'form';
-		Route::get($s_path . '/add',				['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-		$s_method	= 'list';
-		Route::get($s_path . '/all/{type?}/{tid?}',	['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-		$s_method	= 'save';
-		Route::post($s_path . '/done',				['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
-		$s_method	= 'view';
-		Route::get($s_path . '/look/{id}',			['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
+#		$s_method	= 'form';
+#		Route::get($s_path . '/add',				['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
+#		$s_method	= 'list';
+#		Route::get($s_path . '/all/{type?}/{tid?}',	['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
+#		$s_method	= 'save';
+#		Route::post($s_path . '/done',				['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
+#		$s_method	= 'view';
+#		Route::get($s_path . '/look/{id}',			['as' => $s_path . '.' . $s_method,	'uses' => $s_ctrl . '@' . $s_method]);
 /*
 		$s_model	= 'Opinion';
 		$s_path		= strtolower($s_model);

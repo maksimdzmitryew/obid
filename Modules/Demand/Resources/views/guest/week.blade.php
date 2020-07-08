@@ -43,10 +43,32 @@ include(base_path().'/resources/views/guest/crud.php');
 					<div>
 						<p>{{ \Carbon\Carbon::parse($a_dates[$d])->format('D j M') }}</p>
 						<p class="p_totals">
-							<span id="demand_{{ $s_date }}_total" class="demand_{{ $s_date }}_total" style="font-weight: bold;">0₴</span>
+							<span 
+								class="demand_{{ $s_date }}_total"
+								id="demand_{{ $s_date }}_total"
+								style="font-weight: bold;"
+								data-sum_price="{{ (isset($activity[$s_date])) ? $activity[$s_date]['total'] : 0 }}"
+							>
+							@if (isset($activity[$s_date]))
+							{{ $activity[$s_date]['total'] }}₴ <span class="smaller">{{ $activity[$s_date]['heavy'] }}гр.</span>
+							@else
+							0₴
+							@endif
+							</span>
 							<span id="demand_{{ $s_date }}_nums" class="demand_{{ $s_date }}_nums" style="font-weight: normal;"></span>
 						</p>
-						<div id="demand_{{ $s_date }}_list" class="smaller" data-date="{{ $s_date }}"></div>
+						<div id="demand_{{ $s_date }}_list" class="smaller" data-date="{{ $s_date }}">
+
+						@if (isset($activity[$s_date]))
+						@php
+							$a_data			= $activity[$s_date];
+						@endphp
+						@for ($i = 0; $i < count($a_data['plate_id']); $i++)
+							<p class="div_meal_item selected" data-meal_id="{{ $a_data['meal_id'][$i] }}" data-plate_id="{{ $a_data['plate_id'][$i] }}" data-course_id="{{ $a_data['course_id'][$i] }}" data-position="{{ $a_data['position'][$i] }}" data-date="{{ $s_date }}" data-price="{{ $a_data['price'][$i] }}" data-weight="{{ $a_data['weight'][$i] }}" id="list_{{ $a_data['course_id'][$i] }}_{{ $s_date }}_{{ $a_data['meal_id'][$i] }}" title="{{ $a_data['meal_title'][$i] }}">{{ $a_data['price'][$i] }}₴ {{ mb_substr($a_data['meal_title'][$i],0,30) }}</p>
+						@endfor
+						@endif
+
+						</div>
 					</div>
 				</div>
 
@@ -109,21 +131,34 @@ include(base_path().'/resources/views/guest/crud.php');
 						$s_date			= $a_dates[$d]; 
 						$i_meal_id		= $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->id;
 						$i_plate_id		= $a_items[$i_course_id][$i_curr_pos][$s_date]->id;
+						$b_selected		= FALSE;
+
+						if (isset($activity[$s_date]) && in_array($i_plate_id, $activity[$s_date]['plate_id']))
+						{
+							$b_selected	= TRUE;
+						}
 					@endphp
 
-				<div class="div_cell div_meal_item meal_id_{{ $i_meal_id }}"
-						id="plate_{{ $i_course_id }}_{{ $s_date }}_{{ $i_meal_id }}"
-						data-meal_id="{{ $i_meal_id }}"
-						data-plate_id="{{ $i_plate_id }}"
-						data-course_id="{{ $i_course_id }}"
-						data-position="{{ $i_curr_pos }}"
-						data-date="{{ $s_date }}"
-						data-price="{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->price }}"
-						data-weight="{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->weight }}"
+				<div 
+					class="div_cell div_meal_item meal_id_{{ $i_meal_id }} {{ $b_selected ? 'selected' : '' }}"
+					id="plate_{{ $i_course_id }}_{{ $s_date }}_{{ $i_meal_id }}"
+					data-meal_id="{{ $i_meal_id }}"
+					data-plate_id="{{ $i_plate_id }}"
+					data-course_id="{{ $i_course_id }}"
+					data-position="{{ $i_curr_pos }}"
+					data-date="{{ $s_date }}"
+					data-price="{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->price }}"
+					data-weight="{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->weight }}"
 					>
-					<p class="meal_id_{{ $i_meal_id }}_title"
+					<p class="meal_id_{{ $i_meal_id }}_title {{ $b_selected ? 'selected' : '' }}"
 					>{{ $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->title }}</p>
-					<input type="hidden" class="form-control" id="{{ $i_plate_id }}" name="plate_ids[]" value="">
+					<input 
+						class="form-control"
+						id="{{ $i_plate_id }}"
+						name="plate_ids[]" 
+						type="hidden"
+						value="{{ $b_selected ? $i_plate_id : '' }}"
+					>
 				</div>
 
 					@endfor
@@ -250,7 +285,7 @@ include(base_path().'/resources/views/guest/crud.php');
 		position	= target.data('position'),
 		date		= target.data('date'),
 		price		= target.data('price'),
-		weight		= target.data('weight')
+		weight		= target.data('weight'),
 		element_id	= '.meal_id_' + target.data('meal_id')
 		;
 		s_demand_id	= 'list_' + course_id+'_'+date+'_'+meal_id,
@@ -258,8 +293,15 @@ include(base_path().'/resources/views/guest/crud.php');
 		s_total_id	= 'demand_'+date+'_total',
 		s_total_num	= 'demand_'+date+'_nums',
 		title_id	= element_id+'_title',
+		sum_price	= $('#'+s_total_id).attr('data-sum_price'),
 		input_id	= '#' + plate_id
 		;
+
+		// initialise total for the day
+		if (typeof $('#' + s_total_id).prop('total') === 'undefined')
+		{
+			$('#' + s_total_id).prop('total', sum_price);
+		}
 
 		if ($('#' + s_plate_id).hasClass('selected'))
 		{
@@ -316,11 +358,6 @@ include(base_path().'/resources/views/guest/crud.php');
 			.html( (parseInt(price)) + '₴ ' + s_title )
 			.appendTo( container );
 
-		// initialise total for the day
-		if (typeof $('#' + s_total_id).prop('total') === 'undefined')
-		{
-			$('#' + s_total_id).prop('total', 0);
-		}
 		// total amount without newly selected item
 		total = (parseFloat($('#' + s_total_id).prop('total')));
 		//add position at provider’s list

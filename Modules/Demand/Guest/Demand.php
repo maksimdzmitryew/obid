@@ -49,4 +49,45 @@ class Demand extends Model
 		}
 		return $a_items;
 	}
+
+	/**
+	 * Get activity of user
+	 * @param	Object		$o_user			user to check activity for
+	 *
+	 * @return	Array						specifically organised for easier presentation
+	 */
+	public static function getUserActivity(Object $o_user) : Array
+	{
+		$o_demands		= self::select('id')->whereUserId($o_user->id)->get('id', 'plate_id');
+		$a_items		= [];
+		foreach ($o_demands AS $k => $o_demand)
+		{
+			$o_plates	= $o_demand->plate;
+			$a_tmp		= [];
+			$i_tmp		= 0;
+			foreach ($o_plates AS $k => $o_plate)
+			{
+				$a_items[$o_plate->date]['plate_id'][]			= $o_plate->id;
+				$a_items[$o_plate->date]['course_id'][]			= $o_plate->meal->course->id;
+				$a_items[$o_plate->date]['meal_title'][]		= $o_plate->meal->title;
+				$a_items[$o_plate->date]['meal_id'][]			= $o_plate->meal->id;
+				$a_items[$o_plate->date]['price'][]				= (int) $o_plate->price;
+				$a_items[$o_plate->date]['position'][]			= $o_plate->position;
+				$a_items[$o_plate->date]['weight'][]			= (int) $o_plate->weight;
+				if (!isset($a_items[$o_plate->date]['total']))
+				{
+					$a_items[$o_plate->date]['total']			= 0;
+				}
+				if (!isset($a_items[$o_plate->date]['heavy']))
+				{
+					$a_items[$o_plate->date]['heavy']			= 0;
+				}
+				$a_items[$o_plate->date]['total']				+= (int) $o_plate->price;
+				$a_items[$o_plate->date]['heavy']				+= (int) $o_plate->weight;
+			}
+		}
+#dd($a_items);
+		return $a_items;
+	}
+
 }

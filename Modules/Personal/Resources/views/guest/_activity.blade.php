@@ -10,11 +10,11 @@
 
 		@foreach ($activity AS $s_date => $a_data)
 			<p>{{ \Carbon\Carbon::parse($s_date)->format('D j M') }}: {{ $a_data['total'] }}₴</p>
-			@for ($i = 0; $i < count($a_data['id']); $i++)
+			@for ($i = 0; $i < count($a_data['plate_id']); $i++)
 			<p class="smaller">
 				{{ $a_data['position'][$i] }})
 				{{ $a_data['price'][$i] }}₴
-				{{ $a_data['plate'][$i] }}
+				{{ $a_data['meal_title'][$i] }}
 			</p>
 			@endfor
 		@endforeach
