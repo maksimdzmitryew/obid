@@ -41,7 +41,7 @@
 			@endif
 		}
 
-		// fn_form can be found in
+		// fnForm can be found in
 		// forms.js
 		$('{!! $s_id !!}').on('submit', fnForm);
 /*

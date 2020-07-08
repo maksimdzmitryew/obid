@@ -1255,7 +1255,7 @@ header nav ul li button.green {
 footer div {
 	padding-left: 20px;
 }
-footer div, img, p {
+footer div, footer img, footer p {
 	display: block;
 	float: left;
 }
@@ -1404,6 +1404,13 @@ footer .contact_us {
 	padding-top: 3px;
 	padding-bottom: 3px;
 	font-size: 0.7rem;
+}
+
+p.smaller
+{
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-size: 0.85rem;
 }
 
 .div_row.div_course_title

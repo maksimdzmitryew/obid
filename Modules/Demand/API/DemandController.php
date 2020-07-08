@@ -47,7 +47,7 @@ class DemandController extends Controller
 #	public function index(DemandApiRequest $request, DemandFilters $filters) : \Illuminate\Http\Response
 	public function index(DemandRequest $request, DemandFilters $filters) : \Illuminate\Http\Response
 	{
-		$a_res = $this->indexAPI($request, $filters, ['meal', 'meal.course', 'meal.course.provider', ]);
+		$a_res = $this->indexAPI($request, $filters, ['plate', 'meal', 'meal.course', 'meal.course.provider', ]);
 		return $a_res;
 	}
 
@@ -59,7 +59,16 @@ class DemandController extends Controller
 	 */
 	public function store(SaveRequest $request) : \Illuminate\Http\Response
 	{
-		$a_res = $this->storeAPI($request);
+		$request->merge([
+			'user_id' => \Auth::user()->id,
+		]);
+
+		$a_tmp		= array_flip($request->plate_ids);
+		unset($a_tmp['']);
+		$a_tmp		= array_keys($a_tmp);
+		$a_res		= $this->storeAPI($request);
+		$this->o_item->plate()->sync($a_tmp);
+
 		return $a_res;
 	}
 

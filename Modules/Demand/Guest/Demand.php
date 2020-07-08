@@ -31,7 +31,6 @@ class Demand extends Model
 	public static function getUpcomingDates($o_query)
 	{
 		return $o_query->select('date')->get()->pluck('date')->toArray();
-;
 	}
 
 	/**
@@ -40,7 +39,7 @@ class Demand extends Model
 	 *
 	 * @return	Array				specifically organised for easier presentation
 	 */
-	public static function getItems($o_query)
+	public static function getWeekItems($o_query)
 	{
 		$o_items		= $o_query->select('id', 'meal_id', 'date', 'position', 'price', 'weight')->get();
 		$a_items		= [];

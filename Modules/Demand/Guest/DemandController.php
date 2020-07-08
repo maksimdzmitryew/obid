@@ -29,7 +29,10 @@ class DemandController extends Controller
 
 		$user = Auth::user();
 
-		$o_query = Plate::where('date', '>', Carbon::now())->distinct()->limit(1000);
+		$o_query = Plate::whereBetween('date', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])
+			->distinct()
+			->limit(1000)
+			;
 
 		return view($this->_env->s_view . 'form',
 					[
@@ -37,7 +40,7 @@ class DemandController extends Controller
 						'demand'		=> GuestDemand::findOrNew($request->id),
 						'a_dates'		=> GuestDemand::getUpcomingDates($o_query),
 						'o_courses'		=> GuestDemand::getCourses($o_query),
-						'a_items'		=> GuestDemand::getItems($o_query),
+						'a_items'		=> GuestDemand::getWeekItems($o_query),
 						'user'			=> $user,
 					]);
 	}

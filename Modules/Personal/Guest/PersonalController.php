@@ -2,15 +2,16 @@
 
 namespace Modules\Personal\Guest;
 
-                                 use Auth;
-       use Modules\Building\Database\Building;
-            use App\Http\Controllers\ControllerGuest as Controller;
-                                 use Hash;
-          use Modules\Place\Database\Place;
-                 use Illuminate\Http\Request;
-                             use App\Subscriber;
-                             use App\User;
-                                 use Validator;
+use                                              Auth;
+use                         App\Http\Controllers\ControllerGuest as Controller;
+use                      Modules\Demand\Database\Demand;
+use                                              Hash;
+use                       Modules\Place\Database\Place;
+use                              Illuminate\Http\Request;
+use                                          App\Subscriber;
+use                                          App\User;
+use                                              Validator;
+
 
 class PersonalController extends Controller
 {
@@ -86,15 +87,15 @@ class PersonalController extends Controller
 	public function activity(Request $request)
 	{
 		$this->setEnv();
-
-		$user = Auth::user();
+		$o_user							= Auth::user();
 
 		return view($this->_env->s_view . 'index',
 					[
-						'b_admin'		=> $user->checkAdmin(),
+						'b_admin'		=> $o_user->checkAdmin(),
 						'tab'			=> request()->segment(2),
-						'user'			=> $user,
-						'subscribe'		=> Subscriber::where('email', $user->email)->exists(),
+						'user'			=> $o_user,
+						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
+						'activity'		=> Demand::getUserActivity($o_user),
 					]);
 	}
 
