@@ -49,13 +49,27 @@ include(base_path().'/resources/views/guest/crud.php');
 								style="font-weight: bold;"
 								data-sum_price="{{ (isset($activity[$s_date])) ? $activity[$s_date]['total'] : 0 }}"
 							>
-							@if (isset($activity[$s_date]))
-							{{ $activity[$s_date]['total'] }}₴ <span class="smaller">{{ $activity[$s_date]['heavy'] }}гр.</span>
-							@else
-							0₴
-							@endif
+								@if (isset($activity[$s_date]))
+								{{ $activity[$s_date]['total'] }}₴
+								@else
+								0₴
+								@endif
 							</span>
-							<span id="demand_{{ $s_date }}_nums" class="demand_{{ $s_date }}_nums" style="font-weight: normal;"></span>
+							<span 
+								id="demand_{{ $s_date }}_weight"
+								class="smaller"
+								data-sum_weight="{{ (isset($activity[$s_date])) ? $activity[$s_date]['heavy'] : 0 }}"
+							>
+								@if (isset($activity[$s_date]))
+								{{ $activity[$s_date]['heavy'] }}гр.
+								@else
+								0гр.
+								@endif
+							</span>
+							<span
+								id="demand_{{ $s_date }}_nums"
+								class="demand_{{ $s_date }}_nums" style="font-weight: normal;"
+							>@if (isset($activity[$s_date]))№{{ implode(',', $activity[$s_date]['position']) }}@endif</span>
 						</p>
 						<div id="demand_{{ $s_date }}_list" class="smaller" data-date="{{ $s_date }}">
 
@@ -292,8 +306,10 @@ include(base_path().'/resources/views/guest/crud.php');
 		s_plate_id	= 'plate_' + course_id+'_'+date+'_'+meal_id,
 		s_total_id	= 'demand_'+date+'_total',
 		s_total_num	= 'demand_'+date+'_nums',
+		s_weight_id	= 'demand_'+date+'_weight',
 		title_id	= element_id+'_title',
 		sum_price	= $('#'+s_total_id).attr('data-sum_price'),
+		sum_weight	= $('#'+s_weight_id).attr('data-sum_weight'),
 		input_id	= '#' + plate_id
 		;
 
@@ -301,6 +317,10 @@ include(base_path().'/resources/views/guest/crud.php');
 		if (typeof $('#' + s_total_id).prop('total') === 'undefined')
 		{
 			$('#' + s_total_id).prop('total', sum_price);
+		}
+		if (typeof $('#' + s_weight_id).prop('weight') === 'undefined')
+		{
+			$('#' + s_weight_id).prop('weight', sum_weight);
 		}
 
 		if ($('#' + s_plate_id).hasClass('selected'))
@@ -368,6 +388,12 @@ include(base_path().'/resources/views/guest/crud.php');
 		$('.' + s_total_id).text(total+ '₴');
 		// store total value
 		$('#' + s_total_id).prop('total', total);
+
+		sum_weight = (parseFloat($('#' + s_weight_id).prop('weight')));
+		sum_weight = ( sum_weight + parseFloat(weight));
+		$('#' + s_weight_id).text(sum_weight+ 'гр.');
+		$('#' + s_weight_id).prop('weight', sum_weight);
+
 		$(input_id).val(plate_id);
 		$('#' + s_demand_id).click(function (e) {
 			fnClick(e);
@@ -382,10 +408,16 @@ include(base_path().'/resources/views/guest/crud.php');
 		total = ( parseFloat($('#' + s_total_id).prop('total')) - parseFloat(price));
 		$('.' + s_total_id).text(total+ '₴');
 		$('#' + s_total_id).prop('total', total);
+
 		$(input_id).val('');
 		s_nums = $('#' + s_total_num).text() + ',';
 		s_nums = s_nums.replace(position + ',', '').slice(0,-1);
 		$('.' + s_total_num).text( s_nums );
+
+		weight = ( parseFloat($('#' + s_weight_id).prop('weight')) - parseFloat(weight));
+		$('#' + s_weight_id).text(weight+ 'гр.');
+		$('#' + s_weight_id).prop('weight', weight);
+
 	}
 
  	</script>

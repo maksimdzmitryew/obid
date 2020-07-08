@@ -20,14 +20,15 @@ class PersonalController extends Controller
 	{
 		$this->setEnv();
 
-		$user = Auth::user();
+		$o_user = Auth::user();
 
 		return view($this->_env->s_view . 'index',
 					[
-						'b_admin'		=> $user->checkAdmin(),
+						'b_admin'		=> $o_user->checkAdmin(),
 						'tab'			=> request()->segment(2),
-						'user'			=> $user,
-						'subscribe'		=> Subscriber::where('email', $user->email)->exists(),
+						'user'			=> $o_user,
+						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
+						'activity'		=> GuestDemand::getUserActivity($o_user),
 					]);
 /*
 #        return view('public.profile.miy-pr', [

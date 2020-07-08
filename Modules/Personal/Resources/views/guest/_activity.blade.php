@@ -2,7 +2,7 @@
 
 						<div class="buttons">
 							<button type="submit" class="confirm">
-								<a href="{!! route('guest.demand.form') !!}">
+								<a href="{!! route('guest.demand.week') !!}">
 								{!! trans('personal::guest.button.add_new_demand') !!}
 								</a>
 							</button>
