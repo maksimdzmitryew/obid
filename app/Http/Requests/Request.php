@@ -52,6 +52,7 @@ class Request extends BaseRequest
 		$a_fill_main				= [];
 		$a_form_trans				= [];
 		$a_fill_trans				= [];
+		$a_rules_all				= [];
 
 		$s_tmp						= $this->_env->s_model;
 		if (class_exists($s_tmp))
@@ -68,20 +69,19 @@ class Request extends BaseRequest
 			$a_fill_trans			= $t->getFillable();
 			$a_form_trans			= $t->getFields();
 #			$a_form_trans			= $t->a_form;
-		}
 
-		$a_rules_all = [];
-		$a_locales = config('translatable.locales');
+			$a_locales = config('translatable.locales');
 
-		for ($i = 0; $i < count($a_locales); $i++)
-		{
-			$a_rules_all[$a_locales[$i]] = 'required|array';
-			for ($j = 0; $j < count($a_fill_trans); $j++)
+			for ($i = 0; $i < count($a_locales); $i++)
 			{
-				if (array_key_exists($a_fill_trans[$j], $a_form_trans))
+				$a_rules_all[$a_locales[$i]] = 'required|array';
+				for ($j = 0; $j < count($a_fill_trans); $j++)
 				{
-					$s_tmp = $a_locales[$i].'.'.$a_fill_trans[$j];
-					$a_rules_all[$s_tmp] = $a_form_trans[$a_fill_trans[$j]]['rules'];
+					if (array_key_exists($a_fill_trans[$j], $a_form_trans))
+					{
+						$s_tmp = $a_locales[$i].'.'.$a_fill_trans[$j];
+						$a_rules_all[$s_tmp] = $a_form_trans[$a_fill_trans[$j]]['rules'];
+					}
 				}
 			}
 		}

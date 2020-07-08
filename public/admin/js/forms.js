@@ -45,11 +45,11 @@ fnForm = function(e){
 					//JSON parse error, this is not json (or JSON isn't in the browser)
 					// login back() reload with cookies set
 					location.reload(true);
+//					notify(s_json_err, 'danger', 3000);
 				}
 			}
 			else
 			{
-//						location.reload(true);
 				setSwalParams(data, form, b_error);
 			}
 			runSwal(b_error);
