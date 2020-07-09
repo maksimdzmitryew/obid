@@ -1425,6 +1425,11 @@ p.smaller, span.smaller
 	padding-bottom: 5px;
 }
 
+.tab .buttons
+{
+	padding-bottom: 35px;
+}
+
 div.sticky
 {
   position: -webkit-sticky;
@@ -1437,4 +1442,70 @@ div.sticky
 div.sticky .div_table
 {
   height: 182px;
+}
+
+.hidden {
+  display: none;
+}
+
+.div_date_wrap.future,
+.div_date_wrap.past.opened
+{
+	font-weight: 400;
+}
+
+.div_date_wrap.today
+{
+	font-weight: 700;
+}
+
+.div_date_wrap
+{
+	cursor: pointer;
+	border-bottom: solid lightslategray;
+	border-width: thin;
+	margin-bottom: 20px;
+	font-weight: 100;
+	color:grey;
+}
+
+.div_date_wrap.today > p.p_date:before
+{
+	color:green;
+}
+
+.div_date_wrap > p.p_date:before
+{
+	display: block;
+	float: left;
+    content: '\E9C7';
+    font-family: "icomoon";
+    color:grey;
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: middle;
+    line-height: 1;
+
+    top: 0.75rem;
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
+    left: 1.25rem;
+
+    transition: -webkit-transform 0.25s ease-in-out;
+    -webkit-transition: -webkit-transform 0.25s ease-in-out;
+    transition: transform 0.25s ease-in-out;
+    transition: transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.div_date_wrap.opened > p.p_date:before
+{
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.plate_items_wrapper
+{
+	padding-left: 50px;
 }

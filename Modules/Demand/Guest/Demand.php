@@ -86,7 +86,10 @@ class Demand extends Model
 				$a_items[$o_plate->date]['heavy']				+= (int) $o_plate->weight;
 			}
 		}
-#dd($a_items);
+		/**
+		 *	sort by date DESC
+		 */
+		krsort($a_items);
 		return $a_items;
 	}
 
