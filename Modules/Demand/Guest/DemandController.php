@@ -27,9 +27,14 @@ class DemandController extends Controller
 	{
 		$this->setEnv();
 
-		$o_user = Auth::user();
+		$o_user		= Auth::user();
 
-		$o_query = Plate::whereBetween('date', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])
+		$i_week		= 1;
+
+		$o_query	= Plate::whereBetween('date', [
+							Carbon::now()->addWeek($i_week)->startOfWeek()->format('Y-m-d'),
+							Carbon::now()->addWeek($i_week)->endOfWeek()->format('Y-m-d')
+						])
 			->distinct()
 			->limit(1000)
 			;

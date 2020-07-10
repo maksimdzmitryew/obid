@@ -73,11 +73,16 @@
 		? 'map_screen'
 		: 'custom_page'
 		}}"
-	class="{{ request()->segment(1) == ''
-				? 'general_page'
-				: request()->segment(1) == 'place' || request()->segment(1) == 'opinion'
-					? ''
-					: request()->segment(1) . '_page'
+	class="{{ 
+				(
+					request()->segment(1) == ''
+					? 'general_page'
+					: 	(
+							request()->segment(1) == 'place' || request()->segment(1) == 'opinion'
+							? ''
+							: request()->segment(1) . '_page'
+						)
+				)
 			}}"
 >
 @yield('content')

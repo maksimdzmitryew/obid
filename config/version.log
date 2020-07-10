@@ -1,3 +1,4 @@
+0.01.0+a193:1 user UPD initial release and php7.4 compliance
 0.00.2+a191:3 user ADD current week review orders sorted by date desc
 0.00.2+a191:2 user ADD calculate weight
 0.00.2+a191:1 user ADD show alreaded demanded items, totals, weight
@@ -77,6 +78,13 @@ Ensures visitor browsing-security by preventing cross-site request forgery. This
 щоб ми мали можливість оперативно проінформувати
 Вас про важливі події.
 
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
 
 Зберегти
 Ми не розсилаємо спам. Якщо Ви вирішите, що наші листи
@@ -99,6 +107,7 @@ php artisan module:make
 php artisan module:migrate
 php artisan module:migrate-rollback
 php artisan module:enable
+
 
 down modules<-vmware
 
