@@ -17,7 +17,7 @@
 								) }}
 								" data-date="{{ $s_date }}">
 							<p class="p_date">
-								{{ \Carbon\Carbon::parse($s_date)->format('D j M') }}:
+								{{ \Carbon\Carbon::parse($s_date)->translatedFormat('D j M') }}:
 								{{ $a_data['total'] }}₴
 								{{ $activity[$s_date]['heavy'] }}гр.
 								№{{ implode(',', $activity[$s_date]['position']) }}

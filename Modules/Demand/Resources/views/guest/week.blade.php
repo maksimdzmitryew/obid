@@ -41,7 +41,7 @@ include(base_path().'/resources/views/guest/crud.php');
 
 				<div class="div_cell" style="width:19%">
 					<div>
-						<p>{{ \Carbon\Carbon::parse($a_dates[$d])->format('D j M') }}</p>
+						<p>{{ \Carbon\Carbon::parse($a_dates[$d])->translatedFormat('l j F') }}</p>
 						<p class="p_totals">
 							<span 
 								class="demand_{{ $s_date }}_total"
