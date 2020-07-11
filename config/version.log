@@ -1,3 +1,4 @@
+0.02.0+a193:1 user UPD clean legacy code
 0.01.0+a193:2 user ADD better locale for dates spelling
 0.01.0+a193:1 user UPD initial release and php7.4 compliance
 0.00.2+a191:3 user ADD current week review orders sorted by date desc
