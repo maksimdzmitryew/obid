@@ -14,6 +14,9 @@ namespace App\Http\Controllers\Auth;
                  use Illuminate\Http\Request;
       use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
               use Illuminate\Support\Str;
+
+
+
       use Illuminate\Support\Facades\Validator;
 
 class PasswordController extends Controller
@@ -33,40 +36,42 @@ class PasswordController extends Controller
 
 	function change($token = NULL, Request $request)
 	{
+		$a_errors = [];
+
 		if (!is_null($request->post('token')))
 			$token = $request->post('token');
 
-		$user = $this->_checkToken($token);
-
-		if( ! $user){
-			return response([
-				'message' => trans('messages.validation.fail'),
-				'errors' => [
-					'token' => 'Token is not valid'
-				]
-			], 422);
-		}
-
 		$validator = Validator::make(request()->post(), [
-			'password' => 'required|string|confirmed|min:6|max:20',
-			'password_confirmation' => 'required|string'
+			'password_new' => 'required|string|confirmed|min:6|max:20',
+			'password_new_confirmation' => 'required|string'
 		]);
 
 		if($validator->fails())
 		{
+			$a_errors		= json_decode($validator->errors(), TRUE);
+		}
+
+		$user = $this->_checkToken($token);
+		if( ! $user){
+			$a_errors['token'] = [trans('validation.exists', ['attribute' => trans('user/form.field.token'),]),];
+		}
+
+		if (count($a_errors) > 0)
+		{
 			return response([
-				'message' => trans('messages.validation.fail'),
-				'errors' => $validator->errors()
+				'message'	=> trans('messages.validation.fail'),
+				'errors'	=> $a_errors,
 			], 422);
 		}
 
-		$user->password = bcrypt($request->post('password'));
+		$user->password = bcrypt($request->post('password_new'));
 		$user->save();
 
 		Auth::login($user);
 
 		return response([
-			'message' => trans('user/form.text.reset_done'),
+			'title'		=> trans('user/form.text.reset'),
+			'message'	=> trans('user/form.text.reset_done'),
 			'url'		=> route('guest.personal.profile'),
 		], 200);
 
@@ -141,6 +146,7 @@ class PasswordController extends Controller
 		$reset_password->count() ? $reset_password->update($data) : $reset_password->insert($data);
 
 		return response([
+			'title'		=> trans('user/form.text.reset'),
 			'message'	=> trans('user/form.text.reset_sent'),
 			'url'		=> route('password_change', ['token' => NULL]),
 		], 200);

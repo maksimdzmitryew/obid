@@ -520,7 +520,7 @@
 									</div> --}}
 									<div class="form-group row">
 										<div class="col-md-3 col-sm-4 col-12 label-wrap">
-											<label for="profile_old_pass">{!! trans('user/form.field.old') !!}</label>
+											<label for="profile_old_pass">{!! trans('user/form.field.password_old') !!}</label>
 										</div>
 										<div class="col-md-9 col-sm-8 col-12 control-wrap">
 											<input type="password" class="form-control" id="profile_old_pass" name="old_password">
@@ -528,7 +528,7 @@
 									</div>
 									<div class="form-group row">
 										<div class="col-md-3 col-sm-4 col-12 label-wrap">
-											<label for="profile_new_pass">{!! trans('user/form.field.new') !!}</label>
+											<label for="profile_new_pass">{!! trans('user/form.field.password_new') !!}</label>
 										</div>
 										<div class="col-md-9 col-sm-8 col-12 control-wrap">
 											<input type="password" class="form-control" id="profile_new_pass" name="password">

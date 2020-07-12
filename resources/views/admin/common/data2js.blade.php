@@ -9,5 +9,4 @@ let
 	,s_route_secondary	= '{!! $s_route_secondary !!}'
 	,s_close_route		= '{!! $s_cancel_route !!}'
 	,s_action_form		= '{!! ($o_item->id ? 'update' : 'create') !!}'
-	,s_json_err			= '{!! trans('common/messages.json_parse_error') !!}'
 	;

@@ -35,6 +35,7 @@ fnForm = function(e){
 			data:	form.serialize()
 		}).done((data, status, xhr) => {
 			b_error		= false;
+
 			if (xhr.readyState == 4 && xhr.status == 200)
 			{
 				try {
@@ -105,7 +106,7 @@ fnForm = function(e){
 				prev_errors.remove();
 				field_label.removeClass('validation-invalid-label');
 
-				if(errors[o_field.data('name')])
+				if(typeof (errors) !== 'undefined' && errors[o_field.data('name')])
 				{
 					errors[field_name].forEach((msg) => {
 						field_label.addClass('validation-invalid-label');
@@ -175,13 +176,16 @@ function setSwalParams(data, form, b_error){
 			a_params.icon	= 'info';
 	}
 
-	if (typeof data.url === 'undefined' && typeof s_route_primary !== 'undefined')
+	if (typeof data.url === 'undefined')
 	{
-		data.url		= s_route_primary;
-	}
-	else
-	{
-		data.url		= '';
+		if (typeof s_route_primary !== 'undefined')
+		{
+			data.url		= s_route_primary;
+		}
+		else
+		{
+			data.url		= '';
+		}
 	}
 
 	if (typeof data.btn !== 'undefined')
@@ -228,6 +232,7 @@ function setSwalParams(data, form, b_error){
 	{
 		data.url = '';
 	}
+console.log(s_btn_ok, data.url, s_url_ok);
 
 	a_params.onClose = () => {
 		if (s_url_ok != '' && s_url_dissmiss == '')
@@ -263,7 +268,7 @@ function runSwal(b_keep_form)
 
 function resetForm(form)
 {
-	if (s_action_form == 'create')
+	if (typeof (s_action_form) !== 'undefined' && s_action_form == 'create')
 	{
 		// clean all fields once the form's been saved
 		form.find('input[type=text]').val('');

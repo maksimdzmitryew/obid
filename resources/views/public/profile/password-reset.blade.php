@@ -1,3 +1,4 @@
+{{--
 @extends('layouts.public')
 
 @section('meta')
@@ -54,3 +55,4 @@
 </div>
 
 @endsection
+--}}
