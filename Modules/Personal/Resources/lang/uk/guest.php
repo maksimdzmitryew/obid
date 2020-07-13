@@ -9,9 +9,9 @@ return [
 	],
 	'button' => [
 		'change'					=> 'Зберегти',
-		'future_demand'				=> 'Майбутні тиждень',
-		'add_new_demand'			=> 'Зробити замовлення',
-		'review_demand'				=> 'Перегляд тижня',
-		'modify_demand'				=> 'Змінити замовлення',
+		'future_demand'				=> 'Нове замовлення',
+		'add_new_demand'			=> 'Зберегти замовлення',
+		'review_demand'				=> 'Зміна замовлення',
+		'modify_demand'				=> 'Зберегти зміни',
 	],
 ];
