@@ -1448,15 +1448,54 @@ div.sticky .div_table
   display: none;
 }
 
+.div_date_wrap
+{
+	clear: both;
+	min-height: 79px;
+}
+
+.div_date_wrap .calendar-item-icon
+{
+	display: block;
+	float: left;
+}
+
+.div_date_wrap .div_date
+{
+	margin-left: 69px;
+}
+
+.div_date_wrap .div_date
+{
+	margin-left: 69px;
+}
+
 .div_date_wrap.future,
-.div_date_wrap.past.opened
+.div_date_wrap.past.opened,
+.div_date_wrap.past .calendar-item-icon-day,
+.div_date_wrap.past.opened .calendar-item-icon-date
 {
 	font-weight: 400;
 }
 
-.div_date_wrap.today
+.div_date_wrap.today,
+.div_date_wrap.today .calendar-item-icon-day,
+.div_date_wrap.today .calendar-item-icon-date
 {
 	font-weight: 700;
+}
+
+.div_date_wrap,
+.div_date_wrap.past .div_date,
+.div_date_wrap.past .calendar-item-icon-date
+{
+	font-weight: 100;
+	color: lightgrey;
+}
+
+.div_date_wrap.today .calendar-item-icon-date
+{
+    color: #535c69;
 }
 
 .div_date_wrap
@@ -1465,16 +1504,15 @@ div.sticky .div_table
 	border-bottom: solid lightslategray;
 	border-width: thin;
 	margin-bottom: 20px;
-	font-weight: 100;
 	color:grey;
 }
 
-.div_date_wrap.today > p.p_date:before
+.div_date_wrap.today > p.div_date:before
 {
 	color:green;
 }
 
-.div_date_wrap > p.p_date:before
+.div_date_wrap > p.div_date:before
 {
 	display: block;
 	float: left;
@@ -1499,7 +1537,7 @@ div.sticky .div_table
     -moz-osx-font-smoothing: grayscale;
 }
 
-.div_date_wrap.opened > p.p_date:before
+.div_date_wrap.opened > p.div_date:before
 {
 	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg);
@@ -1507,5 +1545,34 @@ div.sticky .div_table
 
 .plate_items_wrapper
 {
-	padding-left: 50px;
+	padding-left: 69px;
+}
+
+.widget-first-item .calendar-item-icon {
+    top: 20px!important;
+}
+.calendar-item-icon {
+    background-color: #2fc7f7;
+    display: block;
+    height: 57px;
+    left: 19px;
+    top: 12px;
+    width: 53px;
+}
+.calendar-item-icon-day {
+    color: #fff;
+    display: block;
+    font-size: 1rem;
+    height: 1.2rem;
+    line-height: 1.3rem;
+    text-align: center;
+}
+.calendar-item-icon-date {
+    background-color: #fff;
+    display: block;
+    font-size: 1.7rem;
+    height: 2.1rem;
+    line-height: 1.9rem;
+    margin: 0 4px;
+    text-align: center;
 }

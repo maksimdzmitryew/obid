@@ -16,12 +16,16 @@
 										: ( \Carbon\Carbon::now()->format('Y-m-d') < $s_date ? 'future' : 'past')
 								) }}
 								" data-date="{{ $s_date }}">
-							<p class="p_date">
-								{{ \Carbon\Carbon::parse($s_date)->translatedFormat('D j M') }}:
-								{{ $a_data['total'] }}₴
-								{{ $activity[$s_date]['heavy'] }}гр.
-								№{{ implode(',', $activity[$s_date]['position']) }}
-							</p>
+
+<span class="calendar-item-icon">
+<span class="calendar-item-icon-day">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('j') }}</span>
+<span class="calendar-item-icon-date">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('D') }}</span>
+</span>
+
+							<div class="div_date">
+								<p>№{{ implode(',', $activity[$s_date]['position']) }}</p>
+								<p class="smaller">{{ $a_data['total'] }}₴ {{ $activity[$s_date]['heavy'] }}гр.</p>
+							</div>
 							<div class="
 								plate_items_wrapper
 								plate_items_wrapper_{{ $s_date }}
