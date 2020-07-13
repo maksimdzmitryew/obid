@@ -29,7 +29,12 @@ class DemandController extends Controller
 
 		$o_user		= Auth::user();
 
-		$i_week		= 1;
+		$i_week		= 0;
+
+		if (date("N") > 4)
+		{
+			$i_week	= 1;
+		}
 
 		$o_query	= Plate::whereBetween('date', [
 							Carbon::now()->addWeek($i_week)->startOfWeek()->format('Y-m-d'),
