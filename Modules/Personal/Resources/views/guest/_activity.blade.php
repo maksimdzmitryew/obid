@@ -3,7 +3,11 @@
 						<div class="buttons">
 							<button type="submit" class="confirm">
 								<a href="{!! route('guest.demand.week') !!}">
-								{!! trans('personal::guest.button.add_new_demand') !!}
+								@if($b_week)
+								{!! trans('personal::guest.button.review_demand') !!}
+								@else
+								{!! trans('personal::guest.button.future_demand') !!}
+								@endif
 								</a>
 							</button>
 						</div>
@@ -17,10 +21,10 @@
 								) }}
 								" data-date="{{ $s_date }}">
 
-<span class="calendar-item-icon">
-<span class="calendar-item-icon-day">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('j') }}</span>
-<span class="calendar-item-icon-date">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('D') }}</span>
-</span>
+							<span class="calendar-item-icon">
+								<span class="calendar-item-icon-day">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('j') }}</span>
+								<span class="calendar-item-icon-date">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('D') }}</span>
+							</span>
 
 							<div class="div_date">
 								<p>№{{ implode(',', $activity[$s_date]['position']) }}</p>

@@ -19,13 +19,17 @@ include(base_path().'/resources/views/guest/crud.php');
 @append
 
 @section('content')
-	<form action="{!! route('api.'.$s_category.'.store') !!}" method="POST" class="form-page item-form" id="create-{!! $s_category !!}-form">
+	<form action="{!! ($b_week ? route('api.'.$s_category.'.update', $$s_category->id) : route('api.'.$s_category.'.store')) !!}" method="POST" class="form-page item-form" id="create-{!! $s_category !!}-form">
 		@csrf
 
 	<div class="sticky">
 		<div class="buttons">
 			<button type="submit" class="confirm">
+			@if($b_week)
+			{!! trans('personal::guest.button.modify_' . $s_category) !!}
+			@else
 			{!! trans('personal::guest.button.add_new_' . $s_category) !!}
+			@endif
 			</button>
 		</div>
 		<div class="div_table">
@@ -108,7 +112,6 @@ include(base_path().'/resources/views/guest/crud.php');
 
 		<div class="div_table">
 			<div class="div_title">
-				<p>{!! trans('personal::guest.button.add_new_demand') !!}</p>
 			</div>
 
 			@foreach ($o_courses AS $o_course)
@@ -214,13 +217,18 @@ include(base_path().'/resources/views/guest/crud.php');
 										--}}
 
 @include($theme . '::' . $_env->s_utype . '._recaptcha', ['id' => 'create-' . $s_category])
-
+{{--
 				<button type="submit" class="confirm">
 					{!! trans('personal::guest.button.add_new_' . $s_category) !!}
 				</button>
-
+--}}
 			<div class="divider"></div>
 		</div>
+
+		<div style="display:none;">
+		@include('layouts._form_control', ['control' => 'checkbox', 'name'=>'published'])
+		</div>
+
 	</form>
 
 

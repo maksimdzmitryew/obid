@@ -34,6 +34,18 @@ class Demand extends Model
 	}
 
 	/**
+	 * Check if any demands already made for current week
+	 * @param	Array				demands’ dates
+	 *
+	 * @return	Boolean				flag
+	 */
+	public static function getThisWeek($a_dates) : Bool
+	{
+		$b_current_week	 = (isset($a_dates[0]) ? (\Carbon\Carbon::now()->startOfWeek()->format('Y-m-d') <= $a_dates[0]) : FALSE);
+		return $b_current_week;
+	}
+
+	/**
 	 * Get list of meals on plate that available for upcoming dates
 	 * @param	Object				query to select items for
 	 *

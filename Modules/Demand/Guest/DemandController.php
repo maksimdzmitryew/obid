@@ -26,11 +26,21 @@ class DemandController extends Controller
 	public function week(Request $request)
 	{
 		$this->setEnv();
+		$fn_find = $this->_env->fn_find;
+		$this->validate($request, [
+			'id' => 'integer'
+		]);
 
 		$o_user		= Auth::user();
+		if (is_null($request->id))
+		{
+			$i_tmp		= GuestDemand::select('id')->whereUserId($o_user->id)->max('id');
+			$request->merge([
+				'id' => $i_tmp,
+			]);
+		}
 
 		$i_week		= 0;
-
 		if (date("N") > 4)
 		{
 			$i_week	= 1;
@@ -44,15 +54,18 @@ class DemandController extends Controller
 			->limit(1000)
 			;
 
+		$a_activity	= GuestDemand::getUserActivity($o_user);
+
 		return view($this->_env->s_view . 'week',
-					[
-						'b_admin'		=> $o_user->checkAdmin(),
-						'demand'		=> GuestDemand::findOrNew($request->id),
-						'a_dates'		=> GuestDemand::getUpcomingDates($o_query),
-						'o_courses'		=> GuestDemand::getCourses($o_query),
-						'a_items'		=> GuestDemand::getWeekItems($o_query),
-						'activity'		=> GuestDemand::getUserActivity($o_user),
-						'user'			=> $o_user,
-					]);
+				[
+					$this->_env->s_sgl		=> $fn_find($request->id),
+					'b_admin'				=> $o_user->checkAdmin(),
+					'a_dates'				=> GuestDemand::getUpcomingDates($o_query),
+					'o_courses'				=> GuestDemand::getCourses($o_query),
+					'a_items'				=> GuestDemand::getWeekItems($o_query),
+					'b_week'				=> GuestDemand::getThisWeek(array_keys($a_activity)),
+					'activity'				=> $a_activity,
+					'user'					=> $o_user,
+				]);
 	}
 }

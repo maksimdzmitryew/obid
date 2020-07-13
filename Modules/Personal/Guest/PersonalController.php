@@ -20,7 +20,8 @@ class PersonalController extends Controller
 	{
 		$this->setEnv();
 
-		$o_user = Auth::user();
+		$o_user							= Auth::user();
+		$a_activity						= GuestDemand::getUserActivity($o_user);
 
 		return view($this->_env->s_view . 'index',
 					[
@@ -28,7 +29,8 @@ class PersonalController extends Controller
 						'tab'			=> request()->segment(2),
 						'user'			=> $o_user,
 						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
-						'activity'		=> GuestDemand::getUserActivity($o_user),
+						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
+						'activity'		=> $a_activity,
 					]);
 /*
 #        return view('public.profile.miy-pr', [
@@ -89,6 +91,7 @@ class PersonalController extends Controller
 	{
 		$this->setEnv();
 		$o_user							= Auth::user();
+		$a_activity						= GuestDemand::getUserActivity($o_user);
 
 		return view($this->_env->s_view . 'index',
 					[
@@ -96,7 +99,8 @@ class PersonalController extends Controller
 						'tab'			=> request()->segment(2),
 						'user'			=> $o_user,
 						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
-						'activity'		=> GuestDemand::getUserActivity($o_user),
+						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
+						'activity'		=> $a_activity,
 					]);
 	}
 

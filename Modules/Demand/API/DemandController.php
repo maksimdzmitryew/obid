@@ -80,7 +80,11 @@ class DemandController extends Controller
 	 */
 	public function update(SaveRequest $request, DBDemand $item) : \Illuminate\Http\Response
 	{
-		$a_res = $this->updateAPI($request, $item);
+		$a_tmp		= array_flip($request->plate_ids);
+		unset($a_tmp['']);
+		$a_tmp		= array_keys($a_tmp);
+		$item->plate()->sync($a_tmp);
+		$a_res		= $this->updateAPI($request, $item);
 		return $a_res;
 	}
 }
