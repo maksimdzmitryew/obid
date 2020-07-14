@@ -37,15 +37,21 @@ include(base_path().'/resources/views/guest/crud.php');
 				<div class="div_cell" style="width:5%">
 					<p>&nbsp;</p>
 				</div>
-
 				@for ($d=0; $d < count($a_dates); $d++)
 				@php
 					$s_date			= $a_dates[$d];
+					$s_changeable	= ($s_date > \Carbon\Carbon::now()->format('Y-m-d') ? '' : '_old');
+					$s_relative		= (
+										$s_date == \Carbon\Carbon::now()->format('Y-m-d') ? 'today'
+										: (
+											$s_date > \Carbon\Carbon::now()->format('Y-m-d') ? 'future' : 'past'
+											)
+										);
 				@endphp
 
 				<div class="div_cell" style="width:19%">
 					<div>
-						<p>{{ \Carbon\Carbon::parse($a_dates[$d])->translatedFormat('l j F') }}</p>
+						<p class="{!! $s_relative !!}">{{ \Carbon\Carbon::parse($a_dates[$d])->translatedFormat('l j F') }}</p>
 						<p class="p_totals">
 							<span 
 								class="demand_{{ $s_date }}_total"
@@ -82,7 +88,7 @@ include(base_path().'/resources/views/guest/crud.php');
 							$a_data			= $activity[$s_date];
 						@endphp
 						@for ($i = 0; $i < count($a_data['plate_id']); $i++)
-							<p class="div_meal_item selected" data-meal_id="{{ $a_data['meal_id'][$i] }}" data-plate_id="{{ $a_data['plate_id'][$i] }}" data-course_id="{{ $a_data['course_id'][$i] }}" data-position="{{ $a_data['position'][$i] }}" data-date="{{ $s_date }}" data-price="{{ $a_data['price'][$i] }}" data-weight="{{ $a_data['weight'][$i] }}" id="list_{{ $a_data['course_id'][$i] }}_{{ $s_date }}_{{ $a_data['meal_id'][$i] }}" title="{{ $a_data['meal_title'][$i] }}">{{ $a_data['price'][$i] }}₴ {{ mb_substr($a_data['meal_title'][$i],0,30) }}</p>
+							<p class="div_meal_item{!! $s_changeable !!} selected" data-meal_id="{{ $a_data['meal_id'][$i] }}" data-plate_id="{{ $a_data['plate_id'][$i] }}" data-course_id="{{ $a_data['course_id'][$i] }}" data-position="{{ $a_data['position'][$i] }}" data-date="{{ $s_date }}" data-price="{{ $a_data['price'][$i] }}" data-weight="{{ $a_data['weight'][$i] }}" id="list_{{ $a_data['course_id'][$i] }}_{{ $s_date }}_{{ $a_data['meal_id'][$i] }}" title="{{ $a_data['meal_title'][$i] }}">{{ $a_data['price'][$i] }}₴ {{ mb_substr($a_data['meal_title'][$i],0,30) }}</p>
 						@endfor
 						@endif
 
@@ -149,6 +155,7 @@ include(base_path().'/resources/views/guest/crud.php');
 						$i_meal_id		= $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->id;
 						$i_plate_id		= $a_items[$i_course_id][$i_curr_pos][$s_date]->id;
 						$b_selected		= FALSE;
+						$s_changeable	= ($s_date > \Carbon\Carbon::now()->format('Y-m-d') ? '' : '_old');
 
 						if (isset($activity[$s_date]) && in_array($i_plate_id, $activity[$s_date]['plate_id']))
 						{
@@ -157,7 +164,7 @@ include(base_path().'/resources/views/guest/crud.php');
 					@endphp
 
 				<div 
-					class="div_cell div_meal_item meal_id_{{ $i_meal_id }} {{ $b_selected ? 'selected' : '' }}"
+					class="div_cell div_meal_item{!! $s_changeable !!} meal_id_{{ $i_meal_id }} {{ $b_selected ? 'selected' : '' }}"
 					id="plate_{{ $i_course_id }}_{{ $s_date }}_{{ $i_meal_id }}"
 					data-meal_id="{{ $i_meal_id }}"
 					data-plate_id="{{ $i_plate_id }}"
