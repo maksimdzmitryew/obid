@@ -46,7 +46,8 @@ class SigninController	extends Controller
 		else
 			$s_email = NULL;
 
-		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], ($i_safety == 2)))
+		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'enabled' => 1], ($i_safety == 2)))
+#		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], ($i_safety == 2)))
 		{
 			$cookie_name		= 'email';
 			$cookie_value		= $s_email;

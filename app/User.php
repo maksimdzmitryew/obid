@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\EventHolding;
-use App\Traits\Favoritable;
-use App\Traits\GeneralTrait;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use                                          App\EventHolding;
+use                                   App\Traits\Favoritable;
+use                                   App\Traits\GeneralTrait;
+use                     Spatie\Permission\Traits\HasRoles;
+use                     Illuminate\Notifications\Notifiable;
+use                   Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -16,20 +16,21 @@ class User extends Authenticatable
     use GeneralTrait;
 
 #	protected $connection = 'psc';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-#        'role_id',
-        'activation_token',
-        'active',
-#        'country_id',
+        'enabled',
         'email',
+        'title',
         'first_name',
         'last_name',
+        'activation_token',
         'password',
+#        'country_id',
     ];
 
     /**
@@ -42,34 +43,27 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-//    public function roles()
-//    {
-//        return $this->belongsToMany('App\Role', 'model_has_roles', 'role_id');
-//    }
-
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
     }
-
+/*
     public function favoritedEvents()
     {
         return $this->morphedByMany('App\Event', 'favorited', 'favorites');
     }
+*/
     public function country()
     {
         return $this->belongsTo('App\Country');
     }
-	public function places()
-	{
-		return $this->hasMany('Modules\Place\Database\Place');
-	}
 
     public function getRoles($i_user_id = NULL)
     {
     	if (is_null($i_user_id)) $i_user_id = $this->id;
         return Role::select('id', 'name', 'guard_name')->whereIn('id', function($query) use ($i_user_id) {
             $query->select('role_id')
+#                ->from('psc.model_has_roles')
                 ->from('model_has_roles')
                 ->where([
                     'model_type' => 'App\User',
@@ -84,7 +78,7 @@ class User extends Authenticatable
     	$i_admin_role_id = 1;
     	return in_array($i_admin_role_id, $this->getRoles($i_user_id)->pluck('id')->toArray());
     }
-
+/*
     public function holdings()
     {
         return EventHolding::whereIn('event_id', function($query) {
@@ -96,4 +90,5 @@ class User extends Authenticatable
                 ]);
         });
     }
+*/
 }

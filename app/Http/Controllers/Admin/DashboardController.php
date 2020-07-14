@@ -27,7 +27,7 @@ class DashboardController extends Controller
 				$s_ctrl = 'App\\'.$s_model;
 
 			if ($s_model == 'User')
-				$s_field = 'active';
+				$s_field = 'enabled';
 			else
 				$s_field = 'published';
 

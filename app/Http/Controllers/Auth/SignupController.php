@@ -12,7 +12,7 @@ namespace App\Http\Controllers\Auth;
       use Illuminate\Support\Facades\Mail;
                  use Illuminate\Http\Request;
                use App\Http\Requests\SignupRequest;
-                             use App\User;
+use                              App\User;
       use Illuminate\Support\Facades\Validator;
               use Illuminate\Support\Str;
 
@@ -56,6 +56,7 @@ class SignupController	extends Controller
 	public function core(SignupRequest $request)
 	{
 		$data = $request->post();
+
 /*
 		$validator = Validator::make($data, []);
 
