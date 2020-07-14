@@ -12937,6 +12937,11 @@ input[type=text].noui-height-helper:not(.noUi-target)[data-fouc] {
   padding-left: 1.625rem;
 }
 
+#profile_wrap .profile .user_fields .item .label.validation-invalid-label {
+  font-size: 1rem;
+  padding: 5px 0 5px 1.625rem;
+}
+
 .validation-valid-label,
 .validation-valid-text {
   color: #4CAF50 !important;

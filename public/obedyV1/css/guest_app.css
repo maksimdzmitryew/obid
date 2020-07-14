@@ -1067,6 +1067,7 @@ form .buttons .confirm
 	padding: 15px 25px;
 	width: 36%;
 	min-width: 36%;
+	visibility: hidden;
 }
 #profile_wrap .profile .user_fields .item .value {
 	width: 64%;
@@ -1079,10 +1080,10 @@ form .buttons .confirm
 	background: transparent;
 	border:1px solid transparent;
 	padding:15px;
-	line-height: 20px;
-	font-size: 14px;
-	font-weight: 300;
-	color: #495261;
+	line-height: 1.3rem;
+	font-size: 1.2rem;
+	font-weight: 500;
+	/* color: #495261; */
 }
 #profile_wrap .profile .user_fields .item .value input[type="radio"] {
 	height: 13px;

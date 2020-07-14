@@ -106,11 +106,23 @@ fnForm = function(e){
 				prev_errors.remove();
 				field_label.removeClass('validation-invalid-label');
 
+				field_label.show();
+				field_label.visible();
+
 				if(typeof (errors) !== 'undefined' && errors[o_field.data('name')])
 				{
 					errors[field_name].forEach((msg) => {
 						field_label.addClass('validation-invalid-label');
-						msg_text.clone().addClass('validation-invalid-text').html(msg).appendTo(field_value);
+//						msg_text.clone().addClass('validation-invalid-text').html(msg).appendTo(field_value);
+						msg_text
+							.clone()
+							.addClass('label validation-invalid-label')
+							.html(msg)
+							.insertAfter(field_label)
+							.visible()
+							;
+						field_label.hide();
+						field_label.hidden();
 					});
 				}
 				else
@@ -121,6 +133,20 @@ fnForm = function(e){
 			});
 		})
 	}
+
+jQuery.fn.visible = function() {
+    return this.css('visibility', 'visible');
+};
+
+jQuery.fn.hidden = function() {
+    return this.css('visibility', 'hidden');
+};
+
+jQuery.fn.visibilityToggle = function() {
+    return this.css('visibility', function(i, visibility) {
+        return (visibility == 'visible') ? 'hidden' : 'visible';
+    });
+};
 
 let a_params 	= {};
 function setSwalParams(data, form, b_error){

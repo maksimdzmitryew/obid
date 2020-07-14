@@ -3,7 +3,7 @@
 										{!! trans('user/form.field.email') !!}
 									</span>
 									<span class="value">
-										<input type="email" class="form-control" placeholder="" name="email" value="{{
+										<input type="email" class="form-control" placeholder="{!! trans('user/form.field.email') !!}" name="email" value="{{
 										(
 											isset($email)
 											? $email
