@@ -1,5 +1,6 @@
+0.02.1+a197:4 user ADD shorten title of plates when loading preselected demands
 0.02.1+a197:3 user ADD make past not selected items less visible in week schedule
-0.02.1+a197:2 user ADD disable modifying of demans for past dates and today
+0.02.1+a197:2 user ADD disable modifying of demands for past dates and today
 0.02.1+a197:1 user FIX foreign key to u s e r table
 0.02.0+a196:3 user ADD better signin and signup forms UX
 0.02.0+a196:2 user ADD better wording for demand UX

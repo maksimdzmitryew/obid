@@ -88,7 +88,20 @@ include(base_path().'/resources/views/guest/crud.php');
 							$a_data			= $activity[$s_date];
 						@endphp
 						@for ($i = 0; $i < count($a_data['plate_id']); $i++)
-							<p class="div_meal_item{!! $s_changeable !!} selected" data-meal_id="{{ $a_data['meal_id'][$i] }}" data-plate_id="{{ $a_data['plate_id'][$i] }}" data-course_id="{{ $a_data['course_id'][$i] }}" data-position="{{ $a_data['position'][$i] }}" data-date="{{ $s_date }}" data-price="{{ $a_data['price'][$i] }}" data-weight="{{ $a_data['weight'][$i] }}" id="list_{{ $a_data['course_id'][$i] }}_{{ $s_date }}_{{ $a_data['meal_id'][$i] }}" title="{{ $a_data['meal_title'][$i] }}">{{ $a_data['price'][$i] }}₴ {{ mb_substr($a_data['meal_title'][$i],0,30) }}</p>
+						@php
+							$s_tmp			= $a_data['meal_title'][$i];
+							if (mb_strlen($s_tmp) > 30)
+							{
+								$s_tmp		= mb_substr($s_tmp,0,30);
+								$s_tmp		= mb_substr($s_tmp,0,mb_strrpos($s_tmp, ' '));
+								$s_tmp		.= '&hellip;';
+							}
+						@endphp
+
+							<p class="div_meal_item{!! $s_changeable !!} selected" data-meal_id="{{ $a_data['meal_id'][$i] }}" data-plate_id="{{ $a_data['plate_id'][$i] }}" data-course_id="{{ $a_data['course_id'][$i] }}" data-position="{{ $a_data['position'][$i] }}" data-date="{{ $s_date }}" data-price="{{ $a_data['price'][$i] }}" data-weight="{{ $a_data['weight'][$i] }}" id="list_{{ $a_data['course_id'][$i] }}_{{ $s_date }}_{{ $a_data['meal_id'][$i] }}" title="{{ $a_data['meal_title'][$i] }}">
+								{{ $a_data['price'][$i] }}₴ 
+								{!! $s_tmp !!}
+							</p>
 						@endfor
 						@endif
 
