@@ -180,7 +180,9 @@ footer .socials a.ico {
 footer .socials a img {
 	width: 20px;
 	height: 20px;
+	filter: brightness(0) saturate(100%) grayscale(100%) invert(48%) brightness(118%) contrast(119%);
 }
+
 /*
 footer .socials {
 	padding: 0 0;
