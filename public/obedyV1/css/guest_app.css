@@ -1030,18 +1030,19 @@ footer .open_filter_btn {
 #profile_wrap .profile .user_details .other .reviews {
 	background-image: url('../img/icon_comments.png');
 }
+
 #profile_wrap .profile .user_fields {
-	border-radius: 8px;
-	border: solid 2px #ebeaeb;
 	margin:0 0 24px;
 }
 #profile_wrap .profile .user_fields .item {
-	border-bottom: solid 2px #ebeaeb;
+/*
 	display: flex;
 	-webkit-display:flex;
+	padding-bottom: 15px;
+*/
 }
 #profile_wrap .profile .user_fields .item:last-child {
-	border-bottom: none;
+	padding-bottom: 0;
 }
 #profile_wrap .profile .confirm,
 form .buttons .confirm
@@ -1062,19 +1063,22 @@ form .buttons .confirm
 	margin:0 auto;
 }
 #profile_wrap .profile .user_fields .item .label {
-	font-size: 14px;
-	line-height: 20px;
+	display: block;
+	clear: both;
+	width: 100%;
+	font-size: 1.1rem;
+	line-height: 1.3rem;
 	font-weight: 500;
 	color: #495261;
-	padding: 15px 25px;
-	width: 36%;
-	min-width: 36%;
-	visibility: hidden;
+	padding: 1rem 1.5rem 0.3rem 0;
 }
 #profile_wrap .profile .user_fields .item .value {
-	width: 64%;
-	min-width: 64%;
+	border-radius: 8px;
+	border: solid 2px #ebeaeb;
+	width: 100%;
+/*	min-width: 64%; */
 	position: relative;
+	margin-bottom: 0.5em;
 }
 #profile_wrap .profile .user_fields .item .value input {
 	width: 100%;
@@ -1084,9 +1088,13 @@ form .buttons .confirm
 	padding:15px;
 	line-height: 1.3rem;
 	font-size: 1.2rem;
-	font-weight: 500;
-	/* color: #495261; */
+	font-weight: 600;
+	color: black;
 }
+#profile_wrap .profile .user_fields .item .value input:focus {
+	background-color: wheat;
+}
+
 #profile_wrap .profile .user_fields .item .value input[type="radio"] {
 	height: 13px;
 	margin-top: 3px;

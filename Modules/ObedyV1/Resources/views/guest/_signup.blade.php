@@ -1,6 +1,6 @@
 					<div id="tab-signup" class="tab{{ request()->segment(1) == 'signup' ? ' opened' : '' }}">
 						<div class="user_details">
-							<div class="img" style="width: 10px;"></div>
+							{{-- <div class="img" style="width: 10px;"></div> --}}
 							<div class="name">{!! trans('general.my-area') !!} <span>{{ trans('user/form.text.hint_up') }}</span></div>
 							<div class="divider"></div>
 						</div>
