@@ -1400,6 +1400,10 @@ footer .contact_us {
 	background-color: green;
 }
 
+.div_cell.div_meal_item_old p
+{
+	color:lightgrey;
+}
 .div_cell.div_meal_item_old.selected p
 {
 	color: darkgreen;
