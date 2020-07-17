@@ -12,18 +12,29 @@
 @include($theme . '::' . $_env->s_utype . '._email')
 @include($theme . '::' . $_env->s_utype . '._password')
 
-								<div class="item">
-									<span class="label">
-										{!! trans('user/form.field.safety_options') !!}
-									</span>
-									<span class="value">
+								<div class="field_row" data-name="safety_options">
+									<label for="safety_options">
+										<span class="label">
+											{!! trans('user/form.field.safety_options') !!}
+										</span>
+									</label>
+									<div class="value">
 										@for ($i = 0; $i < 3; $i++)
 										<div class="radio_wrap">
-											<div><input type="radio" name="login_safety" value=" {!! $i !!}"  {!! $i == $safety ? 'checked="checked"' : '' !!}></div>
-											<div class="radio_label">{{ trans('user/form.button.remember-' . $i) }}</div>
+
+<input type="radio" name="login_safety" value="{!! $i !!}"  {!! $i == $safety ? 'checked="checked"' : '' !!} id="login_safety_{!! $i !!}">
+<label for="login_safety_{!! $i !!}">{{ trans('user/form.button.remember-' . $i) }}</label>
+{{--
+<input type="radio" class="radio" name="x" value="y" id="y" />
+    <label for="y">Thing 1</label>
+											<span class="radio_button">
+												<input type="radio" name="login_safety" value=" {!! $i !!}"  {!! $i == $safety ? 'checked="checked"' : '' !!}>
+											</span>
+											<span class="radio_label">{{ trans('user/form.button.remember-' . $i) }}</span>
+--}}
 										</div>
 										@endfor
-									</span>
+									</div>
 								</div>
 
 @include($theme . '::' . $_env->s_utype . '._recaptcha', ['id' => 'signin'])

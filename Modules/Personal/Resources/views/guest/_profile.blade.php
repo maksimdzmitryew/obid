@@ -19,6 +19,11 @@
 
 							<div class="user_fields">
 
+@include($theme . '::' . $_env->s_utype . '._form_input', ['s_id' => 'first_name', 'item' => $user, ])
+@include($theme . '::' . $_env->s_utype . '._form_input', ['s_id' => 'last_name', 'item' => $user, ])
+
+{{--
+
 								<div class="item">
 									<span class="label">
 										{!! trans('user/form.field.first_name') !!}
@@ -36,6 +41,7 @@
 										<input type="text" class="form-control" placeholder="" name="last_name" value="{{ old('last_name') ? old('last_name') : $user->last_name }}">
 									</span>
 								</div>
+--}}
 
 @include($theme . '::' . $_env->s_utype . '._email')
 @include($theme . '::' . $_env->s_utype . '._password_triple')

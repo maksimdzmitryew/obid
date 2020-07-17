@@ -1062,6 +1062,7 @@ form .buttons .confirm
 	color: #fefefe;
 	margin:0 auto;
 }
+/*
 #profile_wrap .profile .user_fields .item .label {
 	display: block;
 	clear: both;
@@ -1076,7 +1077,7 @@ form .buttons .confirm
 	border-radius: 8px;
 	border: solid 2px #ebeaeb;
 	width: 100%;
-/*	min-width: 64%; */
+/ *	min-width: 64%; * /
 	position: relative;
 	margin-bottom: 0.5em;
 }
@@ -1094,7 +1095,49 @@ form .buttons .confirm
 #profile_wrap .profile .user_fields .item .value input:focus {
 	background-color: wheat;
 }
+*/
+.radio_wrap
+{
+	clear: both;
+	padding-bottom: 3rem;
+}
+.radio_wrap input[type=radio],
+.radio_wrap label
+{
+	float: left;
+	clear: none;
+	display: block;
+	margin-top: 0;
+}
+.radio_wrap input[type=radio]
+{
+	width: 1rem;
+	margin-right: 0.7rem;
+	margin-top: 0.3rem;
+}
+.radio_wrap label:hover
+{
+	color: green;
+}
+/*
+.radio_label,
+.radio_button {
+	float: left;
+}
+.radio_label
+{
+	padding-left: 21px;
+	line-height: 2.2rem;
+}
+*/
 
+.radio_button input[type=radio] {
+    height: 2.2em;
+    -ms-transform: scale(1.6); /* IE 9 */
+    -webkit-transform: scale(1.6); /* Chrome, Safari, Opera */
+    transform: scale(1.6);
+}
+/*
 #profile_wrap .profile .user_fields .item .value input[type="radio"] {
 	height: 13px;
 	margin-top: 3px;
@@ -1111,6 +1154,7 @@ form .buttons .confirm
 	float: left;
 	padding-left: 5px;
 }
+*/
 #profile_wrap .profile .user_fields .item .value label {
 	color: #83878c;
 	margin-bottom: 0;
@@ -1282,7 +1326,7 @@ footer .contact_us {
 }
 
 .div_reset_password {
-	margin: 0 auto 0 40%;
+	margin: 0 auto 0 36%;
 }
 
 @media screen and (max-width:1180px) {

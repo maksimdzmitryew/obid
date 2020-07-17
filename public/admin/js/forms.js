@@ -96,7 +96,7 @@ fnForm = function(e){
 			{
 				errors = response.errors;
 			}
-			form.find('.item').each((i, el) => {
+			form.find('.item,.field_row').each((i, el) => {
 				msg_text = $('<span class="err_text">');
 				let o_field = $(el),
 					field_value = o_field.find('.value'),

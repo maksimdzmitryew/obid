@@ -1,3 +1,4 @@
+0.02.2+a200:1 user ADD better UX for signin form and unify input fields
 0.02.2+a199:2 user FIX signup enable with activation token
 0.02.1+a199:1 user ADD proper detection and distinction between current and next week
 0.02.1+a197:7 user ADD better signin and signup forms UX

@@ -1,3 +1,5 @@
+@include($theme . '::' . $_env->s_utype . '._form_input', ['s_id' => 'email', 'item' => $user ?? NULL, ])
+{{--
 								<div class="item" data-name="email">
 									<span class="label">
 										{!! trans('user/form.field.email') !!}
@@ -16,3 +18,4 @@
 										}}">
 									</span>
 								</div>
+--}}
