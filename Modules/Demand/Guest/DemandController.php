@@ -31,20 +31,19 @@ class DemandController extends Controller
 			'id' => 'integer'
 		]);
 
-		$o_user		= Auth::user();
+		$o_user				= Auth::user();
 		if (is_null($request->id))
 		{
-			$i_tmp		= GuestDemand::select('id')->whereUserId($o_user->id)->max('id');
+			$i_tmp			= GuestDemand::select('id')->whereUserId($o_user->id)->max('id');
 			$request->merge([
 				'id' => $i_tmp,
 			]);
 		}
 
-		$i_week		= 0;
-		if (date("N") > 4)
-		{
-			$i_week	= 1;
-		}
+		$a_activity	= GuestDemand::getUserActivity($o_user);
+
+		$s_freshest			= Plate::select('date')->max('date');
+		$i_week				= (int) \Carbon\Carbon::parse($s_freshest)->isNextWeek();
 
 		$o_query	= Plate::whereBetween('date', [
 							Carbon::now()->addWeek($i_week)->startOfWeek()->format('Y-m-d'),
@@ -53,8 +52,6 @@ class DemandController extends Controller
 			->distinct()
 			->limit(1000)
 			;
-
-		$a_activity	= GuestDemand::getUserActivity($o_user);
 
 		return view($this->_env->s_view . 'week',
 				[

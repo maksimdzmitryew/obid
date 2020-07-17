@@ -40,6 +40,9 @@ include(base_path().'/resources/views/guest/crud.php');
 				@for ($d=0; $d < count($a_dates); $d++)
 				@php
 					$s_date			= $a_dates[$d];
+$s_changeable	= '';
+$s_relative		= 'future';
+/*
 					$s_changeable	= ($s_date > \Carbon\Carbon::now()->format('Y-m-d') ? '' : '_old');
 					$s_relative		= (
 										$s_date == \Carbon\Carbon::now()->format('Y-m-d') ? 'today'
@@ -47,6 +50,7 @@ include(base_path().'/resources/views/guest/crud.php');
 											$s_date > \Carbon\Carbon::now()->format('Y-m-d') ? 'future' : 'past'
 											)
 										);
+*/
 				@endphp
 
 				<div class="div_cell" style="width:19%">
@@ -163,19 +167,31 @@ include(base_path().'/resources/views/guest/crud.php');
 				</div>
 
 					@for ($d=0; $d < count($a_dates); $d++)
+					{{-- @foreach ($a_items[$i_course_id][$i_curr_pos] AS $s_date => $o_plate) --}}
 					@php 
-						$s_date			= $a_dates[$d]; 
+						$s_date			= $a_dates[$d];
+if (isset($a_items[$i_course_id][$i_curr_pos][$s_date]))
+{
 						$i_meal_id		= $a_items[$i_course_id][$i_curr_pos][$s_date]->meal->id;
 						$i_plate_id		= $a_items[$i_course_id][$i_curr_pos][$s_date]->id;
 						$b_selected		= FALSE;
-						$s_changeable	= ($s_date > \Carbon\Carbon::now()->format('Y-m-d') ? '' : '_old');
+#						$s_changeable	= ($s_date > \Carbon\Carbon::now()->format('Y-m-d') ? '' : '_old');
+$s_changeable		= '';
 
 						if (isset($activity[$s_date]) && in_array($i_plate_id, $activity[$s_date]['plate_id']))
 						{
 							$b_selected	= TRUE;
 						}
+}
+else
+{
+	#dd($i_course_id, $i_curr_pos, $s_date, $a_items[$i_course_id][$i_curr_pos]);
+}
 					@endphp
 
+@if (!isset($a_items[$i_course_id][$i_curr_pos][$s_date]))
+	<div class="div_cell"></div>
+@else
 				<div 
 					class="div_cell div_meal_item{!! $s_changeable !!} meal_id_{{ $i_meal_id }} {{ $b_selected ? 'selected' : '' }}"
 					id="plate_{{ $i_course_id }}_{{ $s_date }}_{{ $i_meal_id }}"
@@ -197,9 +213,10 @@ include(base_path().'/resources/views/guest/crud.php');
 						value="{{ $b_selected ? $i_plate_id : '' }}"
 					>
 				</div>
+@endif
 
 					@endfor
-
+					{{-- @endforeach --}}
 			</div>
 				@endfor
 			@endforeach

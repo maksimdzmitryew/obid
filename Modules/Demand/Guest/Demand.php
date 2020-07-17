@@ -5,6 +5,7 @@ namespace Modules\Demand\Guest;
 use                   Modules\Course\Database\Course;
 use                   Modules\Demand\Database\Demand as Model;
 use                     Modules\Meal\Database\Meal;
+use                    Modules\Plate\Database\Plate;
 
 class Demand extends Model
 {
@@ -20,6 +21,80 @@ class Demand extends Model
 		$a_course_ids	= Meal::select('course_id')->whereIn('id', $a_meal_ids)->distinct()->get('course_id')->pluck('course_id')->toArray();
 		$o_courses		= Course::select()->whereIn('id', $a_course_ids)->get('id', 'title');
 		return $o_courses;
+	}
+
+
+
+	/**
+	 * Get list of preferred meals by user
+	 * @param	Object		$o_user			user to check activity for
+	 *
+	 * @return	Array						items
+	 */
+	public static function getRating(Object $o_user)
+	{
+
+#Table 1 (plates): id, name
+#Table 2 (demand_plate): id, amount, plate_id, plate_id
+#Table 3 (demands): id, last_name
+
+$o_items = Plate::join('demand_plate', 'plates.id', '=', 'demand_plate.plate_id')
+->join('demands', 'demand_plate.demand_id', '=', 'demands.id');
+#->get();
+
+dd($o_items->toSql());
+
+        $o_query = Meal::select
+        			(
+						'meals.id'
+#						, 'meal_translations.title AS title'
+						, 'demands.id AS demand_id'
+        			)
+/*
+            ->leftJoin('plate_translations', function($join) {
+                $join->on('plate_translations.plate_id', '=', 'plates.id')
+                    ->where('locale', '=', app()->getLocale());
+            })
+*/
+#            ->join('meal_translations', 'plates.meal_id', '=', 'meal_translations.meal_id')
+#            ->join('courses', 'courses.id', '=', 'meals.course_id')
+#            ->leftJoin('demands', function($join) {
+#                $join->on('meals.demand_id', '=', 'plates.demand_id');
+#            })
+#            ->whereDate('date', '=', $o_date)
+            ;
+dd($o_query->get()[0]->original);
+
+
+
+/*
+		$o_demands		= self::select('id')->distinct()->whereUserId($o_user->id)->get('id', 'plate_id', 'meal_id');
+
+		foreach ($o_demands AS $k => $v)
+		{
+			dump($v->plate->meal);#->demand->id);
+
+		}
+dd($o_demands);
+*/
+#		$r = self::select()->whereUserId($i_user_id)->
+		$o_items	= Meal::select()
+#						->distinct()
+						->with('plate')
+						->with('plate.demand')
+#						->where('demand.user_id', '=', $o_user->id)
+#						->get()
+						;#->with('plate')->with('demand')->where('demands.user_id', '=', $o_user->id)->get('id', 'meal_id');
+dump($o_items->toSql());
+#		$a_items	= [];
+		foreach ($o_items->get() AS $k => $v)
+		{
+			dump($v->plate->demand);#->demand->id);
+#			$a_items[$v->meal->course->id][$v->position][$v->date] = $v;
+		}
+
+dd($o_items->count(), $o_items);
+		return $o_query->select('date')->get()->pluck('date')->toArray();
 	}
 
 	/**
@@ -41,7 +116,25 @@ class Demand extends Model
 	 */
 	public static function getThisWeek($a_dates) : Bool
 	{
-		$b_current_week	 = (isset($a_dates[0]) ? (\Carbon\Carbon::now()->startOfWeek()->format('Y-m-d') <= $a_dates[0]) : FALSE);
+		$s_freshest			= Plate::select('date')->max('date');
+
+		$b_current_week	 	= (isset($a_dates[0]) ?
+									(
+										\Carbon\Carbon::parse($s_freshest)->isNextWeek()
+										&&
+										\Carbon\Carbon::parse($a_dates[0])->isNextWeek()
+									)
+									||
+									(
+										\Carbon\Carbon::now()->startOfWeek()->format('Y-m-d') <= $a_dates[0]
+										&&
+										\Carbon\Carbon::now()->endOfWeek()->format('Y-m-d') >= $a_dates[0]
+										&&
+										\Carbon\Carbon::now()->startOfWeek()->format('Y-m-d') <= $s_freshest
+										&&
+										\Carbon\Carbon::now()->endOfWeek()->format('Y-m-d') >= $s_freshest
+									)
+								: FALSE);
 		return $b_current_week;
 	}
 

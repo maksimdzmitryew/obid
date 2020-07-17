@@ -5,7 +5,7 @@
 namespace Modules\Demand\API;
 
 #use App\Demand;
-use               Modules\Complaint\Database\Complaint;
+use                Modules\Complaint\Database\Complaint;
 use                        Modules\Demand\API\Demand;
 use                   Modules\Demand\Database\Demand as DBDemand;
 
@@ -15,9 +15,9 @@ use                    Modules\Demand\Filters\DemandFilters;
 #use App\Http\Requests\DemandRequest;
 #use Modules\Demand\Requests\DemandRequest;
 
-use                        App\Http\Requests\DeleteRequest;
+use                         App\Http\Requests\DeleteRequest;
 
-use                     App\Http\Controllers\ControllerAPI as Controller;
+use                      App\Http\Controllers\ControllerAPI as Controller;
 #use App\Http\Requests\DemandApiRequest;
 use                       Modules\Demand\Http\DemandRequest;
 use                        Modules\Demand\API\SaveRequest;
