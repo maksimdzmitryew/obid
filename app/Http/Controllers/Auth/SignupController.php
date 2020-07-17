@@ -45,7 +45,8 @@ class SignupController	extends Controller
 			return redirect('welcome.index');
 		}
 
-		$user->active = 1;
+		$user->enabled = 1;
+#		$user->active = 1;
 		$user->save();
 
 		Auth::login($user);
