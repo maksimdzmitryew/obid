@@ -48,9 +48,9 @@ class SigninController	extends Controller
 			$s_email = NULL;
 
 		$a_res		= Auth::attempt(['email' => $request->email, 'password' => $request->password, 'enabled' => 1], ($i_safety == 2));
+#		$a_res		= Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], ($i_safety == 2));
 
 		if ($a_res)
-#		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], ($i_safety == 2)))
 		{
 			$cookie_name		= 'email';
 			$cookie_value		= $s_email;
@@ -64,12 +64,18 @@ class SigninController	extends Controller
 			$my_cookie			= cookie($cookie_name, $cookie_value, $cookie_expired_in,$cookie_path,$cookie_host,$http_only);
 			Cookie::queue($my_cookie);
 
-			return back()->withCookie($my_cookie);
-/*
-			return response([
-				'action' => 'reload',
-			], 307);
-*/
+			$o_response = back()->withCookie($my_cookie);
+
+			if ($request->ajax())
+			{
+				return response([
+					'action' => 'reload',
+				], 307);
+			}
+			else
+			{
+				return $o_response;
+			}
 		}
 		else
 		{

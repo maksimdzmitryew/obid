@@ -63,7 +63,8 @@ fnForm = function(e){
 			runSwal(b_error);
 		}).fail((xhr) => {
 			b_error	= true;
-			if (i_reCAPTCHA_version == 2)
+
+			if (b_recaptcha && i_reCAPTCHA_version == 2)
 			{
 				grecaptcha.reset();
 			}
@@ -83,6 +84,10 @@ fnForm = function(e){
 					//JSON parse error, this is not json (or JSON isn't in the browser)
 					notify(xhr.status + ': ' + tmp.message, 'danger', 3000);
 				}
+			}
+			else if (xhr.readyState == 4 && xhr.status == 307)
+			{
+				location.reload(true);
 			}
 			else
 			// return http errors other that "422 (Unprocessable Entity)"

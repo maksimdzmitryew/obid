@@ -4,5 +4,6 @@ let
 	,s_locale			= '{!! $app->getLocale() !!}'
 	,s_route_auth		= '{!! route('guest.personal.profile') !!}'
 	,s_route_csfr		= '{!! route('get-csrf') !!}'
-	,s_text_primary		= '{!! (isset($s_btn_primary) ? $s_btn_primary : trans('user/messages.button.ok')) !!}';
+	,s_text_primary		= '{!! (isset($s_btn_primary) ? $s_btn_primary : trans('user/messages.button.ok')) !!}'
+	,b_recaptcha		= Boolean({!! ((Auth::user() === NULL) && (config('app.env') != 'local')) !!})
 ;

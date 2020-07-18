@@ -1,3 +1,4 @@
+0.02.2+a200:6 user ADD even better recaptcha support for reload for http and ajax responses
 0.02.2+a200:5 user ADD better recaptcha v2 support to show error, refresh and handle feedback
 0.02.2+a200:4 user ADD when login attempt fails because of inactivated account
 0.02.2+a200:3 user ADD refresh csrf when form is submited and proper debug handling as json response

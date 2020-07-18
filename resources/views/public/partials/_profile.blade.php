@@ -15,7 +15,7 @@
 	$(document).ready(() => {
 		function reCAPTCHA_execute () {
 			timepassed = Math.round((Date.now() - i_reCAPTCHA_update_time) / 1000) * 1000;
-			if ( timepassed < i_reCAPTCHA_refresh_time || !b_focus_status) return true;
+			if (timepassed < i_reCAPTCHA_refresh_time || !b_focus_status) return true;
 
 			grecaptcha.execute(reCAPTCHA_site_key, {action: 'login'}).then(function(token) {
 				if (s_reCAPTCHA != token)
@@ -27,8 +27,12 @@
 			});
 		}
 
-		if (typeof grecaptcha !== 'undefined' && typeof reCAPTCHA_site_key !== 'undefined') {
-			@if ((Auth::user() === NULL))
+		if (
+			typeof grecaptcha !== 'undefined' // check settings
+			&& typeof reCAPTCHA_site_key !== 'undefined' // check settings
+			&& !auth // disable for authenticated user
+			&& b_recaptcha // whether is enabled
+		) {
 			if (i_reCAPTCHA_version == 3)
 			{
 				grecaptcha.ready(reCAPTCHA_execute);
@@ -39,8 +43,6 @@
 				a_check_focus.push(reCAPTCHA_execute);
 				setInterval(reCAPTCHA_execute, 1000 * 60); // 1 min
 			}
-
-			@endif
 		}
 
 		// fnForm can be found in
