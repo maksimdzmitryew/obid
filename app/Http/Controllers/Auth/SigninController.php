@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-      use Illuminate\Support\Facades\Auth;
+use                              App\User;
+use       Illuminate\Support\Facades\Auth;
 #      use Illuminate\Foundation\Auth\AuthenticatesUsers;
                                  use Cookie;
       use Illuminate\Support\Facades\DB;
@@ -46,10 +47,8 @@ class SigninController	extends Controller
 		else
 			$s_email = NULL;
 
-
 		$a_res		= Auth::attempt(['email' => $request->email, 'password' => $request->password, 'enabled' => 1], ($i_safety == 2));
-#		return json_encode([$a_res]);
-dd($a_res);
+
 		if ($a_res)
 #		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], ($i_safety == 2)))
 		{
@@ -71,6 +70,21 @@ dd($a_res);
 				'action' => 'reload',
 			], 307);
 */
+		}
+		else
+		{
+			$o_res				= User::whereEmail($request->email)->first();
+			if (!($o_res->enabled === TRUE))
+			{
+				return response([
+					'title'			=> trans('user/form.text.account_inactive'),
+					'message'		=> trans('user/form.text.hint_inactive'),
+					'btn_primary'	=> trans('user/messages.button.ok'),
+					'url'			=> '',
+					'footer'		=> trans('user/form.text.extra_inactive'),
+					'extra'			=> 'mailto:' . config('services.mail.to'),
+				], 401);
+			}
 		}
 		return redirect(route('guest.personal.profile'));
 	}

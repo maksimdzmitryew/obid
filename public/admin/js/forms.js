@@ -192,6 +192,10 @@ function setSwalParams(data, form, b_error){
 	{
 		s_text_secondary = '';
 	}
+	if (typeof data.footer !== 'undefined')
+	{
+		s_text_extra		= data.footer;
+	}
 	if (typeof s_text_extra === 'undefined')
 	{
 		s_text_extra = '';
@@ -247,9 +251,15 @@ function setSwalParams(data, form, b_error){
 
 	if (s_text_extra != '')
 	{
-		if (typeof data.url !== 'undefined')
-			s_route_extra = data.url;
-		a_params.footer = '<a href="' + s_route_extra + '">' + s_text_extra + '</a>';
+		if (typeof data.extra !== 'undefined')
+		{
+			s_route_extra = data.extra;
+			a_params.footer = '<a href="' + s_route_extra + '">' + s_text_extra + '</a>';
+		}
+		else
+		{
+			a_params.footer = s_text_extra;
+		}
 	}
 	else
 	{
