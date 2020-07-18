@@ -29,9 +29,9 @@ return [
 
 	],
 	'field' => [
-		'email'						=> 'Електронна пошта',
+		'email'						=> 'Елєктронна пошта',
 		'first_name'				=> 'Ім’я',
-		'g-recaptcha-response'		=> 'Google reCaptcha',
+		'g-recaptcha-response'		=> 'Перехоплювач роботів від Гугл',
 		'last_name'					=> 'Прізвище',
 		'password_old'				=> 'Поточний пароль',
 		'password_new'				=> 'Новий пароль',

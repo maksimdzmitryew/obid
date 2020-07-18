@@ -63,6 +63,10 @@ fnForm = function(e){
 			runSwal(b_error);
 		}).fail((xhr) => {
 			b_error	= true;
+			if (i_reCAPTCHA_version == 2)
+			{
+				grecaptcha.reset();
+			}
 
 			// validator returns "422 (Unprocessable Entity)"
 			if (xhr.readyState == 4 && xhr.status == 422)

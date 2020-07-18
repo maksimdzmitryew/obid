@@ -6,8 +6,10 @@ let b_focus_status				= null,
 	i_csrf_update_time			= 0,
 	i_csrf_refresh_time			= 1000 * 60 * 60 * 2, // 2 hours
 	i_reCAPTCHA_update_time		= 0,
-	i_reCAPTCHA_refresh_time	= 1000 * 60 * 2; // 1 second * 60 = 1 minute * 2 = 2 minutes
-
+	i_reCAPTCHA_refresh_time	= 1000 * 60 * 2, // 1 second * 60 = 1 minute * 2 = 2 minutes
+	i_reCAPTCHA_version			= 2,
+	b_refresh_tokens			= false
+	;
 
 $(document).ready(function ()
 {
@@ -15,6 +17,12 @@ $(document).ready(function ()
 
 	checkFocus();
 	setInterval(checkFocus, 200);
+
+	if (b_refresh_tokens)
+	{
+		setInterval(refreshToken, 1000 * 60); // 1 min
+	}
+
 });
 
 function checkFocus()
@@ -55,7 +63,7 @@ function refreshToken(){
 
 }
 // check token and refresh after user return to the page
-if (false)
+if (b_refresh_tokens)
 {
 	a_check_focus.push(refreshToken);
 }

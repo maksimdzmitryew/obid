@@ -93,7 +93,7 @@ return [
     'numeric'              => 'The :attribute must be a number',
     'present'              => 'The :attribute field must be present',
     'regex'                => 'The :attribute format is invalid',
-    'required'             => ':attribute є обов’язковим',
+    'required'             => 'Прошу заповніть <strong>:attribute</strong>',
     'required_if'          => 'The :attribute field is required when :other is :value',
     'required_unless'      => 'The :attribute field is required unless :other is in :values',
     'required_with'        => 'The :attribute field is required when :values is present',
@@ -147,6 +147,7 @@ return [
 
     'attributes' => [],
 
-	'captcha'	=> 'This captcha :attribute is invalid',
+	'recaptcha'	=> 'Повторно перевірити <strong>:attribute</strong>',
+#	'captcha'	=> 'Повторно перевірити :attribute recaptcha',
 
 ];
