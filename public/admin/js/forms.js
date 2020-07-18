@@ -24,6 +24,7 @@ let b_error 		= false,
 	s_url_close		= '';
 fnForm = function(e){
 		e.preventDefault();
+		refreshToken();
 
 		let data = {},
 //			form = $(this);
@@ -44,9 +45,15 @@ fnForm = function(e){
 					setSwalParams(tmp, form, b_error);
 				} catch(e) {
 					//JSON parse error, this is not json (or JSON isn't in the browser)
-					// login back() reload with cookies set
-					location.reload(true);
-//					notify(s_json_err, 'danger', 3000);
+					if (xhr.responseText.length > 0)
+					{
+						notify(s_json_err, 'danger', 3000);
+					}
+					else
+					{
+						// login back() reload with cookies set
+						location.reload(true);
+					}
 				}
 			}
 			else
@@ -258,7 +265,6 @@ function setSwalParams(data, form, b_error){
 	{
 		data.url = '';
 	}
-console.log(s_btn_ok, data.url, s_url_ok);
 
 	a_params.onClose = () => {
 		if (s_url_ok != '' && s_url_dissmiss == '')

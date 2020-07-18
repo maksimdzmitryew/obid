@@ -11,13 +11,10 @@ let b_focus_status				= null,
 
 $(document).ready(function ()
 {
-
-//	window.statusEl = document.getElementById('status');
 	window.b_focus_status = document.hasFocus();
 
 	checkFocus();
 	setInterval(checkFocus, 200);
-
 });
 
 function checkFocus()
@@ -38,9 +35,6 @@ function refreshToken(){
 	if (timepassed < i_csrf_refresh_time || !b_focus_status) return true;
 
 	$.get(s_route_csfr).done(function(token){
-
-//console.log('s_csrf_token updated=' + (s_csrf_token != token), Math.round(timepassed / 1000) + 's ' + Math.round(timepassed / 1000 / 60) + 'm', 'old-csrf=' + $('[name="csrf-token"]').attr('content') );
-
 		// new token received
 		if (s_csrf_token != token)
 		{
@@ -49,8 +43,6 @@ function refreshToken(){
 			$('[name="_token"]').attr('value', s_csrf_token);
 
 			i_csrf_refresh_time = Date.now();
-
-//console.log('new-csrf=' + $('[name="csrf-token"]').attr('content') );
 
 			$.ajaxSetup({
 			    headers: {
@@ -62,6 +54,8 @@ function refreshToken(){
 	});
 
 }
-a_check_focus.push(refreshToken);
-
-
+// check token and refresh after user return to the page
+if (false)
+{
+	a_check_focus.push(refreshToken);
+}

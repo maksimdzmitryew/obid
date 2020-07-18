@@ -1,3 +1,4 @@
+0.02.2+a200:3 user ADD refresh csrf when form is submited and proper debug handling as json response
 0.02.2+a200:2 user ADD fancy radiobutton, see security options at signin page
 0.02.2+a200:1 user ADD better UX for signin form and unify input fields
 0.02.2+a199:2 user FIX signup enable with activation token
