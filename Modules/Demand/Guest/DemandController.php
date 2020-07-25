@@ -40,12 +40,12 @@ class DemandController extends Controller
 			]);
 		}
 
-		$a_activity	= GuestDemand::getUserActivity($o_user);
+		$a_activity			= GuestDemand::getUserActivity($o_user);
 
 		$s_freshest			= Plate::select('date')->max('date');
 		$i_week				= (int) \Carbon\Carbon::parse($s_freshest)->isNextWeek();
 
-		$o_query	= Plate::whereBetween('date', [
+		$o_query			= Plate::whereBetween('date', [
 							Carbon::now()->addWeek($i_week)->startOfWeek()->format('Y-m-d'),
 							Carbon::now()->addWeek($i_week)->endOfWeek()->format('Y-m-d')
 						])

@@ -27,8 +27,17 @@
 							</span>
 
 							<div class="div_date">
-								<p>№{{ implode(',', $activity[$s_date]['position']) }}</p>
-								<p class="smaller">{{ $a_data['total'] }}₴ {{ $activity[$s_date]['heavy'] }}гр.</p>
+								<p>№{{ implode(',', $activity[$s_date]['position']) }}
+									@if (isset($totals[$s_date]))
+									 | <i>№{{ $totals[$s_date]['list'] }}</i>
+								 	@endif
+								</p>
+								<p class="smaller">
+									{{ $a_data['total'] }}₴ {{ $activity[$s_date]['heavy'] }}гр.
+									@if (isset($totals[$s_date]))
+									 | <i>{{ $totals[$s_date]['total'] }}₴ {{ $totals[$s_date]['heavy'] }}гр.</i>
+								 	@endif
+								 </p>
 							</div>
 							<div class="
 								plate_items_wrapper
@@ -39,7 +48,7 @@
 							@for ($i = 0; $i < count($a_data['plate_id']); $i++)
 								<p class="smaller" data-date="{{ $s_date }}">
 									{{ $a_data['position'][$i] }})
-									{{ $a_data['price'][$i] }}₴
+									{{ $a_data['price'][$i] }}₴</i>
 									{{ $a_data['meal_title'][$i] }}
 								</p>
 							@endfor

@@ -2,6 +2,7 @@
 
 namespace Modules\Demand\Guest;
 
+use                                   \Carbon\Carbon;
 use                   Modules\Course\Database\Course;
 use                   Modules\Demand\Database\Demand as Model;
 use                     Modules\Meal\Database\Meal;
@@ -24,6 +25,41 @@ class Demand extends Model
 	}
 
 
+	/**
+	 * Get activity of all users
+	 *
+	 * @return	Array						specifically organised for easier presentation
+	 */
+	public static function getAllDemand() : Array
+	{
+		$s_freshest		= Plate::select('date')->max('date');
+		$s_date_start	= Carbon::parse($s_freshest)->startOfWeek()->format('Y-m-d');
+		$s_date_end		= Carbon::parse($s_freshest)->endOfWeek()->format('Y-m-d');
+
+        $o_query		= Plate::select
+        			(
+						'plates.id'
+						, 'plates.date'
+						, 'plates.position'
+						, 'plates.price'
+						, 'plates.weight'
+						, 'courses.id AS course_id'
+						, 'meals.id AS meal_id'
+						, \DB::raw('COUNT(ob_plates.id) AS qty')
+						, 'meal_translations.title AS title'
+        			)
+            ->join('meals', 'plates.meal_id', '=', 'meals.id')
+            ->join('courses', 'meals.course_id', '=', 'courses.id')
+            ->join('meal_translations', 'plates.meal_id', '=', 'meal_translations.meal_id')
+            ->join('demand_plate', 'plates.id', '=', 'demand_plate.plate_id')
+            ->groupBy('plates.id')
+			->whereBetween('plates.date', [$s_date_start, $s_date_end])
+            ;
+		$o_plates		= $o_query->get();
+		$a_items		= [];
+		$a_items	= self::_arrangeDemands($o_plates, $a_items);
+		return $a_items;
+	}
 
 	/**
 	 * Get list of preferred meals by user
@@ -120,19 +156,19 @@ dd($o_items->count(), $o_items);
 
 		$b_current_week	 	= (isset($a_dates[0]) ?
 									(
-										\Carbon\Carbon::parse($s_freshest)->isNextWeek()
+										Carbon::parse($s_freshest)->isNextWeek()
 										&&
-										\Carbon\Carbon::parse($a_dates[0])->isNextWeek()
+										Carbon::parse($a_dates[0])->isNextWeek()
 									)
 									||
 									(
-										\Carbon\Carbon::now()->startOfWeek()->format('Y-m-d') <= $a_dates[0]
+										Carbon::now()->startOfWeek()->format('Y-m-d') <= $a_dates[0]
 										&&
-										\Carbon\Carbon::now()->endOfWeek()->format('Y-m-d') >= $a_dates[0]
+										Carbon::now()->endOfWeek()->format('Y-m-d') >= $a_dates[0]
 										&&
-										\Carbon\Carbon::now()->startOfWeek()->format('Y-m-d') <= $s_freshest
+										Carbon::now()->startOfWeek()->format('Y-m-d') <= $s_freshest
 										&&
-										\Carbon\Carbon::now()->endOfWeek()->format('Y-m-d') >= $s_freshest
+										Carbon::now()->endOfWeek()->format('Y-m-d') >= $s_freshest
 									)
 								: FALSE);
 		return $b_current_week;
@@ -156,6 +192,53 @@ dd($o_items->count(), $o_items);
 	}
 
 	/**
+	 * Arrange raw data to unified array grouped by date
+	 * @param	Object		$o_plates		user to check activity for
+	 * @param	Array		$a_items		user to check activity for
+	 *
+	 * @return	Array						plate properties by date
+	 */
+	private static function _arrangeDemands(Object $o_plates, Array $a_items) : Array
+	{
+		foreach ($o_plates AS $k => $o_plate)
+		{
+			$a_items[$o_plate->date]['plate_id'][]			= $o_plate->id;
+			$a_items[$o_plate->date]['course_id'][]			= $o_plate->meal->course->id;
+			$a_items[$o_plate->date]['meal_title'][]		= $o_plate->meal->title;
+			$a_items[$o_plate->date]['meal_id'][]			= $o_plate->meal->id;
+			$a_items[$o_plate->date]['price'][]				= (int) $o_plate->price;
+			$a_items[$o_plate->date]['position'][]			= $o_plate->position;
+			$a_items[$o_plate->date]['qty'][]				= (int) ($o_plate->qty ?? 1);
+			if (!isset($a_items[$o_plate->date]['total']))
+			{
+				$a_items[$o_plate->date]['total']			= 0;
+			}
+			if (!isset($a_items[$o_plate->date]['heavy']))
+			{
+				$a_items[$o_plate->date]['heavy']			= 0;
+			}
+			if (!isset($a_items[$o_plate->date]['heap']))
+			{
+				$a_items[$o_plate->date]['heap']			= 0;
+			}
+			if (!isset($a_items[$o_plate->date]['list']))
+			{
+				$a_items[$o_plate->date]['list']			= '';
+			}
+			$i_qty											= (int) ($o_plate->qty ?? 1);
+			$a_items[$o_plate->date]['total']				+= (int) $o_plate->price;
+			$a_items[$o_plate->date]['heavy']				+= (int) $o_plate->weight;
+			$a_items[$o_plate->date]['heap']				+= $i_qty;
+			$a_items[$o_plate->date]['list']				.= ','. $o_plate->position . ( $i_qty > 1 ? '×' . $i_qty : '' );
+		}
+		/**
+		 *	clean up
+		 */
+		$a_items[$o_plate->date]['list']					= trim($a_items[$o_plate->date]['list'], ',');
+		return $a_items;
+	}
+
+	/**
 	 * Get activity of user
 	 * @param	Object		$o_user			user to check activity for
 	 *
@@ -168,28 +251,7 @@ dd($o_items->count(), $o_items);
 		foreach ($o_demands AS $k => $o_demand)
 		{
 			$o_plates	= $o_demand->plate;
-			$a_tmp		= [];
-			$i_tmp		= 0;
-			foreach ($o_plates AS $k => $o_plate)
-			{
-				$a_items[$o_plate->date]['plate_id'][]			= $o_plate->id;
-				$a_items[$o_plate->date]['course_id'][]			= $o_plate->meal->course->id;
-				$a_items[$o_plate->date]['meal_title'][]		= $o_plate->meal->title;
-				$a_items[$o_plate->date]['meal_id'][]			= $o_plate->meal->id;
-				$a_items[$o_plate->date]['price'][]				= (int) $o_plate->price;
-				$a_items[$o_plate->date]['position'][]			= $o_plate->position;
-				$a_items[$o_plate->date]['weight'][]			= (int) $o_plate->weight;
-				if (!isset($a_items[$o_plate->date]['total']))
-				{
-					$a_items[$o_plate->date]['total']			= 0;
-				}
-				if (!isset($a_items[$o_plate->date]['heavy']))
-				{
-					$a_items[$o_plate->date]['heavy']			= 0;
-				}
-				$a_items[$o_plate->date]['total']				+= (int) $o_plate->price;
-				$a_items[$o_plate->date]['heavy']				+= (int) $o_plate->weight;
-			}
+			$a_items	= self::_arrangeDemands($o_plates, $a_items);
 		}
 		/**
 		 *	sort by date DESC

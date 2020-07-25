@@ -22,6 +22,7 @@ class PersonalController extends Controller
 
 		$o_user							= Auth::user();
 		$a_activity						= GuestDemand::getUserActivity($o_user);
+		$a_totals						= GuestDemand::getAllDemand();
 
 		return view($this->_env->s_view . 'index',
 					[
@@ -31,6 +32,7 @@ class PersonalController extends Controller
 						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
 						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
 						'activity'		=> $a_activity,
+						'totals'		=> $a_totals,
 					]);
 /*
 #        return view('public.profile.miy-pr', [
@@ -92,6 +94,7 @@ class PersonalController extends Controller
 		$this->setEnv();
 		$o_user							= Auth::user();
 		$a_activity						= GuestDemand::getUserActivity($o_user);
+		$a_totals						= GuestDemand::getAllDemand();
 
 		return view($this->_env->s_view . 'index',
 					[
@@ -101,6 +104,7 @@ class PersonalController extends Controller
 						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
 						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
 						'activity'		=> $a_activity,
+						'totals'		=> $a_totals,
 					]);
 	}
 
