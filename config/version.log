@@ -1,3 +1,4 @@
+0.02.2+a208:2 user ADD styling for all demands of the day incl. latest and past 3 weeks
 0.02.2+a208:1 user ADD list plate ids for all demands of the day
 0.02.2+a200:6 user ADD even better recaptcha support for reload for http and ajax responses
 0.02.2+a200:5 user ADD better recaptcha v2 support to show error, refresh and handle feedback

@@ -33,8 +33,9 @@ class Demand extends Model
 	public static function getAllDemand() : Array
 	{
 		$s_freshest		= Plate::select('date')->max('date');
-		$s_date_start	= Carbon::parse($s_freshest)->startOfWeek()->format('Y-m-d');
+		$s_date_start	= Carbon::parse($s_freshest)->addWeeks(-2)->startOfWeek()->format('Y-m-d');
 		$s_date_end		= Carbon::parse($s_freshest)->endOfWeek()->format('Y-m-d');
+#$s_date_start	= '2020-07-13';$s_date_end		= '2020-07-31';
 
         $o_query		= Plate::select
         			(

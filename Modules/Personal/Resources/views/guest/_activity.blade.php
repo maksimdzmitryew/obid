@@ -26,19 +26,41 @@
 								<span class="calendar-item-icon-date">{{ \Carbon\Carbon::parse($s_date)->translatedFormat('D') }}</span>
 							</span>
 
-							<div class="div_date">
-								<p>№{{ implode(',', $activity[$s_date]['position']) }}
-									@if (isset($totals[$s_date]))
-									 | <i>№{{ $totals[$s_date]['list'] }}</i>
-								 	@endif
-								</p>
-								<p class="smaller">
-									{{ $a_data['total'] }}₴ {{ $activity[$s_date]['heavy'] }}гр.
-									@if (isset($totals[$s_date]))
-									 | <i>{{ $totals[$s_date]['total'] }}₴ {{ $totals[$s_date]['heavy'] }}гр.</i>
-								 	@endif
-								 </p>
+							<div class="user_details">
+
+		<div class="div_date">
+			<i class="far fa-user-circle"></i>
+			<p>
+				№{{ implode(',', $activity[$s_date]['position']) }}
+			</p>
+			<p class="smaller">
+				{{ $a_data['total'] }}₴ {{ $activity[$s_date]['heavy'] }}гр.
+			 </p>
+		</div>
+
+
+
+	@if (isset($totals[$s_date]) || isset($totals[$s_date]))
+		<div class="div_date">
+			<i class="far fa-users"></i>
+			@if (isset($totals[$s_date]))
+			<p>
+				№{{ $totals[$s_date]['list'] }}
+			</p>
+			@endif
+			@if (isset($totals[$s_date]))
+			<p class="smaller">
+				{{ $totals[$s_date]['total'] }}₴ {{ $totals[$s_date]['heavy'] }}гр.
+			</p>
+			@endif
+
+		</div>
+ 	@endif
+
+
 							</div>
+
+
 							<div class="
 								plate_items_wrapper
 								plate_items_wrapper_{{ $s_date }}

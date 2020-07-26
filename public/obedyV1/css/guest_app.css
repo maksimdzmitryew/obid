@@ -946,7 +946,7 @@ footer .open_filter_btn {
 
 #profile_wrap .profile {
 	float: left;
-	width: 662px;
+	width: 900px;
 	box-shadow: 0 0 40px 0 rgba(82, 85, 114, 0.2);
 	background-color: #ffffff;
 }
@@ -1606,12 +1606,23 @@ div.sticky .div_table
 
 .div_date_wrap .div_date
 {
-	margin-left: 69px;
+	display: block;
+	float: left;
+	margin-left: 13px;
+	width: 220px;
 }
 
-.div_date_wrap .div_date
+.div_date_wrap .div_date:last-child
 {
-	margin-left: 69px;
+	width: 510px;
+}
+
+.div_date_wrap .div_date i
+{
+	display: block;
+	float: left;
+	font-size: 4rem;
+	padding-right: 10px;
 }
 
 .div_date_wrap.future,
