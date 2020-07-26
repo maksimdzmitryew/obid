@@ -1,3 +1,4 @@
+0.02.3+a208:3 user FIX restore weight in data for demand
 0.02.2+a208:2 user ADD styling for all demands of the day incl. latest and past 3 weeks
 0.02.2+a208:1 user ADD list plate ids for all demands of the day
 0.02.2+a200:6 user ADD even better recaptcha support for reload for http and ajax responses

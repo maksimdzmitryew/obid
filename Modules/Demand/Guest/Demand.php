@@ -209,6 +209,7 @@ dd($o_items->count(), $o_items);
 			$a_items[$o_plate->date]['meal_id'][]			= $o_plate->meal->id;
 			$a_items[$o_plate->date]['price'][]				= (int) $o_plate->price;
 			$a_items[$o_plate->date]['position'][]			= $o_plate->position;
+			$a_items[$o_plate->date]['weight'][]			= $o_plate->weight;
 			$a_items[$o_plate->date]['qty'][]				= (int) ($o_plate->qty ?? 1);
 			if (!isset($a_items[$o_plate->date]['total']))
 			{
