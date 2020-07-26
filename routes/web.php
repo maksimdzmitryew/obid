@@ -558,9 +558,6 @@ Route::group([
 */
 	Route::group(['middleware' => 'auth'], function() {
 /*
-		Route::get('miy-pr', ['as' => 'cabinet', 'uses' => 'ProfileController@cabinet']);
-		Route::post('miy-pr', ['as' => 'profile.update', 'uses' => 'ProfileController@updateProfile']);
-		Route::post('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@updateProfile']);
 		Route::post('event/{event}/favorite', ['as' => 'event.favorite', 'uses' => 'ProgramController@favorite']);
 		Route::post('event/{event}/unfavorite', ['as' => 'event.unfavorite', 'uses' => 'ProgramController@unfavorite']);
 */
@@ -715,10 +712,6 @@ Route::group([
 		'uses' => 'FestivalController@gallery'
 	]);
 
-	Route::get('cabinet/favorite-events', [
-		'as' => 'cabinet.favorite-events',
-		'uses' => 'ProfileController@favoriteEvents'
-	]);
 / *
 	Route::get('image/{image_id}/{show_marker}', [
 		'as' => 'image.download',

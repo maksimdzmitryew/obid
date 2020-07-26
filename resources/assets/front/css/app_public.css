@@ -5595,10 +5595,6 @@ textarea {
     margin-top: 15px !important;
 }
 
-.miy-pr-page .filter-content .right-sidebar {
-    margin-top: 0 !important;
-}
-
 .cal-synk-btn {
     text-transform: inherit;
     font-weight: normal;
@@ -5677,7 +5673,6 @@ textarea {
 
 /****/
 .sign-in-page,
-.miy-pr-page,
 .about-us-page,
 .book-page,
 .event-page,
