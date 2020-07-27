@@ -1,3 +1,4 @@
+0.03.0+a209:1 user ADD unify data preparation for profile and activity tabs
 0.03.0+a208:1 user DEL legacy code for personal profile
 0.02.3+a208:3 user FIX restore weight in data for demand
 0.02.2+a208:2 user ADD styling for all demands of the day incl. latest and past 3 weeks

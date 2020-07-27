@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(route('guest.personal.profile'));
+            return redirect(route('guest.personal.activity'));
         }
 
         return $next($request);

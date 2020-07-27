@@ -63,13 +63,51 @@ class Demand extends Model
 	}
 
 	/**
-	 * Get list of preferred meals by user
+	 * Get list of preferred meals by user for the past month
 	 * @param	Object		$o_user			user to check activity for
 	 *
 	 * @return	Array						items
 	 */
 	public static function getRating(Object $o_user)
 	{
+
+
+		$s_freshest		= Plate::select('date')->max('date');
+		$s_date_start	= Carbon::parse($s_freshest)->addWeeks(-3)->startOfWeek()->format('Y-m-d');
+		$s_date_end		= Carbon::parse($s_freshest)->endOfWeek()->format('Y-m-d');
+#$s_date_start	= '2020-07-13';$s_date_end		= '2020-07-31';
+
+$q = $o_demands		= self::select('id', 'plates.id')->whereUserId($o_user->id)->join('demand_plate', 'plates.id', '=', 'demand_plate.plate_id')->groupBy('plates.id');
+dd($q->toSql(), $q->get());
+
+        $o_query		= self::select
+        			(
+/*
+						'plates.id'
+						, 'plates.date'
+						, 'plates.position'
+						, 'plates.price'
+						, 'plates.weight'
+						, 'courses.id AS course_id'
+						, 'demands.id AS demand_id'
+						, 'meals.id AS meal_id'
+						, \DB::raw('COUNT(ob_plates.id) AS qty')
+						, 'meal_translations.title AS title'
+*/
+        			)
+            ->join('meals', 'plates.meal_id', '=', 'meals.id')
+            ->join('courses', 'meals.course_id', '=', 'courses.id')
+            ->join('meal_translations', 'plates.meal_id', '=', 'meal_translations.meal_id')
+            ->join('demand_plate', 'plates.id', '=', 'demand_plate.plate_id')
+#            ->join('demand_plate', 'demands.id', '=', 'demand_plate.demand_id')
+            ->groupBy('plates.id')
+			->where('demands.user_id', '=', $o_user->id)
+			->whereBetween('plates.date', [$s_date_start, $s_date_end])
+            ;
+#dd($o_query->toSql());
+		$o_plates		= $o_query->get();
+
+dd($o_user, $o_plates);
 
 #Table 1 (plates): id, name
 #Table 2 (demand_plate): id, amount, plate_id, plate_id

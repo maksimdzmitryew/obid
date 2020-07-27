@@ -16,13 +16,13 @@ use                                              Validator;
 class PersonalController extends Controller
 {
 
-	public function profile(Request $request)
+	public function _addProfileData(Request $request)
 	{
 		$this->setEnv();
-
 		$o_user							= Auth::user();
 		$a_activity						= GuestDemand::getUserActivity($o_user);
 		$a_totals						= GuestDemand::getAllDemand();
+#		$a_rating						= GuestDemand::getRating($o_user);
 
 		return view($this->_env->s_view . 'index',
 					[
@@ -33,18 +33,18 @@ class PersonalController extends Controller
 						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
 						'activity'		=> $a_activity,
 						'totals'		=> $a_totals,
+						#'cities'		=> $this->getCities()
 					]);
-/*
-#        return view('public.profile.miy-pr', [
-		return view('public.profile.miy-pr', [
-			'user'			=> $user,
-			'b_admin'		=> $user->checkAdmin(),
-			'subscribe'		=> Subscriber::where('email', $user->email)->exists(),
-			#'event_dates' => $events,
-			#'dates' => $this->getFavoriteDates(),
-			#'cities' => $this->getCities()
-		]);
-*/
+	}
+
+	public function activity(Request $request)
+	{
+		return self::_addProfileData($request);
+	}
+
+	public function profile(Request $request)
+	{
+		return self::_addProfileData($request);
 	}
 
 	public function update(Request $request)
@@ -89,23 +89,5 @@ class PersonalController extends Controller
 		return back();
 	}
 
-	public function activity(Request $request)
-	{
-		$this->setEnv();
-		$o_user							= Auth::user();
-		$a_activity						= GuestDemand::getUserActivity($o_user);
-		$a_totals						= GuestDemand::getAllDemand();
-
-		return view($this->_env->s_view . 'index',
-					[
-						'b_admin'		=> $o_user->checkAdmin(),
-						'tab'			=> request()->segment(2),
-						'user'			=> $o_user,
-						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
-						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
-						'activity'		=> $a_activity,
-						'totals'		=> $a_totals,
-					]);
-	}
 
 }
