@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('meta')
-	<title>{!! mb_strtoupper(trans('general.my-area') . ' | ' . trans('app.name')) !!}</title>
+	<title>{!! mb_strtoupper(trans('general.my-area', ['app_name' => trans('app.name')]) . ' | ' . trans('app.name')) !!}</title>
 @endsection
 
 @include('public.partials._profile', ['s_id' => '#register-form, #sign-in-form'])
@@ -14,7 +14,7 @@
             <div class="single-form-block">
                 <div class="title-box">
                     <h1 class="title-block">
-                    	{!! trans('general.my-area') !!}
+                    	{!! trans('general.my-area', ['app_name' => trans('app.name')]) !!}
                     </h1>
                     <ul class="nav nav-tabs" id="pressTab" role="tablist">
                         <li class="nav-item">

@@ -141,7 +141,7 @@ class Model extends BaseModel
 /*	 *
 	 * @return Array						set of results
 	 */
-	public static function getIdTitle(Request $request, $filters, String $s_model, Bool $b_published, Array $a_include_ids, Array $a_exclude_ids, Bool $b_sort_bytitle, Bool $b_byid
+	public static function getIdTitle(Request $request, $filters, String $s_model, ?Bool $b_published, Array $a_include_ids, Array $a_exclude_ids, Bool $b_sort_bytitle, Bool $b_byid
 #		, Bool $b_json
 	) : Array
 	{
@@ -160,9 +160,9 @@ class Model extends BaseModel
 #		if ($b_json)
 #			$s_title = 'text';
 
-		$s_model				= self::getModelNameWithNamespace($s_model);
-		$fn_select				= $s_model . '::select';
-		$fn_filter				= $s_model . '::filter';
+		$s_model_path			= self::getModelNameWithNamespace($s_model);
+		$fn_select				= $s_model_path . '::select';
+		$fn_filter				= $s_model_path . '::filter';
 
 
 		if (is_null($filters))

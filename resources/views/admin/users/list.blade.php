@@ -59,7 +59,7 @@ $s_category = 'user';
                 order: [[ 2, "asc" ]],
                 columns: [
                 	@include('user._list_actions')
-					@include('user._list_checkbox', ['s_name' => 'active', ])
+					@include('user._list_checkbox', ['s_name' => 'enabled', ])
                     {
                         data: 'first_name',
                         render: function(data, type, row){
@@ -286,6 +286,32 @@ $s_category = 'user';
                 applyFilters(false);
             });
 
+            s_route_del = '{!! route('api.user.destroy') !!}';
+            function deleteEntries(){
+                let rows = dt.rows('.selected').indexes(),
+                    ids = Array.prototype.map.call(dt.rows(rows).data(), el => el.id);
+
+                $.ajax({
+                    type: 'post',
+                    url: s_route_del,
+                    data: {
+                        'ids': ids
+                    },
+                    success: function (data, status, xhr){
+
+                        if(xhr.status === 200){
+                            notify('{!! trans('common/messages.delete_entries_success') !!}', 'success', 2000);
+                            dt.draw(false);
+                        }else{
+                            notify('{!! trans('common/messages.delete_entries_error') !!}', 'danger', 2000);
+                        }
+
+                        applyFilters(false);
+                    },
+                    error: function (data){}
+                })
+            }
+/*
             function deleteEntries(){
                 let rows = dt.rows('.selected').indexes(),
                     ids = Array.prototype.map.call(dt.rows(rows).data(), el => el.id);
@@ -310,7 +336,33 @@ $s_category = 'user';
                     error: function (data){}
                 })
             }
+*/
+            $('#btn-delete').on('click', function(){
 
+                a_params = {
+                    reverseButtons:     true,
+                    showCloseButton:    true,
+                    icon:               'warning',
+                    title:              '{!! trans('common/messages.confirm_delete_title') !!}',
+                    text:               '{!! trans('common/messages.confirm_delete_description') !!}',
+                    confirmButtonText:  '{!! trans('common/messages.confirm_delete_cancel_button_text') !!}',
+                    cancelButtonText:   '{!! trans('common/messages.confirm_delete_confirm_button_text') !!}',
+                    showCancelButton:   true,
+                };
+
+                Swal.fire(
+                    a_params
+                ).then((result) => {
+                    if (result.value) {
+                        notify('{!! trans('common/messages.delete_entries_cancelled') !!}', 'info', 2000);
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        deleteEntries();
+                    }
+                })
+                ;
+            });
+
+/*
             $('#btn-delete').on('click', function(){
                 swal({
                     title: '{!! trans('app/common.messages.confirm_delete_title') !!}',
@@ -327,7 +379,7 @@ $s_category = 'user';
                     }
                 });
             });
-
+*/
             $('#btn-add').on('click', (e) => {
                 window.location.href = '{!! route('admin.user.form') !!}';
             });

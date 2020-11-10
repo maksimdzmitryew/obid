@@ -45,4 +45,20 @@ $(document).ready(() => {
 		}
 		return true;
 	});
+
+    $(document).on('click','.ajax-get',function(e){
+        e.preventDefault();
+        $.ajax({
+            url: $(this).data('href'),
+            type: 'GET',
+            dataType : "json",
+            success: function (data) {
+                //tableActive.ajax.reload(null, false);
+            },
+            error: function(){
+                console.log('Ajax error');
+            }
+        });
+    });
+
 });

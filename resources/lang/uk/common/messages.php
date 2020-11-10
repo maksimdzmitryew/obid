@@ -12,17 +12,17 @@ return [
 	'confirm_delete_cancel_button_text' => 'Cancel',
 	'json_parse_error' => 'Помилкова json-відповідь',
 	'email' => [
-		'subject' => 'Підтвердіть реєстрацію на OBID',
+		'subject' => 'Confirm registration on :app_name',
 		'confirm' => [
-			'title' => 'Підтвердьте свою електронну адресу для OBID',
-			'open' => 'Привіт! Нам просто потрібно перевірити, що',
-			'close' => '— це ваша електронна адреса, і тоді ми допоможемо вам увійти в особистий кабінет OBID.',
-			'link' => 'Підтвердити електронну адресу',
-			'thanks' => 'Дякуємо за реєстрацію в OBID.',
+			'title' => 'Confirm your email address on :app_name',
+			'open' => 'Hello! We just need to verify that',
+			'close' => 'is your email address, and then we’ll help you login to you personal :app_name cabinet.',
+			'link' => 'Confirm Email Address',
+			'thanks' => 'Thanks for signing up to :app_name.',
 		],
 		'disclaimer' => [
-			'title' => 'Ви не надсилали запит на цей електронний лист?',
-			'text' => 'Не хвилюйтесь! Можливо, вашу адресу було введено помилково. Якщо ви проігноруєте або видалите цей електронний лист, більше нічого не відбудеться.',
+			'title' => 'Didn’t request this email?',
+			'text' => 'No worries! Your address may have been entered by mistake. If you ignore or delete this email, nothing further will happen.',
 		],
 	],
 ];

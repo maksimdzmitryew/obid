@@ -232,12 +232,12 @@ s_action_form		= '{!! ($user->id ? 'update' : 'create') !!}';
                                         </div>
                                     </div>
                                 @endif
-                                <div class="form-group row field" data-name="active">
+                                <div class="form-group row field" data-name="enabled">
                                     <div class="col-lg-3">
                                         <label class="d-block float-left py-2 m-0">{!! trans('common/form.fields.active.label') !!}</label>
                                     </div>
                                     <div class="field-body form-check-switch form-check-switch-left">
-                                        <input name="active" value="1" type="checkbox" class="switcher" data-on-text="On" data-off-text="Off" data-on-color="success" data-off-color="default" {!! $user->active ? 'checked=checked' : '' !!}>
+                                        <input name="enabled" value="1" type="checkbox" class="switcher" data-on-text="On" data-off-text="Off" data-on-color="success" data-off-color="default" {!! $user->enabled ? 'checked=checked' : '' !!}>
                                     </div>
                                 </div>
 

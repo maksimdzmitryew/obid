@@ -31,7 +31,7 @@ include(base_path().'/resources/views/user/crud.php');
 	<script src="{{ asset('/admin/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
 	<script src="{{ asset('/admin/js/plugins/ui/moment/moment_locales.min.js') }}"></script>
 	<script src="{{ asset('/admin/js/plugins/pickers/daterangepicker.js') }}"></script>
-	<script src="{{ asset('/admin/js/lists.js') }}"></script>
+	<script src="{{ asset('/admin/js/lists.js?v=' . $version->js) }}"></script>
 @endsection
 
 @section('script')

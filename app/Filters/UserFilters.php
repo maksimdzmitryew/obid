@@ -47,7 +47,7 @@ class UserFilters extends Filters
                 'users.first_name',
                 'users.last_name',
                 'users.email',
-                'users.active'
+                'users.enabled'
             )
             ->offset($this->request->start)
             ->limit($this->limit)

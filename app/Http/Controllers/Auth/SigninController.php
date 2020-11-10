@@ -80,14 +80,25 @@ class SigninController	extends Controller
 		else
 		{
 			$o_res				= User::whereEmail($request->email)->first();
-			if (!($o_res->enabled === TRUE))
+			if (!( (bool) $o_res->enabled === TRUE ))
 			{
 				return response([
-					'title'			=> trans('user/form.text.account_inactive'),
-					'message'		=> trans('user/form.text.hint_inactive'),
+					'title'			=> trans('user/form.text.inactive_account'),
+					'message'		=> trans('user/form.text.inactive_hint'),
 					'btn_primary'	=> trans('user/messages.button.ok'),
 					'url'			=> '',
-					'footer'		=> trans('user/form.text.extra_inactive'),
+					'footer'		=> trans('user/form.text.inactive_extra'),
+					'extra'			=> 'mailto:' . config('services.mail.to'),
+				], 401);
+			}
+			else
+			{
+				return response([
+					'title'			=> trans('user/form.text.failed_credentials'),
+					'message'		=> trans('user/form.text.failed_hint'),
+					'btn_primary'	=> trans('user/messages.button.ok'),
+					'url'			=> '',
+					'footer'		=> trans('user/form.text.inactive_extra'),
 					'extra'			=> 'mailto:' . config('services.mail.to'),
 				], 401);
 			}

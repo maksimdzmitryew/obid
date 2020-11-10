@@ -2,7 +2,13 @@
 <th width="5%">{!! trans('user/crud.table.published') !!}</th>
 
 @if (!isset($b_title) || (isset($b_title) && $b_title))
-<th width="50%">{!! trans('crud.field.title.label') !!}</th>
+@php
+	$s_name			= 'title';
+	$s_label		= 'crud.field.'.$s_name.'.label';
+	$s_tmp			= $_env->s_sgl.'::crud.field.' . $s_name . '.label';
+	if ($s_tmp != trans($s_tmp)) $s_label = $s_tmp;
+@endphp
+<th width="50%">{!! trans($s_label) !!}</th>
 @endif
 
 @if (isset($a_columns) && count($a_columns) > 0)

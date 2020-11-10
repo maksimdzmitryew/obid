@@ -52,4 +52,11 @@ return [
         ],
     ],
 
+    'analysis' => [
+        'google' => [
+            'tag' => env('ANALYSIS_GOOGLE_TAG'),
+            'analytics' => env('ANALYSIS_GOOGLE_ANALYTICS'),
+        ],
+    ],
+
 ];

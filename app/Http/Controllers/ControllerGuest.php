@@ -15,7 +15,6 @@ class ControllerGuest	extends BaseController
 	 */
 	public function index(Request $request) #: \Illuminate\View\View
 	{
-#s_utype
 		$this->setEnv();
 
 		return view($this->_env->s_view . 'index', [
