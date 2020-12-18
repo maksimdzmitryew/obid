@@ -12,6 +12,7 @@
 	@if (config('app.env') != 'local')
 	let reCAPTCHA_site_key = '{{ config('services.google.recaptcha.key') }}';
 	@endif
+	let i_reCAPTCHA_version = {{ config('services.google.recaptcha.version') }};
 	$(document).ready(() => {
 		function reCAPTCHA_execute () {
 			timepassed = Math.round((Date.now() - i_reCAPTCHA_update_time) / 1000) * 1000;

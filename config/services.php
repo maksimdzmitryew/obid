@@ -46,6 +46,7 @@ return [
         'recaptcha' => [
             'key' => env('GOOGLE_RECAPTCHA_V3_SITE_KEY'),
             'secret' => env('GOOGLE_RECAPTCHA_V3_SECRET'),
+            'version' => env('GOOGLE_RECAPTCHA_V'),
         ],
         'map' => [
             'key' => env('GOOGLE_MAPS_API_KEY'),

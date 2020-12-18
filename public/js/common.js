@@ -7,7 +7,6 @@ let b_focus_status					= null,
 	i_csrf_refresh_time				= 1000 * 60 * 60 * 2, // 2 hours
 	i_reCAPTCHA_update_time		= 0,
 	i_reCAPTCHA_refresh_time	= 1000 * 60 * 2, // 1 second * 60 = 1 minute * 2 = 2 minutes
-	i_reCAPTCHA_version				= 3,
 	b_refresh_tokens					= false
 	;
 
