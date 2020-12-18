@@ -1,14 +1,14 @@
-let b_focus_status				= null,
-	a_check_focus				= [],
-	timepassed					= 0,
-	s_csrf_token				= $('[name="csrf-token"]').attr('content'),
-	s_reCAPTCHA					= $('[name="g-recaptcha-response"]').val(),
-	i_csrf_update_time			= 0,
-	i_csrf_refresh_time			= 1000 * 60 * 60 * 2, // 2 hours
+let b_focus_status					= null,
+	a_check_focus							= [],
+	timepassed								= 0,
+	s_csrf_token							= $('[name="csrf-token"]').attr('content'),
+	s_reCAPTCHA								= $('[name="g-recaptcha-response"]').val(),
+	i_csrf_update_time				= 0,
+	i_csrf_refresh_time				= 1000 * 60 * 60 * 2, // 2 hours
 	i_reCAPTCHA_update_time		= 0,
 	i_reCAPTCHA_refresh_time	= 1000 * 60 * 2, // 1 second * 60 = 1 minute * 2 = 2 minutes
-	i_reCAPTCHA_version			= 2,
-	b_refresh_tokens			= false
+	i_reCAPTCHA_version				= 3,
+	b_refresh_tokens					= false
 	;
 
 $(document).ready(function ()

@@ -7,7 +7,6 @@
 @include('public.partials._profile', ['s_id' => '#register-form, #sign-in-form'])
 
 @section('content')
-
 <div class="content sign-in-page">
     <div class="container-fluid">
         <div class="single-form-block-wrap">
@@ -161,8 +160,9 @@
                                     </div>
 --}}
                                     <input type="hidden" id="recap_response_signup" placeholder="" name="g-recaptcha-response">
+{{--
                                     <div class="g-recaptcha" data-sitekey="{{ config('services.google.recaptcha.key') }}"></div>
-
+--}}
                                     <div class="btn-wrap row form-group">
                                         <div class="btn-inner offset-md-3 col-md-9 offset-sm-4 col-sm-8 col-12 control-wrap">
                                             <button type="submit" class="btn btn-primary">
