@@ -25,13 +25,20 @@ class Provider extends Model
 	public static function parse(Request $request) : void
 	{
 		$a_columns	= ['id'];
-		if (date("w") > 4)
+		if (is_null($request->id))
 		{
-			$d = 1;
+			if (date("w") > 4)
+			{
+				$d		= 1;
+			}
+			else
+			{
+				$d		= date("w") + 1;
+			}
 		}
 		else
 		{
-			$d = date("w") + 1;
+			$d		= $request->id;
 		}
 		$a_columns[]	= 'day_' . $d;
 		$a_items	= self::select($a_columns)->wherePublished(1)->limit(25)->get()->toArray();
@@ -48,7 +55,7 @@ class Provider extends Model
 				$b_parse	= ((substr($s_name, 0, 4) == 'day_') && (substr($s_value, 0, 4) == 'http'));
 				if ($b_parse)
 				{
-					dump($i_provider_id, date("w"), $s_name, $s_value, $b_parse);
+					dump('provider=' . $i_provider_id . ' today=' . date("w") . ' ' . (!is_null($request->id) ? 'FORCE_' : '') . 'next=' . $s_name . ' url=' . $s_value . ' parse=' . ($b_parse ? 'TRUE' : 'FALSE') );
 #					dump($a_items[$i]['day_' . $d]);
 					self::_parseDay($i_provider_id, $s_value);
 				}
