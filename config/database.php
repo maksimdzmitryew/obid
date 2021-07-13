@@ -32,17 +32,19 @@ return [
 	*/
 
 	'connections' => [
-
-		'sqlite_unittest' => [
-			'driver' => 'sqlite',
-			'database' =>
+		/*
+		'sqlite' => [
+			'driver'		=> 'sqlite',
+			'database'		=>
 				# relative to storage/ folder
+				# so it's not overritten when hot-updating code at vmware
 				storage_path('database.sqlite'),
-				#':memory:',
-				#env('DB_DATABASE', storage_path('database.sqlite')),
+				# other possible path
 				#env('DB_DATABASE', database_path('database.sqlite')),
-			'prefix' => '',
+				#':memory:',
+			'prefix'		=> '',
 		],
+		*/
 
 		'mysql' => [
 			'driver'		=> env('DB_CONNECTION',			'mysql'),
@@ -96,29 +98,56 @@ return [
 			'engine'		=> 'InnoDB ROW_FORMAT=DYNAMIC',
 		],
 
-		'pgsql' => [
-			'driver' => 'pgsql',
-			'host' => env('DB_HOST', '127.0.0.1'),
-			'port' => env('DB_PORT', '5432'),
-			'database' => env('DB_DATABASE', 'forge'),
-			'username' => env('DB_USERNAME', 'forge'),
-			'password' => env('DB_PASSWORD', ''),
-			'charset' => 'utf8',
-			'prefix' => '',
-			'schema' => 'public',
-			'sslmode' => 'prefer',
+		/**
+		 *	when we need to run and test some code, query or migration before using it on live structure
+		 *	this is not the config for unit-tests
+		 *	see overriden values at phpunit.xml
+		 */
+		'tst' => [
+			'driver'		=> env('TST_DB_CONNECTION',		'mysql'),
+			'host'			=> env('TST_DB_HOST',			'127.0.0.1'),
+			'port'			=> env('TST_DB_PORT',			'3306'),
+			'database'		=> env('TST_DB_DATABASE',		'forge'),
+			'username'		=> env('TST_DB_USERNAME',		'forge'),
+			'password'		=> env('TST_DB_PASSWORD',		''),
+			'charset'		=> 'utf8',
+			'prefix'		=> env('TST_DB_PREFIX',			'TST').'_',
+			'schema'		=> 'public',
+			'charset'		=> 'utf8mb4',
+			'collation'		=> 'utf8mb4_unicode_ci',
+			'strict'		=> false,
+			# DYNAMIC allows to store long key indexes.
+			'engine'		=> 'InnoDB ROW_FORMAT=DYNAMIC',
 		],
 
-		'sqlsrv' => [
-			'driver' => 'sqlsrv',
-			'host' => env('DB_HOST', 'localhost'),
-			'port' => env('DB_PORT', '1433'),
-			'database' => env('DB_DATABASE', 'forge'),
-			'username' => env('DB_USERNAME', 'forge'),
-			'password' => env('DB_PASSWORD', ''),
-			'charset' => 'utf8',
-			'prefix' => '',
+		'pgsql' => [
+			'driver'		=> 'pgsql',
+			'host'			=> env('DB_HOST', '127.0.0.1'),
+			'port'			=> env('DB_PORT', '5432'),
+			'database'		=> env('DB_DATABASE', 'forge'),
+			'username'		=> env('DB_USERNAME', 'forge'),
+			'password'		=> env('DB_PASSWORD', ''),
+			'charset'		=> 'utf8',
+			'prefix'		=> '',
+			'schema'		=> 'public',
+			'sslmode'		=> 'prefer',
 		],
+
+		/**
+		 *	windows based hosting
+		 */
+		/*
+		'sqlsrv' => [
+			'driver'		=> 'sqlsrv',
+			'host'			=> env('DB_HOST', 'localhost'),
+			'port'			=> env('DB_PORT', '1433'),
+			'database'		=> env('DB_DATABASE', 'forge'),
+			'username'		=> env('DB_USERNAME', 'forge'),
+			'password'		=> env('DB_PASSWORD', ''),
+			'charset'		=> 'utf8',
+			'prefix'		=> '',
+		],
+		*/
 
 	],
 

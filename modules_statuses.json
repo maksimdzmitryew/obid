@@ -1,10 +1,14 @@
 {
-	"Course":		true,
-	"Demand":		true,
-	"Meal":			true,
-	"Plate":		true,
-	"Personal":		true,
-	"Provider":		true,
-	"ObedyV1":		true,
-	"Welcome":		true
+	"ObedyV1":				true,
+	"__comment_1__":	"default theme is always at first position for unit-testing",
+	"__comment_2__":	"rest of modules are alphabetically sorted",
+	"Course":					true,
+	"Demand":					true,
+	"Meal":						true,
+	"Page":						true,
+	"Plate":					true,
+	"Personal":				true,
+	"Provider":				true,
+	"Reaction":				true,
+	"Welcome":				true
 }

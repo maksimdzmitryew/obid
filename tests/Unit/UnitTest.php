@@ -3,11 +3,12 @@
 namespace Tests\Unit;
 
 use                                    Tests\TestCase;
-#use PHPUnit\Framework\TestCase;
 
 class UnitTest extends TestCase
 {
     /**
+     * A unit test example.
+     *
      * @test
      * @return	void
      */
