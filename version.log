@@ -1,3 +1,4 @@
+0.11.0+a196:1 test ADD middleware TrimStrings
 0.11.0+a195:7 test ADD minor visual
 0.11.0+a195:6 test ADD check guest and power pages
 0.11.0+a195:5 test ADD better version-app
