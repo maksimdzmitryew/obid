@@ -139,7 +139,7 @@ Route::group([
 
 	$s_model	= 'Welcome';
 	$s_method	= 'index';
-	Route::get($getPath($s_model),																$getRoute($s_model, $s_type, $s_method));
+	Route::get('/',																								$getRoute($s_model, $s_type, $s_method));
 
 	$s_model	= 'Page';
 	$s_method	= 'posibnyk';
