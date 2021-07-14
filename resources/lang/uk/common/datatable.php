@@ -1,8 +1,21 @@
 <?php
 return [
-	'lengthMenu'		=> 'Відобразити _MENU_ записів на сторінку',
-	'zeroRecords'		=> 'Нічого не знайдено, вибачте',
-	'info'				=> 'Показана сторінка _PAGE_ з _PAGES_',
-	'infoEmpty'			=> 'Немає записів',
+	'decimal'					=> ',',
+	'emptyTable'			=> 'No data available in table',
+	'info'						=> 'Показана сторінка _PAGE_ з _PAGES_ (записи _START_…_END_ з _TOTAL_)',
+	'infoEmpty'				=> 'Немає записів',
 	'infoFiltered'		=> '(відфільтровано з _MAX_ загальних записів)',
-];
+	'infoPostFix'			=> '',
+	'first'						=> 'Перша',
+	'last'						=> 'Остання',
+	'lengthMenu'			=> 'Відобразити _MENU_ записів на сторінку',
+	'loadingRecords'	=> 'Loading...',
+	'next'						=> 'Наступна',
+	'previous'				=> 'Попередня',
+	'processing'			=> 'Processing...',
+	'search'					=> 'Search:',
+	'sortAscending'		=> '=> activate to sort column ascending',
+	'sortDescending'	=> '=> activate to sort column descending',
+	'thousands'				=> '’',
+	'zeroRecords'			=> 'Нічого не знайдено, вибачте',
+	];

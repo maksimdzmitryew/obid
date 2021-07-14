@@ -2,12 +2,12 @@
 
 return [
     'breadcrumbs' => [
-        'list' => 'Users list',
-        'create' => 'Create user',
-        'edit' => 'Edit user'
+        'list' => 'Спис користувачів',
+        'create' => '=====',
+        'edit' => '-----'
     ],
     'list' => [
-        'title' => 'Users list',
+        'title' => 'Спис користувачів',
         'buttons' => [
             'add' => 'Add new',
             'reset' => 'Reset filters',
@@ -15,58 +15,66 @@ return [
             'delete' => 'Deleted selected'
         ],
     ],
+    'menu' => [
+        'title' => 'Користувачи',
+        ],
+    'btn' => [
+        'create' => 'користувача',
+        'edit' => 'користувача',
+        'delete' => 'користувачів',
+        ],
     'form' => [
         'submit' => 'Submit',
         'title' => [
-            'create' => 'Create user',
+            'create' => 'Створення користувача',
             'edit' => 'Edit user'
         ],
         'tabs' => [
-            'main' => 'Main',
+            'main' => 'Дані',
             'secondary' => 'Secondary'
         ],
         'fields' => [
             'first_name' => [
-                'label' => 'Enter first name',
+                'label' => 'Введіть Ім’я',
                 'rules' => 'required'
             ],
             'last_name' => [
-                'label' => 'Enter last name',
+                'label' => 'Введіть Прізвище',
                 'rules' => 'required'
             ],
             'role_id' => [
-                'label' => 'Select role',
+                'label' => 'Оберіть роль',
                 'rules' => 'one from list'
             ],
             'email' => [
-                'label' => 'Enter email',
+                'label' => 'Введіть email',
                 'rules' => 'required | email'
             ],
             'password' => [
-                'label' => 'Enter password',
+                'label' => 'Введіть гасло',
                 'rules' => 'required | min-length: 6 | max-length : 20'
             ],
             'password_confirmation' => [
-                'label' => 'Confirm password',
+                'label' => 'Підтвердження гасла',
                 'rules' => 'required | same: password'
             ],
             'old_password' => [
-                'label' => 'Enter old password',
+                'label' => 'Введіть бегучий гасло',
                 'rules' => 'required | min-length: 6 | max-length : 20'
             ],
             'new_password' => [
-                'label' => 'Enter new password',
+                'label' => 'Введіть new гасло',
                 'rules' => 'required | min-length: 6 | max-length : 20'
             ],
             'new_password_confirmation' => [
-                'label' => 'Confirm new password',
+                'label' => 'Confirm new гасло',
                 'rules' => 'required | min-length: 6 | max-length : 20'
             ],
 
         ],
         'legends' => [
-            'main' => 'Main info',
-            'password' => 'Change password'
+            'main' => 'Загальна інформація',
+            'password' => 'Change гасло'
         ]
     ]
 ];
