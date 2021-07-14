@@ -7,6 +7,7 @@ use                                    Tests\TestCase;
 class UnitTest extends TestCase
 {
     /**
+     *
      * A unit test example.
      *
      * @test
