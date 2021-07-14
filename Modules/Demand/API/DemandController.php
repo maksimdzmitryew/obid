@@ -53,21 +53,29 @@ class DemandController extends Controller
 
 	/**
 	 * Create a new item
+	 * @param	Request	$request			Data from request
+	 *
+	 * @return	Array								only selected ids
+	 */
+	private function _prepareSync(SaveRequest $request) : Array
+	{
+		$a_tmp		= array_flip($request->plate_ids);
+		unset($a_tmp['']);
+		$a_tmp		= array_keys($a_tmp);
+		return $a_tmp;
+	}
+
+	/**
+	 * Create a new item
 	 * @param Request	$request		Data from request
 	 *
 	 * @return Response	json instance of
 	 */
 	public function store(SaveRequest $request) : \Illuminate\Http\Response
 	{
-		$request->merge([
-			'user_id' => \Auth::user()->id,
-		]);
-
-		$a_tmp		= array_flip($request->plate_ids);
-		unset($a_tmp['']);
-		$a_tmp		= array_keys($a_tmp);
+		$a_ids		= $this->_prepareSync($request);
 		$a_res		= $this->storeAPI($request);
-		$this->o_item->plate()->sync($a_tmp);
+		$this->o_item->plate()->sync($a_ids);
 
 		return $a_res;
 	}
@@ -80,10 +88,8 @@ class DemandController extends Controller
 	 */
 	public function update(SaveRequest $request, DBDemand $item) : \Illuminate\Http\Response
 	{
-		$a_tmp		= array_flip($request->plate_ids);
-		unset($a_tmp['']);
-		$a_tmp		= array_keys($a_tmp);
-		$item->plate()->sync($a_tmp);
+		$a_ids		= $this->_prepareSync($request);
+		$item->plate()->sync($a_ids);
 		$a_res		= $this->updateAPI($request, $item);
 		return $a_res;
 	}

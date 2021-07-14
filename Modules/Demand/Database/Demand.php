@@ -11,7 +11,7 @@ class Demand extends Model
 	protected $connection = 'psc';
 	protected $fillable = [
 		'user_id',
-		'plate_id',
+#		'plate_id',
 		'published',
 	];
 

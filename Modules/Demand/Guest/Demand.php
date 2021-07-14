@@ -231,11 +231,29 @@ dd($o_items->count(), $o_items);
 	}
 
 	/**
+	 * Set init values for all plates of the date
+	 * @param	Array	$a_items			items on plate for the date
+	 * @param	String	$s_title			param to check
+	 * @param	String	$s_date				date of plate
+	 * @param	Array	$a_value			value to set
+	 *
+	 * @return	Array
+	 */
+	private static function _initPlateParam(Array $a_items, String $s_date, String $s_title, Array $a_value) : Array
+	{
+		if (!isset($a_items[$s_date][$s_title]))
+		{
+			$a_items[$s_date][$s_title]		= $a_value[0];
+		}
+		return $a_items;
+	}
+
+	/**
 	 * Arrange raw data to unified array grouped by date
 	 * @param	Object		$o_plates		user to check activity for
 	 * @param	Array		$a_items		user to check activity for
 	 *
-	 * @return	Array						plate properties by date
+	 * @return	Array					plate properties by date
 	 */
 	private static function _arrangeDemands(Object $o_plates, Array $a_items) : Array
 	{
@@ -245,36 +263,30 @@ dd($o_items->count(), $o_items);
 			$a_items[$o_plate->date]['course_id'][]			= $o_plate->meal->course->id;
 			$a_items[$o_plate->date]['meal_title'][]		= $o_plate->meal->title;
 			$a_items[$o_plate->date]['meal_id'][]			= $o_plate->meal->id;
-			$a_items[$o_plate->date]['price'][]				= (int) $o_plate->price;
+			$a_items[$o_plate->date]['price'][]			= (int) $o_plate->price;
 			$a_items[$o_plate->date]['position'][]			= $o_plate->position;
 			$a_items[$o_plate->date]['weight'][]			= $o_plate->weight;
-			$a_items[$o_plate->date]['qty'][]				= (int) ($o_plate->qty ?? 1);
-			if (!isset($a_items[$o_plate->date]['total']))
-			{
-				$a_items[$o_plate->date]['total']			= 0;
-			}
-			if (!isset($a_items[$o_plate->date]['heavy']))
-			{
-				$a_items[$o_plate->date]['heavy']			= 0;
-			}
-			if (!isset($a_items[$o_plate->date]['heap']))
-			{
-				$a_items[$o_plate->date]['heap']			= 0;
-			}
-			if (!isset($a_items[$o_plate->date]['list']))
-			{
-				$a_items[$o_plate->date]['list']			= '';
-			}
-			$i_qty											= (int) ($o_plate->qty ?? 1);
-			$a_items[$o_plate->date]['total']				+= (int) $o_plate->price;
-			$a_items[$o_plate->date]['heavy']				+= (int) $o_plate->weight;
-			$a_items[$o_plate->date]['heap']				+= $i_qty;
-			$a_items[$o_plate->date]['list']				.= ','. $o_plate->position . ( $i_qty > 1 ? '×' . $i_qty : '' );
+			$a_items[$o_plate->date]['qty'][]			= (int) ($o_plate->qty ?? 1);
+
+			$a_items = self::_initPlateParam($a_items, $o_plate->date, 'total', [0]);
+			$a_items = self::_initPlateParam($a_items, $o_plate->date, 'heavy', [0]);
+			$a_items = self::_initPlateParam($a_items, $o_plate->date, 'heap', [0]);
+			$a_items = self::_initPlateParam($a_items, $o_plate->date, 'list', ['']);
+
+			$i_qty							= (int) ($o_plate->qty ?? 1);
+			$a_items[$o_plate->date]['total']			+= (int) $o_plate->price;
+			$a_items[$o_plate->date]['heavy']			+= (int) $o_plate->weight;
+			$a_items[$o_plate->date]['heap']			+= $i_qty;
+			$a_items[$o_plate->date]['list']			.= ','. $o_plate->position . ( $i_qty > 1 ? '×' . $i_qty : '' );
 		}
-		/**
-		 *	clean up
-		 */
-		$a_items[$o_plate->date]['list']					= trim($a_items[$o_plate->date]['list'], ',');
+			if (isset($o_plate->date))
+			{
+
+			/**
+			 *	clean up
+			 */
+			$a_items[$o_plate->date]['list']					= trim($a_items[$o_plate->date]['list'], ',');
+		}
 		return $a_items;
 	}
 

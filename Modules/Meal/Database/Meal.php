@@ -2,11 +2,11 @@
 
 namespace Modules\Meal\Database;
 
-use                       Illuminate\Support\Carbon;
-use              \Modules\Complaint\Database\Complaint;
-use                \Modules\Element\Database\Element;
-use                   \Modules\Mark\Database\Mark;
-use                                      App\Model;
+use                          Illuminate\Support\Carbon;
+use                 \Modules\Complaint\Database\Complaint;
+use                   \Modules\Element\Database\Element;
+use                      \Modules\Mark\Database\Mark;
+use                                         App\Model;
 
 class Meal extends Model
 {
@@ -18,10 +18,15 @@ class Meal extends Model
 	public $translatedAttributes = [];
 	protected $a_form = [
 		'published'		=> [
-			'tab'		=> 'data',
+			'tab'			=> 'data',
 			'field'		=> 'checkbox',
 			'rules'		=> 'boolean',
 			'default'	=>	TRUE,
+		],
+		'course_id'		=> [
+			'tab'			=> 'data',
+			'field'		=> 'select',
+			'rules'		=> 'integer',
 		],
 	];
 

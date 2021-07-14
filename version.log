@@ -1,3 +1,4 @@
+0.05.2+a195:4 user FIX many-to-many save to DB issue when updating selection
 0.05.1+a195:3 user ADD migration password reset
 0.05.1+a195:2 user FIX migration missing index
 0.05.0+a195:1 user ADD migration permissions
