@@ -3,9 +3,10 @@
 namespace Modules\Meal\User;
 
 #use Modules\Meal\Http\Controllers\MealController as Controller;
-use App\Http\Controllers\ControllerUser as Controller;
-use Modules\Building\Database\Building;
-use Illuminate\Http\Request;
+use                        App\Http\Controllers\ControllerUser as Controller;
+use                     Modules\Course\Database\Course;
+use                      Modules\Plate\Database\Plate;
+use                             Illuminate\Http\Request;
 
 class MealController extends Controller
 {
@@ -15,11 +16,13 @@ class MealController extends Controller
 	 *
 	 * @return View		instance of
 	 */
+
 	public function form(Request $request) : \Illuminate\View\View
 	{
 		\View::composer('user.*', function ($view) {
 			$view->with([
-				'building'		=> Building::all()->sortBy('title'),
+				'course'			=> Course::all()->sortBy('title'),
+				'plate'				=> Plate::all()->sortBy('title'),
 			]);
 		});
 		return parent::form($request);
