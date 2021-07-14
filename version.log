@@ -1,3 +1,4 @@
+0.08.0+a195:1 user UPD page module
 0.07.0+a195:1 user UPD COPY improvements from core of posibnyk
 0.06.0+a195:1 user UPD routes unification and clean up
 0.05.2+a195:4 user FIX many-to-many save to DB issue when updating selection

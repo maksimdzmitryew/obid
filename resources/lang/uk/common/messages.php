@@ -3,6 +3,11 @@
 return [
 	'apply_filters' => 'filters have been applied',
 	'reset_filters' => 'filters have been reset',
+	'order_entries_success' => ':qty записів було впорядковано',
+	'order_entries_error' => 'Під час упорядкування сталася помилка',
+	'order_choose_parent' => 'Спочатку застосуйте фільтр «Батьківськая» сторінка',
+	'order_qty_mistmatch' => 'Кількість не відповідає. Варто оновіть сторінку',
+
 	'delete_entries_success' => 'Entries were successfully deleted',
 	'delete_entries_error' => 'An error occurred while deleting records',
 	'delete_entries_cancelled' => 'Cancelled deletion',

@@ -1,0 +1,25 @@
+{
+	"name": "maxd/page",
+	"description": "Pages that exist on map",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Page\\Providers\\PageServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Page\\": ""
+		}
+	}
+}
