@@ -6,7 +6,7 @@ use                                       Tests\TestCase;
 use                         App\Http\Middleware\TrimStrings as Middleware;
 use                             Illuminate\Http\Request;
 
-class TrimStringsTest extends TestCase
+class MiddlewareTrimStringsTest extends TestCase
 {
 
 		protected $s_sample	= '  String Surrounded by Spaces  ';
