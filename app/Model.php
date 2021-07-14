@@ -2,6 +2,7 @@
 
 namespace App;
 
+use                                             Auth;
 use                                  App\Traits\GeneralTrait;
 use                Illuminate\Database\Eloquent\Model          as BaseModel;
 use           Astrotomic\Translatable\Contracts\Translatable   as TranslatableContract;
@@ -80,6 +81,42 @@ class Model extends BaseModel
 	public function getFields()
 	{
 		return $this->a_form;
+	}
+
+	/**
+	 * set proper parent values or nullify them
+	 *
+	 * @param Request		$request			Model specific
+	 * @param Array			$a_fields			fields' names list
+	 * @param Object		$o_item				item to be created or updated
+	 *
+	 * @return void
+	 */
+	public static function _addNullValuesFromForm($request, Array $a_fields, Object $o_item = NULL) : void
+	{
+		/**
+		 *	for select2 dropdowns with list of parent items
+		 */
+		for ($i = 0; $i < count($a_fields); $i++)
+		{
+			$s_name_field	= $a_fields[$i];
+			if (stristr($s_name_field, '_id'))
+			{
+				if (stristr($s_name_field, 'user'))
+				{
+					$request->merge([
+						$s_name_field => (isset($item->user_id) ? $item->$s_name_field : Auth::user()->id),
+					]);
+				}
+
+				if (count($request->only($s_name_field)) < 1)
+				{
+					$request->merge([
+						$s_name_field => NULL
+					]);
+				}
+			}
+		}
 	}
 
 	/**

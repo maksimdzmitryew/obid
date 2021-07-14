@@ -4,7 +4,7 @@ let filters				= {}
 moment.locale(s_locale);
 
 $('#page-length').on('change', function(){
-    dt.page.len($(this).val()).draw(false);
+    dt.page.len($(this).val()).draw();
 });
 
 $('#btn-delete').on('click', function(){

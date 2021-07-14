@@ -4,7 +4,6 @@ namespace App\Traits;
 
 use App\File;
 use Carbon\Carbon;
-
 trait Imageable
 {
     private $_file;
@@ -89,10 +88,10 @@ trait Imageable
 
     public function updateImage($request, $s_image_type = 'image', $position = 0)
     {
-        $b_del = FALSE;
-        $b_upd = FALSE;
+        $b_del          = FALSE;
+        $b_upd          = FALSE;
 
-        $curr_image = $this->_getImageFile($this->image->id);
+        $curr_image     = $this->_getImageFile($this->image->id);
 
         #$this->_setImageFile($request->image_id);
 
@@ -118,10 +117,7 @@ trait Imageable
 
     public function attachImage($request, $s_image_type = 'image', $position = 0)
     {
-        #if (! $this->_file)
-        #{
-            $this->_setImageFile($request->image_id);
-        #}
+        $this->_setImageFile($request->image_id);
 
         if ($this->_file) {
             $this->_file->fileable()->associate($this);

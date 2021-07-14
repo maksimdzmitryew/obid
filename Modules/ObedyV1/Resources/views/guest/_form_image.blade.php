@@ -22,7 +22,7 @@ $(document).ready(function(){
 	@include('modules.uploader.data2js')
 </script>
 <script src="{{ asset('/admin/js/plugins/uploaders/dmUploader.js') }}"></script>
-<script src="{{ asset('/modules/image/admin_form.js') }}"></script>
+<script src="{{ asset('/modules/upload/admin_form.js?v=' . $version->js) }}"></script>
 @endsection
 
 <div class="image_id" data-name="{!! $s_dataname !!}">

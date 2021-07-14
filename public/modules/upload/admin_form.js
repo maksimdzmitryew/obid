@@ -25,12 +25,11 @@ $(document).ready(function(){
 			extraData:  {},
 			extFilter:  ext,
 			onNewFile: function(id, file){
-
 			    let reader = new FileReader(),
 			        container = $(this).closest('.field-body').find('#previews'),
 			        _self = $(this),
 			        lang = $(this).closest('.field-body').data('lang'),
-			        field_name = _self.data('type') === 'image' ? 'image_ids[]' : 'file_id',
+			        field_name = _self.data('type') === 'image' ? 'image_ids[]' : $(this).closest('.file_id').data('name'),
 			        tpl_type = _self.data('type') === 'image' ? 'image' : 'file';
 
 				if (typeof lang != 'undefined')
@@ -39,14 +38,14 @@ $(document).ready(function(){
 				}
 
 			    reader.onload = function(e) {
-
 					viewUploadedFile({
 						'id': id,
 						'tpl': tpl_type,
 						'name': file.name,
 						'size': (file.size / 1024 / 1024).toFixed(2),
 						'field_name': field_name,
-						'src': _self.data('type') === 'image' ? e.target.result : _self.data('preview')
+						// https://www.iconfinder.com/iconsets/file-types-6
+						'src': _self.data('type') === 'image' ? e.target.result : "/admin/images/" + _self.data('type') + "-ico-default.png"
 					}, id, container);
 			    }
 
@@ -65,7 +64,14 @@ $(document).ready(function(){
 						.replace(/disabled="disabled"/g, '')
 				);
 				if (typeof data.image == 'object')
+				{
 					$('#preview-' + id).find('img').attr('src', data.image.small_image_url);
+				}
+				else if (typeof data.file == 'object')
+				{
+					img = $('#preview-' + id).find('img');
+					img.attr('src', img.attr('src').replace('default', data.file.ext));
+				}
 				$('#preview-' + id).find('.data input').val(file_id).removeAttr('disabled');
 			},
 			onUploadError: function(id, message){

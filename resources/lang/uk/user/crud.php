@@ -20,7 +20,7 @@ return [
 		'title'			=> 'Назвою',
 		'created_at'	=> 'датою створення',
 		'updated_at'	=> 'датою оновлення',
-		'perpage'		=> 'записами на сторінці',
+		'perpage'		=> 'записів на сторінці',
 	],
 	'table' => [
 		'created_at'	=> 'Створено',
@@ -36,16 +36,6 @@ return [
 			'filterby'	=> 'дійсністю',
 			'typein'	=> 'дійсність',
 		],
-		'email' => [
-			'label'		=> 'Е-пошта',
-			'filterby'	=> 'е-поштою',
-			'typein'	=> 'е-пошту',
-		],
-		'first_name' => [
-			'label'		=> 'Ім’я',
-			'filterby'	=> 'ім’ям',
-			'typein'	=> 'Ім’я',
-		],
 		'id' => [
 			'label'		=> 'ID',
 		],
@@ -53,11 +43,6 @@ return [
 			'label'		=> 'Зображення',
 			'filterby'	=> 'зображенням',
 			'typein'	=> 'зображенні',
-		],
-		'last_name' => [
-			'label'		=> 'Прізвище',
-			'filterby'	=> 'прізвищем',
-			'typein'	=> 'прізвище',
 		],
 		'published' => [
 			'label'		=> 'Опублікувати',
@@ -75,10 +60,38 @@ return [
 		'user_name' => [
 			'label'		=> 'Ім‘я Прізвище',
 		],
+//
+// TODO remove when users Module is ready
+/********************************* datatable *********************************/
+		'first_name'	 => [
+			'label'			=> 'Ім’я',
+			'filterby'	=> 'ім’ям',
+			'typein'		=> 'Ім’я',
+		],
+		'last_name' 	=> [
+			'label'			=> 'Прізвище',
+			'filterby'	=> 'прізвищем',
+			'typein'		=> 'прізвище',
+		],
+		'email' => [
+			'label'			=> 'Е-пошта',
+			'filterby'	=> 'е-поштою',
+			'typein'		=> 'е-пошту',
+		],
+/********************************* /datatable *********************************/
+// TODO remove when users Module is ready
+//
 	],
 	'hint' => [
 		'disabled'		=> 'Вимкн.',
 		'enabled'		=> 'Увімкн.',
+//
+// TODO remove when users Module is ready
+/********************************* filter *********************************/
+		'select'		=> 'Оберіть',
+/********************************* /filter *********************************/
+// TODO remove when users Module is ready
+//
 	],
 	'button' => [
 		'add' => [

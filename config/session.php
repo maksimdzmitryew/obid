@@ -123,7 +123,8 @@ return [
     */
 
     'cookie' => env(
-        'SESSION_COOKIE', config('app.name').'_session'
+        'SESSION_COOKIE',
+        config('app.name').'_session'
     ),
 
     /*

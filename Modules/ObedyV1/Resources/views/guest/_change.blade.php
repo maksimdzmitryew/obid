@@ -1,7 +1,7 @@
 					<div id="tab-change" class="tab{{ request()->segment(1) == 'change' ? ' opened' : '' }}">
 						<div class="user_details">
 							<div class="img" style="width: 10px;"></div>
-							<div class="name">{!! trans('general.my-area') !!} <span>{{ trans('user/form.text.hint_change') }}</span></div>
+							<div class="name">{!! trans('general.my-area', ['app_name' => trans('app.name')]) !!} <span>{{ trans('user/form.text.hint_change') }}</span></div>
 							<div class="divider"></div>
 						</div>
 						<form action="{!! route('password_change') !!}" method="POST" class="form-page" id="password-change-form">

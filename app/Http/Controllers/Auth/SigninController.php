@@ -40,7 +40,7 @@ class SigninController	extends Controller
 		else
 			$i_safety = NULL;
 
-		session(['safety' => $i_safety]);
+#		session(['safety' => $i_safety]);
 
 		if ($i_safety == 1)
 			$s_email = $request->email;
@@ -57,10 +57,12 @@ class SigninController	extends Controller
 			$cookie_expired_in	= 2629800;//in mins = 5 years
 			$cookie_path		= '/'; // available to all pages of website.
 			$cookie_host		= $request->getHttpHost(); // domain or website you are setting this cookie.
-			$http_only			= false;
-			$secure				= false;
-			$raw				= false;
-			$samesite			= null;
+			$http_only			= FALSE;
+/*
+$secure				= false;
+$raw					= false;
+$samesite			= null;
+*/
 			$my_cookie			= cookie($cookie_name, $cookie_value, $cookie_expired_in,$cookie_path,$cookie_host,$http_only);
 			Cookie::queue($my_cookie);
 
@@ -117,7 +119,7 @@ class SigninController	extends Controller
 		return view($this->_env->s_view . 'login',
 					[
 						'safety'		=> $i_safety,
-						'email'			=> $s_email,
+						'email'		=> $s_email,
 						'tab'			=> request()->segment(1),
 					]);
 	}

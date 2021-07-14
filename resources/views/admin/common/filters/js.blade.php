@@ -59,7 +59,7 @@ function initFilters(){
                 picker.element.closest('.filter').attr('data-value', picker.startDate.format('YYYY-MM-DD HH:mm:ss') + '|' + picker.endDate.format('YYYY-MM-DD HH:mm:ss'));
             });
         }else if(filter.data('filter-type') === 'select'){
-
+/*
             filter.find('select').multiselect('destroy').multiselect({
                 onChange: function(){
 
@@ -86,6 +86,7 @@ function initFilters(){
 
                 }
             });
+*/
         }
     });
 }
@@ -122,10 +123,59 @@ function applyFilters(message = true){
 
             if( ! value[0]) return;
 
-            if(filter.find('select').data('multiselect').$select.prop('multiple')){
-                filters[filter.data('name')] = value;
-            }else{
-                filters[filter.data('name')] = value[0];
+            // for a pre-filled dropdown
+            if (typeof filter.find('select').data('multiselect') != 'undefined')
+            {
+                if(filter.find('select').data('multiselect').$select.prop('multiple')){
+                    filters[filter.data('name')] = value;
+                }else{
+                    filters[filter.data('name')] = value[0];
+                }
+            }
+            // for a live dropdown that gets data via ajax
+            else
+            {
+                s_filter_name = filter.data('name');
+                // reset previous selection of parent item
+                filters[s_filter_name] = 0;
+
+                if (s_filter_name == 'page_id')
+                {
+                    // a non-default option is selected
+                    if (filter.find('select').val() != null)
+                    {
+                        filters[s_filter_name] = filter.find('select').val();
+
+                        var a_new_option = {
+                            qty: 500,
+                            text: '{!! trans('user/crud.filter.perpage') !!}'
+                        };
+
+                        // show more results so all pages are visible
+
+                        if ($('#page-length').find("option[value='" + a_new_option.qty + "']").length) {
+                            $('#page-length').val(a_new_option.qty);
+                        } else {
+                            // add new option per page = 500
+                            // select the option
+                            var newOption = new Option(a_new_option.qty + ' ' + a_new_option.text, a_new_option.qty, true, true);
+                            // Append it to the select
+                            $('#page-length').append(newOption);
+                        }
+                        // sort by order column
+                        dt.order([[4, "asc",]]);
+                    }
+                    else
+                    // restore selection and sorting
+                    {
+                        // TODO remember last selected
+                        // 1) per page
+                        // 2) sort order and column(s)
+                        $('#page-length').val(i_perpage);
+                        dt.order(a_order);
+                    }
+                }
+
             }
         }
     });
@@ -133,7 +183,9 @@ function applyFilters(message = true){
     dt.draw(true);
 
     if(message)
+    {
         notify('{!! trans('common/messages.apply_filters') !!}', 'info', 2000);
+    }
 }
 
 $('#btn-filter').on('click', function(){
@@ -170,7 +222,7 @@ function resetFilters(message = true){
             filter.attr('data-value', drp.startDate.format('YYYY-MM-DD HH:mm:ss') + '|' + drp.endDate.format('YYYY-MM-DD HH:mm:ss'));
 
         }else if(filter.data('filter-type') === 'select'){
-
+/*
             let multiselect = filter.find('select').data('multiselect'),
                 values = String(filter.data('default-value')).split('|');
 
@@ -183,6 +235,7 @@ function resetFilters(message = true){
             multiselect.refresh();
 
             filter.attr('data-value', values.join('|'))
+*/
         }
     });
 
@@ -194,4 +247,3 @@ $('#btn-reset').on('click', function(){
     resetFilters();
     applyFilters(false);
 });
-

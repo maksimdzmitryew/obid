@@ -1,24 +1,8 @@
 @php
-	if (!isset($b_tpl_loaded) && isset($s_preview_tpl)):
-@endphp
-@section('js')
-
-<script type="text/javascript">
-	@include('modules.uploader.data2js')
-</script>
-<script src="{{ asset('/admin/js/plugins/uploaders/dmUploader.js') }}"></script>
-<script src="{{ asset('/modules/upload/admin_form.js?v=' . $version->js) }}"></script>
-@append
-@php
-	endif;
+	if (isset($control) && !isset($b_tpl_loaded[$control]) && Route::has('api.upload.' . $control)):
 @endphp
 
-@php
-	if (isset($s_preview_tpl) && !isset($b_tpl_loaded[$s_preview_tpl]) && Route::has('api.upload.' . $s_preview_tpl)):
-@endphp
-@php /*=====preview-tpl-{!! $s_preview_tpl !!}====*/ @endphp
-
-<div id="preview-tpl-{!! $s_preview_tpl !!}" class="d-none">
+<div id="preview-tpl-{!! $control !!}" class="d-none">
 <!--
     <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb" id="preview-${id}" data-id="">
         <div class="kv-file-content text-center">
@@ -48,13 +32,10 @@
             </div>
             <div class="clearfix"></div>
         </div>
-    @if ($s_preview_tpl == 'image')
-	@include('modules.image.admin_tpl_copyright')
-	@endif
     </div>
 -->
 </div>
 @php
-	$b_tpl_loaded[$s_preview_tpl] = TRUE;
+	$b_tpl_loaded[$control] = TRUE;
 	endif;
 @endphp

@@ -34,6 +34,32 @@ $(document).ready(function () {
 	@if ($b_disabled)
 	$("#{!! $s_id !!}_off").select2({disabled:true});
 	@endif
+
+	sel2 = $("#{!! $s_id !!}");
+
+	if (typeof preselected2 == "undefined")
+	{
+		preselected2 = new Array;
+	}
+	// store pre-selected value
+	preselected2.{!! $s_id !!} = sel2.val();
+
+	// restore initial value when page loaded
+	$('#btn-restore').on('click', function(){
+		sel2.val(preselected2["{!! $s_id !!}"]).trigger('change');
+	});
+
+	// clear selection
+	$('#btn-clean').on('click', function(e) {
+		var $target = $(this);
+		sel2.val(null).trigger('change');
+		$("#{!! $s_id !!}").find('option:selected').removeAttr("selected");
+	});
+
+	$('#btn-open').on('click', (e) => {
+		sel2.select2('open');
+	});
+
 });
 </script>
 @append

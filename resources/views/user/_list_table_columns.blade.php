@@ -14,4 +14,4 @@
 
 @include('user._list_date', ['s_name' => 'created_at', ])
 @include('user._list_date', ['s_name' => 'updated_at', ])
-@include('user._list_id')
+@include('user._list_id', ['s_name' => 'id', ])

@@ -30,7 +30,7 @@ class UploadController extends Controller
 		];
 
 		$o_file			= $request->file;
-		$s_file_ext		= $o_file->guessExtension(); #getClientOriginalExtension
+		$s_file_ext	= $o_file->guessExtension(); #getClientOriginalExtension
 		$s_type			= 'doc';
 
 		foreach($a_types as $s_file_type => $a_extensions) {
@@ -49,9 +49,10 @@ class UploadController extends Controller
 		$a_file_data =
 		[
 			'type'						=> $s_type,
-			'url'						=> $s_file_url . $s_file_name,
+			'ext'							=> $s_file_ext,
+			'url'							=> $s_file_url . $s_file_name,
 			'path'						=> $s_file_path . $s_file_name,
-			'savedname'					=> $s_file_name,
+			'savedname'				=> $s_file_name,
 			'title'						=> $o_file->getClientOriginalName(),
 			'size'						=> $o_file->getSize(), #round($o_file->getSize() / 1024, 2)
 		];
@@ -62,7 +63,8 @@ class UploadController extends Controller
 			$a_file_data['copyright']	= $request->copyright;
 
 		$a_file = File::create($a_file_data);
-		$a_file['size'] = round($a_file['size']/1024, 2);
+		$a_file['size']			= round($a_file['size']/1024, 2);
+		$a_file['ext']			= $s_file_ext;
 
 		return [
 			'file'    => $a_file
@@ -72,7 +74,13 @@ class UploadController extends Controller
 	public function image(Request $request) : Array
 	{
 		$this->validate($request, [
-			'image' => 'required|image'
+      /**
+       *  image validator is buggy
+       *  https://stackoverflow.com/questions/65434042/jpeg-file-not-recognized-as-image-in-laravel
+       *
+       * 'image' => 'required|image'
+       */
+      'image' => 'required|mimes:jpeg,jpg,png,gif'
 		]);
 
 		$sizes = [

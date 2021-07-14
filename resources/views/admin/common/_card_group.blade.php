@@ -21,7 +21,7 @@
 	padding-top:20%;text-align: center;
 }
 .sub_level {
-	text-align: left; padding-left: 20px;
+	text-align: left; padding-left: 10px;
 }
 .sub_level a {
 	color: white
@@ -32,7 +32,7 @@
 </style>
 
 @foreach($menu_title AS $i_idx => $menu_name)
-<div class="card_group" style="background-color:{{ $menu_color[$i_idx] }};">
+<div class="card_group" style="background-color:{{ $menu_color[$i_idx] }}; color:{{ $text_color[$i_idx] }};">
 	<div class="top_level" style="">
 		<i style="font-size:6em" class="{{ $menu_icon[$i_idx] }}"></i>
 		<br />
@@ -40,8 +40,24 @@
 	</div>
 	<div class="sub_level" style="">
 		@foreach($menu_list[$i_idx] AS $i_cnt => $menu_item)
-		<a href="{!! route('admin.' . $menu_item . '.index') !!}" class="nav-link">
-		<i class="{!! Config::get($menu_item.'.ico') !!} {!! config('icons.'.$menu_item) !!}"></i><span>{!! trans($menu_item . '::crud.names.plr') !!}</span>
+		<a href="{!! route('admin.' . $menu_item . '.index') !!}" class="nav-link" style="color:{{ $text_color[$i_idx] }};">
+		<i class="{!! Config::get($menu_item.'.ico') !!} {!! config('icons.'.$menu_item) !!}"></i><span>
+{{--
+//
+// TODO remove when users Module is ready
+/********************************* datatable *********************************/
+--}}
+				@if ($menu_item == 'user')
+				{!! trans('app/user.menu.title') !!}
+				@else
+				{!! trans($menu_item . '::crud.names.plr') !!}
+				@endif
+{{--
+/********************************* /datatable *********************************/
+// TODO remove when users Module is ready
+//
+--}}
+				</span>
 		</a>
 		@endforeach
 	</div>

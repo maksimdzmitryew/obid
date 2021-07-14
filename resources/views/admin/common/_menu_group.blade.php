@@ -7,7 +7,21 @@
 			<a href="{!! route('admin.' . $menu_item . '.index') !!}" class="nav-link {!! in_array(request()->segment(2), [$menu_item]) ? 'active' : '' !!}">
 				<i class="{!! Config::get($menu_item.'.ico') !!} {!! config('icons.'.$menu_item) !!}"></i>
 				<span>
+{{--
+//
+// TODO remove when users Module is ready
+/********************************* datatable *********************************/
+--}}
+				@if ($menu_item == 'user')
+				{!! trans('app/user.menu.title') !!}
+				@else
 				{!! trans($menu_item . '::crud.names.plr') !!}
+				@endif
+{{--
+/********************************* /datatable *********************************/
+// TODO remove when users Module is ready
+//
+--}}
 				</span>
 			</a>
 		</li>

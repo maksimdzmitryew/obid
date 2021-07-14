@@ -32,7 +32,7 @@ include(base_path().'/resources/views/user/crud.php');
 	<script src="{{ asset('/admin/js/plugins/ui/moment/moment_locales.min.js') }}"></script>
 	<script src="{{ asset('/admin/js/plugins/pickers/daterangepicker.js') }}"></script>
 	<script src="{{ asset('/admin/js/lists.js?v=' . $version->js) }}"></script>
-@endsection
+@append
 
 @section('script')
 	<script type="text/javascript">
@@ -44,31 +44,73 @@ include(base_path().'/resources/views/user/crud.php');
 			if (typeof a_order == 'undefined')
 				a_order = [ 2, "asc" ];
 
+			if (typeof i_perpage == 'undefined')
+				i_perpage = 20;
+
 			@include('admin.common.list_js')
 			@include('admin.common.filters.js')
 
 			let dt = $('.table').DataTable({
 				'language': {
-					'lengthMenu':		'{!! trans('common/datatable.lengthMenu') !!}',
-					'zeroRecords':		'{!! trans('common/datatable.zeroRecords') !!}',
-					'info':				'{!! trans('common/datatable.info') !!}',
-					'infoEmpty':		'{!! trans('common/datatable.infoEmpty') !!}',
-					'infoFiltered':		'{!! trans('common/datatable.infoFiltered') !!}',
+					"aria"						: {
+						"sortAscending"	: '{!! trans('common/datatable.sortAscending') !!}',
+						"sortDescending": '{!! trans('common/datatable.sortDescending') !!}',
+						},
+					"decimal"					: '{!! trans('common/datatable.decimal') !!}',
+					"emptyTable"			: '{!! trans('common/datatable.emptyTable') !!}',
+					'info'						: '{!! trans('common/datatable.info') !!}',
+					'infoEmpty'				: '{!! trans('common/datatable.infoEmpty') !!}',
+					'infoFiltered'		: '{!! trans('common/datatable.infoFiltered') !!}',
+					"infoPostFix"			: '{!! trans('common/datatable.infoPostFix') !!}',
+					'lengthMenu'			: '{!! trans('common/datatable.lengthMenu') !!}',
+					"loadingRecords"	: '{!! trans('common/datatable.loadingRecords') !!}',
+					"paginate"				: {
+						"first"					: '{!! trans('common/datatable.first') !!}',
+						"last"					: '{!! trans('common/datatable.last') !!}',
+						"next"					: '{!! trans('common/datatable.next') !!}',
+						"previous"			: '{!! trans('common/datatable.previous') !!}',
+						},
+					"processing"			: '{!! trans('common/datatable.processing') !!}',
+					"search"					: '{!! trans('common/datatable.search') !!}',
+					"thousands"				: '{!! trans('common/datatable.thousands') !!}',
+					'zeroRecords'			: '{!! trans('common/datatable.zeroRecords') !!}',
+
 				},
 				dom: 'tip',
+				deferRender: true,
 				autoWidth: false,
 				processing: true,
 				serverSide: true,
 				searching: false,
-				pageLength: 20,
+				pageLength: i_perpage,
 				select: {
 					style: 'os',
 					selector: 'td:not(:last-child)'
 				},
-                order: a_order,
+				order: a_order,
 				columns: [
 					@include('user._list_table_columns')
 				],
+
+				// Per-row function to iterate cells
+				"createdRow": function (row, data, rowIndex) {
+					$(row).attr('data-id', data.id);
+/*
+					// Per-cell function to do whatever needed with cells
+					$.each($('td', row), function (colIndex) {
+						// For example, adding data-* attributes to the cell
+						$(this).attr('data-content', $(this).html());
+					});
+*/
+				},
+				// Sets the attribute
+				"columnDefs": [{
+					"targets":'_all',
+					"createdCell": function(cell, data, cellIndex){
+						cell.setAttribute('data-content',data);
+					}
+				}],
+
 				ajax: {
 					url: '{!! route('api.'.$s_category.'.index') !!}',
 					data: function(data){

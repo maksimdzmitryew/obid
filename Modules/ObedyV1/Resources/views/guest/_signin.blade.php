@@ -1,7 +1,7 @@
 					<div id="tab-signin" class="tab{{ request()->segment(1) == 'signin' ? ' opened' : '' }}">
 						<div class="user_details">
 							{{-- <div class="img" style="width: 10px;"></div> --}}
-							<div class="name">{!! trans('general.my-area') !!} <span>{{ trans('user/form.text.hint_in') }}</span></div>
+							<div class="name">{!! trans('general.my-area', ['app_name' => trans('app.name')]) !!} <span>{{ trans('user/form.text.hint_in') }}</span></div>
 							<div class="divider"></div>
 						</div>
 						<form action="{!! route('signin_page') !!}" method="POST" class="form-page" id="signin-form">
@@ -32,7 +32,6 @@
 
 <section class="radio_wrap">
 
-
 {{--
 									<div class="value">
 --}}
@@ -40,8 +39,8 @@
 
 
 <div class="radio_wrap">
-  <input type="radio" id="control_{{ $i }}" name="select" value="{{ $i }}" checked>
-  <label for="control_{{ $i }}">
+  <input type="radio" name="login_safety" value="{!! $i !!}" {!! $i == $safety ? 'checked="checked"' : '' !!} id="login_safety_{{ $i }}" >
+  <label for="login_safety_{{ $i }}">
     <h2>{{ trans('user/form.button.remember-' . $i) }}</h2>
     <p>{{ trans('user/form.text.remember-' . $i) }}</p>
   </label>

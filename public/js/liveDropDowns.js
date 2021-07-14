@@ -17,7 +17,6 @@ function initLiveDropdowns(){
 	var selects = $(".select2-dropdown");
 	selects.each(function (i, item) {
 		var select = $(item);
-//console.log(select, select[0].id == 'place_id', select[0].baseURI);
 		select.select2(settings({
 			url: select.data('url'),
 			filter: 'title'
@@ -51,7 +50,8 @@ function settings(params){
 			data: function (settings) {
 				let filters = {};
 
-				filters[params.filter] = settings.term
+				filters[params.filter] = settings.term;
+				filters['parent'] = true;
 
 				return {
 					filters: filters
@@ -67,6 +67,7 @@ function settings(params){
 		escapeMarkup: function (markup) { return markup; },
 		minimumInputLength: 0,
 		templateResult: formatRepo,
+		allowClear: true,
 		templateSelection: formatRepoSelection
 	}
 }

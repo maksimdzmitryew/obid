@@ -92,6 +92,11 @@ class File extends Model
 		return Storage::download($this->{$s_path}, Str::ascii($this->savedname['savedname']), $headers);
 	}
 
+	public function downloadAttachment()
+	{
+		return response()->download(getcwd() . $this->url, $this->title, [ 'Content-Type' => Storage::getMimeType($this->path) ]);
+	}
+
 	public function downloadImage()
 	{
 		return response()->download(getcwd() . $this->url, $this->savedname['savedname'], [ 'Content-Type' => Storage::getMimeType($this->path) ]);

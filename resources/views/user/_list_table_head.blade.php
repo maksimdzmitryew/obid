@@ -1,5 +1,24 @@
 <th width="1px">{!! trans('user/crud.table.actions') !!}</th>
-<th width="5%">{!! trans('user/crud.table.published') !!}</th>
+
+@php
+$s_field_name			= 'published';
+
+$a_trans_path[0]	= $_env->s_sgl.'::crud';
+$a_trans_path[1]	= 'user/'.$_env->s_sgl;
+$a_trans_path[2]	= 'user/crud';
+
+$s_label			= '';
+for ($i = 0; $i < count($a_trans_path); $i++)
+{
+	$s_tmp			= $a_trans_path[$i] . '.field.'.$s_field_name.'.label';
+	if (empty($s_label) && trans($s_tmp) != $s_tmp)
+	{
+		$s_label = trans($s_tmp);
+	}
+}
+@endphp
+
+<th width="5%">{!! $s_label !!}</th>
 
 @if (!isset($b_title) || (isset($b_title) && $b_title))
 @php
@@ -12,8 +31,25 @@
 @endif
 
 @if (isset($a_columns) && count($a_columns) > 0)
-@foreach ($a_columns AS $s_name => $s_type)
-<th width="10%">{!! trans($_env->s_sgl.'::crud.field.' . $s_name . '.label') !!}</th>
+@foreach ($a_columns AS $s_field_name => $s_type)
+
+@php
+$a_trans_path[0]	= $_env->s_sgl.'::crud';
+$a_trans_path[1]	= 'user/'.$_env->s_sgl;
+$a_trans_path[2]	= 'user/crud';
+
+$s_label			= '';
+for ($i = 0; $i < count($a_trans_path); $i++)
+{
+	$s_tmp			= $a_trans_path[$i] . '.field.'.$s_field_name.'.label';
+	if (empty($s_label) && trans($s_tmp) != $s_tmp)
+	{
+		$s_label = trans($s_tmp);
+	}
+}
+@endphp
+
+<th width="10%">{!! $s_label !!}</th>
 @endforeach
 @endif
 

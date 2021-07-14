@@ -14,6 +14,7 @@
 
 	@yield('css')
 	@yield('css-checkbox')
+    @yield('css-file')
 	@yield('css-image')
 	@yield('css-input')
 	@yield('css-select')
@@ -343,12 +344,14 @@ https://sweetalert.js.org/docs/#buttons
 
 @yield('js')
 @yield('js-checkbox')
+@yield('js-file')
 @yield('js-image')
 @yield('js-input')
 @yield('js-select')
 
 @yield('script')
 @yield('script-checkbox')
+@yield('script-file')
 @yield('script-image')
 @yield('script-input')
 @yield('script-select')

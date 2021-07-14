@@ -4,4 +4,6 @@
 		@include('user._list_table_head')
 	</tr>
 	</thead>
+	<tbody>
+	</tbody>
 </table>

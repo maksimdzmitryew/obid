@@ -29,11 +29,13 @@ class Plate extends Model
 			'rules'		=> 'boolean',
 			'default'	=>	TRUE,
 		],
+/*
 		'demand_ids'		=> [
 			'tab'		=> 'data',
 			'field'		=> 'select',
 			'rules'		=> '',
 		],
+*/
 	];
 
 	/**

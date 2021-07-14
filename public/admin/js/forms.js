@@ -39,6 +39,15 @@ fnForm = function(e){
 		;
 
 	disableSubmit($this);
+
+	// wysiwyg is loaded
+	if (typeof(CKEDITOR) !== "undefined")
+	{
+		for (instance in CKEDITOR.instances) {
+			CKEDITOR.instances[instance].updateElement();
+		}
+	}
+
 	refreshToken();
 	$.ajax({
 		url:	form.attr('action'),
@@ -330,6 +339,10 @@ function runSwal(b_keep_form)
 
 function resetForm(form)
 {
+	if (typeof (form.find) === 'undefined')
+	{
+		return false;
+	}
 	if (typeof (s_action_form) !== 'undefined' && s_action_form == 'create')
 	{
 		// clean all fields once the form's been saved

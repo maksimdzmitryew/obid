@@ -1,18 +1,11 @@
-{{--
-
-//TODO
-
-need further unification with _form_file.blade.php
-
---}}
 @section('script-' . $control)
 <script>
 b_{!! $control !!}_single = {!! $b_many ? 0 : 1 !!};
 $(document).ready(function(){
-	new Sortable($('#previews'), {
-		animation: 300,
-		delay: 0
-	});
+
+
+
+
 });
 </script>
 @endsection
@@ -41,7 +34,7 @@ $(document).ready(function(){
 		<span class="badge badge-primary tooltip-helper d-block float-right my-2 px-1" data-toggle="tooltip" title="{!! $s_rules !!}"><i class="icon-info3"></i></span>
 	</div>
 
-@include($theme . '::user._form_previews');
+@include($theme . '::user._form_previews')
 
 </div>
 

@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
-use                                      App\Text;
-use                       Illuminate\Support\ServiceProvider;
-use                          Illuminate\Http\Request;
-use               Illuminate\Support\Facades\DB;
-use               Illuminate\Support\Facades\App;
-use                               App\Traits\LocaleTrait;
+use                                  App\Traits\LocaleTrait;
+use                                         App\Text;
+use                  Illuminate\Support\Facades\App;
+use                  Illuminate\Support\Facades\DB;
+use                  Illuminate\Support\Facades\Schema;
+use                             Illuminate\Http\Request;
+use                          Illuminate\Support\ServiceProvider;
+
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -20,10 +22,34 @@ class ViewComposerServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		$this->_L10N2config();
+
 		// TODO refactroring
 		// app/Http/Controllers/Controller.php
-		$o_settings	= app('App\Settings');
-		$s_theme	= $o_settings->theme;
+
+		if (Schema::hasTable('settings'))
+		{
+			$o_settings	= app('App\Settings');
+		}
+		// TODO refactroring
+		// for purpose of unit-testing only
+		else
+		{
+			$o_settings =  new \stdClass();
+		}
+		// TODO refactroring
+		// for purpose of unit-testing only
+		if (!isset($o_settings->theme))
+		{
+			$a_modules = config('fragment.modules');
+			$o_settings->theme = lcfirst($a_modules[0]);
+			$o_settings->title = '';
+			$o_settings->established = 2020;
+		}
+
+		if (isset($o_settings->theme))
+		{
+			$s_theme	= $o_settings->theme;
+		}
 
 		$a_version	= include_once( base_path(). '/version.php');
 

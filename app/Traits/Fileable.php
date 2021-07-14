@@ -2,74 +2,147 @@
 
 namespace App\Traits;
 
-use App\File;
+use                                      Carbon\Carbon;
+use                                         App\File;
 
 trait Fileable
 {
-    public function file()
-    {
-        return $this->morphOne('App\File', 'fileable')->where('type', 'doc')->withDefault();
-    }
+	private $_file;
 
-    public function archive()
-    {
-        return $this->morphOne('App\File', 'fileable')->where('type', 'archive')->withDefault();
-    }
+	public function file()
+	{
+		return $this->morphOne('App\File', 'fileable')->where('type', 'doc')->withDefault();
+	}
 
-    public function updateFile($file_id)
-    {
-        if ($this->file->id == $file_id) {
-            return $this;
-        }
+	public function files()
+	{
+		return $this->morphMany('App\File', 'fileable');
+	}
 
-        $old_file = $this->file->id ? File::find($this->file->id) : null;
-        $new_file = $file_id ? File::find($file_id) : null;
+	private function _cleanGarbage($request, Array $a_field_name) : void
+	{
+		$a_files_orphan = array();
+		$a_files_ignore = array();
 
-        if ($old_file && ! $file_id) {
-            $old_file->delete();
-        } elseif ($new_file) {
-            $new_file->fileable()->associate($this);
-            $new_file->save();
+		# garbage collector
+		# clean up uploaded files but yet not attached to any item in DB
+		# older than 1 week ago
+		$res = File::where('fileable_id', '=', NULL)->where('created_at', '<', Carbon::today()->subWeek())->get();
 
-            if ($old_file) {
-                $old_file->delete();
-            }
-        }
+		if ($res->count() > 0)
+			$a_files_orphan = array_merge($a_files_orphan, $res->map->id->toArray());
 
-        return $this;
-    }
+		for ($i = 0; $i < count($a_field_name); $i++)
+		{
+			$s_tmp		= $a_field_name[$i];
+			if (!is_null($this->$s_tmp))
+			{
+				$a_files_ignore[] = (int)$this->$s_tmp;
+			}
+			if (!is_null($request->$s_tmp))
+			{
+				$a_files_ignore[] = (int)$request->$s_tmp;
+			}
+		}
+		if ($this->files)
+			$a_files_orphan = array_merge($a_files_orphan, $this->files->map->id->toArray());
 
-    public function updateArchive($file_id)
-    {
-        if ($this->archive->id == $file_id) {
-            return $this;
-        }
+		if (count($a_files_orphan) > 0)
+		{
+			# delete only files that are not in the array form submitted by user
+			$a_files_orphan = array_diff($a_files_orphan, $a_files_ignore);
+			# clean actual files
+			# clean DB records
+			foreach ($a_files_orphan as $value) {
+				$this->_getFile($value)->delete();
+			}
+/*
+			// what does this do?
+			File::destroy($a_files_orphan);
+*/
+		}
+	}
 
-        $old_file = $this->archive->id ? File::find($this->archive->id) : null;
-        $new_file = $file_id ? File::find($file_id) : null;
+	public function processFiles($request, $s_file_type = 'file', $o_env)
+	{
+		$a_field_name	= $o_env->a_types['file'];
 
-        if ($old_file && ! $file_id) {
-            $old_file->delete();
-        } elseif ($new_file) {
-            $new_file->fileable()->associate($this);
-            $new_file->save();
+		if (empty($a_field_name))
+		{
+			$a_field_name   = ['file_id'];
+		}
 
-            if ($old_file) {
-                $old_file->delete();
-            }
-        }
+  	self::_cleanGarbage($request, $a_field_name);
 
-        return $this;
-    }
+		for ($i = 0; $i < count($a_field_name); $i++)
+		{
+			$s_tmp		= $a_field_name[$i];
+			$this->_updateFile($request, $s_tmp);
+		}
+	}
 
+	private function _getFile($file_id)
+	{
+		return $file_id ? File::find($file_id) : null;
+	}
 
-    public function attachFile($file_id)
-    {
-        if ($file_id && $file = File::find($file_id)) {
-            $file->fileable()->associate($this);
-            $file->save();
-        }
+	private function _setFile($file_id)
+	{
+		$this->_file = $this->_getFile($file_id);
+	}
 
-        return $this;
-    }
+	public function archive()
+	{
+		return $this->morphOne('App\File', 'fileable')->where('type', 'archive')->withDefault();
+	}
+
+	private function _updateFile($request, $s_name)
+	{
+		$b_del			= FALSE;
+		$b_upd			= FALSE;
+		$i_id			= NULL;
+		$this->_file	= NULL;
+
+		$curr_file		= $this->_getFile($this->$s_name);
+		if ($curr_file)
+		{
+			$i_id		= $curr_file->id;
+		}
+        $new_file		= $this->_getFile($request->$s_name);
+    # new item created
+		$b_upd = $b_upd || (is_null($request->id));
+    # exisiting item modified
+		$b_upd = $b_upd || ($this->$s_name != $request->$s_name);
+
+		if ($b_upd)
+		{
+			$this->attachFile($request, $s_name);
+			if ($this->_file)
+			{
+				$i_id		= $this->_file->id;
+			}
+		}
+
+		$b_del = $b_del || ($curr_file && !$request->$s_name);
+		$b_del = $b_del || ($curr_file && $this->_file && $this->$s_name != $request->$s_name);
+#dump('b_del='.($b_del ? 'TRUE' : 'FALSE'), $curr_file, $this->_file, $request->$s_name);
+		if ($b_del)
+		{
+			$curr_file->delete();
+			$i_id		= NULL;
+		}
+
+		$request->merge([
+			$s_name => $i_id,
+		]);
+	}
+
+	public function attachFile($request, $s_name)
+	{
+		$this->_setFile($request->$s_name);
+		if ($this->_file) {
+			$this->_file->fileable()->associate($this);
+			$this->_file->save();
+		}
+	}
 }

@@ -17,7 +17,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\StartSessionMiddleware::class,
         \App\Http\Middleware\TrimStrings::class,
         \App\Http\Middleware\TrustProxies::class,
-#		\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Spatie\CookieConsent\CookieConsentMiddleware::class,

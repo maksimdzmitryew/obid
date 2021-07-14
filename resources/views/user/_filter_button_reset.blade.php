@@ -1,0 +1,1 @@
+	<button type="button" class="btn btn-sm btn-info tooltip-helper" id="btn-{!! $btn_id ?? 'reset'!!}" data-toggle="tooltip" data-placement="top" title="{!! trans('user/crud.button.reset.key') !!} | {!! trans('user/crud.button.reset.label') !!}" data-trigger="hover"><i class="icon-reset"></i><span class="text"></span></button>

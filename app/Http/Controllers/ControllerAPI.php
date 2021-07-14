@@ -21,13 +21,12 @@ class ControllerAPI		extends BaseController
 		$this->setEnv();
 		$o_items	= $this->_env->s_model::filter($filters);
 		$i_tmp		= count($a_with);
-
+#dd($o_items->toSql(), $o_items->getBindings());
 		for ($i = 0; $i < count($a_with); $i++)
 			if ($a_with[$i] != 'user')
 				$o_items->with($a_with[$i]);
 
 		$o_res = $o_items->get();
-
 		for($i = 0; $i < $o_res->count(); $i++)
 			for ($j = 0; $j < count($a_with); $j++)
 				if ($a_with[$j] != 'user'
@@ -87,6 +86,7 @@ class ControllerAPI		extends BaseController
 		}
 
 		$this->_env->s_model::_addBoolsValuesFromForm($request);
+		$this->_env->s_model::_addNullValuesFromForm($request, $this->a_fields);
 
 		$this->o_item = $this->_env->s_model::create($request->only($this->a_fields));
 #        $design->processImages($request, 'image');
@@ -97,17 +97,17 @@ class ControllerAPI		extends BaseController
 	/**
 	 * Updated item that is being edited
 	 * @param Request	$request		Data from request
+	 * @param Object	$item				item to be updated
 	 *
 	 * @return Response	json instance of
 	 */
-	public function updateAPI($request, $item) : \Illuminate\Http\Response
+	public function updateAPI($request, Object $item) : \Illuminate\Http\Response
 	{
 		$this->setEnv();
 		$this->_env->s_model::_addBoolsValuesFromForm($request);
-		$item->update($request->only($this->a_fields));
-#        $design->update($request->only('enabled', 'uk', 'ru', 'en', 'de'));
-#        $design->processImages($request, 'image');
+		$this->_env->s_model::_addNullValuesFromForm($request, $this->a_fields, $item);
 
+		$item->update($request->only($this->a_fields));
 		return response(['id' => $item->id,], 200);
 	}
 

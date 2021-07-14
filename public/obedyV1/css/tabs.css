@@ -10,7 +10,7 @@
 
 .nav-link {
   display: block;
-  padding: 0.625rem 1.25rem; }
+  padding: 1.3rem 1.25rem 0rem 1.25rem; }
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none; }
@@ -133,15 +133,15 @@
   padding-bottom: 0.625rem; }
 
 .navbar-text.main {
-	float: left;
-	vertical-align: top;
-	width: 90%;
-	height: 100%;
+  float: left;
+  vertical-align: top;
+  width: 88%;
+  height: 100%;
 }
 .navbar-text.sub {
-	float: right;
-	width: 95px;
-	font-family: monospace;
+  float: right;
+  width: 105px;
+  font-family: monospace;
 }
 .navbar-text.sub .version.ver-id{
 	float: left;

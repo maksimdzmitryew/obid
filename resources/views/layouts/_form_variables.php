@@ -14,7 +14,6 @@ $s_route_list		= '';
 if (stristr($name, '_id'))
 {
 	$id				= $name;
-#	if (stristr($name, '_ids'))
 	$b_many			= (stristr($name, '_ids'));
 	$name			= str_replace(['_ids','_id',], '', $name);
 }
@@ -33,7 +32,7 @@ else # expected to be a foreign key *_id
 
 $s_dataname			= ($code ? $code .'.' : '') . $s_id;
 $s_fieldname		= ($code ? $code .'[' : '') . $s_id . ($code ? ']' : '');
-$s_value			= $o_item->id
+$s_value			= (is_object($o_item) && isset($o_item->id))
 						? ($code ? $o_item->translate($code)->$name : $o_item->$name)
 						: ''
 						;
@@ -105,16 +104,26 @@ $a_field_trans[]	= 'crud';
 $i = 0;
 do
 {
+    $s_tmp          = $s_category . '::crud.field.' . $s_id . '.label';
+    if (empty($s_label) && $s_tmp != trans($s_tmp)) $s_label = trans($s_tmp);
+
 	$s_tmp			= $a_field_trans[$i] . '.sgl';
 	if (empty($s_label) && $s_tmp != trans($s_tmp)) $s_label = trans($s_tmp);
 
 	$s_tmp			= $a_field_trans[$i] . '.field.' . $name . '.label';
 	if (empty($s_label) && $s_tmp != trans($s_tmp)) $s_label = trans($s_tmp);
 
+    $s_tmp          = $s_category . '::crud.field.' . $s_id . '.typein';
+    if (empty($s_typein) && $s_tmp != trans($s_tmp)) $s_typein = trans($s_tmp);
+
 	$s_tmp			= $a_field_trans[$i] . '.field.' . $name . '.typein';
 	if (empty($s_typein) && $s_tmp != trans($s_tmp)) $s_typein = trans($s_tmp);
+
 	$s_tmp			= $a_field_trans[$i] . '.typein';
 	if (empty($s_typein) && $s_tmp != trans($s_tmp)) $s_typein = trans($s_tmp);
+
+    $s_tmp          = $s_category . '::crud.field.' . $s_id . '.hint';
+    if (empty($s_hint) && $s_tmp != trans($s_tmp)) $s_hint = trans($s_tmp);
 
 	$s_tmp			= $a_field_trans[$i] . '.hint.' . $control;
 	if (empty($s_hint) && $s_tmp != trans($s_tmp)) $s_hint = trans($s_tmp);
@@ -131,7 +140,7 @@ if (empty($s_typein)) $s_typein		= '“'.$name.'”';
 if (empty($s_hint)) $s_hint			= '“'.$control.'”';
 
 /**
-dump($s_label, $s_typein);
+dump($s_category, $s_label, $s_typein);
  * Module specific user-role related
  */
 

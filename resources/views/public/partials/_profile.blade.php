@@ -1,6 +1,6 @@
 @section('js')
 <!-- http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm -->
-@if (Cookie::get( config('cookie-consent.cookie_name') ) !== null)
+@if (!config('cookie-consent.enabled') || config('cookie-consent.enabled') && Cookie::get( config('cookie-consent.cookie_name') ) !== null)
 <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.google.recaptcha.key') }}&hl={!! $app->getLocale() !!}"></script>
 @endif
 <script src="{{ asset('/admin/js/plugins/ui/moment/moment_locales.min.js') }}"></script>
@@ -12,7 +12,6 @@
 	@if (config('app.env') != 'local')
 	let reCAPTCHA_site_key = '{{ config('services.google.recaptcha.key') }}';
 	@endif
-	let i_reCAPTCHA_version = {{ config('services.google.recaptcha.version') }};
 	$(document).ready(() => {
 		function reCAPTCHA_execute () {
 			timepassed = Math.round((Date.now() - i_reCAPTCHA_update_time) / 1000) * 1000;

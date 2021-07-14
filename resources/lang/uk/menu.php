@@ -4,5 +4,6 @@ return [
 	'needs'			=> 'Попит',
 	'foods'			=> 'Їжа',
 	'menu'			=> 'Мєню',
-	'people'		=> 'Людини',
+	'people'		=> 'Люди',
+	'website'		=> 'Сайт',
 ];

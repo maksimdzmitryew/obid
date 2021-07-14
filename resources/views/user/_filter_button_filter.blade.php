@@ -1,0 +1,1 @@
+	<button type="button" class="btn btn-sm btn-primary tooltip-helper" id="btn-{!! $btn_id ?? 'filter'!!}" data-toggle="tooltip" data-placement="top" title="{!! trans('user/crud.button.apply.key') !!} | {!! trans('user/crud.button.apply.label') !!}" data-trigger="hover"><i class="icon-filter3"></i><span class="text"></span></button>

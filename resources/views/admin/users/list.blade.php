@@ -46,6 +46,31 @@ $s_category = 'user';
             let filters = {};
 
             let dt = $('.table').DataTable({
+                'language': {
+                    "aria"                      : {
+                        "sortAscending" : '{!! trans('common/datatable.sortAscending') !!}',
+                        "sortDescending": '{!! trans('common/datatable.sortDescending') !!}',
+                        },
+                    "decimal"                   : '{!! trans('common/datatable.decimal') !!}',
+                    "emptyTable"            : '{!! trans('common/datatable.emptyTable') !!}',
+                    'info'                      : '{!! trans('common/datatable.info') !!}',
+                    'infoEmpty'             : '{!! trans('common/datatable.infoEmpty') !!}',
+                    'infoFiltered'      : '{!! trans('common/datatable.infoFiltered') !!}',
+                    "infoPostFix"           : '{!! trans('common/datatable.infoPostFix') !!}',
+                    'lengthMenu'            : '{!! trans('common/datatable.lengthMenu') !!}',
+                    "loadingRecords"    : '{!! trans('common/datatable.loadingRecords') !!}',
+                    "paginate"              : {
+                        "first"                 : '{!! trans('common/datatable.first') !!}',
+                        "last"                  : '{!! trans('common/datatable.last') !!}',
+                        "next"                  : '{!! trans('common/datatable.next') !!}',
+                        "previous"          : '{!! trans('common/datatable.previous') !!}',
+                        },
+                    "processing"            : '{!! trans('common/datatable.processing') !!}',
+                    "search"                    : '{!! trans('common/datatable.search') !!}',
+                    "thousands"             : '{!! trans('common/datatable.thousands') !!}',
+                    'zeroRecords'           : '{!! trans('common/datatable.zeroRecords') !!}',
+
+                },
                 dom: 'tip',
                 autoWidth: false,
                 processing: true,

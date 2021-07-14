@@ -38,8 +38,8 @@ if (isset($$s_category))
 							)
 							;
 	$s_page_route		= ($o_item->id
-								? route('admin.' . $s_category . '.form', $o_item->id)
-								: route('admin.' . $s_category . '.form')
+								? route($s_utype . '.' . $s_category . '.form', $o_item->id)
+								: route($s_utype . '.' . $s_category . '.form')
 							);
 	$s_form_method		= ($o_item->id
 								? 'post'
@@ -58,6 +58,14 @@ if (isset($$s_category))
 		$s_route_primary	= $s_list_route;
 		$s_btn_secondary	= '';#trans('common/form.actions.create_more');
 		$s_route_secondary	= '';#$s_create_route;
+		$s_btn_extra		= '';
+		$s_route_extra		= '';
+		break;
+		case 'reaction':
+		$s_btn_primary		= trans('common/form.actions.view') . ' ' . trans("common/form.breadcrumbs.list");
+		$s_route_primary	= $s_list_route;
+		$s_btn_secondary	= '';
+		$s_route_secondary	= '';
 		$s_btn_extra		= '';
 		$s_route_extra		= '';
 		break;

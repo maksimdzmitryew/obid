@@ -20,7 +20,7 @@ class StartSessionMiddleware extends BaseStartSession
     public function handle($request, Closure $next) {
 
         # http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm
-        if (Cookie::get( config('cookie-consent.cookie_name') ) === null)
+        if (config('cookie-consent.enabled') && Cookie::get( config('cookie-consent.cookie_name') ) === null)
         {
             Config::set('session.driver', 'array');
         }

@@ -152,6 +152,7 @@ s_action_form		= '{!! ($user->id ? 'update' : 'create') !!}';
                         <legend class="text-uppercase font-size-sm font-weight-bold">{!! trans('app/user.form.legends.main') !!}</legend>
                         <form class="form-validate-jquery" action="{!! $user->id ? route('api.user.update', $user->id) : route('api.user.store') !!}" method="post">
                             <fieldset class="mb-3">
+
                                 <div class="form-group row field" data-name="first_name">
                                     <div class="col-lg-3">
                                         <label class="d-block float-left py-2 m-0">{!! trans('app/user.form.fields.first_name.label') !!} <span class="text-danger">*</span></label>
@@ -161,6 +162,7 @@ s_action_form		= '{!! ($user->id ? 'update' : 'create') !!}';
                                         <input type="text" name="first_name" class="form-control" placeholder="{!! trans('app/user.form.fields.first_name.label') !!}" autocomplete="off" value="{!! $user->first_name !!}">
                                     </div>
                                 </div>
+
                                 <div class="form-group row field" data-name="last_name">
                                     <div class="col-lg-3">
                                         <label class="d-block float-left py-2 m-0">{!! trans('app/user.form.fields.last_name.label') !!} <span class="text-danger">*</span></label>
