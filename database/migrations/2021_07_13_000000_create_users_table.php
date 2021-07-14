@@ -25,6 +25,19 @@ class CreateUsersTable extends Migration
 			$table->string('last_name')																->nullable(false);
 			$table->rememberToken()																		->nullable(false);
 			$table->string('activation_token', 40)										->nullable(false)->index();
+			/**
+			 * https://dev.mysql.com/doc/refman/8.0/en/multiple-column-indexes.html
+			 *
+			 * As an alternative to a composite index
+			 * you can introduce a column that is “hashed” based on information from other columns.
+			 * If this column is short, reasonably unique, and indexed,
+			 * it might be faster than a “wide” index on many columns.
+			 * In MySQL, it is very easy to use this extra column:
+			 * SELECT * FROM tbl_name
+					WHERE hash_col=MD5(CONCAT(val1,val2))
+					AND col1=val1 AND col2=val2;
+			 */
+			$table->string('hash_name', 32)														->nullable(false)->index();
 			$table->timestamps();
 			$table->index(['last_name', 'first_name'], self::TABLE_MIGRATION . '_name_index');
 		});
