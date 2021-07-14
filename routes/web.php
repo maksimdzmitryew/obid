@@ -40,8 +40,6 @@ $getCtrlName = function (String $s_model, String $s_type)
 	return $s_ctrl ;
 };
 
-
-
 /**
  * spell path name to be used in both URL and in 'as' alias
  *
@@ -120,12 +118,7 @@ Route::group([
 	'middleware' => []
 ], function() use ($s_type, $getPath, $getRoute) {
 	Route::group(['middleware' => 'auth'], function() use ($s_type, $getPath, $getRoute) {
-
 		$s_model	= 'Page';
-		$s_method	= 'download';
-		Route::get($getPath($s_model, '/download/{format}'),				$getRoute($s_model, $s_type, $s_method));
-
-		$s_model	= 'Reaction';
 		$s_method	= 'download';
 		Route::get($getPath($s_model, '/download/{format}'),				$getRoute($s_model, $s_type, $s_method));
 	});
@@ -151,18 +144,7 @@ Route::group([
 	$s_model	= 'Page';
 	$s_method	= 'posibnyk';
 	Route::get($getPath($s_model, '/{page_slug}'),								$getRoute($s_model, $s_type, $s_method));
-/*
-	Route::get('info/{page_slug}', [
-		'as' => 'page',
-		'uses' => 'PageController@showStaticPage']
-	);
-*/
 
-	$s_model	= 'Reaction';
-	$s_method	= 'form';
-	Route::get($getPath($s_model, '/{id?}'),											$getRoute($s_model, $s_type, $s_method));
-	$s_method	= 'save';
-	Route::get($getPath($s_model),																$getRoute($s_model, $s_type, $s_method));
 
 	Route::group(['middleware' => 'auth'], function() use ($s_type, $getPath, $getRoute) {
 		$s_model	= 'Personal';

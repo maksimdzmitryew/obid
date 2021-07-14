@@ -32,8 +32,7 @@ class PageController extends Controller
 		$o_page		= Page::getItem($request, $this->_env, 'home');
 
 		return view('welcome::guest.index', [
-#		return view($this->_env->s_view . 'index', [
-        		'page'              => $o_page,
+				'page'					=> $o_page,
 				'attachments'		=> $o_page->atts,
 		]);
 	}
@@ -54,34 +53,5 @@ class PageController extends Controller
 			]
 		);
 	}
-
-/*
-	public function showStaticPage1(Request $request){
-		$o_page = Page::where('slug', $request->page_slug)->where('published', 1)->firstOrFail();
-
-		return view(
-			'public.pages.impressum',
-			[
-				'page'              => $o_page,
-			]
-		);
-
-	}
-
-	public function showStaticPage2(Request $request){
-		if (! in_array($request->page_slug, ['about-us', 'confidentiality']))
-			die();
-		$this->setEnv();
-#        $o_page = Page::where('slug', $request->page_slug)->where('published', 1)->firstOrFail();
-		return view(
-#        	'public.pages.static',
-			'providnykV1::guest.static',
-			[
-				'page_slug'         => $request->page_slug,
-#        		'page'              => $o_page,
-			]
-		);
-	}
-*/
 
 }

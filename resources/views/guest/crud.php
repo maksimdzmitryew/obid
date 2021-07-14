@@ -61,14 +61,6 @@ if (isset($$s_category))
 		$s_btn_extra		= '';
 		$s_route_extra		= '';
 		break;
-		case 'reaction':
-		$s_btn_primary		= trans('common/form.actions.view') . ' ' . trans("common/form.breadcrumbs.list");
-		$s_route_primary	= $s_list_route;
-		$s_btn_secondary	= '';
-		$s_route_secondary	= '';
-		$s_btn_extra		= '';
-		$s_route_extra		= '';
-		break;
 		default:
 		$s_btn_primary		= ($o_item->id
 									? trans('common/form.actions.continue') . ' ' . trans('common/form.actions.edit')
