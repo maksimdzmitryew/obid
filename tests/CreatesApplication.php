@@ -23,10 +23,10 @@ DatabaseMigrations trait
 	triggers php artisan migrate command and before the application is destroyed, it rolls everything back.
 	this is the worse choice in my opinion. Migrations are applied before each test and then they are rolled back after each test so the speed of tests is not very impressive.
 */
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use               Illuminate\Foundation\Testing\RefreshDatabase;
 #use Illuminate\Foundation\Testing\DatabaseMigrations;
 #use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+#use               Illuminate\Foundation\Testing\WithoutMiddleware;
 
 trait CreatesApplication
 {

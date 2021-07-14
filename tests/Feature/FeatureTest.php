@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
-use                                    Tests\TestCase;
+use                                       Tests\TestCase;
+use               Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class FeatureTest extends TestCase
 {
+
+    use WithoutMiddleware;
+
     /**
      * A basic feature test example.
      *
