@@ -2,20 +2,13 @@
 
 namespace Tests\Feature;
 
-#use            Illuminate\Foundation\Testing\RefreshDatabase;
 use                                    Tests\TestCase;
-#use            Illuminate\Foundation\Testing\WithFaker;
 
 class HomePageTest extends TestCase
 {
 
 	public function testTitle()
 	{
-		/**
-		 *	errors will be written to stdout instead of to page contents
-		 */
-		$this->withoutExceptionHandling();
-
 		$response = $this->get('/');
 		$response->assertSee('<title>
 		FEATURE TEST
@@ -24,8 +17,9 @@ class HomePageTest extends TestCase
 
 	public function testVersionApp()
 	{
+		$a_version	= include( base_path(). '/version.php');
 		$response = $this->get('/');
-		$response->assertSee('version-app');
+		$response->assertSee('<meta name="version-app" content="' . $a_version->app . '">');
 	}
 
 	public function testThemeName()
@@ -42,4 +36,19 @@ class HomePageTest extends TestCase
 		$response = $this->get('/');
 		$response->assertSeeText('function hideCookieDialog()');
 	}
+
+	public function testVersionCss()
+	{
+		$a_version	= include( base_path(). '/version.php');
+		$response = $this->get('/');
+		$response->assertSee('.css?v=' . $a_version->css);
+	}
+
+	public function testVersionJs()
+	{
+		$a_version	= include( base_path(). '/version.php');
+		$response = $this->get('/');
+		$response->assertSee('.js?v=' . $a_version->js);
+	}
+
 }
