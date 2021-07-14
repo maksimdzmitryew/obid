@@ -42,7 +42,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 		{
 			$a_modules = config('fragment.modules');
 			$o_settings->theme = lcfirst($a_modules[0]);
-			$o_settings->title = '';
+			$o_settings->title = 'Feature Test';
 			$o_settings->established = 2020;
 		}
 
@@ -51,7 +51,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 			$s_theme	= $o_settings->theme;
 		}
 
-		$a_version	= include_once( base_path(). '/version.php');
+		$a_version	= include( base_path(). '/version.php');
 
 		\View::composer('*', function ($view) use ($a_version, $o_settings, $s_theme) {
 			if ($route = \Request::route()) {

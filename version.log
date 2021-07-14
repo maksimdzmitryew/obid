@@ -1,3 +1,4 @@
+0.11.0+a195:3 test ADD feature home page
 0.11.1+a195:2 user FIX route to homepage
 0.11.0+a195:1 user DEL clean legacy code related to reactions
 0.10.0+a195:3 user ADD page view by any visitor
@@ -6,7 +7,7 @@
 0.09.0+a195:1 user DEL legacy pages as non-module
 0.08.0+a195:2 user ADD better translations
 0.08.0+a195:1 user UPD page module
-0.07.0+a195:1 user UPD COPY improvements from core of posibnyk
+0.07.0+a195:1 user UPD COPY improvements from core of posibnyk incl. file manipulation
 0.06.0+a195:1 user UPD routes unification and clean up
 0.05.2+a195:4 user FIX many-to-many save to DB issue when updating selection
 0.05.1+a195:3 user ADD migration password reset
