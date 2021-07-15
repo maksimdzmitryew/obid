@@ -106,7 +106,7 @@ class Model extends BaseModel
 				if (stristr($s_name_field, 'user'))
 				{
 					$request->merge([
-						$s_name_field => (isset($item->user_id) ? $item->$s_name_field : Auth::user()->id),
+						$s_name_field => (isset($o_item->$s_name_field) ? $o_item->$s_name_field : Auth::user()->id),
 					]);
 				}
 
