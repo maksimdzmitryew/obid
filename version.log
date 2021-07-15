@@ -1,3 +1,4 @@
+0.11.3+a196:4 user ADD model null value to foreign keys array
 0.11.3+a196:1 user FIX item variable name
 0.11.2+a196:9 user ADD function name convention from private to public
 0.11.2+a196:8 test ADD init app-model with number format

@@ -98,6 +98,7 @@ class Model extends BaseModel
 		/**
 		 *	for select2 dropdowns with list of parent items
 		 */
+
 		for ($i = 0; $i < count($a_fields); $i++)
 		{
 			$s_name_field	= $a_fields[$i];
