@@ -17,5 +17,4 @@ class UnitTest extends TestCase
     {
         $this->assertTrue(TRUE);
     }
-
 }

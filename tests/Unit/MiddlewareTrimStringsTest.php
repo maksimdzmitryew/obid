@@ -9,36 +9,36 @@ use                             Illuminate\Http\Request;
 class MiddlewareTrimStringsTest extends TestCase
 {
 
-		protected $s_sample	= '  String Surrounded by Spaces  ';
+    protected $s_sample = '  String Surrounded by Spaces  ';
 
-		public function testDoTransform()
-		{
-				$request = new Request;
+    public function testTransformParameterAndTrimSurroundingSpaces()
+    {
+        $request = new Request;
 
-				$request->merge([
-						'last_name' => $this->s_sample
-				]);
+        $request->merge([
+            'last_name' => $this->s_sample
+        ]);
 
-				$middleware = new Middleware;
+        $middleware = new Middleware;
 
-				$middleware->handle($request, function ($req) {
-						$this->assertEquals(trim($this->s_sample), $req->last_name);
-				});
-		}
+        $middleware->handle($request, function ($req) {
+            $this->assertEquals(trim($this->s_sample), $req->last_name);
+        });
+    }
 
-		public function testSkipTransform()
-		{
-				$request = new Request;
+    public function testKeepWhitespacesIfParameterNameIsListedAsExclusion()
+    {
+        $request = new Request;
 
-				$request->merge([
-						'password' => $this->s_sample
-				]);
+        $request->merge([
+                'password' => $this->s_sample
+        ]);
 
-				$middleware = new Middleware;
+        $middleware = new Middleware;
 
-				$middleware->handle($request, function ($req) {
-						$this->assertEquals($this->s_sample, $req->password);
-				});
-		}
+        $middleware->handle($request, function ($req) {
+            $this->assertEquals($this->s_sample, $req->password);
+        });
+    }
 
 }
