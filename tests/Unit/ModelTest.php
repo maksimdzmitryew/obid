@@ -68,4 +68,19 @@ class ModelTest extends TestCase
         $this->assertEquals(count($request->only($s_name_field)), 1);
         $this->assertFalse($request->only($s_name_field)[$s_name_field]);
     }
+
+    /**
+     * spell namespace for model that is a module
+     *
+     * @test
+     * @return void
+     */
+    public function spellNamespaceForModelThatIsAModule() : void
+    {
+        $model = new Model();
+        $s_name = 'Test';
+
+        $s_namespace = $model->getModelNameWithNamespace(strtolower($s_name));
+        $this->assertEquals($s_namespace, '\Modules\\' . $s_name . '\\' . 'Database' . '\\' . $s_name);
+    }
 }

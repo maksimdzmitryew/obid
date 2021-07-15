@@ -127,16 +127,16 @@ class Model extends BaseModel
 	 *
 	 * @param Request	$request		Model specific
 	 *
-	 * @return Request	as per Model specific
+	 * @return void
 	 */
-	public static function addBoolsValuesFromForm($request)
+	public static function addBoolsValuesFromForm($request) : void
 	{
 		$request->merge([
 			'published' => !! $request->published,
 		]);
 	}
 
-	public static function getModelNameWithNamespace($s_name)
+	public static function getModelNameWithNamespace($s_name) : String
 	{
 		$s_model		= ucfirst($s_name);
 		$s_model		= '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model;
