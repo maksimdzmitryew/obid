@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Frontend;
 
 #use App\Festival;
-use App\Traits\FestivalTrait;
+#use App\Traits\FestivalTrait;
 use App\Http\Requests\SearchRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    use FestivalTrait {
-        FestivalTrait::__construct as protected __traitConstruct;
-    }
+#    use FestivalTrait {
+#        FestivalTrait::__construct as protected __traitConstruct;
+#    }
 
     public function __construct(Request $request){
         $this->__traitConstruct($request);

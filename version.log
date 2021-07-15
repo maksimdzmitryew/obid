@@ -1,3 +1,4 @@
+0.11.5+a197:2 test ADD code coverage settings
 0.11.5+a197:1 test FIX actual log branch for commits
 0.11.3+a197:6 test ADD check namespace for model in module
 0.11.3+a196:5 test ADD model null value to submitted form data
