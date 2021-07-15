@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -15,9 +18,11 @@ class StartSessionMiddleware extends BaseStartSession
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
-    public function handle($request, Closure $next) {
+    public function handle($request, Closure $next)
+    {
 
         # http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm
         if (config('cookie-consent.enabled') && Cookie::get( config('cookie-consent.cookie_name') ) === null)
