@@ -1,3 +1,4 @@
+0.11.2+a196:8 test ADD init app-model with number format
 0.11.1+a196:7 user ADD format as PSR-12 to some middleware and blade view
 0.11.1+a196:6 test FIX url when opening signin page
 0.11.0+a196:5 test ADD better function names and PHPDoc comments
@@ -115,83 +116,3 @@
 0.00.0+a166:2 user ADD translation to datatable
 0.00.0+a166:1 user ADD translation to datatable
 0.00.0+a152:1 user ADD meal clean up
-
-cookies consent design 
-https://hootsuite.com/pages/owly
-https://www.miband.org/product/xiaomi-mi-band-5-global-english-nfc-version-smart-wristband/
-https://www.xda-developers.com/xiaomi-mi-band-5-launches-with-1-2-color-screen-nfc-and-magnetic-charging/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+xda-developers%2FShsH+%28xda-developers%29
-
-Я дозволяю Організатору Програми Fishka, як Володільцю персональних даних, здійснювати обробку моїх персональних даних згідно з умовами надання згоди на обробку персональних даних і погоджуюся з усіма https://myfishka.com/rules Правилами Програми.
-
-validation errors
-https://hootsuite.com/billing/create-account?plan=PROFESSIONAL_PLAN
-
-Consent required to access this website
-Unfortunately, our paywall and function to measure trending articles does not work unless you accept our cookie requirements.
-As you have not accepted them, you will not be able to use the website.
-
-https://www.fluke.com/en-us/product/network-cable-testers/copper/cableiq-qualification-tester
-Ensures visitor browsing-security by preventing cross-site request forgery. This cookie is essential for the security of the website and visitor.
-
-Максиме Валерійовичу!
-
-На жаль, у нас немає Вашої e-mail-адреси,
-тому ми не можемо надіслати Вам квитанції
-за платежами, електронні квитки, інформацію
-щодо Ваших карток і рахунків, новини про банк
-або іншу корисну та важливу інформацію.
-
-Будь ласка, зазначте свою актуальну e-mail-адресу,
-щоб ми мали можливість оперативно проінформувати
-Вас про важливі події.
-
-We trust you have received the usual lecture from the local System
-Administrator. It usually boils down to these three things:
-
-    #1) Respect the privacy of others.
-    #2) Think before you type.
-    #3) With great power comes great responsibility.
-
-
-Зберегти
-Ми не розсилаємо спам. Якщо Ви вирішите, що наші листи
-Вам не потрібні, просто відпишіться, перейшовши
-за посиланням у кінці повідомлення.
-
-If you choose to send us your system information, you encourage better support for your system configuration in our future releases. This is entirely voluntary and anonymous. We promise never to use your information for nefarious purposes. Please click Open Preferences to learn more.
-
-Team Win strives to provide a quality product.  However, it is your decision to install our software on your device.  Team Win takes no responsibility for any damage that may occur from installing or using TWRP.
-
-Status:
-Support Status: Current
-
-Maintainer: Bruno Martins (bgcngm), Louis Popi (h2o64)
-
-https://nwidart.com/laravel-modules/v6/advanced-tools/artisan-commands
-php artisan module:use Issue
-php artisan module:unuse Issue
-php artisan module:make
-php artisan module:migrate
-php artisan module:migrate-rollback
-php artisan module:enable
-
-
-down modules<-vmware
-
-rsync -pahize 'ssh -p 30307' --progress --delete --exclude={'cache','/vendor','storage','tmp'} --exclude=composer.lock --exclude={'.git/*','.git*'} maximax@pr.max:/usr/share/nginx/www/max.pr/Modules/Issue /Volumes/ssd/Dropbox/projects/web/pr.max/Modules
-
-cd /Volumes/ssd/Dropbox/projects/web/pr.max/Modules/
-cp -r Issue Opinion
-cd Opinion
-zmv -W '**/Issue*' '**/Opinion*'
-zmv -W '**/*Issue*' '**/*Opinion*'
-zmv -W '**/*issue*' '**/*opinion*'
-zmv -W '**/*issue*' '**/*opinion*'
-find . -type f -name "*.php" -print0 | xargs -0 sed -i '' 's/Issue/Opinion/g'
-find . -type f -name "*.json" -print0 | xargs -0 sed -i '' 's/Issue/Opinion/g'
-find . -type f -name "*.php" -print0 | xargs -0 sed -i '' 's/issue/opinion/g'
-find . -type f -name "*.json" -print0 | xargs -0 sed -i '' 's/issue/opinion/g'
-cp "../../../pr/[pru] issue.sublime-workspace" "../../../pr/[pru] opinion.sublime-workspace"
-sed -i '' 's/Issue/Opinion/g' "../../../pr/[pru] opinion.sublime-workspace"
-sed -i '' 's/issue/opinion/g' "../../../pr/[pru] opinion.sublime-workspace"
-
