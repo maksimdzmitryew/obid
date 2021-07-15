@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use                                       Tests\TestCase;
@@ -10,7 +12,30 @@ class SigninPageTest extends TestCase
 
     use WithoutMiddleware;
 
-    public function testTitle()
+    /**
+     * Webserver config is correct and signin page is opened
+     *
+     * @test
+     * @return void
+     */
+    public function webserverConfigIsCorrectAndSigninPageIsOpened() : void
+    {
+        /**
+         *  errors will be written to stdout instead of to page contents
+         */
+        $this->withoutExceptionHandling();
+
+        $response = $this->get('/signin');
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Title as meta is shown at Signin page
+     *
+     * @test
+     * @return void
+     */
+    public function testTitle() : void
     {
         $response = $this->get('/');
         $response->assertSee('
@@ -19,45 +44,43 @@ class SigninPageTest extends TestCase
     </title>');
     }
 
-    public function testForm()
+    /**
+     * Signin form is shown with correct id at Signin page
+     *
+     * @test
+     * @return void
+     */
+    public function signinFormIsShownWithCorrectIdAtSigninPage() : void
     {
         $response = $this->get('/signin');
         $response->assertSee('id="signin-form"');
     }
 
-    public function testTokenMeta()
+    /**
+     * csrf-token is shown as meta at Signin page
+     *
+     * @test
+     * @return void
+     */
+    public function csrfTokenIsShownAsMetaAtSigninPage() : void
     {
         $response = $this->get('/signin');
         $response->assertSee('<meta name="csrf-token" content="">');
     }
 
-    public function testTokenInput()
+    /**
+     * Signin form contains required elements: token, input, safety, submit
+     *
+     * @test
+     * @return void
+     */
+    public function signinFormContainsRequiredElementsTokenInputSafetySubmit() : void
     {
         $response = $this->get('/signin');
         $response->assertSee('<input type="hidden" name="_token" value="">');
-    }
-
-    public function testLoginInput()
-    {
-        $response = $this->get('/signin');
         $response->assertSee('<input type="text" name="email"');
-    }
-
-    public function testPasswordInput()
-    {
-        $response = $this->get('/signin');
         $response->assertSee('<input type="password" name="password"');
-    }
-
-    public function testSafetyInput()
-    {
-        $response = $this->get('/signin');
         $response->assertSee('value="0" checked="checked" id="login_safety_0"');
-    }
-
-    public function testSubmitButton()
-    {
-        $response = $this->get('/signin');
         $response->assertSeeText('Увійти');
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit;
 
 use                                       Tests\TestCase;
@@ -11,7 +13,7 @@ class MiddlewareTrimStringsTest extends TestCase
 
     protected $s_sample = '  String Surrounded by Spaces  ';
 
-    public function testTransformParameterAndTrimSurroundingSpaces()
+    public function testTransformParameterAndTrimSurroundingSpaces() : void
     {
         $request = new Request;
 
@@ -26,7 +28,7 @@ class MiddlewareTrimStringsTest extends TestCase
         });
     }
 
-    public function testKeepWhitespacesIfParameterNameIsListedAsExclusion()
+    public function testKeepWhitespacesIfParameterNameIsListedAsExclusion() : void
     {
         $request = new Request;
 
