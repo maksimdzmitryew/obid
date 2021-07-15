@@ -1,6 +1,7 @@
-0.11.3+a197:1 user ADD check namespace for model in module
-0.11.3+a196:5 user ADD model null value to submitted form data
-0.11.3+a196:4 user ADD model null value to foreign keys array
+0.11.5+a197:1 test FIX actual log branch for commits
+0.11.3+a197:6 test ADD check namespace for model in module
+0.11.3+a196:5 test ADD model null value to submitted form data
+0.11.3+a196:4 test ADD model null value to foreign keys array
 0.11.3+a196:1 user FIX item variable name
 0.11.2+a196:9 user ADD function name convention from private to public
 0.11.2+a196:8 test ADD init app-model with number format
