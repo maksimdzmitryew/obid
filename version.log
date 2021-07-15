@@ -1,3 +1,4 @@
+0.11.1+a196:6 test FIX url when opening signin page
 0.11.0+a196:5 test ADD better function names and PHPDoc comments
 0.11.0+a196:4 test ADD introduce PSR-12 https://www.php-fig.org/psr/psr-12/
 0.11.0+a196:3 test ADD better name for middleware case

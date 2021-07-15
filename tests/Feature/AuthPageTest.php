@@ -35,11 +35,13 @@ class SigninPageTest extends TestCase
      * @test
      * @return void
      */
-    public function testTitle() : void
+    public function titleAsMetaIsShownAtSigninPage() : void
     {
-        $response = $this->get('/');
+        $response = $this->get('/signin');
         $response->assertSee('
     <title>
+        ВХІД
+ &#60;
         FEATURE TEST
     </title>');
     }
