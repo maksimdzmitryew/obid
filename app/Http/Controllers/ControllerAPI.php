@@ -85,8 +85,8 @@ class ControllerAPI		extends BaseController
 				$request->$s_field_name = $s_field_params['default'];
 		}
 
-		$this->_env->s_model::_addBoolsValuesFromForm($request);
-		$this->_env->s_model::_addNullValuesFromForm($request, $this->a_fields);
+		$this->_env->s_model::addBoolsValuesFromForm($request);
+		$this->_env->s_model::addNullValuesFromForm($request, $this->a_fields);
 
 		$this->o_item = $this->_env->s_model::create($request->only($this->a_fields));
 #        $design->processImages($request, 'image');
@@ -104,8 +104,8 @@ class ControllerAPI		extends BaseController
 	public function updateAPI($request, Object $item) : \Illuminate\Http\Response
 	{
 		$this->setEnv();
-		$this->_env->s_model::_addBoolsValuesFromForm($request);
-		$this->_env->s_model::_addNullValuesFromForm($request, $this->a_fields, $item);
+		$this->_env->s_model::addBoolsValuesFromForm($request);
+		$this->_env->s_model::addNullValuesFromForm($request, $this->a_fields, $item);
 
 		$item->update($request->only($this->a_fields));
 		return response(['id' => $item->id,], 200);

@@ -73,6 +73,7 @@ class Model extends BaseModel
 	{
 		return number_format($i_num, $i_decimal ?? 0, ',', '’');
 	}
+
 	public function scopeFilter($query, $filters)
 	{
 		return $filters->apply($query);
@@ -92,7 +93,7 @@ class Model extends BaseModel
 	 *
 	 * @return void
 	 */
-	public static function _addNullValuesFromForm($request, Array $a_fields, Object $o_item = NULL) : void
+	public static function addNullValuesFromForm($request, Array $a_fields, Object $o_item = NULL) : void
 	{
 		/**
 		 *	for select2 dropdowns with list of parent items
@@ -127,7 +128,7 @@ class Model extends BaseModel
 	 *
 	 * @return Request	as per Model specific
 	 */
-	public static function _addBoolsValuesFromForm($request)
+	public static function addBoolsValuesFromForm($request)
 	{
 		$request->merge([
 			'published' => !! $request->published,
