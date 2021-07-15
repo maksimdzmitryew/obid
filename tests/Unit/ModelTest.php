@@ -11,11 +11,11 @@ use                             Illuminate\Http\Request;
 class ModelTest extends TestCase
 {
     /**
-    * Number is formatted for human visually accepted in logs
-    *
-    * @test
-    * @return void
-    */
+     * Number is formatted for human visually accepted in logs
+     *
+     * @test
+     * @return void
+     */
     public function numberIsFormattedForHumanVisuallyAcceptedInLogs() : void
     {
         $model = new Model();
@@ -25,11 +25,11 @@ class ModelTest extends TestCase
     }
 
     /**
-    * Null value added to foreign key in array if not submitted but expected by model's fields
-    *
-    * @test
-    * @return void
-    */
+     * Null value added to foreign key in array if not submitted but expected by model's fields
+     *
+     * @test
+     * @return void
+     */
     public function NullValueAddedToForeignKeyInArrayIfNotSubmittedButExpectedByModelsFields() : void
     {
         $model = new Model();
@@ -43,8 +43,29 @@ class ModelTest extends TestCase
         ]);
 
         $this->assertEquals(count($request->only($s_name_field)), 0);
+        $this->assertFalse(isset($request->only($s_name_field)[$s_name_field]));
         $model->addNullValuesFromForm($request, $a_fields);
         $this->assertEquals(count($request->only('order_id')), 1);
         $this->assertEquals(count($request->only($s_name_field)), 1);
+        $this->assertEquals($request->only($s_name_field)[$s_name_field], null);
+    }
+
+    /**
+     * Bool value added for published to array if not submitted
+     *
+     * @test
+     * @return void
+     */
+    public function BoolValueAddedForPublishedToArrayIfNotSubmitted() : void
+    {
+        $model = new Model();
+        $request = new Request;
+
+        $s_name_field = 'published';
+
+        $this->assertEquals(count($request->only($s_name_field)), 0);
+        $model->addBoolsValuesFromForm($request);
+        $this->assertEquals(count($request->only($s_name_field)), 1);
+        $this->assertFalse($request->only($s_name_field)[$s_name_field]);
     }
 }
