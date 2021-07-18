@@ -1,3 +1,4 @@
+0.11.6+a200:1 test ADD current session's CSRF token returned via the helper function
 0.11.6+a197:1 test FIX model t e s t namespace
 0.11.5+a197:2 test ADD code coverage settings
 0.11.5+a197:1 test FIX actual log branch for commits
