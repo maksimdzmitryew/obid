@@ -2,8 +2,8 @@
 
 namespace App;
 
-use                                          App\EventHolding;
-use                                   App\Traits\Favoritable;
+#use                                          App\EventHolding;
+#use                                   App\Traits\Favoritable;
 use                                   App\Traits\GeneralTrait;
 use                     Spatie\Permission\Traits\HasRoles;
 use                     Illuminate\Notifications\Notifiable;
@@ -23,6 +23,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        /**
+         *  id is require for being able to sign in as a virtual/fake/non-existent user
+         *  https://medium.com/@yish/how-to-mock-authentication-user-on-unit-test-in-laravel-1441d491d82c
+         */
+        'id',
         'enabled',
         'email',
         'title',

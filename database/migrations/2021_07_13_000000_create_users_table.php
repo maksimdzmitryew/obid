@@ -6,7 +6,8 @@ use       Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
-	const DB_CONNECTION		= 'psc';
+#	const DB_CONNECTION		= 'psc';
+	const DB_CONNECTION		= 'mysql';
 	const TABLE_MIGRATION	= 'users';
 	/**
 	 * Run the migrations.

@@ -41,7 +41,7 @@ use               Illuminate\Foundation\Testing\RefreshDatabase;
 trait CreatesApplication
 {
 
-    use RefreshDatabase;
+#    use RefreshDatabase;
 #    use DatabaseMigrations;
 #    use DatabaseTransactions;
 #    use WithoutMiddleware;
