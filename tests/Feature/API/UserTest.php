@@ -29,12 +29,15 @@ class UserTest extends TestCase
     {
         self::_signinAsAVirtualUser();
 
-        $user = factory('App\User')->create();
+        // override factory's password
+        $s_password = str_random(rand(6,10));
+
+        $o_user = factory('App\User')->create(['password' => bcrypt($s_password)]);
 
         $this->get(route('api.user.index'))
             ->assertJsonFragment([
-                'first_name' => $user->first_name,
-                'email' => $user->email
+                'first_name' => $o_user->first_name,
+                'email' => $o_user->email
             ])
             ->assertStatus(200);
     }
