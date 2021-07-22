@@ -14,9 +14,10 @@ class UserTest extends TestCase
     public function _signinAsAVirtualUser()
     {
         $o_user = new User([
-            'id' => 1,
-            'name' => 'yish'
+            'name' => 'virtual_user'
         ]);
+
+        $o_user->id = 1;
 
         $this->be($o_user);
     }

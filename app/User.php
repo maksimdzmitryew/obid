@@ -23,11 +23,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        /**
-         *  id is require for being able to sign in as a virtual/fake/non-existent user
-         *  https://medium.com/@yish/how-to-mock-authentication-user-on-unit-test-in-laravel-1441d491d82c
-         */
-        'id',
         'enabled',
         'email',
         'title',
