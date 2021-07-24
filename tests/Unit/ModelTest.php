@@ -8,8 +8,17 @@ use                                         App\Model;
 use                                       Tests\TestCase;
 use                             Illuminate\Http\Request;
 
+use Mockery;
+use App\Http\Controllers\TestController;
+#use App\Http\Controllers\ControllerGuest AS TestController;
+
 class ModelTest extends TestCase
 {
+    public function boot()
+    {
+        $this->withoutExceptionHandling();
+    }
+
     /**
      * Number is formatted for human visually accepted in logs
      *
@@ -23,6 +32,81 @@ class ModelTest extends TestCase
         $this->assertEquals($model->formatNumber($f_value),      '1’234’568');
         $this->assertEquals($model->formatNumber($f_value, 2),   '1’234’567,85');
     }
+
+    /**
+     * Number is formatted for human visually accepted in logs
+     *
+     * @test
+     * @return void
+     */
+    public function scopeFilter() : void
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * parent model does not have value set for protected fields list
+     *
+     * @test
+     * @return void
+     */
+    public function parentModelDoesNotHaveValueSetForProtectedFieldsList() : void
+    {
+        $model = new Model();
+        $a_res = $model->getFields();
+        $this->assertNull($a_res);
+    }
+
+    /**
+     * variable is passed and available witin view
+     *
+     * @test
+     * @return void
+     */
+/*
+    public function controllercheck() : void
+    {
+
+
+$this->withoutExceptionHandling();
+$response = $this->get(route('guest.viewtest'));
+$this->assertTrue(isset($response->original));
+dd($response->original instanceof View, gettype($response->original), $response);
+
+
+*/
+#
+#dump($response);
+#$response->assertViewIs('layouts.test');
+#$response->assertViewHas('array');
+
+#$response = $this->get('/');
+#$response->assertViewHas('array');
+#dd($response);
+/*
+#$response = $this->call('GET', 'unit/test');
+#$response->assertViewHas('_env');
+#dd($response);
+#        $res = $this->action('GET', 'Wecome@index');
+#        dd($res);
+
+        $ctrl = new TestController();
+        $request = new Request;
+        $response = $ctrl->index($request);
+dd($response);
+#        $value = data_get($response, 'test_array');
+#dd($view);
+dd(gettype($value));#, $response->assertViewHas('array'));
+        $response->assertViewHas('test_array');
+        $f_value = 1234567.85;
+        $this->assertEquals($model->formatNumber($f_value),      '1’234’568');
+        $this->assertEquals($model->formatNumber($f_value, 2),   '1’234’567,85');
+
+#        $response->assertViewHas('version');
+        $response->assertContains('version');
+    }
+*/
+
 
     /**
      * Null value added to foreign key in array if not submitted but expected by model's fields
