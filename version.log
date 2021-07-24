@@ -1,3 +1,4 @@
+0.11.6+a206:2 test ADD transform array into response
 0.11.6+a206:1 test ADD parent model does not have related model set by default
 0.11.6+a205:3 test ADD parent model does not have parent id set by default
 0.11.6+a205:2 test ADD parent model does not have value set for protected fields list

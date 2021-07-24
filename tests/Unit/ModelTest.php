@@ -194,4 +194,25 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $a_res = $model->getIdTitle($request, NULL, 'None', NULL, [], [], TRUE, TRUE);
         $this->assertEquals($a_res, array());
     }
+
+    /**
+     * transform array variable into response object when storing item cases sql error
+     *
+     * @test
+     * @return void
+     */
+    public function transformArrayVariableIntoResponseObjectForCompatibilityWithQuery() : void
+    {
+        $model = new Model();
+        $a_response = [
+                'error'     => true,
+                'code'      => 111,
+        ];
+        $a_res = $model->makeResponse($a_response);
+
+        $this->assertEquals(gettype($a_res), 'object');
+        $this->assertTrue($a_res->original['error']);
+        $this->assertEquals($a_res->original['code'], 111);
+        $this->assertJson($a_res->getContent(), '{"error":true,"code":111}');
+    }
 }
