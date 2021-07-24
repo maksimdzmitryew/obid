@@ -180,4 +180,18 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $a_res = $model->getIdTitleForParent('None', null, 'parent', [1]);
         $this->assertEquals($a_res, array());
     }
+
+    /**
+     * parent model does not have related model set by default
+     *
+     * @test
+     * @return void
+     */
+    public function parentModelDoesNotHaveRelatedModelSetByDefault() : void
+    {
+        $model = new Model();
+        $request = new Request;
+        $a_res = $model->getIdTitle($request, NULL, 'None', NULL, [], [], TRUE, TRUE);
+        $this->assertEquals($a_res, array());
+    }
 }

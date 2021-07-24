@@ -155,14 +155,14 @@ class Model extends BaseModel
 	 */
 	public static function getIdTitleForParent(String $s_model, Bool $b_published = NULL, String $s_parent, Array $a_parent) : Array
 	{
-		$s_model		= self::getModelNameWithNamespace($s_model);
+		$s_model_path	= self::getModelNameWithNamespace($s_model);
 
-		if (!class_exists($s_model))
+		if (!class_exists($s_model_path))
 		{
 			return [];
 		}
 
-		$fn_select		= $s_model . '::select';
+		$fn_select		= $s_model_path . '::select';
 		$o_items		= $fn_select()->whereIn($s_parent . '_id', $a_parent)->get('title', 'id')->pluck('title', 'id');
 		if (!is_null($b_published))
 		{
@@ -206,6 +206,12 @@ class Model extends BaseModel
 #			$s_title = 'text';
 
 		$s_model_path			= self::getModelNameWithNamespace($s_model);
+
+		if (!class_exists($s_model_path))
+		{
+			return [];
+		}
+
 		$fn_select				= $s_model_path . '::select';
 		$fn_filter				= $s_model_path . '::filter';
 
