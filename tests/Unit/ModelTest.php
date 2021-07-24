@@ -167,4 +167,17 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $s_namespace = $model->getModelNameWithNamespace(strtolower($s_name));
         $this->assertEquals($s_namespace, '\Modules\\' . $s_name . '\\' . 'Database' . '\\' . $s_name);
     }
+
+    /**
+     * parent model does not have parent id set by default
+     *
+     * @test
+     * @return void
+     */
+    public function parentModelDoesNotHaveParentIdSetBydefault() : void
+    {
+        $model = new Model();
+        $a_res = $model->getIdTitleForParent('None', null, 'parent', [1]);
+        $this->assertEquals($a_res, array());
+    }
 }

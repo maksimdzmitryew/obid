@@ -1,3 +1,4 @@
+0.11.6+a205:3 test ADD parent model does not have parent id set by default
 0.11.6+a205:2 test ADD parent model does not have value set for protected fields list
 0.11.6+a205:1 test ADD check password
 0.11.6+a204:1 test ADD pre-set password for fakery of a person
