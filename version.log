@@ -1,3 +1,4 @@
+0.11.6+a205:1 test ADD check password
 0.11.6+a204:1 test ADD pre-set password for fakery of a person
 0.11.6+a203:2 test ADD better virtual person
 0.11.6+a203:1 test ADD signin and view list of people

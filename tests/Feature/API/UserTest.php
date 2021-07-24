@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\User;
-#use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
@@ -25,19 +25,21 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function authorized_user_can_get_users_list()
+    public function AnyAuthorisedUserCanViewUsersList()
     {
         self::_signinAsAVirtualUser();
 
         // override factory's password
         $s_password = str_random(rand(6,10));
+        $s_password_crypt = bcrypt($s_password);
 
-        $o_user = factory('App\User')->create(['password' => bcrypt($s_password)]);
+        $o_user = factory('App\User')->create(['password' => $s_password_crypt]);
 
         $this->get(route('api.user.index'))
             ->assertJsonFragment([
                 'first_name' => $o_user->first_name,
-                'email' => $o_user->email
+                'email' => $o_user->email,
+#                'password' => $s_password_crypt,
             ])
             ->assertStatus(200);
     }
