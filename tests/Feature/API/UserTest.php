@@ -11,7 +11,12 @@ class UserTest extends TestCase
 #    use RefreshDatabase;
 
 
-    public function _signinAsAVirtualUser()
+    /**
+     * sign in to the system as a user that is not stored in DB
+     *
+     * @return void
+     */
+    private function _signinAsVirtualUser() : void
     {
         $o_user = new User([
             'name' => 'virtual_user'
@@ -23,25 +28,101 @@ class UserTest extends TestCase
     }
 
     /**
-     * @test
+     * sign in to the system as a user that is not stored in DB
+     *
+     * @param   String          plain text password
+     *
+     * @return  String          encrypted password
      */
-    public function AnyAuthorisedUserCanViewUsersList()
+    private function _getPasswordEncrypted($s_password) : String
     {
-        self::_signinAsAVirtualUser();
+        return bcrypt($s_password);
+    }
 
+    /**
+     * sign in to the system as a user that is not stored in DB
+     *
+     * @return  Object           user data
+     */
+    private function _createUserRecord() : Object
+    {
         // override factory's password
         $s_password = str_random(rand(6,10));
-        $s_password_crypt = bcrypt($s_password);
+        $s_password_crypt = self::_getPasswordEncrypted($s_password);
 
         $o_user = factory('App\User')->create(['password' => $s_password_crypt]);
+        return $o_user;
+    }
 
-        $this->get(route('api.user.index'))
+    /**
+     * any authorised user can view users list with correct structure and password is not revealed
+     *
+     * @return void
+     * @test
+     */
+    public function AnyAuthorisedUserCanViewUsersListWithCorrectStructureAndPasswordIsNotRevealed() : void
+    {
+        self::_signinAsVirtualUser();
+        $o_user = self::_createUserRecord();
+        $s_password_crypt = self::_getPasswordEncrypted($o_user->password);
+
+        $this
+            ->get(route('api.user.index'))
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                            ['email', 'enabled', 'first_name', 'id', 'last_name', 'roles', ],
+                        ],
+                        'draw',
+                        'recordsFiltered',
+                        'recordsTotal',
+            ])
+            ->assertJsonMissing([
+                'password' => $s_password_crypt,
+            ])
+            ;
+    }
+
+    /**
+     * users list can be filtered descending by id column
+     *
+     * @return void
+     * @test
+     */
+    public function UsersListCanBeFilteredDescendingByIdColumn() : void
+    {
+        self::_signinAsVirtualUser();
+        $o_user = self::_createUserRecord();
+        $s_password_crypt = self::_getPasswordEncrypted($o_user->password);
+
+        $a_order[0] = [
+            'column' => '2',
+            'dir' => 'desc',
+        ];
+
+        $parameters = [
+                        'length' => 1,
+                        'order' => $a_order,
+                    ];
+        $cookies = [];
+        $files = [];
+        $server = [];
+        $content = null;
+
+        $this
+            ->get(route('api.user.index', $parameters))
+            ->assertStatus(200)
             ->assertJsonFragment([
                 'first_name' => $o_user->first_name,
                 'email' => $o_user->email,
-#                'password' => $s_password_crypt,
             ])
-            ->assertStatus(200);
+            ->assertJsonMissing([
+                'password' => $s_password_crypt,
+            ])
+            ;
+
+#        $s_res = $this->call('GET', route('api.user.index'), $parameters, $cookies, $files, $server, $content);
+#        $s_res = $this->json('GET', route('api.user.index'), $parameters);
     }
 
     /**

@@ -1,3 +1,4 @@
+0.12.0+a206:2 test ADD check json response structure
 0.12.0+a206:1 user UPD COPY from core, TimerTrait
 0.11.6+a206:5 user ADD uuid to people table
 0.11.6+a206:4 test ADD write to log parameters order and type are correct
