@@ -4,6 +4,7 @@ namespace App;
 
 use                                             Auth;
 use                                  App\Traits\GeneralTrait;
+use                                  App\Traits\TimerTrait;
 use                Illuminate\Database\Eloquent\Model          as BaseModel;
 use           Astrotomic\Translatable\Contracts\Translatable   as TranslatableContract;
 use                     Astrotomic\Translatable\Translatable;
@@ -13,6 +14,7 @@ use                             Illuminate\Http\Request;
 class Model extends BaseModel
 {
 	use GeneralTrait;
+	use TimerTrait;
 	use Translatable;
 
 	public $translatedAttributes = [];
@@ -322,7 +324,7 @@ class Model extends BaseModel
 		if (!empty($i_qty))
 		{
 			$s_format .=	' at %10s/hour';
-			$a_format_values[] = '';#self::formatNumber(self::getPerHourRate($f_time, $i_qty));
+			$a_format_values[] = self::formatNumber(self::getPerHourRate($f_time, $i_qty));
 		}
 
 		$s_msg = self::_replaceSeparatorForLogging($s_format, $a_format_values);
