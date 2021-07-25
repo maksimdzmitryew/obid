@@ -258,11 +258,34 @@ dd(gettype($value));#, $response->assertViewHas('array'));
     public function checkMemoryUsage() : void
     {
         $model = new Model();
+
         $s_res = $model->getServerMemoryUsage();
         $this->assertIsFloat($s_res);
+
         $s_res = $model->getServerMemoryUsage(false);
         $this->assertIsArray($s_res);
         $this->assertArrayHasKey('total', $s_res);
         $this->assertArrayHasKey('free', $s_res);
+    }
+
+
+    /**
+     * size is formatted to nice human readable presentation
+     *
+     * @test
+     * @return void
+     */
+    public function sizeIsFormattedToNiceHumanReadablePresentation() : void
+    {
+        $model = new Model();
+
+        $this->assertEquals($model->getNiceFileSize(0),                         '0 B');
+        $this->assertEquals($model->getNiceFileSize(12.34),                     '12.34 B');
+        $this->assertEquals($model->getNiceFileSize(1234.56),                   '1.21 KiB');
+        $this->assertEquals($model->getNiceFileSize(1234567.89),                '1.18 MiB');
+        $this->assertEquals($model->getNiceFileSize(123456789123.45),           '114.98 GiB');
+        $this->assertEquals($model->getNiceFileSize(123456789123456.78),        '112.28 TiB');
+        $this->assertEquals($model->getNiceFileSize(123456789123456789.12),     '109.65 PiB');
+        $this->assertEquals($model->getNiceFileSize(1234567891234567891234567), '1.02 B');
     }
 }
