@@ -21,6 +21,18 @@ class ModelTest extends TestCase
     }
 
     /**
+     * class translation property is present and has default value
+     *
+     * @test
+     * @return void
+     */
+    public function classTranslationPropertyIsPresentAndHasDefaultValue() : void
+    {
+        $this->assertClassHasAttribute('translatedAttributes', 'App\\Model');
+        $this->assertClassNotHasStaticAttribute('a_settings', 'App\\Model');
+    }
+
+    /**
      * Number is formatted for human visually accepted in logs
      *
      * @test
