@@ -24,8 +24,9 @@ class CreateUsersTable extends Migration
 			$table->string('title')																		->nullable(false);
 			$table->string('first_name')															->nullable(false)->index();
 			$table->string('last_name')																->nullable(false);
-			$table->rememberToken()																		->nullable(false);
+			$table->rememberToken()																		->nullable(false)->index();
 			$table->string('activation_token', 40)										->nullable(false)->index();
+			$table->uuid('uuid')																			->nullable(false)->index();
 			/**
 			 * https://dev.mysql.com/doc/refman/8.0/en/multiple-column-indexes.html
 			 *
