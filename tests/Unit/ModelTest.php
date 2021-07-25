@@ -280,7 +280,6 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $this->assertArrayHasKey('free', $s_res);
     }
 
-
     /**
      * size is formatted to nice human readable presentation
      *
@@ -299,5 +298,19 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $this->assertEquals($model->getNiceFileSize(123456789123456.78),        '112.28 TiB');
         $this->assertEquals($model->getNiceFileSize(123456789123456789.12),     '109.65 PiB');
         $this->assertEquals($model->getNiceFileSize(1234567891234567891234567), '1.02 B');
+    }
+
+    /**
+     * replace thousand separator from multibyte characher to single
+     *
+     * @test
+     * @return void
+     */
+    public function replaceThousandSeparatorFromMultibyteCharacterToSingle() : void
+    {
+        $model = new Model();
+
+        $s_res = $model->_replaceSeparatorK('1"234"567.89');
+        $this->assertEquals($model->_replaceSeparatorK('1"234"567.89'),         '1‘234‘567.89');
     }
 }
