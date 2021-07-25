@@ -313,4 +313,24 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $s_res = $model->_replaceSeparatorK('1"234"567.89');
         $this->assertEquals($model->_replaceSeparatorK('1"234"567.89'),         '1‘234‘567.89');
     }
+
+    /**
+     * replace thousand separator in array and transform to string
+     *
+     * @test
+     * @return void
+     */
+    public function replaceThousandSeparatorInArrayAndTransformToString() : void
+    {
+        $model = new Model();
+
+        $s_format =     '%13s';
+        $a_values =     [1234567.89];
+        $s_res = $model->_replaceSeparatorForLogging($s_format, $a_values);
+        $this->assertEquals($s_res, '   1234567.89');
+
+        $a_values =     ['1"234"567.89'];
+        $s_res = $model->_replaceSeparatorForLogging($s_format, $a_values);
+        $this->assertEquals($s_res, ' 1‘234‘567.89');
+    }
 }
