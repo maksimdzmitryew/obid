@@ -215,4 +215,19 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $this->assertEquals($a_res->original['code'], 111);
         $this->assertJson($a_res->getContent(), '{"error":true,"code":111}');
     }
+
+    /**
+     * server name is string and can not be empty
+     *
+     * @test
+     * @return void
+     */
+    public function serverNameIsStringAndCanNotBeEmpty() : void
+    {
+        $model = new Model();
+        $s_res = $model->_getServerName();
+
+        $this->assertNotEmpty($s_res);
+        $this->assertStringMatchesFormat('%s', $s_res);
+    }
 }

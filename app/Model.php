@@ -285,7 +285,7 @@ class Model extends BaseModel
 	}
 
 
-	public static function _getServerName()
+	public static function _getServerName() : String
 	{
 		$a_tmp = explode('.', request()->getHost());
 		$a_tmp[0] = strtoupper($a_tmp[0]);
