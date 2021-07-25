@@ -70,12 +70,13 @@ class UserTest extends TestCase
             ->get(route('api.user.index'))
             ->assertStatus(200)
             ->assertJsonStructure([
-                'data' => [
-                            ['email', 'enabled', 'first_name', 'id', 'last_name', 'roles', ],
-                        ],
-                        'draw',
-                        'recordsFiltered',
-                        'recordsTotal',
+                'data' =>
+                    [
+                        ['email', 'enabled', 'first_name', 'id', 'last_name', 'roles', ],
+                    ],
+                    'draw',
+                    'recordsFiltered',
+                    'recordsTotal',
             ])
             ->assertJsonMissing([
                 'password' => $s_password_crypt,

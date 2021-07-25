@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use                                         App\Model;
-use                                       Tests\TestCase;
 use                             Illuminate\Http\Request;
+use                                       Tests\TestCase;
 
 use Mockery;
 use App\Http\Controllers\TestController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\TestController;
 
 class ModelTest extends TestCase
 {
+
     public function boot()
     {
         $this->withoutExceptionHandling();
@@ -240,7 +241,28 @@ dd(gettype($value));#, $response->assertViewHas('array'));
     public function writeToLogParametersOrderAndTypeAreCorrect() : void
     {
         $model = new Model();
+        $s_res = $model->writeLog('log_type', 'log_info');
+        $this->assertNull($s_res);
+        $s_res = $model->writeLog('log_type', 'log_info', 'log_time');
+        $this->assertNull($s_res);
         $s_res = $model->writeLog('log_type', 'log_info', 'log_time', 222);
         $this->assertNull($s_res);
+    }
+
+    /**
+     * check memory usage
+     *
+     * @test
+     * @return void
+     */
+    public function checkMemoryUsage() : void
+    {
+        $model = new Model();
+        $s_res = $model->getServerMemoryUsage();
+        $this->assertIsFloat($s_res);
+        $s_res = $model->getServerMemoryUsage(false);
+        $this->assertIsArray($s_res);
+        $this->assertArrayHasKey('total', $s_res);
+        $this->assertArrayHasKey('free', $s_res);
     }
 }
