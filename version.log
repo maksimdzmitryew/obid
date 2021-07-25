@@ -1,3 +1,4 @@
+0.11.6+a206:4 test ADD write to log parameters order and type are correct
 0.11.6+a206:3 test ADD server name is string and can not be empty
 0.11.6+a206:2 test ADD transform array into response
 0.11.6+a206:1 test ADD parent model does not have related model set by default

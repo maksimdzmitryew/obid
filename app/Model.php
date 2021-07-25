@@ -322,7 +322,7 @@ class Model extends BaseModel
 		if (!empty($i_qty))
 		{
 			$s_format .=	' at %10s/hour';
-			$a_format_values[] = self::formatNumber(self::getPerHourRate($f_time, $i_qty));
+			$a_format_values[] = '';#self::formatNumber(self::getPerHourRate($f_time, $i_qty));
 		}
 
 		$s_msg = self::_replaceSeparatorForLogging($s_format, $a_format_values);
@@ -347,8 +347,6 @@ class Model extends BaseModel
 			case 'warning':		\Log::warning('  ' . $s_msg); break;
 			case 'error':		\Log::error('    ' . $s_msg); break;
 			case 'critical':	\Log::critical(' ' . $s_msg); die(); break;
-
-			break;
 		}
 	}
 

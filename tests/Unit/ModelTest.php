@@ -131,7 +131,7 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $model->addNullValuesFromForm($request, $a_fields);
         $this->assertEquals(count($request->only('order_id')), 1);
         $this->assertEquals(count($request->only($s_name_field)), 1);
-        $this->assertEquals($request->only($s_name_field)[$s_name_field], null);
+        $this->assertNull($request->only($s_name_field)[$s_name_field]);
     }
 
     /**
@@ -229,5 +229,18 @@ dd(gettype($value));#, $response->assertViewHas('array'));
 
         $this->assertNotEmpty($s_res);
         $this->assertStringMatchesFormat('%s', $s_res);
+    }
+
+    /**
+     * write to log parameters order and type are correct
+     *
+     * @test
+     * @return void
+     */
+    public function writeToLogParametersOrderAndTypeAreCorrect() : void
+    {
+        $model = new Model();
+        $s_res = $model->writeLog('log_type', 'log_info', 'log_time', 222);
+        $this->assertNull($s_res);
     }
 }
