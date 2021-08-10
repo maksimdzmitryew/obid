@@ -1,3 +1,4 @@
+0.13.0+a222:2 user ADD spacing and clean up
 0.13.0+a222:1 guest UPD better UI and styles, and config values usage for cookies consent
 0.12.0+a221:1 guest ADD clean redundant style
 0.12.0+a206:7 test ADD replace thousand separator in array and transform to string

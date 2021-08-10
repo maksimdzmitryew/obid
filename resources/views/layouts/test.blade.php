@@ -1,6 +1,4 @@
-@php
-# $version = include_once( __DIR__ . '/../../../version.php');
-@endphp<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +10,7 @@
 <body>
 <h2>Test template</h2>
 
-@include('public.test')
+@ include('public.test')
 
 </body>
 </html>
