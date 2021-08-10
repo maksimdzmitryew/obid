@@ -194,4 +194,17 @@ return [
 
     'same_site' => null,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Cookies Consent
+    |--------------------------------------------------------------------------
+    |
+    | Values that cookies consent will check against to understand if
+    | consent was given or user postponed their decision.
+    |
+    */
+
+    'consent_value' => 1,
+    'consent_disagree' => 'later',
+
 ];

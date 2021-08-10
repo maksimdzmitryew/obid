@@ -73,6 +73,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 				'settings'				=> $o_settings,
 				'theme'					=> $s_theme,
 				'version'				=> $a_version,
+				's_domain_tld'			=> config('session.domain') ?? request()->gethost(),
 			]);
 		});
 

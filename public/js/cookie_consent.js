@@ -7,13 +7,12 @@ jQuery(document).ready(function($) {
 
 	$('.cookie-consent__later').on('click', function (e) {
 		$('div.js-cookie-consent').remove();
-		cookie_consent = 'later';
-		localStorage.setItem("cookie_consent", cookie_consent);
+		localStorage.setItem("cookie_consent", COOKIE_DISAGREE);
 	});
 
 	var cookie_consent = localStorage.getItem("cookie_consent");
 
-	if (typeof cookie_consent == 'string' && cookie_consent == 'later')
+	if (typeof cookie_consent == 'string' && cookie_consent == COOKIE_DISAGREE && !FORCE_CONSENT)
 		$('.cookie-consent__later').trigger('click');
 
 });

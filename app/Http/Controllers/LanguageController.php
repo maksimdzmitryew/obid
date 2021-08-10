@@ -17,12 +17,12 @@ class LanguageController extends Controller
 			$cookie_name='lang';
 			$cookie_value=$locale;
 			$cookie_expired_in=2629800;//in mins = 5 years
-			$cookie_path='/'; // available to all pages of website.
-			$cookie_host=$request->getHttpHost(); // domain or website you are setting this cookie.
-			$http_only=false;
-			$secure=false;
+			$cookie_path=config('session.path'); // available to all pages of website.
+			$cookie_host=(config('session.domain') ?? $request->getHttpHost());
+			$http_only=config('session.http_only');
+			$secure=config('session.secure');
 			$raw=false;
-			$samesite=null;
+//			$samesite=config('session.same_site');
 			$my_cookie = cookie($cookie_name, $cookie_value, $cookie_expired_in,$cookie_path,$cookie_host,$http_only);
 			Cookie::queue($my_cookie);
         }
