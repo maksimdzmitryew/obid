@@ -120,6 +120,11 @@
     border-color: #feff9c;
 }
 
+.js-cookie-consent.cookie-consent .consent-choices button.js-cookie-consent-later span sup {
+    font-weight: 100;
+}
+
+
 .js-cookie-consent.cookie-consent .consent-choices button:first-child {
     color: rgb(99, 99, 99);
 }
