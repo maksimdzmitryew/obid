@@ -22,7 +22,7 @@
 	}
 	header .language,
 	header .socials {
-		display:block;
+		display:none;
 	}
 	header .open_menu {
 		display: block;
@@ -132,6 +132,9 @@
 		top:22px;
 		transform: rotate(-45deg);
 	}
+	.flexwrap {
+		width: 100%;
+	}
 	footer.visible_anytime .flexwrap{
 		display: block;
 		height: 48px;
@@ -142,7 +145,7 @@
 		text-align: center;
 	}
 	footer.visible_anytime .language,
-	footer.visible_anytime .socials{
+	footer.visible_anytime .socials {
 		display: none;
 	}
 	#mib_content .new_place_wrap .buttons {
@@ -167,6 +170,26 @@
 		margin:0 auto;
 		float: none;
 	}
+	header nav ul li button.green {
+		margin: 0 auto 0 42%;
+	}
+	footer div {
+		padding-left: 7px;
+	}
+	footer .copyright, footer .socials, footer .contact_us {
+		padding-top: 10px;
+	}
+	footer .copyright {
+		width: 200px;
+	}
+	footer .socials
+	{
+		width: auto;
+	}
+	footer .contact_us
+	{
+		width: 180px;
+	}
 
 }
 
@@ -179,7 +202,7 @@
 @media screen and (max-width:1000px) {
 	#profile_wrap .profile {
 		width: 100%;
-		margin:-50px auto 10px;
+		margin: 0px auto 10px;
 		float: none;
 		max-width: 780px;
 	}
@@ -236,5 +259,16 @@
 	#profile_wrap .profile .tabs li {
 		padding: 17px 5px;
 		letter-spacing: -1px;
+	}
+
+	@media screen and (max-width:700px) {
+		header nav ul li button.green {
+			margin: 0 auto 0 37%;
+		}
+		.div_reset_password {
+			margin: 0 auto 0 30%;
+		}
+	}
+	@media screen and (max-width:480px) {
 	}
 }

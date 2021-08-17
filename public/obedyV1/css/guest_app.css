@@ -1397,29 +1397,6 @@ footer .contact_us {
 	margin: 0 auto 0 36%;
 }
 
-@media screen and (max-width:1180px) {
-	header nav ul li button.green {
-		margin: 0 auto 0 42%;
-	}
-	footer div {
-		padding-left: 7px;
-	}
-	footer .copyright {
-		padding-top: 10px;
-		width: 100%;
-	}
-}
-@media screen and (max-width:700px) {
-	header nav ul li button.green {
-		margin: 0 auto 0 37%;
-	}
-	.div_reset_password {
-		margin: 0 auto 0 30%;
-	}
-}
-@media screen and (max-width:480px) {
-}
-
 .map_preloader_wrap {
   position: fixed;
   background: #fff;
