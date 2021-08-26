@@ -26,7 +26,7 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::connection($this->getConnection())->create('cities', function (Blueprint $table) {
+        Schema::connection($this->getConnection())->create($this->getTable(), function (Blueprint $table) {
             $this->addPrimaryKey($this, $table);
             $this->addForeignKey(self::$o_country, $table);
 
@@ -44,6 +44,6 @@ class CreateCitiesTable extends Migration
     public function down()
     {
         $this->downTranslationMigration();
-        Schema::connection($this->getConnection())->dropIfExists('cities');
+        Schema::connection($this->getConnection())->dropIfExists($this->getTable());
     }
 }
