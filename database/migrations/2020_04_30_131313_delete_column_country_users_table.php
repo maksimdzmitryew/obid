@@ -17,10 +17,12 @@ class DeleteColumnCountryUsersTable extends Migration
      */
     public function up()
     {
+/*
         Schema::table(self::TABLE_MIGRATION, function (Blueprint $table) {
             $table->dropForeign([self::HASONE_TABLE.'_'.self::HASONE_KEY]);
             $table->dropColumn(self::HASONE_TABLE.'_'.self::HASONE_KEY);
         });
+*/
     }
 
     /**
@@ -30,6 +32,7 @@ class DeleteColumnCountryUsersTable extends Migration
      */
     public function down()
     {
+/*
         Schema::table(self::TABLE_MIGRATION, function (Blueprint $table) {
             $table->integer(self::HASONE_TABLE.'_'.self::HASONE_KEY.'_tmp')->unsigned()->nullable()->default(246)->after('id');
             $table->integer(self::HASONE_TABLE.'_'.self::HASONE_KEY)->unsigned()->nullable()->default(NULL)->after('id');
@@ -48,5 +51,6 @@ class DeleteColumnCountryUsersTable extends Migration
         Schema::table(self::TABLE_MIGRATION, function (Blueprint $table) {
             $table->foreign(self::HASONE_TABLE.'_'.self::HASONE_KEY)->references(self::HASONE_KEY)->on(self::TABLE_HASONE)->onDelete('cascade');
         });
+*/
     }
 }

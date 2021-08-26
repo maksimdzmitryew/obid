@@ -18,6 +18,7 @@ class CreateElementIssueTable extends Migration {
 	 */
 	public function up()
 	{
+/*
 		$s_tname	= self::DB_NAME_SGL1.'_'.self::DB_NAME_SGL2;
 		$s_tkey1	= self::DB_NAME_SGL1.'_'.self::DB_TABLE_KEY;
 		$s_tkey2	= self::DB_NAME_SGL2.'_'.self::DB_TABLE_KEY;
@@ -29,6 +30,7 @@ class CreateElementIssueTable extends Migration {
             $table->foreign($s_tkey1)->references(self::DB_TABLE_KEY)->on(self::DB_NAME_PLR1)->onDelete('cascade');
             $table->foreign($s_tkey2)->references(self::DB_TABLE_KEY)->on(self::DB_NAME_PLR2)->onDelete('cascade');
         });
+*/
 	}
 
 	/**
@@ -38,8 +40,10 @@ class CreateElementIssueTable extends Migration {
 	 */
 	public function down()
 	{
+/*
 		$s_tname	= self::DB_NAME_SGL1.'_'.self::DB_NAME_SGL2;
         Schema::connection(self::DB_CONNECTION)->dropIfExists($s_tname);
+*/
 	}
 
 }
