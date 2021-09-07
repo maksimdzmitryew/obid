@@ -8,10 +8,12 @@ use              Astrotomic\Translatable\Translatable;
 
 class Setting extends Model
 {
+    protected $connection = 'psc';
+
     use Translatable;
 
     protected $fillable = [
-        'name',
+        'slug',
         'value',
     ];
 
@@ -21,8 +23,8 @@ class Setting extends Model
 
     public $timestamps = false;
 
-    public function scopeName($query, $name)
+    public function scopeSlug($query, $name)
     {
-        return $query->where('name', $name)->firstOrFail();
+        return $query->where('slug', $name)->firstOrFail();
     }
 }

@@ -18,8 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-    	# longer indexes
-    	# MySQL < 5.7.7 and MariaDB < 10.2.2
+    	/**
+         *  longer indexes
+    	 *  MySQL < 5.7.7 and MariaDB < 10.2.2
+         */
         Schema::defaultStringLength(191);
         Validator::extend(
             'recaptcha',

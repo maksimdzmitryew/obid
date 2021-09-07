@@ -12,8 +12,7 @@ class TextTranslation extends Model
 
     protected $fillable = [
         'name',
-        'slug',
-        'description',
+        'body',
     ];
 
     public function sluggable()

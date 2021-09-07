@@ -93,12 +93,12 @@ class ViewComposerServiceProvider extends ServiceProvider
 		$texts = array();
 		$tmp = Text::select('texts.*')
 			->leftJoin('text_translations', 'texts.id', '=', 'text_translations.text_id')
-			->where('codename', 'LIKE', 'footer_%')
+			->where('slug', 'LIKE', 'footer_%')
 			->where(['text_translations.locale'  => App::getLocale()])
 			->get();
 		foreach ($tmp as $text)
 		{
-			$texts[$text->codename] = $text->description;
+			$texts[$text->slug] = $text->body;
 		}
 		return $texts;
 	}

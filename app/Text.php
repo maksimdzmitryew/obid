@@ -12,15 +12,15 @@ class Text extends Model
     use GeneralTrait;
     use Translatable;
 
+   protected $connection = 'psc';
+
     protected $fillable = [
-        'name',
-        'codename',
+        'slug',
     ];
 
     public $translatedAttributes = [
         'name',
-        'slug',
-        'description',
+        'body',
     ];
 
     public function scopeFilter($query, $filters)

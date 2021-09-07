@@ -1,3 +1,4 @@
+0.13.0+a250:8 test ADD use slug located in major table instead of name in translations
 0.13.0+a250:7 test ADD only reset database aka refresh if an existing migration was updated or a new one created
 0.13.0+a250:6 test ADD better name for migration for autodetect work properly
 0.13.0+a250:5 test ADD fix database table name detection when migrating
