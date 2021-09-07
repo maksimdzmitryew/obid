@@ -1,14 +1,27 @@
 <?php
 
-use           Illuminate\Database\Schema\Blueprint;
-use       Illuminate\Database\Migrations\Migration;
-use           Illuminate\Support\Facades\Schema;
+use               Illuminate\Database\Schema\Blueprint;
+use           Illuminate\Database\Migrations\Migration;
+use                               App\Traits\MigrationTrait;
+use               Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
+    use MigrationTrait;
+
 #    const DB_CONNECTION         = 'psc';
     const DB_CONNECTION         = 'mysql';
     const TABLE_MIGRATION       = 'users';
+
+    protected static $o_country = '';
+    protected static $o_city    = '';
+
+    public function __construct()
+    {
+        self::$o_country        = new CreateCountriesTable();
+        self::$o_city           = new CreateCitiesTable();
+    }
+
     /**
      * Run the migrations.
      *
@@ -17,15 +30,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::connection($this->getConnection())->create($this->getTable(), function (Blueprint $table) {
-            $table->increments('id');
-            $table->boolean('enabled')                    ->default(0)->nullable(false)->index()->comment('account is enabled and user will be allowed to sign in');
-            $table->string('email')           ->unique()              ->nullable(false)->index();
-            $table->string('password')                                ->nullable(false);
-            $table->string('title')                                   ->nullable(false);
-            $table->string('first_name')                              ->nullable(false)->index();
-            $table->string('last_name')                               ->nullable(false);
-            $table->rememberToken()                                   ->nullable(false)->index();
-            $table->string('activation_token', 40)                    ->nullable(false)->index();
+            $this->addPrimaryKey($this, $table);
+            $this->addForeignKey(self::$o_country, $table);
+            $this->addForeignKey(self::$o_city, $table);
+            $this->addPublished($table, 'account is published and user will be allowed to sign in');
+
+            $table->string('email')           ->unique()                ->nullable(false)->index();
+            $table->string('password')                                  ->nullable(false);
+            $table->string('title')                         ->default('')->nullable(false);
+            $table->string('first_name')                    ->default('')->nullable(false)->index();
+            $table->string('last_name')                     ->default('')->nullable(false);
+            $table->rememberToken()                                     ->nullable(false)->index();
+            $table->string('activation_token', 40)          ->default('')->nullable(false)->index();
             //TODO change to ULID
             //https://laravel.ru/posts/1125
             $table->uuid('uuid')                                      ->nullable(false)->index();
@@ -42,7 +58,7 @@ class CreateUsersTable extends Migration
                 AND col1=val1 AND col2=val2;
              */
             $table->string('hash_name', 32)                           ->nullable(false)->index();
-            $table->timestamps();
+            $this->addDates($table);
             $table->index(['last_name', 'first_name'], $this->getTable('sg') . '_name_index');
         });
     }

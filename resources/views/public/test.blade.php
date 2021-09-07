@@ -1,3 +1,3 @@
 @extends('layouts.test')
 
-{!! dd($array) !!}
+{!! dd($test_var) !!}
