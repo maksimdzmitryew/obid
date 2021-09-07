@@ -1,3 +1,4 @@
+0.13.0+a250:6 test ADD better name for migration for autodetect work properly
 0.13.0+a250:5 test ADD fix database table name detection when migrating
 0.13.0+a250:4 test ADD unify migrations structure with trait, add major migrations
 0.13.0+a250:3 guest ADD unify using a p u b l i s h e d
