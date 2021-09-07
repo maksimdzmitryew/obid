@@ -87,10 +87,12 @@ trait MigrationTrait
         if (empty($s_tmp))
         {
             $s_tmp = get_class($this);
+            $s_tmp = str_replace(['Create', 'Table', ], '', $s_tmp);
             $s_tmp = Str::snake($s_tmp);
-            $a_tmp = explode('_', $s_tmp);
-            $i_pos = array_search('table', $a_tmp);
-            $s_tmp = $a_tmp[$i_pos-1];
+
+#            $a_tmp = explode('_', $s_tmp);
+#            $i_pos = array_search('table', $a_tmp);
+#            $s_tmp = $a_tmp[$i_pos-1];
         }
         return $s_tmp;
     }
