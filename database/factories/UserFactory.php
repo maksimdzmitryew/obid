@@ -17,7 +17,7 @@ $factory->define(App\User::class, function (Faker $faker) use ($a_faker) {
         'first_name' => $a_faker['uk']->firstName,
         'last_name'  => $a_faker['uk']->lastName,
         'email' => $a_faker['uk']->unique()->safeEmail,
-        'enabled' => true,
+        'published' => true,
         'password' => bcrypt($s_password),
         'remember_token' => str_random(10), # this might need an extra "use" as of laravel 6+ version (see upgrade guide)
     ];

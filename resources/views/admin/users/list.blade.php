@@ -84,7 +84,7 @@ $s_category = 'user';
                 order: [[ 2, "asc" ]],
                 columns: [
                 	@include('user._list_actions')
-					@include('user._list_checkbox', ['s_name' => 'enabled', ])
+					@include('user._list_checkbox', ['s_name' => 'published', ])
                     {
                         data: 'first_name',
                         render: function(data, type, row){

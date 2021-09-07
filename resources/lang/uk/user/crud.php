@@ -26,7 +26,7 @@ return [
 		'created_at'	=> 'Створено',
 		'updated_at'	=> 'Оновлено',
 		'actions'		=> 'Дії',
-		'published'		=> 'Опубліковано',
+		'published'		=> 'Опубліковано', # published - formally made public; "published accounts"
 		'enabled'		=> 'Так',
 		'disabled'		=> 'Ні',
 	],

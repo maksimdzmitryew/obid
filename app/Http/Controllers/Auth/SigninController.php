@@ -47,8 +47,7 @@ class SigninController	extends Controller
 		else
 			$s_email = NULL;
 
-		$a_res		= Auth::attempt(['email' => $request->email, 'password' => $request->password, 'enabled' => 1], ($i_safety == 2));
-#		$a_res		= Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], ($i_safety == 2));
+		$a_res		= Auth::attempt(['email' => $request->email, 'password' => $request->password, 'published' => 1], ($i_safety == 2));
 
 		if ($a_res)
 		{
@@ -82,7 +81,7 @@ $samesite			= null;
 		else
 		{
 			$o_res				= User::whereEmail($request->email)->first();
-			if (!( (bool) $o_res->enabled === TRUE ))
+			if (!( (bool) $o_res->published === TRUE ))
 			{
 				return response([
 					'title'			=> trans('user/form.text.inactive_account'),

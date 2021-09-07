@@ -72,7 +72,7 @@ class UserTest extends TestCase
             ->assertJsonStructure([
                 'data' =>
                     [
-                        ['email', 'enabled', 'first_name', 'id', 'last_name', 'roles', ],
+                        ['email', 'published', 'first_name', 'id', 'last_name', 'roles', ],
                     ],
                     'draw',
                     'recordsFiltered',

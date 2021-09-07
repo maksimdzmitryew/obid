@@ -32,11 +32,12 @@ class UserController extends Controller
     {
 
         $user               = new User();
-#        $user->country_id   = $request->country_id;
+        $user->country_id   = $request->country_id;
+        $user->city_id      = $request->city_id;
         $user->first_name   = $request->first_name;
         $user->last_name    = $request->last_name;
         $user->email        = $request->email;
-        $user->enabled      = $request->enabled ? 1 : 0 ?? 0;
+        $user->published    = $request->published ? 1 : 0 ?? 0;
         $user->password     = bcrypt($request->password);
         $user->save();
 
@@ -50,9 +51,8 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $item)
     {
-#    	$data = $request->only('country_id', 'email', 'first_name', 'last_name', 'enabled');
-    	$data = $request->only('email', 'first_name', 'last_name', 'enabled');
-    	$data['enabled'] = $request->enabled ? 1 : 0 ?? 0;
+    	$data = $request->only('country_id', 'city_id', 'email', 'first_name', 'last_name', 'published');
+    	$data['published'] = $request->published ? 1 : 0 ?? 0;
 
         $item->update($data);
         $item->syncRoles($request->role);
