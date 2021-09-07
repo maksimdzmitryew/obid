@@ -23,7 +23,7 @@
     bottom: 0;
     opacity: 1;
     position: fixed;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-sizing: border-box;
     font-family: Helvetica,Calibri,Arial,sans-serif;
     font-size: 16px;
@@ -40,7 +40,17 @@
 
 
 
-
+.js-cookie-consent.cookie-consent .cookie-consent__message::before {
+    content: '';
+    height: 165px;
+    width: 140px;
+    position: absolute;
+    top: -80px;
+    left: 20px;
+    background: url(/images/cookies.svg) no-repeat 50% 50%;
+    background-size: auto;
+    background-size: 160px;
+}
 
 
 .js-cookie-consent.cookie-consent .cookie-consent__message {
@@ -50,6 +60,7 @@
     flex: 1 1 auto;
     max-width: 100%;
     margin-right: 1em;
+    margin-left: 10em;
 }
 
 
