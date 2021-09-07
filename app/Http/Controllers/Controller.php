@@ -38,13 +38,23 @@ class Controller extends BaseController
 
 		// TODO refactroring
 		// app/Providers/ViewComposerServiceProvider.php
-		if (Schema::hasTable('settings'))
+		$s_model_path = 'App\Setting';
+		$b_model_table = false;
+		if (class_exists($s_model_path))
 		{
-			$o_settings	= app('App\Settings');
+			$o_model = new $s_model_path();
+			$s_prefix = $o_model->getConnection()->getTablePrefix();
+			$s_table = $o_model->getTable();
+			$b_model_table = Schema::hasTable($s_prefix . '' . $s_table);
 		}
+		if ($b_model_table)
+		{
+			$o_settings	= app($s_model_path.'s');
+		}
+
 		// TODO refactroring
 		// for purpose of unit-testing only
-		if (!isset($o_settings->theme))
+		if (!isset($o_settings) || !isset($o_settings->theme))
 		{
 			$a_modules = config('fragment.modules');
 			$o_settings->theme = lcfirst($a_modules[0]);
