@@ -14,6 +14,7 @@ class Setting extends Model
 
     protected $fillable = [
         'slug',
+        'published',
         'value',
     ];
 

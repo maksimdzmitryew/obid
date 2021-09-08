@@ -45,7 +45,10 @@ class Controller extends BaseController
 			$o_model = new $s_model_path();
 			$s_prefix = $o_model->getConnection()->getTablePrefix();
 			$s_table = $o_model->getTable();
-			$b_model_table = Schema::hasTable($s_prefix . '' . $s_table);
+			$s_conn = $o_model->getConnection()->getConfig()['name'];
+
+			$b_model_table = Schema::connection($s_conn)->hasTable($s_table);
+
 		}
 		if ($b_model_table)
 		{
