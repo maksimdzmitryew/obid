@@ -26,30 +26,51 @@ class ViewComposerServiceProvider extends ServiceProvider
 		// TODO refactroring
 		// app/Http/Controllers/Controller.php
 
-		if (Schema::hasTable('settings'))
+
+
+
+
+
+		$s_model_path = 'App\Setting';
+		$b_model_table = false;
+		if (class_exists($s_model_path))
 		{
-			$o_settings	= app('App\Settings');
+			$o_model = new $s_model_path();
+			$s_prefix = $o_model->getConnection()->getTablePrefix();
+			$s_table = $o_model->getTable();
+			$s_conn = $o_model->getConnection()->getConfig()['name'];
+
+			$b_model_table = Schema::connection($s_conn)->hasTable($s_table);
+
 		}
+		if ($b_model_table)
+		{
+			$o_settings	= app($s_model_path.'s');
+		}
+
 		// TODO refactroring
 		// for purpose of unit-testing only
-		else
-		{
-			$o_settings =  new \stdClass();
-		}
-		// TODO refactroring
-		// for purpose of unit-testing only
-		if (!isset($o_settings->theme))
+		if (!isset($o_settings) || !isset($o_settings->theme))
 		{
 			$a_modules = config('fragment.modules');
 			$o_settings->theme = lcfirst($a_modules[0]);
-			$o_settings->title = 'Feature Test';
+			$o_settings->title = 'ViewComposerServiceProvider';
 			$o_settings->established = 2020;
 		}
+
+#\App\Settings::i();
 
 		if (isset($o_settings->theme))
 		{
 			$s_theme	= $o_settings->theme;
+#			$this->_env->s_theme		= $s_theme;
 		}
+
+
+
+
+
+
 
 		$a_version	= include( base_path(). '/version.php');
 

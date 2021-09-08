@@ -20,6 +20,9 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+#dump($request, $next, $guard);
+#dd(Auth::guard($guard));
+#dd(Auth::guard($guard)->check());
         if (Auth::guard($guard)->check()) {
             return redirect(route('guest.personal.activity'));
         }

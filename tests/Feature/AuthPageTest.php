@@ -42,7 +42,7 @@ class SigninPageTest extends TestCase
     <title>
         ВХІД
  &#60;
-        FEATURE TEST
+        VIEWCOMPOSERSERVICEPROVIDER
     </title>');
     }
 

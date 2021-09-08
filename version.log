@@ -1,3 +1,4 @@
+0.13.1+a251:3 anonym ADD unify reading and asssigning settings
 0.13.1+a251:2 anonym ADD minor clean up
 0.13.1+a251:1 anonym FIX settings compatibility with new column names and connections
 0.13.0+a251:4 anonym ADD change return json code

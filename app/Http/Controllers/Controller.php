@@ -36,6 +36,12 @@ class Controller extends BaseController
 		$a_tmp						= explode('\\', $s_tmp);
 		$this->_env->s_name			= str_replace($s_basename, '', $a_tmp[3]);
 
+
+
+
+
+
+
 		// TODO refactroring
 		// app/Providers/ViewComposerServiceProvider.php
 		$s_model_path = 'App\Setting';
@@ -61,7 +67,7 @@ class Controller extends BaseController
 		{
 			$a_modules = config('fragment.modules');
 			$o_settings->theme = lcfirst($a_modules[0]);
-			$o_settings->title = '';
+			$o_settings->title = 'Controller';
 			$o_settings->established = 2020;
 		}
 
@@ -72,6 +78,12 @@ class Controller extends BaseController
 			$s_theme	= $o_settings->theme;
 			$this->_env->s_theme		= $s_theme;
 		}
+
+
+
+
+
+
 
 		if ($a_tmp[0] == 'Modules')
 		{
