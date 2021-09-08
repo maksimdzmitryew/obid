@@ -120,26 +120,31 @@ trait CreatesApplication
         $app = require __DIR__.'/../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
 
-        $b_need_refresh = false;
-
-        $a_tables = self::_getTablesWithoutPrefixes();
-        $a_migrations = self::_getTablesFromMigrationsTitles();
         /**
-         * check if migration is needed
+         *  each test triggers this Trait and function
+         *  for the first run let's check if we have any updates to any migration
          */
-        foreach ($a_migrations AS $s_table => $i_timestamp)
+        if (!RefreshDatabaseState::$migrated)
         {
+            $b_already_migrated = true;
+            $a_tables = self::_getTablesWithoutPrefixes();
+            $a_migrations = self::_getTablesFromMigrationsTitles();
             /**
-             *  there is a migration but table does not exist
+             * check if migration is needed
              */
-            $b_need_refresh = $b_need_refresh || !isset($a_tables[$s_table]);
-            /**
-             *  there was a update made to migration later than table was created from its execution
-             */
-            $b_need_refresh = $b_need_refresh || ($a_migrations[$s_table] - $a_tables[$s_table] > 0);
+            foreach ($a_migrations AS $s_table => $i_timestamp)
+            {
+                /**
+                 *  there is a migration but table does not exist
+                 */
+                $b_already_migrated = $b_already_migrated && isset($a_tables[$s_table]);
+                /**
+                 *  there was a update made to migration later than table was created from its execution
+                 */
+                $b_already_migrated = $b_already_migrated && ($a_migrations[$s_table] - $a_tables[$s_table] < 0);
+            }
+            RefreshDatabaseState::$migrated = $b_already_migrated;
         }
-
-        RefreshDatabaseState::$migrated = !$b_need_refresh;
 
         if ($app->environment() != 'testing')
         {   
