@@ -91,7 +91,7 @@ class ControllerAPI		extends BaseController
 		$this->o_item = $this->_env->s_model::create($request->only($this->a_fields));
 #        $design->processImages($request, 'image');
 
-		return response(['id' => $this->o_item->id,], 200);
+		return response(['id' => $this->o_item->id,], 201);
 	}
 
 	/**
@@ -126,6 +126,6 @@ class ControllerAPI		extends BaseController
 
 		return response([
 			'message' => trans('common/messages.designs_deleted', ['number' => $number], $number)
-		], 200);
+		], 204);
 	}
 }

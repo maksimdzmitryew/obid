@@ -1,166 +1,167 @@
-0.13.0+a251:3 guest ADD clean legacy values in settings
-0.13.0+a251:2 guest ADD return value is view for functions
-0.13.0+a251:1 test ADD clearer check for an update made to migrations that will trigger database refresh
-0.13.0+a250:9 test ADD better settings availability detection
-0.13.0+a250:8 test ADD use slug located in major table instead of name in translations
-0.13.0+a250:7 test ADD only reset database aka refresh if an existing migration was updated or a new one created
-0.13.0+a250:6 test ADD better name for migration for autodetect work properly
-0.13.0+a250:5 test ADD fix database table name detection when migrating
-0.13.0+a250:4 test ADD unify migrations structure with trait, add major migrations
-0.13.0+a250:3 guest ADD unify using a p u b l i s h e d
-0.13.0+a250:2 guest ADD cookies consent image overlay
-0.13.0+a250:1 guest ADD clean legacy migrations
-0.13.0+a238:4 guest ADD unified translation migration creation
-0.13.0+a238:3 guest ADD unified translation migration creation
-0.13.0+a238:2 guest ADD footer styling for sticky and small content
-0.13.0+a238:1 guest ADD clean legacy migrations
-0.13.0+a229:2 guest ADD better footer styling on smaller screens
-0.13.0+a229:1 guest ADD better cookies consent styling
-0.13.0+a222:2 user ADD spacing and clean up
-0.13.0+a222:1 guest UPD better UI and styles, and config values usage for cookies consent
-0.12.0+a221:1 guest ADD clean redundant style
-0.12.0+a206:7 test ADD replace thousand separator in array and transform to string
-0.12.0+a206:6 test ADD replace thousand separator from multibyte characher to single
-0.12.0+a206:5 test ADD class properties
-0.12.0+a206:4 test ADD size is human formatted
-0.12.0+a206:3 test ADD memory usage
-0.12.0+a206:2 test ADD check json response structure
-0.12.0+a206:1 user UPD COPY from core, TimerTrait
-0.11.6+a206:5 user ADD uuid to people table
-0.11.6+a206:4 test ADD write to log parameters order and type are correct
-0.11.6+a206:3 test ADD server name is string and can not be empty
-0.11.6+a206:2 test ADD transform array into response
-0.11.6+a206:1 test ADD parent model does not have related model set by default
-0.11.6+a205:3 test ADD parent model does not have parent id set by default
-0.11.6+a205:2 test ADD parent model does not have value set for protected fields list
-0.11.6+a205:1 test ADD check password
-0.11.6+a204:1 test ADD pre-set password for fakery of a person
-0.11.6+a203:2 test ADD better virtual person
-0.11.6+a203:1 test ADD signin and view list of people
-0.11.6+a200:1 test ADD current session's CSRF token returned via the helper function
-0.11.6+a197:1 test FIX model t e s t namespace
-0.11.5+a197:2 test ADD code coverage settings
-0.11.5+a197:1 test FIX actual log branch for commits
-0.11.3+a197:6 test ADD check namespace for model in module
-0.11.3+a196:5 test ADD model null value to submitted form data
-0.11.3+a196:4 test ADD model null value to foreign keys array
-0.11.3+a196:1 user FIX item variable name
-0.11.2+a196:9 user ADD function name convention from private to public
-0.11.2+a196:8 test ADD init app-model with number format
-0.11.1+a196:7 user ADD format as PSR-12 to some middleware and blade view
-0.11.1+a196:6 test FIX url when opening signin page
-0.11.0+a196:5 test ADD better function names and PHPDoc comments
-0.11.0+a196:4 test ADD introduce PSR-12 https://www.php-fig.org/psr/psr-12/
-0.11.0+a196:3 test ADD better name for middleware case
-0.11.0+a196:2 test ADD minor visual
-0.11.0+a196:1 test ADD middleware TrimStrings
-0.11.0+a195:7 test ADD minor visual
-0.11.0+a195:6 test ADD check guest and power pages
-0.11.0+a195:5 test ADD better version-app
-0.11.0+a195:4 test ADD feature auth page
-0.11.0+a195:3 test ADD feature home page
-0.11.1+a195:2 user FIX route to homepage
-0.11.0+a195:1 user DEL clean legacy code related to reactions
-0.10.0+a195:3 user ADD page view by any visitor
-0.10.0+a195:2 user ADD migration indecies explanation
-0.10.0+a195:1 user DEL legacy relations
-0.09.0+a195:1 user DEL legacy pages as non-module
-0.08.0+a195:2 user ADD better translations
-0.08.0+a195:1 user UPD page module
-0.07.0+a195:1 user UPD COPY improvements from core of posibnyk incl. file manipulation
-0.06.0+a195:1 user UPD routes unification and clean up
-0.05.2+a195:4 user FIX many-to-many save to DB issue when updating selection
-0.05.1+a195:3 user ADD migration password reset
-0.05.1+a195:2 user FIX migration missing index
-0.05.0+a195:1 user ADD migration permissions
-0.05.0+a194:2 user ADD migration u s e r s
-0.05.0+a194:1 user DEL migration laravel translations manager
-0.04.0+a194:1 test DEL pre-initial attempts
-0.03.0+a194:1 test ADD initial setup and basic unit and feature examples
-0.03.0+a363:1 user ADD force specific day of week parsing
-0.03.0+a353:2 user ADD read google.recaptcha.version from env config
-0.03.0+a353:1 user ADD google recaptcha v3
-0.03.0+a313:1 user COPY improvements from core
-0.03.0+a209:1 user ADD unify data preparation for profile and activity tabs
-0.03.0+a208:1 user DEL legacy code for personal profile
-0.02.3+a208:3 user FIX restore weight in data for demand
-0.02.2+a208:2 user ADD styling for all demands of the day incl. latest and past 3 weeks
-0.02.2+a208:1 user ADD list plate ids for all demands of the day
-0.02.2+a200:6 user ADD even better recaptcha support for reload for http and ajax responses
-0.02.2+a200:5 user ADD better recaptcha v2 support to show error, refresh and handle feedback
-0.02.2+a200:4 user ADD when login attempt fails because of inactivated account
-0.02.2+a200:3 user ADD refresh csrf when form is submited and proper debug handling as json response
-0.02.2+a200:2 user ADD fancy radiobutton, see security options at signin page
-0.02.2+a200:1 user ADD better UX for signin form and unify input fields
-0.02.2+a199:2 user FIX signup enable with activation token
-0.02.1+a199:1 user ADD proper detection and distinction between current and next week
-0.02.1+a197:7 user ADD better signin and signup forms UX
-0.02.1+a197:6 user ADD github and linkedin links
-0.02.1+a197:5 user ADD license as per GNU AGPLv3 info
-0.02.1+a197:4 user ADD shorten title of plates when loading preselected demands
-0.02.1+a197:3 user ADD make past not selected items less visible in week schedule
-0.02.1+a197:2 user ADD disable modifying of demands for past dates and today
-0.02.1+a197:1 user FIX foreign key to u s e r table
-0.02.0+a196:3 user ADD better signin and signup forms UX
-0.02.0+a196:2 user ADD better wording for demand UX
-0.02.0+a196:1 user ADD updating demand
-0.02.0+a195:3 user ADD better styling for items list at my activity tab
-0.02.0+a195:2 user ADD shorter wording for signup
-0.02.0+a195:1 user ADD better week schedule switch between current or past
-0.02.0+a194:2 user ADD better UX for password reset
-0.02.0+a194:1 user ADD sign up email translation into uk_ua
-0.02.0+a193:1 user UPD clean legacy code
-0.01.0+a193:2 user ADD better locale for dates spelling
-0.01.0+a193:1 user UPD initial release and php7.4 compliance
-0.00.2+a191:3 user ADD current week review orders sorted by date desc
-0.00.2+a191:2 user ADD calculate weight
-0.00.2+a191:1 user ADD show alreaded demanded items, totals, weight
-0.00.2+a190:3 user ADD list demanded items for the week as personal activity
-0.00.2+a190:2 user ADD core improvements
-0.00.2+a190:1 user ADD save demand and its plates
-0.00.2+a189:3 user ADD more contrast to text and less color to table borders
-0.00.2+a189:2 user ADD selection and deletion from anywhere
-0.00.2+a189:1 user ADD selection and deselection with positions listed and totals calculated
-0.00.2+a188:3 user ADD initial selection click tracking
-0.00.2+a188:2 user ADD clean legacy calls to g-maps and enable scrollers at demand page
-0.00.2+a188:1 user ADD show items on plate per day
-0.00.2+a185:7 user ADD demand module
-0.00.2+a185:6 user ADD activity tab and menu item
-0.00.2+a185:5 user ADD adjust contacts info and layout
-0.00.2+a185:4 user ADD simplify and make laravel-style comparison of daily menu against existing items in DB
-0.00.2+a185:3 user ADD better translation key for parent translation
-0.00.2+a185:2 user ADD translation from parent model
-0.00.2+a185:1 user ADD clean translation for plate
-0.00.2+a183:1 user ADD clean meal and provider direct relation as redundant
-0.00.2+a182:1 user ADD relations between tables and models
-0.00.2+a181:1 user ADD parse all days of week
-0.00.2+a180:4 user ADD plate module
-0.00.2+a180:3 user ADD new version icon pack
-0.00.2+a180:2 user DEL previous version icon pack
-0.00.2+a180:1 user ADD better icons and clean legacy a d m i n c s s
-0.00.2+a178:1 user ADD parse webpage and insert missing data for course and meal
-0.00.2+a177:1 user ADD parse list of items at menu page
-0.00.2+a176:3 user ADD download provider web-page with file trait
-0.00.2+a176:2 user ADD file trait
-0.00.2+a176:1 user ADD enhance common Model
-0.00.2+a175:3 user ADD better provider form and translation
-0.00.2+a175:2 user ADD better font styling
-0.00.2+a175:1 user ADD route to parsing provider’s web-page
-0.00.2+a175:1 user COPY improvements from core
-0.00.2+a173:5 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch
-0.00.2+a173:4 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch
-0.00.2+a173:3 user FIX session and consent cookies' name resulted in 419 csrf token mistmatch
-0.00.1+a173:2 user FIX theme detection in Controller
-0.00.0+a173:1 user ADD clear redundant route
-0.00.0+a172:1 user ADD link courses and providers
-0.00.0+a169:5 user ADD link courses and providers
-0.00.0+a169:4 user ADD link courses and providers
-0.00.0+a169:3 user ADD link courses and providers
-0.00.0+a169:2 user ADD link courses and providers
-0.00.0+a169:1 user ADD link courses and providers
-0.00.0+a167:1 user ADD link courses and providers
-0.00.0+a166:4 user ADD provider module
-0.00.0+a166:3 user ADD course module
-0.00.0+a166:2 user ADD translation to datatable
-0.00.0+a166:1 user ADD translation to datatable
-0.00.0+a152:1 user ADD meal clean up
+0.13.0+a251:4 anonym ADD change return json code
+0.13.0+a251:3 anonym ADD clean legacy values in settings
+0.13.0+a251:2 anonym ADD return value is view for functions
+0.13.0+a251:1 review ADD clearer check for an update made to migrations that will trigger database refresh
+0.13.0+a250:9 review ADD better settings availability detection
+0.13.0+a250:8 review ADD use slug located in major table instead of name in translations
+0.13.0+a250:7 review ADD only reset database aka refresh if an existing migration was updated or a new one created
+0.13.0+a250:6 review ADD better name for migration for autodetect work properly
+0.13.0+a250:5 review ADD fix database table name detection when migrating
+0.13.0+a250:4 review ADD unify migrations structure with trait, add major migrations
+0.13.0+a250:3 anonym ADD unify using a p u b l i s h e d
+0.13.0+a250:2 anonym ADD cookies consent image overlay
+0.13.0+a250:1 anonym ADD clean legacy migrations
+0.13.0+a238:4 anonym ADD unified translation migration creation
+0.13.0+a238:3 anonym ADD unified translation migration creation
+0.13.0+a238:2 anonym ADD footer styling for sticky and small content
+0.13.0+a238:1 anonym ADD clean legacy migrations
+0.13.0+a229:2 anonym ADD better footer styling on smaller screens
+0.13.0+a229:1 anonym ADD better cookies consent styling
+0.13.0+a222:2 person ADD spacing and clean up
+0.13.0+a222:1 anonym UPD better UI and styles, and config values usage for cookies consent
+0.12.0+a221:1 anonym ADD clean redundant style
+0.12.0+a206:7 review ADD replace thousand separator in array and transform to string
+0.12.0+a206:6 review ADD replace thousand separator from multibyte characher to single
+0.12.0+a206:5 review ADD class properties
+0.12.0+a206:4 review ADD size is human formatted
+0.12.0+a206:3 review ADD memory usage
+0.12.0+a206:2 review ADD check json response structure
+0.12.0+a206:1 person UPD COPY from core, TimerTrait
+0.11.6+a206:5 person ADD uuid to people table
+0.11.6+a206:4 review ADD write to log parameters order and type are correct
+0.11.6+a206:3 review ADD server name is string and can not be empty
+0.11.6+a206:2 review ADD transform array into response
+0.11.6+a206:1 review ADD parent model does not have related model set by default
+0.11.6+a205:3 review ADD parent model does not have parent id set by default
+0.11.6+a205:2 review ADD parent model does not have value set for protected fields list
+0.11.6+a205:1 review ADD check password
+0.11.6+a204:1 review ADD pre-set password for fakery of a person
+0.11.6+a203:2 review ADD better virtual person
+0.11.6+a203:1 review ADD signin and view list of people
+0.11.6+a200:1 review ADD current session's CSRF token returned via the helper function
+0.11.6+a197:1 review FIX model test namespace
+0.11.5+a197:2 review ADD code coverage settings
+0.11.5+a197:1 review FIX actual log branch for commits
+0.11.3+a197:6 review ADD check namespace for model in module
+0.11.3+a196:5 review ADD model null value to submitted form data
+0.11.3+a196:4 review ADD model null value to foreign keys array
+0.11.3+a196:1 person FIX item variable name
+0.11.2+a196:9 person ADD function name convention from private to public
+0.11.2+a196:8 review ADD init app-model with number format
+0.11.1+a196:7 person ADD format as PSR-12 to some middleware and blade view
+0.11.1+a196:6 review FIX url when opening signin page
+0.11.0+a196:5 review ADD better function names and PHPDoc comments
+0.11.0+a196:4 review ADD introduce PSR-12 https://www.php-fig.org/psr/psr-12/
+0.11.0+a196:3 review ADD better name for middleware case
+0.11.0+a196:2 review ADD minor visual
+0.11.0+a196:1 review ADD middleware TrimStrings
+0.11.0+a195:7 review ADD minor visual
+0.11.0+a195:6 review ADD check anonym and power pages
+0.11.0+a195:5 review ADD better version-app
+0.11.0+a195:4 review ADD feature auth page
+0.11.0+a195:3 review ADD feature home page
+0.11.1+a195:2 person FIX route to homepage
+0.11.0+a195:1 person DEL clean legacy code related to reactions
+0.10.0+a195:3 person ADD page view by any visitor
+0.10.0+a195:2 person ADD migration indecies explanation
+0.10.0+a195:1 person DEL legacy relations
+0.09.0+a195:1 person DEL legacy pages as non-module
+0.08.0+a195:2 person ADD better translations
+0.08.0+a195:1 person UPD page module
+0.07.0+a195:1 person UPD COPY improvements from core of posibnyk incl. file manipulation
+0.06.0+a195:1 person UPD routes unification and clean up
+0.05.2+a195:4 person FIX many-to-many save to DB issue when updating selection
+0.05.1+a195:3 person ADD migration password reset
+0.05.1+a195:2 person FIX migration missing index
+0.05.0+a195:1 person ADD migration permissions
+0.05.0+a194:2 person ADD migration users
+0.05.0+a194:1 person DEL migration laravel translations manager
+0.04.0+a194:1 review DEL pre-initial attempts
+0.03.0+a194:1 review ADD initial setup and basic unit and feature examples
+0.03.0+a363:1 person ADD force specific day of week parsing
+0.03.0+a353:2 person ADD read google.recaptcha.version from env config
+0.03.0+a353:1 person ADD google recaptcha v3
+0.03.0+a313:1 person COPY improvements from core
+0.03.0+a209:1 person ADD unify data preparation for profile and activity tabs
+0.03.0+a208:1 person DEL legacy code for personal profile
+0.02.3+a208:3 person FIX restore weight in data for demand
+0.02.2+a208:2 person ADD styling for all demands of the day incl. lareview and past 3 weeks
+0.02.2+a208:1 person ADD list plate ids for all demands of the day
+0.02.2+a200:6 person ADD even better recaptcha support for reload for http and ajax responses
+0.02.2+a200:5 person ADD better recaptcha v2 support to show error, refresh and handle feedback
+0.02.2+a200:4 person ADD when login attempt fails because of inactivated account
+0.02.2+a200:3 person ADD refresh csrf when form is submited and proper debug handling as json response
+0.02.2+a200:2 person ADD fancy radiobutton, see security options at signin page
+0.02.2+a200:1 person ADD better UX for signin form and unify input fields
+0.02.2+a199:2 person FIX signup enable with activation token
+0.02.1+a199:1 person ADD proper detection and distinction between current and next week
+0.02.1+a197:7 person ADD better signin and signup forms UX
+0.02.1+a197:6 person ADD github and linkedin links
+0.02.1+a197:5 person ADD license as per GNU AGPLv3 info
+0.02.1+a197:4 person ADD shorten title of plates when loading preselected demands
+0.02.1+a197:3 person ADD make past not selected items less visible in week schedule
+0.02.1+a197:2 person ADD disable modifying of demands for past dates and today
+0.02.1+a197:1 person FIX foreign key to user table
+0.02.0+a196:3 person ADD better signin and signup forms UX
+0.02.0+a196:2 person ADD better wording for demand UX
+0.02.0+a196:1 person ADD updating demand
+0.02.0+a195:3 person ADD better styling for items list at my activity tab
+0.02.0+a195:2 person ADD shorter wording for signup
+0.02.0+a195:1 person ADD better week schedule switch between current or past
+0.02.0+a194:2 person ADD better UX for password reset
+0.02.0+a194:1 person ADD sign up email translation into uk_ua
+0.02.0+a193:1 person UPD clean legacy code
+0.01.0+a193:2 person ADD better locale for dates spelling
+0.01.0+a193:1 person UPD initial release and php7.4 compliance
+0.00.2+a191:3 person ADD current week review orders sorted by date desc
+0.00.2+a191:2 person ADD calculate weight
+0.00.2+a191:1 person ADD show alreaded demanded items, totals, weight
+0.00.2+a190:3 person ADD list demanded items for the week as personal activity
+0.00.2+a190:2 person ADD core improvements
+0.00.2+a190:1 person ADD save demand and its plates
+0.00.2+a189:3 person ADD more contrast to text and less color to table borders
+0.00.2+a189:2 person ADD selection and deletion from anywhere
+0.00.2+a189:1 person ADD selection and deselection with positions listed and totals calculated
+0.00.2+a188:3 person ADD initial selection click tracking
+0.00.2+a188:2 person ADD clean legacy calls to g-maps and enable scrollers at demand page
+0.00.2+a188:1 person ADD show items on plate per day
+0.00.2+a185:7 person ADD demand module
+0.00.2+a185:6 person ADD activity tab and menu item
+0.00.2+a185:5 person ADD adjust contacts info and layout
+0.00.2+a185:4 person ADD simplify and make laravel-style comparison of daily menu against existing items in DB
+0.00.2+a185:3 person ADD better translation key for parent translation
+0.00.2+a185:2 person ADD translation from parent model
+0.00.2+a185:1 person ADD clean translation for plate
+0.00.2+a183:1 person ADD clean meal and provider direct relation as redundant
+0.00.2+a182:1 person ADD relations between tables and models
+0.00.2+a181:1 person ADD parse all days of week
+0.00.2+a180:4 person ADD plate module
+0.00.2+a180:3 person ADD new version icon pack
+0.00.2+a180:2 person DEL previous version icon pack
+0.00.2+a180:1 person ADD better icons and clean legacy admin c s s
+0.00.2+a178:1 person ADD parse webpage and insert missing data for course and meal
+0.00.2+a177:1 person ADD parse list of items at menu page
+0.00.2+a176:3 person ADD download provider web-page with file trait
+0.00.2+a176:2 person ADD file trait
+0.00.2+a176:1 person ADD enhance common Model
+0.00.2+a175:3 person ADD better provider form and translation
+0.00.2+a175:2 person ADD better font styling
+0.00.2+a175:1 person ADD route to parsing provider’s web-page
+0.00.2+a175:1 person COPY improvements from core
+0.00.2+a173:5 person FIX session and consent cookies' name resulted in 419 csrf token mistmatch
+0.00.2+a173:4 person FIX session and consent cookies' name resulted in 419 csrf token mistmatch
+0.00.2+a173:3 person FIX session and consent cookies' name resulted in 419 csrf token mistmatch
+0.00.1+a173:2 person FIX theme detection in Controller
+0.00.0+a173:1 person ADD clear redundant route
+0.00.0+a172:1 person ADD link courses and providers
+0.00.0+a169:5 person ADD link courses and providers
+0.00.0+a169:4 person ADD link courses and providers
+0.00.0+a169:3 person ADD link courses and providers
+0.00.0+a169:2 person ADD link courses and providers
+0.00.0+a169:1 person ADD link courses and providers
+0.00.0+a167:1 person ADD link courses and providers
+0.00.0+a166:4 person ADD provider module
+0.00.0+a166:3 person ADD course module
+0.00.0+a166:2 person ADD translation to datatable
+0.00.0+a166:1 person ADD translation to datatable
+0.00.0+a152:1 person ADD meal clean up
