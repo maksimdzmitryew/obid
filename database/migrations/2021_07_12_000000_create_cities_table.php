@@ -25,6 +25,7 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
+
         /**
          * columns specific to the core of the model
          */
