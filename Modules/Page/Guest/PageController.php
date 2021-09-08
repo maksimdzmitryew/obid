@@ -25,7 +25,7 @@ class PageController extends Controller
 	 *	this is override to App\Http\Controllers\ControllerGuest::index
 	 *	which is used by "ordinary" Welcome route
 	 */
-	public function index(Request $request) #: \Illuminate\View\View
+	public function index(Request $request) : \Illuminate\View\View
 	{
 		$this->setEnv();
 

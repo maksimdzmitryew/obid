@@ -1,3 +1,4 @@
+0.13.0+a251:2 guest ADD return value is view for functions
 0.13.0+a251:1 test ADD clearer check for an update made to migrations that will trigger database refresh
 0.13.0+a250:9 test ADD better settings availability detection
 0.13.0+a250:8 test ADD use slug located in major table instead of name in translations
