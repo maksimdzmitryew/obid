@@ -19,7 +19,7 @@
     "lodash": "^4.17.4",
     "vue": "^2.5.7"
   },
-  "name": "culture-scapes.loc",
+  "name": "ob.max",
   "description": "<p align=\"center\"><img src=\"https://laravel.com/assets/img/components/logo-laravel.svg\"></p>",
   "version": "1.0.0",
   "main": "webpack.mix.js",
@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bxon-2017@bitbucket.org/activemediaUA/culturescapes.git"
+    "url": "git+https://github.com/maksimdzmitryew/obid.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/activemediaUA/culturescapes#readme",
+  "homepage": "https://github.com/maksimdzmitryew/obid/blob/master/readme.md",
   "dependencies": {
     "bootstrap-3-typeahead": "^4.0.2",
     "ckeditor": "^4.10.1",

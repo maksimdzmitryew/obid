@@ -6,7 +6,7 @@ $a_production = [
     'version_patch'         => '0',
     'version_maturity'      => 'a', # a=alfa,b=beta,rc=candidate,r=release,sr=service release
     'version_day'           => '251',
-    'version_seq'           => '2', # subsequent commit during same day for the same version
+    'version_seq'           => '3', # subsequent commit during same day for the same version
 ];
 
 return (object) [
@@ -24,5 +24,5 @@ return (object) [
     'test'                  => '0.01.0',
     'api'                   => '0.00.0',
     'css'                   => '0.38.0',
-    'js'                    => '0.27.0',
+    'js'                    => '0.28.0',
 ];
