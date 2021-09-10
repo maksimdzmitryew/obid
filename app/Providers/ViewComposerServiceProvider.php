@@ -52,6 +52,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 		// for purpose of unit-testing only
 		if (!isset($o_settings) || !isset($o_settings->theme))
 		{
+			$o_settings = new \stdClass();
 			$a_modules = config('fragment.modules');
 			$o_settings->theme = lcfirst($a_modules[0]);
 			$o_settings->title = 'ViewComposerServiceProvider';

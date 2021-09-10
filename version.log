@@ -1,4 +1,5 @@
-0.13.2+a253:1 review FIX initialize settings
+0.13.3+a253:1 anonym FIX initialize settings
+0.13.2+a253:1 review FIX pass options to migration
 0.13.1+a251:3 anonym ADD unify reading and assigning settings
 0.13.1+a251:2 anonym ADD minor clean up
 0.13.1+a251:1 anonym FIX settings compatibility with new column names and connections

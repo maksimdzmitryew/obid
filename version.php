@@ -3,7 +3,7 @@
 $a_production = [
     'version_release'       => '0',
     'version_leader'        => '13', # changes whenever any css,js,api,anonym,person value below has changed; reset each realease
-    'version_patch'         => '2',
+    'version_patch'         => '3',
     'version_maturity'      => 'a', # a=alfa,b=beta,rc=candidate,r=release,sr=service release
     'version_day'           => '253',
     'version_seq'           => '1', # subsequent commit during same day for the same version
@@ -19,7 +19,7 @@ return (object) [
     . $a_production['version_day'] . ':'
     . $a_production['version_seq'],
     'release'               => $a_production['version_release'],
-    'anonym'                => '0.01.1',
+    'anonym'                => '0.01.2',
     'person'                => '0.11.0',
     'review'                => '0.01.1',
     'api'                   => '0.00.0',
