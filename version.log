@@ -1,17 +1,18 @@
-0.13.1+a251:3 anonym ADD unify reading and asssigning settings
+0.13.2+a253:1 review FIX initialize settings
+0.13.1+a251:3 anonym ADD unify reading and assigning settings
 0.13.1+a251:2 anonym ADD minor clean up
 0.13.1+a251:1 anonym FIX settings compatibility with new column names and connections
 0.13.0+a251:4 anonym ADD change return json code
 0.13.0+a251:3 anonym ADD clean legacy values in settings
 0.13.0+a251:2 anonym ADD return value is view for functions
-0.13.0+a251:1 review ADD clearer check for an update made to migrations that will trigger database refresh
+0.13.0+a251:1 review ADD check migrations update to trigger database refresh
 0.13.0+a250:9 review ADD better settings availability detection
 0.13.0+a250:8 review ADD use slug located in major table instead of name in translations
-0.13.0+a250:7 review ADD only reset database aka refresh if an existing migration was updated or a new one created
+0.13.0+a250:7 review ADD refresh database if a migration was updated or created
 0.13.0+a250:6 review ADD better name for migration for autodetect work properly
 0.13.0+a250:5 review ADD fix database table name detection when migrating
 0.13.0+a250:4 review ADD unify migrations structure with trait, add major migrations
-0.13.0+a250:3 anonym ADD unify using a p u b l i s h e d
+0.13.0+a250:3 anonym ADD unify using a published
 0.13.0+a250:2 anonym ADD cookies consent image overlay
 0.13.0+a250:1 anonym ADD clean legacy migrations
 0.13.0+a238:4 anonym ADD unified translation migration creation
@@ -21,7 +22,7 @@
 0.13.0+a229:2 anonym ADD better footer styling on smaller screens
 0.13.0+a229:1 anonym ADD better cookies consent styling
 0.13.0+a222:2 person ADD spacing and clean up
-0.13.0+a222:1 anonym UPD better UI and styles, and config values usage for cookies consent
+0.13.0+a222:1 anonym UPD UI and config values usage for cookies consent
 0.12.0+a221:1 anonym ADD clean redundant style
 0.12.0+a206:7 review ADD replace thousand separator in array and transform to string
 0.12.0+a206:6 review ADD replace thousand separator from multibyte characher to single
@@ -88,7 +89,7 @@
 0.03.0+a209:1 person ADD unify data preparation for profile and activity tabs
 0.03.0+a208:1 person DEL legacy code for personal profile
 0.02.3+a208:3 person FIX restore weight in data for demand
-0.02.2+a208:2 person ADD styling for all demands of the day incl. lareview and past 3 weeks
+0.02.2+a208:2 person ADD styling for all demands of the day incl. view and past 3 weeks
 0.02.2+a208:1 person ADD list plate ids for all demands of the day
 0.02.2+a200:6 person ADD even better recaptcha support for reload for http and ajax responses
 0.02.2+a200:5 person ADD better recaptcha v2 support to show error, refresh and handle feedback
@@ -124,14 +125,14 @@
 0.00.2+a190:1 person ADD save demand and its plates
 0.00.2+a189:3 person ADD more contrast to text and less color to table borders
 0.00.2+a189:2 person ADD selection and deletion from anywhere
-0.00.2+a189:1 person ADD selection and deselection with positions listed and totals calculated
+0.00.2+a189:1 person ADD (de)selection with positions listed and totals calculated
 0.00.2+a188:3 person ADD initial selection click tracking
-0.00.2+a188:2 person ADD clean legacy calls to g-maps and enable scrollers at demand page
+0.00.2+a188:2 person ADD clean legacy g-maps and enable scrollers at demand page
 0.00.2+a188:1 person ADD show items on plate per day
 0.00.2+a185:7 person ADD demand module
 0.00.2+a185:6 person ADD activity tab and menu item
 0.00.2+a185:5 person ADD adjust contacts info and layout
-0.00.2+a185:4 person ADD simplify and make laravel-style comparison of daily menu against existing items in DB
+0.00.2+a185:4 person ADD laravel-style comparison of daily menu vs existing items in DB
 0.00.2+a185:3 person ADD better translation key for parent translation
 0.00.2+a185:2 person ADD translation from parent model
 0.00.2+a185:1 person ADD clean translation for plate

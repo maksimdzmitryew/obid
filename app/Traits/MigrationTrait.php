@@ -39,9 +39,14 @@ trait MigrationTrait
         $o_table->timestamps();
     }
 
-    public function addPublished(Object $o_table, String $s_comment = NULL) : void
+    public function addPublished(Object $o_table, String $s_comment = NULL, ?Array $a_options = NULL) : void
     {
-        $o_table->boolean('published')                      ->default(0)    ->nullable(false)->index()  ->comment( $s_comment ?: 'item is confirmed and publicly available');
+        $i_published = 0;
+        if (isset($a_options['published']))
+        {
+            $i_published = $a_options['published'];
+        }
+        $o_table->boolean('published')                 ->default($i_published)->nullable(false)->index()->comment( $s_comment ?: 'item is confirmed and publicly available');
     }
 
     public function addForeignKey(Object $o_model, Object $o_table, String $s_comment = NULL) : void
@@ -58,9 +63,20 @@ trait MigrationTrait
         return (!empty($s_tmp) ? $s_tmp : '');
     }
 
-    public function addPrimaryKey(Object $o_model, Object $o_table) : void
+    public function addPrimaryKey(Object $o_model, Object $o_table, ?Array $a_options = NULL) : void
     {
-        $o_table->increments($o_model->getPrimary())                                                    ->comment('primary identifier');
+        $s_comment = 'primary identifier';
+        if (isset($a_options['id']))
+        {
+            if ($a_options['id'] == 'big')
+            {
+            $o_table->bigIncrements($o_model->getPrimary())                                             ->comment($s_comment);
+            }
+        }
+        else
+        {
+            $o_table->increments($o_model->getPrimary())                                                ->comment($s_comment);
+        }
     }
 
     public function getPrimary() : String
@@ -115,11 +131,11 @@ trait MigrationTrait
     /**
      * common structure for any table
      */
-    public function upMajorMigration(?Blueprint $o_table = NULL) : void
+    public function upMajorMigration(?Blueprint $o_table = NULL, Array $a_options = NULL) : void
     {
-        Schema::connection($this->getConnection())->create($this->getTable(), function (Blueprint $table) use ($o_table) {
-            $this->addPrimaryKey($this, $table);
-            $this->addPublished($table);
+        Schema::connection($this->getConnection())->create($this->getTable(), function (Blueprint $table) use ($o_table, $a_options) {
+            $this->addPrimaryKey($this, $table, $a_options);
+            $this->addPublished($table, NULL, $a_options);
 
             self::addCustomColumns($table, $o_table);
 
@@ -130,12 +146,12 @@ trait MigrationTrait
     /**
      * common structure for any translation table
      */
-    public function upTranslationMigration(?Blueprint $o_table = NULL) : void
+    public function upTranslationMigration(?Blueprint $o_table = NULL, Array $a_options = NULL) : void
     {
-        Schema::connection($this->getConnection())->create($this->getTransTableName(), function (Blueprint $table) use ($o_table) {
+        Schema::connection($this->getConnection())->create($this->getTransTableName(), function (Blueprint $table) use ($o_table, $a_options) {
 
-            $this->addPrimaryKey($this, $table);
-            $this->addForeignKey($this, $table);
+            $this->addPrimaryKey($this, $table, $a_options);
+            $this->addForeignKey($this, $table, $a_options);
 
             $table->char('locale', 2)                       ->default('')->nullable(false)->index()     ->comment('ISO 639-1:2002 alpha-2 language code');
             $table->unique([$this->getAsForeignKey(), 'locale'])                                        ->comment('combination of translation for locale');
