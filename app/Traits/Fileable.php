@@ -72,7 +72,7 @@ trait Fileable
 			$a_field_name   = ['file_id'];
 		}
 
-  	self::_cleanGarbage($request, $a_field_name);
+  		self::_cleanGarbage($request, $a_field_name);
 
 		for ($i = 0; $i < count($a_field_name); $i++)
 		{

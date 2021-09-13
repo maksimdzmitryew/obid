@@ -24,7 +24,7 @@ class CreatePagesTable extends Migration
          * columns specific to the core of the model
          */
         $o_main = $this->getClassForCustomColumns();
-        $this->addForeignKey($this, $o_main, 'parent for pages at sub-levels');
+        $this->addForeignKey($this, $o_main, NULL, 'parent for pages at sub-levels');
         $o_main->string('slug')                 ->unique()  ->default('')->nullable(false)->index()     ->comment('url compatible page name');
         $o_main->smallInteger('order')->unsigned()          ->default(1)->nullable(false)->index()      ->comment('sorting position');
         $this->upMajorMigration($o_main);

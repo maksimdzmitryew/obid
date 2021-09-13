@@ -49,10 +49,21 @@ trait MigrationTrait
         $o_table->boolean('published')                 ->default($i_published)->nullable(false)->index()->comment( $s_comment ?: 'item is confirmed and publicly available');
     }
 
-    public function addForeignKey(Object $o_model, Object $o_table, String $s_comment = NULL) : void
+    public function addForeignKey(Object $o_model, Object $o_table, ?Array $a_options = NULL, String $s_comment = NULL) : void
     {
-        $o_table->unsignedInteger($o_model->getAsForeignKey())                                          ->comment($s_comment ?: '"' . $this->getPrefix() . $o_model->getTable() . '" table’s primary key')
-        ;
+        $s_comment = ($s_comment ?: '"' . $this->getPrefix() . $o_model->getTable() . '" table’s primary key');
+
+        if (isset($a_options['id']))
+        {
+            if ($a_options['id'] == 'big')
+            {
+            $o_table->unsignedBigInteger($o_model->getAsForeignKey())                                   ->comment($s_comment);
+            }
+        }
+        else
+        {
+            $o_table->unsignedInteger($o_model->getAsForeignKey())                                      ->comment($s_comment);
+        }
     }
 
     public function getPrefix() : String
