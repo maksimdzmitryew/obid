@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+#use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
@@ -127,7 +127,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * @test
+     * @ test
      * /
     public function authorized_user_can_create_user()
     {

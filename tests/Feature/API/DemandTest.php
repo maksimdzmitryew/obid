@@ -11,7 +11,7 @@ class DemandTest extends TestCase
 #    use RefreshDatabase;
 
     /**
-     * @test
+     * @ test
      */
 /*
     public function testProductCategorySync()
