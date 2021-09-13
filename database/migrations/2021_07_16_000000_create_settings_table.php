@@ -10,7 +10,6 @@ class CreateSettingsTable extends Migration
     use MigrationTrait;
 
     const DB_CONNECTION         = 'psc';
-    const TABLE_MIGRATION       = 'settings';
 
     /**
      * Run the migrations.
