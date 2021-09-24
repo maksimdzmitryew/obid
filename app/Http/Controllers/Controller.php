@@ -69,6 +69,7 @@ class Controller extends BaseController
 			$o_settings->theme = lcfirst($a_modules[0]);
 			$o_settings->title = 'Controller';
 			$o_settings->established = 2020;
+			$o_settings->email = 'no@spam.com';
 		}
 
 #\App\Settings::i();

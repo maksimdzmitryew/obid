@@ -57,6 +57,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 			$o_settings->theme = lcfirst($a_modules[0]);
 			$o_settings->title = 'ViewComposerServiceProvider';
 			$o_settings->established = 2020;
+			$o_settings->email = 'no@spam.com';
 		}
 
 #\App\Settings::i();
