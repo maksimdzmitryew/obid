@@ -1,3 +1,4 @@
+0.13.3+a267:2 anonym ADD social icons from settings instead of hard-coded
 0.13.3+a267:1 anonym ADD email from settings instead of hard-coded
 0.13.3+a257:1 anonym ADD declare strict_types eq 1 in migrations
 0.13.3+a256:3 review ADD minor clean up empty spaces at end of lines
