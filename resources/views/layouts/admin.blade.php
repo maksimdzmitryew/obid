@@ -291,11 +291,11 @@
 				<div class="navbar-text sub">
 					<i><u>Other Versions</u></i>
 					<br />
-					<div class="version ver-name">guest</div>
-					<div class="version ver-id">{{ $version->guest }}</div>
+					<div class="version ver-name">anonym</div>
+					<div class="version ver-id">{{ $version->anonym }}</div>
 					<br />
-					<div class="version ver-name">user</div>
-					<div class="version ver-id">{{ $version->user }}</div>
+					<div class="version ver-name">person</div>
+					<div class="version ver-id">{{ $version->person }}</div>
 					<br />
 					<div class="version ver-name">api</div>
 					<div class="version ver-id">{{ $version->api }}</div>

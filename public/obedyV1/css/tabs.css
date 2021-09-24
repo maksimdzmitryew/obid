@@ -140,14 +140,14 @@
 }
 .navbar-text.sub {
   float: right;
-  width: 105px;
+  width: 144px;
   font-family: monospace;
 }
 .navbar-text.sub .version.ver-id{
 	float: left;
 }
 .navbar-text.sub .version.ver-name{
-	width: 38px;
+	width: 62px;
 	float: left;
 }
 .navbar-collapse {
