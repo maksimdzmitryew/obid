@@ -7,7 +7,7 @@ namespace Tests\Feature;
 use                                       Tests\TestCase;
 use               Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class SigninPageTest extends TestCase
+class AuthPageTest extends TestCase
 {
 
     use WithoutMiddleware;

@@ -8,7 +8,7 @@ use                                       Tests\TestCase;
 use                         App\Http\Middleware\RedirectIfAuthenticated as Middleware;
 use                             Illuminate\Http\Request;
 
-class MiddlewareRedirectIfAuthenticatedTest extends TestCase
+class MiddlewareIfAuthenticatedTest extends TestCase
 {
     public function testGuest()
     {

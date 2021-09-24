@@ -1,16 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+declare(strict_types=1);
+
+namespace Tests\Feature\API;
 
 use Tests\TestCase;
 use App\User;
-#use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
-#    use RefreshDatabase;
-
-
     /**
      * sign in to the system as a user that is not stored in DB
      *
