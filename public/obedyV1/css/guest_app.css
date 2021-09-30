@@ -1187,6 +1187,9 @@ section.radio_wrap input[type="radio"]#login_safety_2:checked + label {
   section {
     flex-direction: column;
   }
+	#custom_page {
+		padding: 65px 0 100px;
+	}
 }
 
 

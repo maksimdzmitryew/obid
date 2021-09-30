@@ -69,7 +69,6 @@
 
 
 
-
 .cookie-consent__message a {
     opacity: .8;
     display: inline-block;
@@ -178,6 +177,16 @@
 
 
 
+
+@media only screen and (max-width: 700px) {
+  .js-cookie-consent.cookie-consent .cookie-consent__message,
+  .js-cookie-consent.cookie-consent .consent-choices,
+  .js-cookie-consent.cookie-consent {
+    clear: both;
+    display: block;
+    float: right;
+  }
+}
 
 
 
