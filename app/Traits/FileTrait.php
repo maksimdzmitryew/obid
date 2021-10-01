@@ -36,7 +36,7 @@ trait FileTrait
 		$a_file_data = curl_getinfo($ch);
 		curl_close($ch);
 		fclose($fp);
-#dd($a_file_data);
+
 		if ($i_http_code != 200) {
 			\Log::info( 'downloadFile ('. (!is_null($i_id) ? 'id='.$i_id : '') . '): Error #' . $i_http_code);
 			\Log::info( $s_curl_msg );
@@ -47,7 +47,8 @@ trait FileTrait
 #echo('File downloaded anew ' . ((int)$f_file_3) . ' seconds' . "<br>\n");
 		return [
 				's_temp_name'	=> $f_temp_image,
-				'i_source_size'	=> $a_file_data['download_content_length'],
+				# download_content_length returns -1
+				'i_source_size'	=> $a_file_data['size_download'],
 				'i_temp_size'	=> filesize($f_temp_image),
 				'i_http_code'	=> $i_http_code,
 				'i_curl_code'	=> $i_curl_code,
@@ -65,6 +66,7 @@ trait FileTrait
 	public static function getFileContent(String $s_url_read) : String
 	{
 		$a_res		= self::downloadFile($s_url_read, 'provider_');
+		$s_content	= '';
 
 #self::writeLog('info', 'http_size='.(int)$a_res['i_source_size'].',tmp_size='.(int)$a_res['i_temp_size']);
 #self::writeLog('info', 'http_code='.(int)$a_res['i_http_code'].',curl_code='.(int)$a_res['i_curl_code']);
