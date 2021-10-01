@@ -63,7 +63,6 @@ class PageController extends Controller
 	public function store(SaveRequest $request) : \Illuminate\Http\Response
 	{
 		$o_res = $this->storeAPI($request);
-		$this->o_item->processFiles($request, 'file', $this->_env);
 		return $o_res;
 	}
 
@@ -75,11 +74,7 @@ class PageController extends Controller
 	 */
 	public function update(SaveRequest $request, DBPage $item) : \Illuminate\Http\Response
 	{
-		$this->setEnv();
-
-		$item->processFiles($request, 'file', $this->_env);
 		$o_res			= $this->updateAPI($request, $item);
-
 		return $o_res;
 	}
 }

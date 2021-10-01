@@ -1,3 +1,4 @@
+0.14.0+a274:1 anonym DEL fileable from Page module
 0.13.6+a274:1 anonym FIX missing parameter to form when calling sweet alert
 0.13.5+a274:4 anonym ADD change value of size downloaded by curl
 0.13.5+a274:3 anonym ADD show downloaded page uel to log when debugging
