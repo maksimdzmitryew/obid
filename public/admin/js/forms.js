@@ -34,7 +34,7 @@ fnForm = function(e){
 	e.preventDefault();
 
 	let data = {},
-		form = $(e.currentTarget)
+		form = $(e.currentTarget),
 		$this = $(this)
 		;
 
