@@ -28791,6 +28791,10 @@ textarea#HandsontableCopyPaste {
   -webkit-box-shadow: none !important;
 }
 
+.card .form-control {
+  font-weight: 200;
+}
+
 .multiselect-native-select .dropdown-item.active {
   background-color: #009688;
 }
