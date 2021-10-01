@@ -346,7 +346,7 @@ class Provider extends Model
 			/**
 			 *	inform and stop
 			 */
-			self::writeLog('warning', 'Not found: webpage is empty. provider=' . $provider_id);
+			self::writeLog('warning', 'Not found: webpage is empty. provider=' . $provider_id . ' url=' . $s_url_read);
 			return FALSE;
 		}
 
