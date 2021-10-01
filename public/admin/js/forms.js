@@ -79,7 +79,7 @@ fnForm = function(e){
 		{
 			setSwalParams(data, form, b_error);
 		}
-		runSwal(b_error);
+		runSwal(b_error, form);
 	}).fail((xhr) => {
 		b_error	= true;
 
@@ -120,7 +120,7 @@ fnForm = function(e){
 			else
 			{
 				setSwalParams(data, form, b_error);
-				runSwal(b_error);
+				runSwal(b_error, form);
 			}
 		}
 	}).always((xhr, type, status) => {
@@ -313,7 +313,7 @@ function setSwalParams(data, form, b_error){
 	};
 }
 
-function runSwal(b_keep_form)
+function runSwal(b_keep_form, form)
 {
 	// check that setSwalParams() was called
 	if ("title" in a_params)
