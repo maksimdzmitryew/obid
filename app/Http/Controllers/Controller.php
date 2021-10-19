@@ -10,6 +10,7 @@ use            Illuminate\Foundation\Validation\ValidatesRequests;
 use                          Illuminate\Routing\Controller     as BaseController;
 use                          Illuminate\Support\Pluralizer;
 use                       Modules\Page\Database\Page;
+use                    Modules\Setting\Database\Setting;
 use                                             ReflectionClass;
 use                                             ReflectionMethod;
 use                  Illuminate\Support\Facades\Schema;
@@ -36,30 +37,11 @@ class Controller extends BaseController
 		$a_tmp						= explode('\\', $s_tmp);
 		$this->_env->s_name			= str_replace($s_basename, '', $a_tmp[3]);
 
+		$o_settings		= Setting::getPublishedForView();
 
-
-
-
-
-
+/*
 		// TODO refactroring
 		// app/Providers/ViewComposerServiceProvider.php
-		$s_model_path = 'App\Setting';
-		$b_model_table = false;
-		if (class_exists($s_model_path))
-		{
-			$o_model = new $s_model_path();
-			$s_prefix = $o_model->getConnection()->getTablePrefix();
-			$s_table = $o_model->getTable();
-			$s_conn = $o_model->getConnection()->getConfig()['name'];
-
-			$b_model_table = Schema::connection($s_conn)->hasTable($s_table);
-
-		}
-		if ($b_model_table)
-		{
-			$o_settings	= app($s_model_path.'s');
-		}
 
 		// TODO refactroring
 		// for purpose of unit-testing only
@@ -71,20 +53,9 @@ class Controller extends BaseController
 			$o_settings->established = 2020;
 			$o_settings->email = 'no@spam.com';
 		}
+*/
 
-#\App\Settings::i();
-
-		if (isset($o_settings->theme))
-		{
-			$s_theme	= $o_settings->theme;
-			$this->_env->s_theme		= $s_theme;
-		}
-
-
-
-
-
-
+		$this->_env->s_theme		= $o_settings->theme;
 
 		if ($a_tmp[0] == 'Modules')
 		{
@@ -94,22 +65,13 @@ class Controller extends BaseController
 
 			$this->_env->s_trans	= '\Modules\\' . $this->_env->s_name . '\\' . 'Database' . '\\' . $this->_env->s_name ;
 		}
-/*
-		elseif ($s_tmp == 'App\Http\\Controllers\\Guest\\PageController')
-		{
-			$this->_env->s_name		= 'Page';
-			$this->_env->s_model	= 'App\Http\\Controllers\\Guest\\PageController';
-			$this->_env->s_trans	= 'App\Http\\Controllers\\Guest\\PageController';
-			$a_tmp[2]				= 'Guest';
-		}
-*/
 		else
 		{
 			$this->_env->s_name		= str_replace($s_basename, '', $a_tmp[4]);
 			$this->_env->s_model	= '\App\\'.$this->_env->s_name;
 			$this->_env->s_trans	= $this->_env->s_model ;
 		}
-#dd($this->_env->s_model);
+
 		$a_form_main				= [];
 		$a_fill_main				= [];
 		$a_form_trans				= [];
@@ -134,6 +96,8 @@ class Controller extends BaseController
 		$this->_env->fn_find		= $this->_env->s_model.'::findOrNew';
 		$this->_env->s_plr			= Pluralizer::plural($this->_env->s_sgl, 2);
 		$this->_env->s_utype		= strtolower($a_tmp[2]);
+		$this->_env->b_title		= isset($a_form_trans);
+
 
 		if ($a_tmp[0] == 'Modules')
 			$this->_env->s_view		= $this->_env->s_sgl . '::' . $this->_env->s_utype . '.';
@@ -152,7 +116,7 @@ class Controller extends BaseController
 		{
 			$this->_env->s_utype	= 'guest';
 			$this->_env->fn_find	= '';
-			$this->_env->s_view		= ($s_theme . '::' ?: '') . $this->_env->s_utype . '.' ;
+			$this->_env->s_view		= ($o_settings->theme . '::' ?: '') . $this->_env->s_utype . '.' ;
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -280,26 +244,12 @@ if (class_exists($this->_env->s_model))
 		$user = Auth::user();
 		$this->_env->b_admin		= (!is_null($user) ? $user->checkAdmin() : FALSE);
 
-		$o_pages					= Page::all('id', 'slug', 'published', 'page_id', 'order');
-		$a_pages					= [];
-		foreach ($o_pages AS $o_page)
-		{
-			$a_pages[$o_page->id]	=
-			[
-				'id' => $o_page->id,
-				'page_id' => $o_page->page_id,
-				'order' => $o_page->order,
-				'title' => $o_page->translate(app()->getLocale())->title,
-				'slug' => $o_page->slug, 'excerpt' => $o_page->translate(app()->getLocale())->excerpt,
-				'published' => $o_page->published,
-			];
-		}
-
+		$a_pages_list				= Page::getAllForView();
 		$_env						= $this->_env;
-		\View::composer('*', function ($view) use ($_env, $a_pages) {
+		\View::composer('*', function ($view) use ($_env, $a_pages_list) {
 			$view->with([
 				'_env'				=> $this->_env,
-				'a_pages'			=> $a_pages,
+				'a_pages'			=> $a_pages_list,
 			]);
 		});
 

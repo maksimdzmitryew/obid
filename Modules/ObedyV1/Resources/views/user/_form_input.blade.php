@@ -54,7 +54,7 @@ elseif (trans('user/crud.field.'.$name.'.rules') != 'user/crud.field.'.$name.'.r
 $b_required = (stripos($s_rules, 'required') !== FALSE);
 */
 @endphp
-<div class="form-group row field" data-name="{!! $s_dataname !!}">
+<div class="form-group row field div_wrap_{!! $s_id !!}" data-name="{!! $s_dataname !!}" id="div_wrap_{!! $s_dataname !!}">
 	<div class="col-lg-3">
 		<label class="d-block float-left py-2 m-0">
 @include('layouts._form_label')

@@ -12,5 +12,5 @@
     @if(View::hasSection('title'))
     @yield('title') &#60;
     @endif
-    {!! mb_strtoupper($settings->title) !!}
+    @include($theme . '::layouts._setting', ['slug' => 'title'])
     </title>

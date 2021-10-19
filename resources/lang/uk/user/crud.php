@@ -45,9 +45,9 @@ return [
 			'typein'	=> 'зображенні',
 		],
 		'published' => [
-			'label'		=> 'Опублікувати',
-			'filterby'	=> 'опубліковані',
-			'typein'	=> 'опублікуване',
+			'label'		=> 'Оприлюднено',
+			'filterby'	=> 'оприлюднені',
+			'typein'	=> 'оприлюднене',
 		],
 		'role' => [
 			'label'		=> 'Роль',
@@ -60,6 +60,10 @@ return [
 		'user_name' => [
 			'label'		=> 'Ім‘я Прізвище',
 		],
+
+
+
+
 //
 // TODO remove when users Module is ready
 /********************************* datatable *********************************/
@@ -79,19 +83,29 @@ return [
 			'typein'		=> 'е-пошту',
 		],
 /********************************* /datatable *********************************/
-// TODO remove when users Module is ready
+// /TODO remove when users Module is ready
 //
+
+
+
+
 	],
 	'hint' => [
-		'disabled'		=> 'Вимкн.',
-		'enabled'		=> 'Увімкн.',
+		'disabled'		=> 'Ні',
+		'enabled'		=> 'Так',
+
+
+
 //
 // TODO remove when users Module is ready
 /********************************* filter *********************************/
 		'select'		=> 'Оберіть',
 /********************************* /filter *********************************/
-// TODO remove when users Module is ready
+// /TODO remove when users Module is ready
 //
+
+
+
 	],
 	'button' => [
 		'add' => [

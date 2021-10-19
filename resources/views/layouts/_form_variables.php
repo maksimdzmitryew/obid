@@ -6,6 +6,7 @@ $b_many				= FALSE;
 $b_disabled			= FALSE;
 $b_readonly			= FALSE;
 $s_typein			= '';
+$s_filterby         = '';
 $s_hint				= '';
 $s_route			= '';
 $s_route_api		= '';
@@ -32,10 +33,21 @@ else # expected to be a foreign key *_id
 
 $s_dataname			= ($code ? $code .'.' : '') . $s_id;
 $s_fieldname		= ($code ? $code .'[' : '') . $s_id . ($code ? ']' : '');
-$s_value			= (is_object($o_item) && isset($o_item->id))
-						? ($code ? $o_item->translate($code)->$name : $o_item->$name)
-						: ''
-						;
+#if ($name == 'title') dd($name, $o_item->$name, $o_item->translate($code),$o_item);
+
+$s_value            = '';
+if (is_object($o_item) && isset($o_item->id))
+{
+    if ($code && is_object($o_item->translate($code)))
+    {
+        $s_value        = $o_item->translate($code)->$name;
+    }
+    elseif (isset($o_item->$name))
+    {
+        $s_value        = $o_item->$name;
+    }
+}
+
 $s_class_name		= (isset($s_class_name) ? $s_class_name : '');
 
 $a_labels			= [];
@@ -101,43 +113,26 @@ $a_field_trans[]	= $_env->s_utype . '/crud';
  */
 $a_field_trans[]	= 'crud';
 
-$i = 0;
+$a_form_fields_params = ['label', 'typein', 'filterby', 'hint'];
+
+$t = 0;
 do
 {
-    $s_tmp          = $s_category . '::crud.field.' . $s_id . '.label';
-    if (empty($s_label) && $s_tmp != trans($s_tmp)) $s_label = trans($s_tmp);
-
-	$s_tmp			= $a_field_trans[$i] . '.sgl';
-	if (empty($s_label) && $s_tmp != trans($s_tmp)) $s_label = trans($s_tmp);
-
-	$s_tmp			= $a_field_trans[$i] . '.field.' . $name . '.label';
-	if (empty($s_label) && $s_tmp != trans($s_tmp)) $s_label = trans($s_tmp);
-
-    $s_tmp          = $s_category . '::crud.field.' . $s_id . '.typein';
-    if (empty($s_typein) && $s_tmp != trans($s_tmp)) $s_typein = trans($s_tmp);
-
-	$s_tmp			= $a_field_trans[$i] . '.field.' . $name . '.typein';
-	if (empty($s_typein) && $s_tmp != trans($s_tmp)) $s_typein = trans($s_tmp);
-
-	$s_tmp			= $a_field_trans[$i] . '.typein';
-	if (empty($s_typein) && $s_tmp != trans($s_tmp)) $s_typein = trans($s_tmp);
-
-    $s_tmp          = $s_category . '::crud.field.' . $s_id . '.hint';
-    if (empty($s_hint) && $s_tmp != trans($s_tmp)) $s_hint = trans($s_tmp);
-
-	$s_tmp			= $a_field_trans[$i] . '.hint.' . $control;
-	if (empty($s_hint) && $s_tmp != trans($s_tmp)) $s_hint = trans($s_tmp);
-
-	$i++;
+    for ($i = 0; $i < count($a_form_fields_params); $i++)
+    {
+        $s_tmp = $a_form_fields_params[$i];
+        ${'s_'.$s_tmp} = \App\Model::getTranslatedValue(${'s_'.$s_tmp}, $s_id, $name, $s_category, $a_field_trans[$t], $control, $s_tmp);
+        /**
+         * fallback to plain field name, typein, and hint
+         */
+        if ($t+1 == count($a_field_trans) && empty(${'s_'.$s_tmp}))
+        {
+            ${'s_'.$s_tmp} = '“'.$name.'”';
+        }
+    }
+	$t++;
 }
-while ((empty($s_label) || empty($s_typein) || empty($s_hint)) && $i < count($a_field_trans));
-
-/**
- * fallback to plain field name, typein, and hint
- */
-if (empty($s_label)) $s_label		= '“'.$name.'”';
-if (empty($s_typein)) $s_typein		= '“'.$name.'”';
-if (empty($s_hint)) $s_hint			= '“'.$control.'”';
+while ((empty($s_label) || empty($s_typein) || empty($s_filterby) || empty($s_hint)) && $t < count($a_field_trans));
 
 /**
 dump($s_category, $s_label, $s_typein);
@@ -167,4 +162,10 @@ $b_required			= (stripos($s_rules, 'required') !== FALSE);
 $b_disabled			= isset($o_item->disabled) && in_array($s_id, $o_item->disabled);
 $b_readonly			= isset($o_item->readonly) && in_array($s_id, $o_item->readonly);
 
-include(base_path().'/resources/views/layouts/_form_' . $control . '_current.php');
+if (
+    isset($o_item)
+    && (isset($o_item->$s_id) || isset($o_item->id))
+    )
+{
+    include(base_path().'/resources/views/layouts/_form_' . $control . '_current.php');
+}

@@ -2,7 +2,7 @@
 @include('user._list_checkbox', ['s_name' => 'published', ])
 
 
-@if (!isset($b_title) || (isset($b_title) && $b_title))
+@if ($b_title_final)
 @include('user._list_text', ['s_name' => 'title', ])
 @endif
 
@@ -14,4 +14,4 @@
 
 @include('user._list_date', ['s_name' => 'created_at', ])
 @include('user._list_date', ['s_name' => 'updated_at', ])
-@include('user._list_id', ['s_name' => 'id', ])
+@include('user._list_id',   ['s_name' => 'id', ])

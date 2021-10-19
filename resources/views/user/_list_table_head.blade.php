@@ -20,7 +20,7 @@ for ($i = 0; $i < count($a_trans_path); $i++)
 
 <th width="5%">{!! $s_label !!}</th>
 
-@if (!isset($b_title) || (isset($b_title) && $b_title))
+@if ($b_title_final)
 @php
 	$s_name			= 'title';
 	$s_label		= 'crud.field.'.$s_name.'.label';
@@ -47,12 +47,22 @@ for ($i = 0; $i < count($a_trans_path); $i++)
 		$s_label = trans($s_tmp);
 	}
 }
+
+if (!$b_title_final && $s_field_name == 'slug')
+{
+	$s_col_width = '50%';
+}
+else
+{
+	$s_col_width = '10%';
+}
 @endphp
 
-<th width="10%">{!! $s_label !!}</th>
+
+<th width="{{ $s_col_width }}">{!! $s_label !!}</th>
 @endforeach
 @endif
 
-<th width="15%">{!! trans('user/crud.table.created_at') !!}</th>
-<th width="15%">{!! trans('user/crud.table.updated_at') !!}</th>
+<th width="15%" style="min-width: 230px;">{!! trans('user/crud.table.created_at') !!}</th>
+<th width="15%" style="min-width: 230px;">{!! trans('user/crud.table.updated_at') !!}</th>
 <th width="1px">{!! trans('user/crud.field.id.label') !!}</th>

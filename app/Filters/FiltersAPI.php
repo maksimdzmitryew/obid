@@ -14,6 +14,7 @@ class FiltersAPI extends Filters
 		'created_at',
 		'id',
 		'published',
+		'slug',
 		'title',
 		'updated_at',
 	];
@@ -21,6 +22,11 @@ class FiltersAPI extends Filters
 	protected function title($title)
 	{
 		return $this->builder->whereTranslationLike('title', '%' . $title . '%', $this->appLocale);
+	}
+
+	protected function slug($slug)
+	{
+		return $this->builder->where('slug', 'like', '%' . $slug . '%');
 	}
 
 	protected function getQuery()
@@ -79,7 +85,23 @@ class FiltersAPI extends Filters
 			$a_fill_trans			= $t->getFillable();
 			$a_form_trans			= $t->getFields();
 			$s_table_trans			= $t->getTable();
-			$a_select[]				= $s_table_trans.'.title AS title';
+			$s_tmp					= 'title';
+			if (!isset($a_form_trans[$s_tmp]))
+			{
+				/**
+				 *	Setting Module
+				 */
+				$s_tmp				= 'name';
+			}
+			if (!isset($a_form_trans[$s_tmp]))
+			{
+				$s_tmp				= '';
+			}
+
+			if (!empty($s_tmp))
+			{
+				$a_select[]			= $s_table_trans.'.' . $s_tmp . ' AS ' . $s_tmp;
+			}
 
 			$s_key_on				= '';
 			if (!is_null($s_parent_trans))

@@ -9,5 +9,6 @@
     "Plate":            true,
     "Personal":         true,
     "Provider":         true,
+    "Setting":          true,
     "Welcome":          true
 }

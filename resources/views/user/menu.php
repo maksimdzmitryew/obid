@@ -36,5 +36,5 @@ $menu_list[]		= ['user', ];
 $menu_title[]		= 'website';
 $menu_color[]		= '#141edb';
 $text_color[]		= '#DDD';
-$menu_icon[]		= 'fa fa-cogs';
-$menu_list[]		= ['page', ];
+$menu_icon[]		= 'fas fa-cog';
+$menu_list[]		= ['page', 'setting', ];

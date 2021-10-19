@@ -22,6 +22,7 @@ class Model extends BaseModel
 	# https://stackoverflow.com/questions/30502922/a-construct-on-an-eloquent-laravel-model#30503372
 	# The first line (parent::__construct()) will run the Eloquent Model's own construct method
 	# before your code runs, which will set up all the attributes for you.
+
 	public function __construct(array $attributes = array())
 	{
 		parent::__construct($attributes);
@@ -63,6 +64,50 @@ class Model extends BaseModel
 		}
 	}
 
+
+	/**
+	 * Prepare translated values in blade's view
+	 * depending on translation priorities to be specific to:
+	 * Module overriden, Common for Field, Common for Word,
+	 *
+	 * @param String	$s_translated_value			this translation value maybe already known
+	 * @param String	$s_field_name			field name language independent
+	 * @param String	$s_var_name				variable name
+	 * @param String	$s_module_name		module name
+	 * @param String	$s_field_trans		field name language specific
+	 * @param String	$s_html_control		html form control: input, select, etc.
+	 * @param String	$s_html_usage			which part of field to apply: label, type sample, filter, hint
+	 *
+	 * @return String	translated value
+	 */
+	public static function getTranslatedValue(
+	    #String
+	    $s_translated_value,
+	    String $s_field_name,
+	    String $s_var_name,
+	    String $s_module_name,
+	    String $s_field_trans,
+	    String $s_html_control,
+	    String $s_html_usage
+	) #: String
+	{
+	    $s_res          = $s_translated_value;
+
+	    $s_tmp          = $s_module_name . '::crud.field.' . $s_field_name . '.' . $s_html_usage;
+	    if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
+
+	    $s_tmp          = $s_field_trans . '.field.' . $s_var_name . '.' . $s_html_usage;
+	    if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
+
+	    $s_tmp          = $s_field_trans . '.' . $s_html_usage . '.' . $s_html_control;
+	    if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
+
+	    $s_tmp          = $s_field_trans . '.sgl';
+	    if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
+
+	    return $s_res;
+	}
+
 	/**
 	 * Unify number formatting
 	 *
@@ -80,6 +125,11 @@ class Model extends BaseModel
 	{
 		return $filters->apply($query);
 	}
+
+    public function scopeSlug($query, $name)
+    {
+        return $query->where('slug', $name)->firstOrFail();
+    }
 
 	public function getFields()
 	{
@@ -126,16 +176,22 @@ class Model extends BaseModel
 	/**
 	 * check possible boolean values in submitted form and set them to request
 	 * so that checkboxes can be saved correctly
+	 * like "published"
 	 *
-	 * @param Request	$request		Model specific
+	 * @param Request		$request			Model specific
+	 * @param Array			$a_fields			names list of fields that are checkboxes and expect boolean values
 	 *
 	 * @return void
 	 */
-	public static function addBoolsValuesFromForm($request) : void
+	public static function addBoolsValuesFromForm($request, Array $a_fields) : void
 	{
-		$request->merge([
-			'published' => !! $request->published,
-		]);
+		for ($i = 0; $i < count($a_fields); $i++)
+		{
+			$s_field = $a_fields[$i];
+			$request->merge([
+				$s_field => !! $request->$s_field,
+			]);
+		}
 	}
 
 	public static function getModelNameWithNamespace($s_name) : String

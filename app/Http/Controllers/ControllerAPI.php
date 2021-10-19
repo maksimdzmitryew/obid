@@ -21,7 +21,7 @@ class ControllerAPI		extends BaseController
 		$this->setEnv();
 		$o_items	= $this->_env->s_model::filter($filters);
 		$i_tmp		= count($a_with);
-#dd($o_items->toSql(), $o_items->getBindings());
+#dd($this->_env, $o_items->toSql(), $o_items->getBindings());
 		for ($i = 0; $i < count($a_with); $i++)
 			if ($a_with[$i] != 'user')
 				$o_items->with($a_with[$i]);
@@ -84,8 +84,7 @@ class ControllerAPI		extends BaseController
 			if (isset($s_field_params['default']) && is_null($request->$s_field_name))
 				$request->$s_field_name = $s_field_params['default'];
 		}
-
-		$this->_env->s_model::addBoolsValuesFromForm($request);
+		$this->_env->s_model::addBoolsValuesFromForm($request, $this->a_types['checkbox']);
 		$this->_env->s_model::addNullValuesFromForm($request, $this->a_fields);
 
 		$this->o_item = $this->_env->s_model::create($request->only($this->a_fields));
@@ -104,7 +103,7 @@ class ControllerAPI		extends BaseController
 	public function updateAPI($request, Object $item) : \Illuminate\Http\Response
 	{
 		$this->setEnv();
-		$this->_env->s_model::addBoolsValuesFromForm($request);
+		$this->_env->s_model::addBoolsValuesFromForm($request, $this->a_types['checkbox']);
 		$this->_env->s_model::addNullValuesFromForm($request, $this->a_fields, $item);
 
 		$item->update($request->only($this->a_fields));

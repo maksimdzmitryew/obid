@@ -36,7 +36,7 @@
 	<div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
 		<div class="navbar-brand navbar-brand-md">
 			<a href="{!! route('guest.welcome.index') !!}" class="d-inline-block" target="_blank">
-				<span style="font-size: .8rem; color: #ff6a5f; font-weight: bold; font-family: Tahoma; letter-spacing: .1rem">{!! $settings->title !!}</span>
+				<span style="font-size: .8rem; color: #ff6a5f; font-weight: bold; font-family: Tahoma; letter-spacing: .1rem">@include($theme . '::layouts._setting', ['slug' => 'title'])</span>
 				{{--<img src="/img/logo.png" alt="">--}}
 			</a>
 		</div>

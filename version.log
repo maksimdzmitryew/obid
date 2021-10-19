@@ -1,3 +1,5 @@
+0.15.0+a292:1 anonym ADD improve core for settings as module
+0.15.0+a278:1 person DEL legacy field properties
 0.15.0+a277:1 person DEL legacy field properties
 0.14.0+a277:1 anonym ADD change tabs into spaces for PSR-4
 0.14.0+a274:1 anonym DEL fileable from Page module

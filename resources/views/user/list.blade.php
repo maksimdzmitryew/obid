@@ -34,6 +34,14 @@ include(base_path().'/resources/views/user/crud.php');
 	<script src="{{ asset('/admin/js/lists.js?v=' . $version->js) }}"></script>
 @append
 
+@php
+	/**
+	 *	"$b_title" is per-module specific setting is defined in list.blade.php specific to module
+	 *	it overrides settings from Model as detected by Controller
+	 */
+	$b_title_final	= (!isset($b_title) && $_env->b_title || (isset($b_title) && $b_title));
+@endphp
+
 @section('script')
 	<script type="text/javascript">
 		$(document).ready(function(){

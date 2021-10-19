@@ -101,14 +101,25 @@ abstract class Filters
 		return $this->builder->whereId($id);
 	}
 
+	protected function _checkValidRange($s_date)
+	{
+		return ($s_date['from'] != 'Invalid date' && $s_date['to']  != 'Invalid date');
+	}
+
 	protected function created_at($created_at)
 	{
-		return $this->builder->whereBetween('created_at', [$created_at['from'], $created_at['to']]);
+		if ($this->_checkValidRange($created_at))
+		{
+			return $this->builder->whereBetween('created_at', [$created_at['from'], $created_at['to']]);
+		}
 	}
 
 	protected function updated_at($updated_at)
 	{
-		return $this->builder->whereBetween('updated_at', [$updated_at['from'], $updated_at['to']]);
+		if ($this->_checkValidRange($updated_at))
+		{
+			return $this->builder->whereBetween('updated_at', [$updated_at['from'], $updated_at['to']]);
+		}
 	}
 
 	protected function published($published)

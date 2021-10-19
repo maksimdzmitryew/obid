@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Settings;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -41,8 +40,5 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
         }
-        $this->app->singleton(Settings::class, function() {
-            return new Settings();
-        });
     }
 }
