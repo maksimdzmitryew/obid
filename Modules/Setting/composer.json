@@ -1,0 +1,25 @@
+{
+	"name": "maxd/setting",
+	"description": "Settings that exist for project",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Setting\\Providers\\SettingServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Setting\\": ""
+		}
+	}
+}
