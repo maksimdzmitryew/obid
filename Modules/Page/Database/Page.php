@@ -67,6 +67,25 @@ class Page extends Model
 		return $o_page;
 	}
 
+    public static function getAllForView() : Array
+    {
+		$o_pages					= self::all('id', 'slug', 'published', 'page_id', 'order');
+		$a_pages					= [];
+		foreach ($o_pages AS $o_page)
+		{
+			$a_pages[$o_page->id]	=
+			[
+				'id' => $o_page->id,
+				'page_id' => $o_page->page_id,
+				'order' => $o_page->order,
+				'title' => $o_page->translate(app()->getLocale())->title,
+				'slug' => $o_page->slug, 'excerpt' => $o_page->translate(app()->getLocale())->excerpt,
+				'published' => $o_page->published,
+			];
+		}
+		return $a_pages;
+	}
+
     public function sluggable()
     {
         return [
