@@ -31,6 +31,19 @@ class Controller extends BaseController
 
 	public function setEnv()
 	{
+		/**
+		 *	sometimes Laravel's cache is not updated when file is changed
+		 *	this happens when file is copied from external source
+		 *	rather than edited and saved locally;
+		 *
+		 * 	another option would be to open file, modify (add space character) and save
+		 *	however this is not convenient in case of multiple files updates
+		 */
+		if (app()->environment('local', 'testing')) {
+		  $exitCode = \Artisan::call('cache:clear');
+		  $exitCode = \Artisan::call('view:clear');
+		}
+
 		$s_basename					= class_basename(__CLASS__);
 		$this->_env					= (object) [];
 		$s_tmp						= get_called_class();
