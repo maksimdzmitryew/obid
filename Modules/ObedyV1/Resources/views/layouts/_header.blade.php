@@ -8,6 +8,11 @@
     <meta name="version-app" content="{{ $version->app }}">
     @yield('meta')
 
+    @if (config('app.env') == 'production')
+    @include('public.partials._googe_analytics')
+    @include('public.partials._googe_tagmanager_head')
+    @endif
+
     <title>
     @if(View::hasSection('title'))
     @yield('title') &#60;

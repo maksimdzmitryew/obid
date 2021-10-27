@@ -1,89 +1,79 @@
 @include($theme . '::layouts._header')
 
-	<!-- Global stylesheets -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	{{--
-	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/slick.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-	--}}
-	{{--
-	<link rel="stylesheet" href="{{ asset('css/jquery.formstyler.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/jquery.formstyler.theme.css') }}">
-	--}}
-	{{--
-	<link rel="stylesheet" href="{{ asset('css/jquery.fancybox.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
-	--}}
+  <!-- Global stylesheets -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  {{--
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
+  --}}
+  {{--
+  <link rel="stylesheet" href="{{ asset('css/jquery.formstyler.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/jquery.formstyler.theme.css') }}">
+  --}}
+  {{--
+  <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
+  --}}
 
 {{--
-	<link rel="stylesheet" href="{{ asset('css/sweet_alert.css?v=' . $version->css) }}">
+  <link rel="stylesheet" href="{{ asset('css/sweet_alert.css?v=' . $version->css) }}">
 --}}
-	<link rel="stylesheet" href="{{ asset('icons/icomoon/styles.css') }}">
-	<link rel="stylesheet" href="{{ asset('icons/fontawesome/css/all.min.css?v=5.13.0') }}">
-	<!-- /global stylesheets -->
+  <link rel="stylesheet" href="{{ asset('icons/icomoon/styles.css') }}">
+  <link rel="stylesheet" href="{{ asset('icons/fontawesome/css/all.min.css?v=5.13.0') }}">
+  <!-- /global stylesheets -->
 
-	<link rel="stylesheet" href="{{ asset($theme . '/css/' . $_env->s_utype . '_app.css?v=' . $version->css) }}">
-	<link rel="stylesheet" href="{{ asset($theme . '/css/tabs.css?v=' . $version->css) }}">
+  <link rel="stylesheet" href="{{ asset($theme . '/css/' . $_env->s_utype . '_app.css?v=' . $version->css) }}">
+  <link rel="stylesheet" href="{{ asset($theme . '/css/tabs.css?v=' . $version->css) }}">
     <link href="{!! asset('/css/noty.css?v=' . $version->css) !!}" rel="stylesheet" type="text/css">
 
-	@yield('css')
+  @yield('css')
 
-    <link href="{!! asset('/css/override.css?v=' . $version->css) !!}" rel="stylesheet" type="text/css">
+  <link href="{!! asset('/css/override.css?v=' . $version->css) !!}" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/{!! $theme !!}/img/icon.png" type="image/png">
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	{{--
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146132445-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-146132445-1');
-	</script>
-	--}}
-
-	<link rel="shortcut icon" href="/{!! $theme !!}/img/icon.png" type="image/png">
-
-	@section('script')
-	<script type="text/javascript">
-	@include('common.var2js')
-	</script>
-	@append
-	@section('js')
-	<!-- Notifications related JavaScript -->
-	<script src="{!! asset('/admin/js/main/bootstrap.bundle.min.js') !!}"></script>
-	<script src="{{ asset('/admin/js/plugins/forms/styling/switch.min.js') }}"></script>
-	<script src="{{ asset('/admin/js/plugins/notifications/noty.min.js') }}"></script>
-	<script src="{!! asset('/admin/js/common.js?v=' . $version->js) !!}"></script>
-	{{--
-	<script src="{{ asset('/js/app_public.js?v=' . $version->js) }}"></script>
-	--}}
-	<script src="{{ asset($theme . '/js/' . $_env->s_utype . '_app.js?v=' . $version->js) }}"></script>
-	@append
+  @section('script')
+  <script type="text/javascript">
+  @include('common.var2js')
+  </script>
+  @append
+  @section('js')
+  <!-- Notifications related JavaScript -->
+  <script src="{!! asset('/admin/js/main/bootstrap.bundle.min.js') !!}"></script>
+  <script src="{{ asset('/admin/js/plugins/forms/styling/switch.min.js') }}"></script>
+  <script src="{{ asset('/admin/js/plugins/notifications/noty.min.js') }}"></script>
+  <script src="{!! asset('/admin/js/common.js?v=' . $version->js) !!}"></script>
+  {{--
+  <script src="{{ asset('/js/app_public.js?v=' . $version->js) }}"></script>
+  --}}
+  <script src="{{ asset($theme . '/js/' . $_env->s_utype . '_app.js?v=' . $version->js) }}"></script>
+  @append
 
 </head>
 <body>
+@if (config('app.env') == 'production')
+@include('public.partials._googe_tagmanager_body')
+@endif
 @include($theme . '::' . $_env->s_utype . '.header')
 
 <section
-	id="{{ request()->segment(1) == ''
-		|| request()->segment(1) == 'place'
-		|| request()->segment(1) == 'opinion'
-		? 'map_screen'
-		: 'custom_page'
-		}}"
-	class="{{ 
-				(
-					request()->segment(1) == ''
-					? 'general_page'
-					: 	(
-							request()->segment(1) == 'place' || request()->segment(1) == 'opinion'
-							? ''
-							: request()->segment(1) . '_page'
-						)
-				)
-			}}"
+  id="{{ request()->segment(1) == ''
+    || request()->segment(1) == 'place'
+    || request()->segment(1) == 'opinion'
+    ? 'map_screen'
+    : 'custom_page'
+    }}"
+  class="{{
+        (
+          request()->segment(1) == ''
+          ? 'general_page'
+          :   (
+              request()->segment(1) == 'place' || request()->segment(1) == 'opinion'
+              ? ''
+              : request()->segment(1) . '_page'
+            )
+        )
+      }}"
 >
 @yield('content')
 </section>

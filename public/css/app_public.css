@@ -5595,8 +5595,8 @@ a.nav-link {
     height: auto;
 }
 */
-/*MY_CS_PAGE*/
-.press-page .filter-content .right-sidebar,
+
+/*MY_PAGE*/
 .result-page .filter-content .right-sidebar {
     margin-top: 15px !important;
 }

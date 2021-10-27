@@ -170,6 +170,15 @@
 		margin:0 auto;
 		float: none;
 	}
+	#mib_content .filters,
+	.i_switch_directions.icon-shrink
+	{
+		display: none;
+	}
+	.i_switch_directions.icon-enlarge
+	{
+		display: block;
+	}
 	header nav ul li button.green {
 		margin: 0 auto 0 42%;
 	}
