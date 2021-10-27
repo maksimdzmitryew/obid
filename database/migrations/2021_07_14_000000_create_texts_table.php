@@ -32,10 +32,12 @@ class CreateTextsTable extends Migration
          * table object with columns specific to this model's translations
          */
         $o_l10n = $this->getClassForCustomColumns();
-        $o_l10n->string('name', 30)                         ->default('')->nullable(false)              ->comment('human readable title to distinguish between items in the list');
+        $o_l10n->string('title', 30)                        ->default('')->nullable(false)              ->comment('human readable title to distinguish between items in the list');
 #        $table->text('description')                                             ->nullable(false);
         $o_l10n->text('body')                                           ->nullable(false)               ->comment('actual contents');
         $this->upTranslationMigration($o_l10n);
+
+        $this->runSeedTable();
 
 /*
         DB::connection($this->getConnection())->table($this->getTable())->insert(

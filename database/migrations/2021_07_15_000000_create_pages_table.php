@@ -35,13 +35,15 @@ class CreatePagesTable extends Migration
          * table object with columns specific to this model's translations
          */
         $o_l10n = $this->getClassForCustomColumns();
-        $o_l10n->string('name', 300)                         ->default('')->nullable(false)               ->comment('page name for UI');
+        $o_l10n->string('title', 300)                       ->default('')->nullable(false)               ->comment('page name for UI');
         $o_l10n->text('excerpt')                            ->default('')->nullable(false)              ->comment('annotation of page contents');
         $o_l10n->text('body')                                           ->nullable()                    ->comment('page contents');
         $o_l10n->string('meta_title')                                   ->nullable()                    ->comment('meta tag for page title');
         $o_l10n->string('meta_keywords', 1000)                          ->nullable()                    ->comment('meta tag for manually listing of key concepts described in the page');
         $o_l10n->string('meta_description', 1000)                       ->nullable()                    ->comment('meta tag for page excerpt');
         $this->upTranslationMigration($o_l10n);
+
+        $this->runSeedTable();
     }
 
     /**

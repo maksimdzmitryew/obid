@@ -52,11 +52,13 @@ class CreateFilesTable extends Migration
          */
         $o_l10n = $this->getClassForCustomColumns();
 
-        $o_l10n->string('name')                             ->default('')->nullable(false)              ->comment('name for UI shown to visitors');
+        $o_l10n->string('title')                            ->default('')->nullable(false)              ->comment('name for UI shown to visitors');
         $o_l10n->string('copyright')                        ->default('')->nullable(false)              ->comment('copyright owner');
         $o_l10n->string('alt')                              ->default('')->nullable(false)              ->comment('description shown in a tooltip or when image is missing in a page');
 
         $this->upTranslationMigration($o_l10n, $a_options);
+
+        $this->runSeedTable();
     }
 
     /**

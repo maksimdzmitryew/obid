@@ -34,9 +34,11 @@ class CreateSettingsTable extends Migration
          * table object with columns specific to this model's translations
          */
         $o_l10n = $this->getClassForCustomColumns();
-        $o_l10n->string('name', 30)                         ->default('')->nullable(false)               ->comment('settings name for UI shown in various inputs‘ labels');
+        $o_l10n->string('title', 30)                        ->default('')->nullable(false)               ->comment('settings name for UI shown in various inputs‘ labels');
         $o_l10n->string('translated_value')                             ->nullable(false)               ->comment('value specific to each locale');
         $this->upTranslationMigration($o_l10n);
+
+        $this->runSeedTable();
     }
 
     /**

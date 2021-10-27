@@ -40,8 +40,10 @@ class CreateCitiesTable extends Migration
          * table object with columns specific to this model's translations
          */
         $o_l10n = $this->getClassForCustomColumns();
-        $o_l10n->string('name', 30)                       ->default('')->nullable(false)               ->comment('city name for UI shown in various selectors and dropdowns');
+        $o_l10n->string('title', 30)                      ->default('')->nullable(false)               ->comment('city name for UI shown in various selectors and dropdowns');
         $this->upTranslationMigration($o_l10n);
+
+        $this->runSeedTable();
     }
 
     /**
