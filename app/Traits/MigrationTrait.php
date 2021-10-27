@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
-use               Illuminate\Database\Schema\Blueprint;
-use                       Illuminate\Support\Carbon;
-use               Illuminate\Support\Facades\Schema;
-use                       Illuminate\Support\Str;
+use                  Illuminate\Database\Schema\Blueprint;
+use                          Illuminate\Support\Carbon;
+use                                         App\Model;
+use                  Illuminate\Support\Facades\Schema;
+use                          Illuminate\Support\Str;
 
 trait MigrationTrait
 {
@@ -171,10 +172,33 @@ trait MigrationTrait
 
             self::addCustomColumns($table, $o_table);
 
-            $table->foreign($this->getAsForeignKey())->references($this->getPrimary())->on($this->getTable())->onDelete('cascade');
+            $table->foreign(
+                $this->getAsForeignKey(),
+                /**
+                 * custom name to avoid duplicates
+                 * because Laravel does not add prefixes to FKs
+                 * which might result in FK bearing non-unique names across tables
+                 * which will throw an error
+                 * https://stackoverflow.com/questions/31569804/why-do-mysql-foreign-key-constraint-names-have-to-be-unique
+                 * this also means Laravel won't auto-recognise such names ((
+                 */
+                $this->getPrefix() . $this->getTransTableName() . '_' . $this->getAsForeignKey() . '_foreign'
+            )->references($this->getPrimary())->on($this->getTable())->onDelete('cascade');
 
         });
     }
+
+    /**
+     *  run seeder to fill in this module's table
+     */
+    public function runSeedTable() : void
+    {
+        $s_table_name = $this->getTable('sg');
+        $s_model_main = Model::getModelNameWithNamespace($s_table_name);
+        $s_model_seed = Model::getModelSeederWithNamespace($s_model_main);
+        Model::seedTableMainAndTranslation($s_model_main, $s_model_seed);
+    }
+
 
     public function downMajorMigration() : void
     {

@@ -12,10 +12,7 @@ class PageDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
-        Model::unguard();
-
-        // $this->call("OthersTableSeeder");
     }
 }

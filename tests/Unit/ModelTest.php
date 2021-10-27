@@ -161,7 +161,7 @@ dd(gettype($value));#, $response->assertViewHas('array'));
         $s_name_field = 'published';
 
         $this->assertEquals(count($request->only($s_name_field)), 0);
-        $model->addBoolsValuesFromForm($request);
+        $model->addBoolsValuesFromForm($request, [$s_name_field]);
         $this->assertEquals(count($request->only($s_name_field)), 1);
         $this->assertFalse($request->only($s_name_field)[$s_name_field]);
     }

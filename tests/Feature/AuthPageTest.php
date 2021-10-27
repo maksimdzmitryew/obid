@@ -42,7 +42,7 @@ class AuthPageTest extends TestCase
     <title>
         ВХІД
  &#60;
-        VIEWCOMPOSERSERVICEPROVIDER
+        EFTE.IN
     </title>');
     }
 

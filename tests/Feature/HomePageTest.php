@@ -36,7 +36,7 @@ class HomePageTest extends TestCase
         $response = $this->get('/');
         $response->assertSee('
     <title>
-        VIEWCOMPOSERSERVICEPROVIDER
+        EFTE.IN
     </title>');
     }
 

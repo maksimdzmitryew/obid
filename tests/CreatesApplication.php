@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use                            Database\Seeders\DatabaseSeeder;
 use                                             DB;
 use                Illuminate\Contracts\Console\Kernel;
 use               Illuminate\Foundation\Testing\RefreshDatabaseState;
+
 # Laravel has traits to roll-back changes made to the database. 
 # In 5.6, it's the RefreshDatabase trait
 # in some earlier versions it was DatabaseTransactions instead.
@@ -119,11 +121,12 @@ trait CreatesApplication
     {
         $app = require __DIR__.'/../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
-
+        $b_already_migrated = true;
         /**
          *  each test triggers this Trait and function
          *  for the first run let's check if we have any updates to any migration
          */
+
         if (!RefreshDatabaseState::$migrated)
         {
             $b_already_migrated = true;
@@ -144,12 +147,17 @@ trait CreatesApplication
                 $b_already_migrated = $b_already_migrated && ($a_migrations[$s_table] - $a_tables[$s_table] < 0);
             }
             RefreshDatabaseState::$migrated = $b_already_migrated;
+/*
+            $m = new DatabaseSeeder;
+            $m->run();
+*/
         }
 
         if ($app->environment() != 'testing')
         {   
            echo "\n-----\n".$app->environment()."\n-----\n";
         }
+
         return $app;
     }
 }

@@ -1,3 +1,4 @@
+0.18.0+a300:1 review ADD setting factory and seeder with default values plus unit testing it
 0.18.0+a292:1 anonym DEL legacy views for non-modules
 0.17.0+a292:2 anonym ADD unify pages listing universally available
 0.17.0+a292:1 person DEL legacy pages as non-module

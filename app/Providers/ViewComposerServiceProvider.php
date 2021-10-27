@@ -23,8 +23,6 @@ class ViewComposerServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		$this->_L10N2config();
-
-
 		$o_settings		= Setting::getPublishedForView();
 
 /*

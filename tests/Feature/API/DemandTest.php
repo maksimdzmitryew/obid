@@ -4,12 +4,9 @@ namespace Tests\Feature\API;
 
 use Tests\TestCase;
 use                   Modules\Demand\Database\Demand;
-#use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DemandTest extends TestCase
 {
-#    use RefreshDatabase;
-
     /**
      * @ test
      */
