@@ -2,7 +2,7 @@
 	<input type="hidden" name="{!! $s_id !!}{!! $b_many ? '[]' : '' !!}" value="{!! $s_selected_id !!}"/>
 	@endif
 		<select name="{!! $s_id !!}{!! $b_many ? '[]' : '' !!}" class="select2-dropdown {!! $b_many ? 'multi-select' : '' !!}" id="{!! $s_id !!}@if ($b_readonly || $b_disabled){!! '_off' !!}@endif" data-placeholder="{!! $s_hint !!} {!! $s_typein !!}" data-url="{!! route($s_route_api) !!}"{!! $b_many ? ' multiple' : '' !!}{!! $b_disabled ? ' disabled="disabled"' : '' !!}{!! $b_readonly ? ' readonly' : '' !!}>
-			@if($s_selected_id)
+			@if(isset($s_selected_id))
 				<option value="{!! $s_selected_id !!}">
 					{!! $s_selected_title !!}
 				</option>
