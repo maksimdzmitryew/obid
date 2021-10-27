@@ -1,3 +1,4 @@
+0.18.1+a300:2 review ADD country abbreviation in locale for fakers per language
 0.18.1+a300:1 anonym FIX clean cache at development environment
 0.18.0+a300:2 anonym ADD analytics tag and confidentiality info
 0.18.0+a300:1 review ADD setting factory and seeder with default values plus unit testing it

@@ -20,6 +20,7 @@ trait LocaleTrait
 		$a_files = File::allFiles($s_path);
 		$a_dirs = [];
 		$a_L10N = [];
+		$a_lang = [];
 
 		foreach ($a_files as $o_file)
 		{
@@ -32,7 +33,10 @@ trait LocaleTrait
 			{
 				$a_tmp = include($o_file->getPathname());
 				if (isset($a_tmp['lang']))
+				{
 					$a_dirs[$s_abbr] = $a_tmp['lang'];
+					$a_lang[$s_abbr] = $a_tmp['country_code'];
+				}
 			}
 			if(!isset($a_dirs[$s_abbr]))
 				$a_dirs[$s_abbr] = NULL;
@@ -62,6 +66,7 @@ trait LocaleTrait
 		config(['translatable' => [
 					'locales' => array_keys($a_L10N),
 					'names' => $a_L10N,
+					'languages' => $a_lang,
 				]]);
 	}
 }
