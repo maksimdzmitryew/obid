@@ -1,3 +1,4 @@
+0.18.2+a300:2 anonym ADD show google map if API key is set
 0.18.2+a300:1 anonym FIX missing view for confidentiality info
 0.18.1+a300:3 review ADD seed caller to migrations
 0.18.1+a300:2 review ADD country abbreviation in locale for fakers per language
