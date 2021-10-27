@@ -217,16 +217,16 @@ Route::group([
             {
                 $s_ctrl .= 'Controller';
                 Route::group(['middleware' => 'auth'], function() use ($s_path, $s_ctrl) {
-                    Route::get($s_path . '/list',                   ['as' => $s_path . '.index',    'uses' => $s_ctrl . '@index']);
-                    Route::post($s_path,                                    ['as' => $s_path . '.store',    'uses' => $s_ctrl . '@store']);
+                    Route::get($s_path . '/list',           ['as' => $s_path . '.index',    'uses' => $s_ctrl . '@index']);
+                    Route::post($s_path,                    ['as' => $s_path . '.store',    'uses' => $s_ctrl . '@store']);
                     Route::post($s_path . '/{item}/edit',   ['as' => $s_path . '.update',   'uses' => $s_ctrl . '@update']);
-                    Route::post($s_path . '/delete',            ['as' => $s_path . '.destroy','uses' => $s_ctrl . '@destroy']);
+                    Route::post($s_path . '/delete',        ['as' => $s_path . '.destroy','uses' => $s_ctrl . '@destroy']);
                 });
             }
         }
         //
-
     }
+
 });
 
 //Admin Routes

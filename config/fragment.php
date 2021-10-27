@@ -11,7 +11,7 @@ $a_modules = [];
 $a_res = file_get_contents(base_path().'/modules_statuses.json');
 $a_modules = array_keys(json_decode($a_res, TRUE));
 /**
- *	first value is expected to be decoration theme for frontend so we kkep it at its place after sorting
+ *	first value is expected to be decoration theme for frontend so we keep it at its place after sorting
  */
 $s_theme = array_shift($a_modules);
 sort($a_modules);
