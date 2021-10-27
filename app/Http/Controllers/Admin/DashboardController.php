@@ -28,9 +28,9 @@ class DashboardController extends Controller
 
             $fn_where = $s_ctrl . '::where';
             if (!empty($s_ctrl))
-                $a_cnt[$s_model] = $fn_where('published', '=', 1)->get()->count()
+                $a_cnt[$s_model] = $fn_where('published', '=', 1)->count()
                                     .'/'.
-                                    $fn_where('published', '=', 0)->get()->count()
+                                    $fn_where('published', '=', 0)->count()
                                     ;
         }
 
