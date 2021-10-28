@@ -12,12 +12,7 @@ const   COOKIE_DOMAIN = '{{ $s_domain_tld }}';
 const   FORCE_CONSENT = {{ (in_array(request()->segment(1), ['signin', 'signup',]) ? 1 : 0) }};
 const   COOKIE_DISAGREE = "{{ config('session.consent_disagree') }}";
 
-/*
-//if (typeof s_text_primary == 'undefined')
+if (typeof s_text_primary == 'undefined')
 {
-let
-    s_text_primary      = '{!! (isset($s_btn_primary) ? $s_btn_primary : trans('user/messages.button.ok')) !!}'
-    ;
-    alert(s_text_primary);
+    s_text_primary      = '{!! (isset($s_btn_primary) ? $s_btn_primary : trans('user/messages.button.ok')) !!}';
 }
-*/

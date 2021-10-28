@@ -116,6 +116,9 @@ header nav ul li button.green {
 header nav ul li button.green:hover {
 	background-color: #f5f5f5;
 }
+a.logo img {
+    height: 52px;
+}
 
 #custom_page {
 	padding: 30px 0 100px;
@@ -952,7 +955,11 @@ footer .open_filter_btn {
 	font-weight: 500;
 	color: #fefefe;
 }
-.buttons .confirm.disabled{
+#mib_content .new_place_wrap .buttons .confirm.disabled,
+#profile_wrap .profile .confirm.disabled,
+form .buttons .confirm.disabled,
+button .disabled,
+.buttons .confirm.disabled {
 	background-color: grey;
 	border: none;
 }
