@@ -69,23 +69,57 @@ class SignupController	extends Controller
 */
 		$token = sha1(Str::random(60));
 
-		$user = User::create([
-			'email'             => $data['email'],
-			'password'          => Hash::make($data['password']),
-			'activation_token'  => $token,
-		]);
+		$i_status = 200;
+		$s_title = trans('user/messages.text.success');
+		$s_msg = trans('user/form.text.token_sent');
+		$s_footer = '';
+		$s_url = route('guest.personal.profile');
 
-		Mail::send('emails.registration', [ 'token' => $token, 'email' => $data['email'] ], function($message) use ($request) {
-			$message->from(config('services.mail.from'), config('services.mail.name'))
-				->to($request->post('email'))->subject(trans('common/messages.email.subject'));
-		});
+		try
+		{
+			$o_mail_status = Mail::send('emails.registration', [ 'token' => $token, 'email' => $data['email'] ], function($message) use ($request) {
+				$message->from(config('services.mail.from'), config('services.mail.name'))
+					->to($request->post('email'))->subject(trans('common/messages.email.subject'));
+			});
 
-		return response([
-			'title'			=> trans('user/messages.text.success'),
-			'message'		=> trans('user/form.text.token_sent'),
+		    if (is_object($o_mail_status) && $o_mail_status->failures() > 0)
+		    {
+		    	$s_msg = '';
+		        //Fail for which email address...
+		        foreach (Mail::failures as $address)
+		        {
+		            $s_msg .= $address . ', ';
+		        }
+		    }
+		}
+		catch (\Swift_TransportException $e)
+		{
+			$i_status = 409;
+			$s_title = trans('user/messages.text.failure');
+			$s_msg = trans('user/form.text.failed_sending') . ' ' . trans('user/form.text.try_later');
+			$s_footer = trans('user/form.text.failed_exception') . ':<br /><i>' . $e->getMessage() . '</i>';
+			$s_url = route('signup_page');
+		}
+
+		if ($i_status == 200)
+		{
+			$user = User::create([
+				'email'             => $data['email'],
+				'password'          => Hash::make($data['password']),
+				'activation_token'  => $token,
+			]);
+		}
+
+		return response(
+			[
+			'title'			=> $s_title,
+			'message'		=> $s_msg,
+			'footer'		=> $s_footer,
 			'btn_primary'	=> trans('user/messages.button.ok'),
-			'url'			=> route('guest.personal.profile'),
-		], 200);
+			'url'			=> $s_url,
+			],
+			$i_status
+		);
 
 	}
 
