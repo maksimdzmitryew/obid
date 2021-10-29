@@ -16,13 +16,14 @@ use                                              Validator;
 class PersonalController extends Controller
 {
 
-	public function _addProfileData(Request $request)
+    public function _addProfileData(Request $request) : \Illuminate\View\View
 	{
 		$this->setEnv();
 		$o_user							= Auth::user();
 		$a_activity						= GuestDemand::getUserActivity($o_user);
 		$a_totals						= GuestDemand::getAllDemand();
 #		$a_rating						= GuestDemand::getRating($o_user);
+		$b_week							= GuestDemand::getThisWeek(array_keys($a_activity));
 
 		return view($this->_env->s_view . 'index',
 					[
@@ -30,7 +31,7 @@ class PersonalController extends Controller
 						'tab'			=> request()->segment(2),
 						'user'			=> $o_user,
 						'subscribe'		=> Subscriber::where('email', $o_user->email)->exists(),
-						'b_week'		=> GuestDemand::getThisWeek(array_keys($a_activity)),
+						'b_week'		=> $b_week,
 						'activity'		=> $a_activity,
 						'totals'		=> $a_totals,
 						#'cities'		=> $this->getCities()
