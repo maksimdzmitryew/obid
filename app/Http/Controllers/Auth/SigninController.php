@@ -81,7 +81,7 @@ $samesite			= null;
 		else
 		{
 			$o_res				= User::whereEmail($request->email)->first();
-			if (!( (bool) $o_res->published === TRUE ))
+			if (is_object($o_res) && !( (bool) $o_res->published === TRUE ))
 			{
 				return response([
 					'title'			=> trans('user/form.text.inactive_account'),
