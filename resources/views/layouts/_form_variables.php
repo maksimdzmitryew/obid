@@ -31,12 +31,14 @@ else # expected to be a foreign key *_id
 	$s_route_api	= 'api.'.$name.'.index';
 }
 
+$b_item_id_isset    = ( is_object($o_item) && isset($o_item) && (isset($o_item->$s_id) || isset($o_item->id)) );
+
 $s_dataname			= ($code ? $code .'.' : '') . $s_id;
 $s_fieldname		= ($code ? $code .'[' : '') . $s_id . ($code ? ']' : '');
 #if ($name == 'title') dd($name, $o_item->$name, $o_item->translate($code),$o_item);
 
 $s_value            = '';
-if (is_object($o_item) && isset($o_item->id))
+if ($b_item_id_isset)
 {
     if ($code && is_object($o_item->translate($code)))
     {
@@ -162,10 +164,13 @@ $b_required			= (stripos($s_rules, 'required') !== FALSE);
 $b_disabled			= isset($o_item->disabled) && in_array($s_id, $o_item->disabled);
 $b_readonly			= isset($o_item->readonly) && in_array($s_id, $o_item->readonly);
 
+/*
 if (
     isset($o_item)
     && (isset($o_item->$s_id) || isset($o_item->id))
     )
+*/
 {
+    $s_selected_title = '';
     include(base_path().'/resources/views/layouts/_form_' . $control . '_current.php');
 }

@@ -1,8 +1,6 @@
 <?php
 
-	$s_selected_title = '';
-#	$s_selected_id = NULL;
-	if (isset($o_item) && $o_item->id)#if($o_item->$s_id)
+	if ($b_item_id_isset)
 	{
 #		$o_collection = $$name->keyBy('id');
 #		$s_selected_id = $o_item->$s_id;
