@@ -11,12 +11,11 @@
 				</p>
 			</div>
 			<div class="credits">
+				@if(isset($texts->credits))
 				<p>
-				<a href="https://europa.eu/" target="_blank">
-					<img width="67" height="60" src="/images/europa-flag.gif" />
-					This website was created and maintained with the financial support of the European Union. Its contents are the sole responsibility of the <strong>Debate for Changes NGO</strong> and do not necessarily reflect the views of the European Union
-				</a>
+				{!! trans($texts->credits, ['app_name' => $_env->s_title]) !!}
 				</p>
+				@endif
 
 @include($theme . '::' . $_env->s_utype . '._confidentiality_info', ['id' => 'footer'])
 
