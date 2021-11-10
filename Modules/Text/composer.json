@@ -1,0 +1,25 @@
+{
+	"name": "maxd/text",
+	"description": "Texts that exist for project",
+	"authors": [
+		{
+			"name": "Maksim Dzmitryew̆",
+			"email": "maksimdzmitryew@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Text\\Providers\\TextServiceProvider"
+			],
+			"aliases": {
+
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Text\\": ""
+		}
+	}
+}

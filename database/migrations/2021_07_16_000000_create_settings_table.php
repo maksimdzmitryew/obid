@@ -25,7 +25,7 @@ class CreateSettingsTable extends Migration
          * columns specific to the core of the model
          */
         $o_main = $this->getClassForCustomColumns();
-        $o_main->string('slug',60)              ->unique()  ->default('')->nullable(false)->index()     ->comment('code name to be used in views');
+        $o_main->string('slug',60)              ->unique()  ->default('')->nullable(false)->index()      ->comment('code name to be used in views');
         $o_main->string('value')                                        ->nullable(false)               ->comment('value when it is locale independent');
         $o_main->boolean('is_translatable')                 ->default(0)->nullable(false)               ->comment('a flag for locale dependable value');
         $this->upMajorMigration($o_main);

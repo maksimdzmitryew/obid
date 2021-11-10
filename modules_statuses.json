@@ -10,5 +10,6 @@
     "Personal":         true,
     "Provider":         true,
     "Setting":          true,
+    "Text":             true,
     "Welcome":          true
 }
