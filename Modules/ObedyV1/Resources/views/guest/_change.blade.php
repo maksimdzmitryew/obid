@@ -8,14 +8,15 @@
 							@csrf
 
 							<div class="user_fields">
-								<div class="item" data-name="token">
-									<span class="label">
-										{!! trans('user/form.field.token') !!}
-									</span>
-									<span class="value">
-										<input type="text" class="form-control" placeholder="{{ trans('user/form.text.token_hint') }}" name="token" value="{!! $token ?? '' !!}">
-									</span>
-								</div>
+
+@include($theme . '::' . $_env->s_utype . '._form_input',
+	[
+		's_id'				=> 'token',
+		's_dataname'		=> 'token' . ($specific ?? ''),
+		'item'				=> NULL,
+		's_field_type'		=> 'text',
+		's_selected_title'	=> $token ?? '',
+	])
 
 @include($theme . '::' . $_env->s_utype . '._password_twice', ['specific' => '_new'])
 @include($theme . '::' . $_env->s_utype . '._recaptcha', ['id' => 'change'])

@@ -24,6 +24,8 @@ class SigninController	extends Controller
 
 	public function core(SigninRequest $request)
 	{
+		$this->setEnv();
+
 /*
 		$data = $request->post();
 		$validator = Validator::make($data, []);
@@ -89,7 +91,7 @@ $samesite			= null;
 					'btn_primary'	=> trans('user/messages.button.ok'),
 					'url'			=> '',
 					'footer'		=> trans('user/form.text.inactive_extra'),
-					'extra'			=> 'mailto:' . config('services.mail.to'),
+					'extra'			=> 'mailto:' . $this->_env->s_email,
 				], 401);
 			}
 			else
@@ -100,7 +102,7 @@ $samesite			= null;
 					'btn_primary'	=> trans('user/messages.button.ok'),
 					'url'			=> '',
 					'footer'		=> trans('user/form.text.inactive_extra'),
-					'extra'			=> 'mailto:' . config('services.mail.to'),
+					'extra'			=> 'mailto:' . $this->_env->s_email,
 				], 401);
 			}
 		}

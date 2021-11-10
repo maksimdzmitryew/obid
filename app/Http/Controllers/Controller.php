@@ -39,7 +39,8 @@ class Controller extends BaseController
 		 * 	another option would be to open file, modify (add space character) and save
 		 *	however this is not convenient in case of multiple files updates
 		 */
-		if (app()->environment('local', 'testing')) {
+		if (app()->environment('local', 'acceptance', 'testing'))
+		{
 		  $exitCode = \Artisan::call('cache:clear');
 		  $exitCode = \Artisan::call('view:clear');
 		}
@@ -69,6 +70,8 @@ class Controller extends BaseController
 */
 
 		$this->_env->s_theme		= $o_settings->theme;
+		$this->_env->s_title		= $o_settings->title;
+		$this->_env->s_email		= $o_settings->email;
 
 		if ($a_tmp[0] == 'Modules')
 		{

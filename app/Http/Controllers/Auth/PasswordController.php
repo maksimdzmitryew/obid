@@ -42,7 +42,7 @@ class PasswordController extends Controller
 			$token = $request->post('token');
 
 		$validator = Validator::make(request()->post(), [
-			'password_new' => 'required|string|confirmed|min:6|max:20',
+			'password_new' => 'required|string|confirmed|min:6|max:40',
 			'password_new_confirmation' => 'required|string'
 		]);
 
@@ -68,6 +68,7 @@ class PasswordController extends Controller
 		$user->save();
 
 		Auth::login($user);
+		PasswordResets::where('email', $user->email)->delete();
 
 		return response([
 			'title'		=> trans('user/form.text.reset'),
@@ -118,6 +119,8 @@ class PasswordController extends Controller
 
 	function send(ResetRequest $request)
 	{
+        $this->setEnv();
+
 		$data = $request->post();
 		$validator = Validator::make($data, []);
 
@@ -131,26 +134,72 @@ class PasswordController extends Controller
 
 		$hash = sha1(Str::random(60));
 
-		Mail::send('emails.password-reset', ['hash' => $hash], function($message) use ($request) {
-			$message->to($request->post('email'))->subject(trans('user/form.text.reset_subj'));
-		});
+		$i_status	= 200;
+		$s_title	= trans('user/form.text.reset');
+		$s_msg		= trans('user/form.text.reset_sent');
+		$s_footer	= '';
+		$s_url		= route('password_change', ['token' => NULL]);
 
-		$data = [
-			'email' => $request->post('email'),
-			'token' => $hash,
-			'created_at' => now()
-		];
 
-		$reset_password = DB::table('password_resets')->where('email', $request->post('email'));
+#		Mail::send('emails.password-reset', ['hash' => $hash], function($message) use ($request) {
+#			$message->to($request->post('email'))->subject(trans('user/form.text.reset_subj'));
+#		});
 
-		$reset_password->count() ? $reset_password->update($data) : $reset_password->insert($data);
 
-		return response([
-			'title'		=> trans('user/form.text.reset'),
-			'message'	=> trans('user/form.text.reset_sent'),
-			'url'		=> route('password_change', ['token' => NULL]),
-		], 200);
+        try
+        {
+            $a_data = [ 'hash' => $hash, 'email' => $data['email'], 's_app_name' => $this->_env->s_title ];
+            $o_mail_status = Mail::send('emails.password-reset', $a_data, function($message) use ($request) {
+                $message
+                    ->from($this->_env->s_email, $this->_env->s_title)
+                    ->to($request->post('email'))
+                    ->subject(trans('user/form.text.reset_subj', [ 'app_name' => $this->_env->s_title ]))
+                    ;
+            });
 
+            if (is_object($o_mail_status) && $o_mail_status->failures() > 0)
+            {
+                $s_msg = '';
+                //Fail for which email address...
+                foreach (Mail::failures as $address)
+                {
+                    $s_msg .= $address . ', ';
+                }
+            }
+        }
+        catch (\Swift_TransportException $e)
+        {
+            $i_status = 409;
+            $s_title = trans('user/messages.text.failure');
+            $s_msg = trans('user/form.text.failed_sending') . ' ' . trans('user/form.text.try_later');
+            $s_footer = trans('user/form.text.failed_exception') . ':<br /><i>' . $e->getMessage() . '</i>';
+            $s_url = route('signup_page');
+        }
+
+
+        if ($i_status == 200)
+        {
+			$data = [
+				'email' => $request->post('email'),
+				'token' => $hash,
+				'created_at' => now()
+			];
+
+			$reset_password = DB::table('password_resets')->where('email', $request->post('email'));
+
+			$reset_password->count() ? $reset_password->update($data) : $reset_password->insert($data);
+        }
+
+        return response(
+            [
+            'title'         => $s_title,
+            'message'       => $s_msg,
+            'footer'        => $s_footer,
+            'btn_primary'   => trans('user/messages.button.ok'),
+            'url'           => $s_url,
+            ],
+            $i_status
+        );
 	}
 
 	private function _checkToken($token)

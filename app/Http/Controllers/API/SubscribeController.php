@@ -15,6 +15,8 @@ class SubscribeController extends Controller
 {
     public function store(SubscribeRequest $request)
     {
+        $this->setEnv();
+
         Subscriber::create($request->only('email'));
 
         $user = new User();
@@ -23,7 +25,7 @@ class SubscribeController extends Controller
         event(new UserRegistered($user));
 
         Mail::send('emails.subscribe', ['email' => $request->post('email')], function($message) use ($request) {
-            $message->from(config('services.mail.from'), config('services.mail.name'))->to(config('services.mail.to'))->subject('New subscriber');
+            $message->from($this->_env->s_email, $this->_env->s_title)->to($this->_env->s_email)->subject('New subscriber');
         });
 
         return response([
