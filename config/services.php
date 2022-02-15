@@ -20,13 +20,6 @@ return [
         'endpoint'  => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
-    'mail' => [
-        'from' 	=> env('MAIL_FROM_ADDRESS'),
-        'name' 	=> env('MAIL_FROM_NAME'),
-        'to' 	=> env('MAIL_TO_ADDRESS'),
-        'me' 	=> env('MAIL_TO_NAME'),
-    ],
-
     'ses' => [
         'key' => env('SES_KEY'),
         'secret' => env('SES_SECRET'),

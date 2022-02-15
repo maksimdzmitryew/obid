@@ -2,11 +2,11 @@
 
 $a_production = [
     'version_release'       => '0',
-    'version_leader'        => '20', # changes whenever any css,js,api,anonym,person value below has changed; reset each realease
+    'version_leader'        => '21', # changes whenever any css,js,api,anonym,person value below has changed; reset each realease
     'version_patch'         => '0',
     'version_maturity'      => 'a', # a=alfa,b=beta,rc=candidate,r=release,sr=service release
     'version_day'           => '046',
-    'version_seq'           => '9', # subsequent commit during same day for the same version
+    'version_seq'           => '1', # subsequent commit during same day for the same version
 ];
 
 return (object) [
@@ -19,7 +19,7 @@ return (object) [
     . $a_production['version_day'] . ':'
     . $a_production['version_seq'],
     'release'               => $a_production['version_release'],
-    'anonym'                => '0.05.0',
+    'anonym'                => '0.06.0',
     'person'                => '0.14.0',
     'review'                => '0.01.0',
     'api'                   => '0.00.0',
