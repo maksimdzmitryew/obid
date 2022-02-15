@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use                                 App\Filters\FiltersAPI;
 use                                         App\Model;
 use                             Illuminate\Http\Request;
 use                                       Tests\TestCase;
@@ -43,17 +44,154 @@ class ModelTest extends TestCase
         $model = new Model();
         $f_value = 1234567.85;
         $this->assertEquals($model->formatNumber($f_value),      '1’234’568');
-        $this->assertEquals($model->formatNumber($f_value, 2),   '1’234’567,85');
+        $this->assertEquals($model->formatNumber($f_value,2),   '1’234’567,85');
     }
 
     /**
-     * Number is formatted for human visually accepted in logs
+     * Check Translation Default
+     *
+     * @return String
+     */
+    private function checkTranslationDefault(Object $o_model, String $s_given_value) : String
+    {
+        $s_translated_value = $s_given_value;
+        $s_field_name = '';
+        $s_var_name = '';
+        $s_module_name = '';
+        $s_field_trans = '';
+        $s_html_control = '';
+        $s_html_usage = '';
+
+        return $o_model->getTranslatedValue($s_translated_value, $s_field_name, $s_var_name, $s_module_name, $s_field_trans, $s_html_control, $s_html_usage);
+    }
+
+    /**
+     * Check Translation Module Specific
+     *
+     * @return String
+     */
+    private function checkTranslationModuleSpecific(Object $o_model, String $s_given_value) : String
+    {
+        $s_translated_value = $s_given_value;
+        $s_field_name = 'slug';
+        $s_var_name = '';
+        $s_module_name = 'setting';
+        $s_field_trans = '';
+        $s_html_control = '';
+        $s_html_usage = 'label';
+
+        return $o_model->getTranslatedValue($s_translated_value, $s_field_name, $s_var_name, $s_module_name, $s_field_trans, $s_html_control, $s_html_usage);
+    }
+
+    /**
+     * Check Translation General for Role And Field
+     *
+     * @return String
+     */
+    private function checkTranslationGeneralForRoleAndField(Object $o_model, String $s_given_value) : String
+    {
+        $s_translated_value = $s_given_value;
+        $s_field_name = '';
+        $s_var_name = 'id';
+        $s_module_name = '';
+        $s_field_trans = 'user/crud';
+        $s_html_control = '';
+        $s_html_usage = 'label';
+
+        return $o_model->getTranslatedValue($s_translated_value, $s_field_name, $s_var_name, $s_module_name, $s_field_trans, $s_html_control, $s_html_usage);
+    }
+
+    /**
+     * Check Translation General for Role And Control
+     *
+     * @return String
+     */
+    private function checkTranslationGeneralForRoleAndControl(Object $o_model, String $s_given_value) : String
+    {
+        $s_translated_value = $s_given_value;
+        $s_field_name = '';
+        $s_var_name = '';
+        $s_module_name = '';
+        $s_field_trans = 'user/crud';
+        $s_html_control = 'published';
+        $s_html_usage = 'table';
+
+        return $o_model->getTranslatedValue($s_translated_value, $s_field_name, $s_var_name, $s_module_name, $s_field_trans, $s_html_control, $s_html_usage);
+    }
+
+    /**
+     * Check Translation General for Module
+     *
+     * @return String
+     */
+    private function checkTranslationGeneralForModule(Object $o_model, String $s_given_value) : String
+    {
+        $s_translated_value = $s_given_value;
+        $s_field_name = '';
+        $s_var_name = '';
+        $s_module_name = '';
+        $s_field_trans = 'setting::crud.names';
+        $s_html_control = '';
+        $s_html_usage = '';
+
+        return $o_model->getTranslatedValue($s_translated_value, $s_field_name, $s_var_name, $s_module_name, $s_field_trans, $s_html_control, $s_html_usage);
+    }
+
+    /**
+     * Translated values are checked and applied in correct order
      *
      * @test
      * @return void
      */
-    public function scopeFilter() : void
+    public function translatedValuesAreCheckedAndAppliedInCorrectOrder() : void
     {
+        $o_model = new Model();
+
+        $s_translated_value = 'translated value Override';
+
+        $s_res = $this->checkTranslationDefault($o_model, '');
+        $this->assertEmpty($s_res);
+        $s_res = $this->checkTranslationDefault($o_model, $s_translated_value);
+        $this->assertEquals($s_res, $s_translated_value);
+
+        $s_res = $this->checkTranslationModuleSpecific($o_model, '');
+        $this->assertEquals($s_res, 'Кодове слово для інтерфейсу');
+        $s_res = $this->checkTranslationModuleSpecific($o_model, $s_translated_value);
+        $this->assertEquals($s_res, $s_translated_value);
+
+        $s_res = $this->checkTranslationGeneralForRoleAndField($o_model, '');
+        $this->assertEquals($s_res, 'ID');
+        $s_res = $this->checkTranslationGeneralForRoleAndField($o_model, $s_translated_value);
+        $this->assertEquals($s_res, $s_translated_value);
+
+        $s_res = $this->checkTranslationGeneralForRoleAndControl($o_model, '');
+        $this->assertEquals($s_res, 'Опубліковано');
+        $s_res = $this->checkTranslationGeneralForRoleAndControl($o_model, $s_translated_value);
+        $this->assertEquals($s_res, $s_translated_value);
+
+        $s_res = $this->checkTranslationGeneralForModule($o_model, '');
+        $this->assertEquals($s_res, 'Налад');
+        $s_res = $this->checkTranslationGeneralForRoleAndControl($o_model, $s_translated_value);
+        $this->assertEquals($s_res, $s_translated_value);
+    }
+
+    /**
+     * Filters are applied to query
+     *
+     * @test
+     * @return void
+     */
+    public function filtersAreAppliedToQuery() : void
+    {
+        $request = new Request;
+        $o_model = new Model();
+        $o_filters = new FiltersAPI($request);
+        $query = $o_model->select()->where('id', '>', '0');
+#        $res = $o_model->scopeFilter($query, $o_filters);
+#        dd($query->toSql(), $res, $o_filters);
+#        $filters = 1234567.85;
+//        $this->assertEquals($model->formatNumber($f_value),      '1’234’568');
+
         $this->assertTrue(true);
     }
 
@@ -175,7 +313,7 @@ dd(gettype($value));#, $response->assertViewHas('array'));
     public function spellNamespaceForModelThatIsAModule() : void
     {
         $model = new Model();
-        $s_name = 'Test';
+        $s_name = 'Country';
 
         $s_namespace = $model->getModelNameWithNamespace(strtolower($s_name));
         $this->assertEquals($s_namespace, '\Modules\\' . $s_name . '\\' . 'Database' . '\\' . $s_name);
