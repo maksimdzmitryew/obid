@@ -103,8 +103,6 @@ trait CreatesApplication
             if(isset($a_name[1]))
             {
                 $a_name = explode('_table', $a_name[1]);
- #               dump($a_name);
-#                dump( filemtime($s_file) . ' ' . date('c',filemtime($s_file)) . ' ' . $s_file);
                 $s_table = $a_name[0];
                 $a_tables[$s_table] = filemtime($s_file);
             }
@@ -131,6 +129,13 @@ trait CreatesApplication
         {
             $b_already_migrated = true;
             $a_tables = self::_getTablesWithoutPrefixes();
+
+            $i_time_db = (int) strtotime(DB::select('select CURRENT_TIMESTAMP() AS time;')[0]->time);
+            /**
+             *  time difference between  webserver and sqlserver in seconds
+             */
+            $i_time_diff = ($i_time_db - time());
+
             $a_migrations = self::_getTablesFromMigrationsTitles();
             /**
              * check if migration is needed
@@ -144,8 +149,10 @@ trait CreatesApplication
                 /**
                  *  there was a update made to migration later than table was created from its execution
                  */
-                $b_already_migrated = $b_already_migrated && ($a_migrations[$s_table] - $a_tables[$s_table] < 0);
+
+                $b_already_migrated = $b_already_migrated && ($a_migrations[$s_table] - $a_tables[$s_table] + $i_time_diff < 0);
             }
+#$b_already_migrated = 0;
             RefreshDatabaseState::$migrated = $b_already_migrated;
 /*
             $m = new DatabaseSeeder;

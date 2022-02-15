@@ -1,3 +1,4 @@
+0.20.0+a046:5 person ADD check if any migration was updated then run them all on test DB
 0.20.0+a046:4 person ADD Country module
 0.20.0+a046:3 person ADD City module
 0.20.0+a046:2 anonym ADD Seederes refactoring
