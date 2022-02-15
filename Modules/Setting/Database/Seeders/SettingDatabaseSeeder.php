@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Setting\Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
+use                Illuminate\Database\Eloquent\Model;
+use                         Illuminate\Database\Seeder;
 
 class SettingDatabaseSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class SettingDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public static function run()
+    public static function run() : void
     {
         /**
          *  create array with empty L10N data
@@ -31,7 +31,6 @@ class SettingDatabaseSeeder extends Seeder
         {
             $a_data_no_translation[$s_lang] = [ ];
         }
-
 
         /**
          *  data to be filled in as default and/or test values

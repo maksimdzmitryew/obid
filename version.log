@@ -1,3 +1,4 @@
+0.20.0+a046:2 anonym ADD Seederes refactoring
 0.20.0+a046:1 anonym DEL city and country legacy code
 0.19.3+a314:1 anonym FIX password restoration incl. minor UI
 0.19.2+a314:4 person ADD unify checking for an item when processing a form before showing it
