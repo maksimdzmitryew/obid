@@ -1,4 +1,9 @@
 <?php
+/*
+        $admin = User::where(['email' => 'admin@admin.com'])->first();
+        $admin->assignRole('admin');
+
+*/
 
 declare(strict_types=1);
 
@@ -26,13 +31,13 @@ class UserTest extends TestCase
     }
 
     /**
-     * sign in to the system as a user that is not stored in DB
+     * Get hash from plain password
      *
-     * @param   String          plain text password
+     * @param   string          plain text password
      *
-     * @return  String          encrypted password
+     * @return  string          encrypted password
      */
-    private function _getPasswordEncrypted($s_password) : String
+    private function _getPasswordEncrypted(string $s_password) : string
     {
         return bcrypt($s_password);
     }
@@ -118,6 +123,9 @@ class UserTest extends TestCase
             ->assertJsonMissing([
                 'password' => $s_password_crypt,
             ])
+            ->assertJsonMissing([
+                                    'password' => $o_user->password,
+                                ])
             ;
 
 #        $s_res = $this->call('GET', route('api.user.index'), $parameters, $cookies, $files, $server, $content);

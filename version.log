@@ -1,3 +1,4 @@
+0.20.0+a046:8 person ADD additional possword non-leak test
 0.20.0+a046:7 person ADD go for more privacy in methods
 0.20.0+a046:6 person ADD common functions to basic model to support tests
 0.20.0+a046:5 person ADD check if any migration was updated then run them all on test DB
