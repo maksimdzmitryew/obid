@@ -16,7 +16,7 @@ trait MigrationTrait
     protected static $s_table_migration         = '';
     protected static $s_table_translation       = 'translations';
 
-    public function getConnection() : String
+    protected function getConnection() : String
     {
         return self::DB_CONNECTION;
     }
@@ -33,7 +33,7 @@ trait MigrationTrait
         }
     }
 
-    public function addDates(Object $o_table) : void
+    protected function addDates(Object $o_table) : void
     {
         /**
          *  useCurrent() will assign CURRENT_TIMESTAMP if not value is set
@@ -42,7 +42,7 @@ trait MigrationTrait
         $o_table->timestamps();
     }
 
-    public function addPublished(Object $o_table, String $s_comment = NULL, ?Array $a_options = NULL) : void
+    protected function addPublished(Object $o_table, String $s_comment = NULL, ?Array $a_options = NULL) : void
     {
         $i_published = 0;
         if (isset($a_options['published']))
@@ -52,7 +52,7 @@ trait MigrationTrait
         $o_table->boolean('published')                 ->default($i_published)->nullable(false)->index()->comment( $s_comment ?: 'item is confirmed and publicly available');
     }
 
-    public function addForeignKey(Object $o_model, Object $o_table, ?Array $a_options = NULL, String $s_comment = NULL) : void
+    protected function addForeignKey(Object $o_model, Object $o_table, ?Array $a_options = NULL, String $s_comment = NULL) : void
     {
         $s_comment = ($s_comment ?: '"' . $this->getPrefix() . $o_model->getTable() . '" table’s primary key');
 
@@ -69,7 +69,7 @@ trait MigrationTrait
         }
     }
 
-    public function getPrefix() : String
+    protected function getPrefix() : String
     {
         $s_tmp = $this->getConnection();
         $s_tmp = (empty($s_tmp) ? config('database.default') : $s_tmp);
@@ -77,7 +77,7 @@ trait MigrationTrait
         return (!empty($s_tmp) ? $s_tmp : '');
     }
 
-    public function addPrimaryKey(Object $o_model, Object $o_table, ?Array $a_options = NULL) : void
+    protected function addPrimaryKey(Object $o_model, Object $o_table, ?Array $a_options = NULL) : void
     {
         $s_comment = 'primary identifier';
         if (isset($a_options['id']))
@@ -93,12 +93,12 @@ trait MigrationTrait
         }
     }
 
-    public function getPrimary() : String
+    protected function getPrimary() : String
     {
         return self::$s_primary;
     }
 
-    public function getTable(String $s_type = 'pl') : String
+    protected function getTable(String $s_type = 'pl') : String
     {
         $s_tmp = $this->_getTableGuess();
 
@@ -127,12 +127,12 @@ trait MigrationTrait
         return $s_tmp;
     }
 
-    public function getTransTableName() : String
+    protected function getTransTableName() : String
     {
         return $this->getTable('sg') . '_' . self::$s_table_translation;
     }
 
-    public function getAsForeignKey() : String
+    protected function getAsForeignKey() : String
     {
         return $this->getTable('sg') . '_' . $this->getPrimary();
     }
@@ -145,7 +145,7 @@ trait MigrationTrait
     /**
      * common structure for any table
      */
-    public function upMajorMigration(?Blueprint $o_table = NULL, Array $a_options = NULL) : void
+    protected function upMajorMigration(?Blueprint $o_table = NULL, Array $a_options = NULL) : void
     {
         Schema::connection($this->getConnection())->create($this->getTable(), function (Blueprint $table) use ($o_table, $a_options) {
             $this->addPrimaryKey($this, $table, $a_options);
@@ -160,7 +160,7 @@ trait MigrationTrait
     /**
      * common structure for any translation table
      */
-    public function upTranslationMigration(?Blueprint $o_table = NULL, Array $a_options = NULL) : void
+    protected function upTranslationMigration(?Blueprint $o_table = NULL, Array $a_options = NULL) : void
     {
         Schema::connection($this->getConnection())->create($this->getTransTableName(), function (Blueprint $table) use ($o_table, $a_options) {
 
@@ -191,21 +191,18 @@ trait MigrationTrait
     /**
      *  run seeder to fill in this module's table
      */
-    public function runSeedTable() : void
+    protected function runSeedTable() : void
     {
         $s_table_name = $this->getTable('sg');
-        $s_model_main = Model::getModelNameWithNamespace($s_table_name);
-        $s_model_seed = Model::getModelSeederWithNamespace($s_model_main);
-        Model::seedTableMainAndTranslation($s_model_main, $s_model_seed);
+        Model::seedTable($s_table_name);
     }
 
-
-    public function downMajorMigration() : void
+    protected function downMajorMigration() : void
     {
         Schema::connection($this->getConnection())->dropIfExists($this->getTable());
     }
 
-    public function downTranslationMigration() : void
+    protected function downTranslationMigration() : void
     {
         Schema::connection($this->getConnection())->dropIfExists($this->getTransTableName());
     }
