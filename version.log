@@ -1,4 +1,4 @@
-0.21.0+a046:2 anonym ADD version update, Server-Side Request Forgery in Axios
+0.21.0+a046:3 anonym ADD version update, Cross-site scripting vulnerability in TinyMCE
 0.21.0+a046:2 anonym ADD version update, Server-Side Request Forgery in Axios
 0.21.0+a046:1 anonym DEL mail data from config
 0.20.0+a046:9 review ADD translation in parent model for views
