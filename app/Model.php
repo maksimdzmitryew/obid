@@ -93,16 +93,24 @@ class Model extends BaseModel
     ) #: String
     {
         $s_res          = $s_translated_value;
-
+        /*
+         * Module specific
+         */
         $s_tmp          = $s_module_name . '::crud.field.' . $s_field_name . '.' . $s_html_usage;
         if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
-
+        /*
+         * General for Role And Field
+         */
         $s_tmp          = $s_field_trans . '.field.' . $s_var_name . '.' . $s_html_usage;
         if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
-
+        /*
+         * General for Role And Control
+         */
         $s_tmp          = $s_field_trans . '.' . $s_html_usage . '.' . $s_html_control;
         if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
-
+        /*
+         * General for Module
+         */
         $s_tmp          = $s_field_trans . '.sgl';
         if (empty($s_res) && $s_tmp != trans($s_tmp)) $s_res = trans($s_tmp);
 
@@ -195,36 +203,54 @@ class Model extends BaseModel
         }
     }
 
-    public static function getModelNameWithNamespace(String $s_name) : String
+    public static function getModelNameWithNamespace(String $s_table_name) : String
     {
-        $s_model        = ucfirst($s_name);
+        $s_model        = ucfirst($s_table_name);
+
+        /**
+         *  seeder is at Module specific path
+         */
         $s_model        = '\Modules\\' . $s_model . '\\' . 'Database' . '\\' . $s_model;
+
+        /**
+         *  legacy classes that are not modules
+         */
+        if (!class_exists($s_model))
+        {
+            $s_model = '\App\\' . ucfirst($s_table_name);
+        }
+
         return $s_model;
     }
 
-    public static function getModelSeederWithNamespace(String $s_name) : String
+    public static function seedTable(String $s_table_name) : void
     {
-        $a_tmp = explode('\\', $s_name);
+        $s_model_main = self::getModelNameWithNamespace($s_table_name);
+        $s_model_seed = self::getModelSeederWithNamespace($s_model_main);
+        self::seedTableMainAndTranslation($s_model_main, $s_model_seed);
+    }
+
+    public static function getModelSeederWithNamespace(String $s_table_name) : String
+    {
+        $a_tmp = explode('\\', $s_table_name);
         $a_tmp[] = $a_tmp[count($a_tmp)-1] . 'DatabaseSeeder';
         $a_tmp[count($a_tmp)-2] = 'Seeders';
 
         /**
          *  seeder is at Module specific path
          */
-        if (true)
-        {
-            $s_model_seed = implode('\\', $a_tmp);
-        }
+        $s_model = implode('\\', $a_tmp);
         /**
          *  legacy classes that are not modules
          */
-        else
+        if (!class_exists($s_model))
         {
-            $s_model_seed = '\\Database\\Seeders\\' . ucfirst($s_table_name).'Seeder';
+            $a_tmp[1] = 'Database';
+            $a_tmp[count($a_tmp)-1] = str_replace('Database', '', $a_tmp[count($a_tmp)-1]);
+            $s_model = implode('\\', $a_tmp);
         }
-        return $s_model_seed;
+        return $s_model;
     }
-
 
     /**
      * Fill selected table with data
@@ -248,13 +274,17 @@ class Model extends BaseModel
         if (class_exists($s_model_seed))
         {
             $o_model_main       = new $s_model_main;
-            $o_model_trans      = new $s_model_trans;
             $s_prefix           = $o_model_main->getConnection()->getConfig()['prefix'];
-
-            DB::table($s_prefix . $o_model_main->getTable())->truncate();
-            DB::table($s_prefix . $o_model_trans->getTable())->truncate();
+#            DB::table($s_prefix . $o_model_main->getTable())->truncate();
+dump(($s_prefix . $o_model_main->getTable()));
             unset($o_model_main);
-            unset($o_model_trans);
+
+            if (class_exists($s_model_trans))
+            {
+                $o_model_trans      = new $s_model_trans;
+#                DB::table($s_prefix . $o_model_trans->getTable())->truncate();
+                unset($o_model_trans);
+            }
 
             $s_model_seed::run();
         }
