@@ -432,61 +432,11 @@ fnAutocompleteAddress = function(e){
 
 	centerMap( map, latitude, longitude );
 	map.setZoom(17);
-
-//		console.log(form, url, type, data, latitude, longitude, map);
-
-//const proxyurl = "https://cors-anywhere.herokuapp.com/";
-// /const pointurl = 'https://maps.googleapis.com/maps/api/directions/jsonp?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyDgGLLNSEPwyhZk5RvbSwOx85wtd4ASDuc';
-
-/*
-get_ajax_data(pointurl);
-	let headers = new Headers();
-
-//    headers.append('Content-Type', 'application/json');
-	headers.append('Accept', 'application/json');
-	headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-	headers.append('Origin','http://pr.max');
-
-	fetch(pointurl, {
-		mode: 'no-cors',
-//        mode: 'cors',
-//        credentials: 'include',
-		method: 'GET',
-		headers: headers
-	})
-	.then(response => response.json())
-	.then(json => console.log(json))
-	.catch(error => console.log('Authorization failed : ' + error.message));
-
-
-/*
-const url = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyDgGLLNSEPwyhZk5RvbSwOx85wtd4ASDuc"; // site that doesn’t send Access-Control-*
-fetch(url)
-.then(response => response.text())
-.then(contents => console.log(contents))
-.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
-
-	$.ajax({
-		'type': 'get',
-		'url': proxyurl + pointurl,
-		success: (data, status, xhr) => {
-			console.log(data, status, xhr);
-		},
-		'error': (xhr) => {
-			console.log(xhr);
-			notify(xhr, 'danger', 3000);
-		}
-	});
-*/
-
-
 }
 
 
 async function get_ajax_data(pointurl){
 	var _reprojected_lat_lng = await $.ajax({
-//   function get_ajax_data(){
-//       var _reprojected_lat_lng = $.ajax({
 		mode: 'no-cors',
 		type: 'GET',
 		dataType: 'jsonp',
@@ -510,13 +460,6 @@ function initializeAutocompleteAddress() {
 	var options = {
 		componentRestrictions: {country: "UA"}
 	};
-
-//var input = document.getElementById('autocomplete');
-//   var input = $('#autocomplete')[0];
-		// $('form.google_maps_direction').submit();
-		// submitForm();
-
-// $('form.google_maps_direction').find('button[type=submit]').trigger('click');
 
 		$("input[name='travel_mode']").change(function(){
 			checkRequiredFields();
